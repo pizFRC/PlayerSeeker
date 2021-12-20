@@ -1,4 +1,6 @@
 # Player seeker
+Player Seeker è una applicazione Web che permette la creazione di eventi sportivi, facilitando la ricerca di partecipanti a tali eventi. L’applicazione si propone quindi di semplificare il processo di organizzazione di partire, mettendo in comunicazione la struttura ospitante e i giocatori.
+Player Seeker agisce quindi da intermediario tra la struttura e i giocatori, eliminando lo stress dell’organizzazione.
 
 ## TO DO
 >-Features:
