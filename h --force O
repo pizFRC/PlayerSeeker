@@ -1,0 +1,53 @@
+[33mcommit 71d14ba0c8a3c49fa4aa62d436cb62d223961b3e[m[33m ([m[1;36mHEAD -> [m[1;32mPSE-4-Develop[m[33m)[m
+Author: pizFRC <dfzfnc00m29c352t@studenti.unical.it>
+Date:   Mon Dec 20 21:40:05 2021 +0100
+
+    PSE-4 #close #time 20m  #comment Progetto creato
+
+[33mcommit 97b643190af9e51226fea59ccc6d200bf28eeee8[m
+Author: pizFRC <dfzfnc00m29c352t@studenti.unical.it>
+Date:   Mon Dec 20 21:38:01 2021 +0100
+
+    PSE-4 #close #time 20m  #comment Progetto creato
+
+[33mcommit d3160ce8383cda1382f23eb595ca5dac0f8e0a34[m
+Author: pizFRC <dfzfnc00m29c352t@studenti.unical.it>
+Date:   Mon Dec 20 21:35:17 2021 +0100
+
+     aggiunto file prova
+
+[33mcommit 17e8e82498c0976c0bf42763fd19401ed3c59cce[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32morigin/main[m[33m, [m[1;32morigin/features[m[33m, [m[1;32morigin/PSE-4-Develop[m[33m, [m[1;32morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: pizFRC <dfzfnc00m29c352t@studenti.unical.it>
+Date:   Mon Dec 20 19:08:29 2021 +0100
+
+    MODIFICATO:readme.md aggiunta introduzione, creato file .gitignore
+
+[33mcommit 72236d32bf0496f54d96710d5cc779f7e2a24c39[m[33m ([m[1;31morigin/features[m[33m)[m
+Author: gvnberaldi <giovanniberaldi43@gmail.com>
+Date:   Mon Dec 20 16:36:56 2021 +0100
+
+    Aggiunta del documento dei requisiti
+
+[33mcommit bd41ddb4944498c1e3f69af5b61b1a124bba6334[m
+Author: gvnberaldi <83476460+gvnberaldi@users.noreply.github.com>
+Date:   Fri Nov 26 17:47:35 2021 +0100
+
+    Update README.md
+
+[33mcommit 0856a17962cd123bbfc88e90bcecf6588ce3da86[m
+Author: gabtass9 <66789861+gabtass9@users.noreply.github.com>
+Date:   Fri Nov 26 17:44:34 2021 +0100
+
+    Update README.md
+
+[33mcommit f5794dbd44aed56a4f3c620136cf0aa79d7bb76b[m
+Author: Francesco <91631406+pizFRC@users.noreply.github.com>
+Date:   Fri Nov 26 17:38:42 2021 +0100
+
+    Update README.md
+
+[33mcommit 63340e1eac3e5748e223cea84b3551db49f419f3[m
+Author: Francesco <91631406+pizFRC@users.noreply.github.com>
+Date:   Fri Nov 26 17:31:32 2021 +0100
+
+    Initial commit
