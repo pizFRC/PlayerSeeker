@@ -8,6 +8,8 @@
 		
 		<title>Player Seeker</title>
 
+
+       <link href="css/material-kit.min.css" rel="stylesheet" type="text/css"/>
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -26,17 +28,6 @@
 
     </head>
 
-	<body>
-
-		
-
-
-	<!-- Core -->
-	<script src="/assets/js/core/popper.min.js"></script>
-	<script src="/assets/js/core/bootstrap.min.js"></script>
-
-	<!-- Theme JS -->
-	<script src="./assets/js/material-kit-pro.min.js" type="text/javascript"></script>
 </body>
 
 <!-- -------- START HEADER 1 w/ text and image on right ------- -->
@@ -103,6 +94,12 @@
   </div>
 </header>
 <!-- -------- END HEADER 1 w/ text and image on right ------- -->
- 
- 
- </html>
+
+<!-- Core -->
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+
+<!-- Theme JS -->
+<script src="./assets/js/material-kit-pro.min.js" type="text/javascript"></script>
+
+</html>
