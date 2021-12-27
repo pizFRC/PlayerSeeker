@@ -25,9 +25,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
 <!-- Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400"
-	rel="stylesheet">
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link
@@ -39,24 +37,24 @@
 	<!-----------HEADER --------->
 	<header
 		class="d-flex fixed-top navbar-light bg-light flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-		<div class="container d-flex justify-content-between">
+		<div class="container d-flex justify-content-between row">
 			<a href="/"
 				class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
 				<img rel="icon" width="150" height="50" src="img/logo.png"
 				type="image/x-icon" />
 			</a>
-
-			<ul
-				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+   
+			<ul class="nav col-sm-12 col-md-7 mb-2 justify-content-center mb-md-0"   id="menu_items">
 				<li class="raleway_font"><a href="#"
 					class="nav-link px-2 link-secondary ">Home</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Eventi</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
 			</ul>
-			<div class="col-md-3 text-end">
-				<button type="button" class="btn btn-outline-primary me-2"
-					onclick="window.location.href='login'">Accedi</button>
+			<div class="col-md-2 text-end" id="login_div">
+				<a type="button" class="btn btn-outline-primary me-2" href="login">Accedi</a>
+			</div>
+			
 			</div>
 	</header>
 	<!-----------END HEADER --------->

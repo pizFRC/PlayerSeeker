@@ -9,7 +9,11 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>Player Seeker</title>
-
+<!-- jquery -->
+<script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
 <!-- Bootstrap CSS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -29,35 +33,30 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400"
 	rel="stylesheet">
 
-<style>
-body {
-	background-image: url('img/bg.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-}
-</style>
+
 </head>
 
 <body>
 	<!-----------HEADER --------->
 	<header
 		class="d-flex fixed-top navbar-light bg-light flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-		<div class="container d-flex justify-content-between">
+		<div class="container d-flex justify-content-between row">
 			<a href="/"
 				class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
 				<img rel="icon" width="150" height="50" src="img/logo.png"
 				type="image/x-icon" />
 			</a>
-
-			<ul
-				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-				<li><a href="#" class="nav-link px-2 link-dark ">Home</a></li>
+   
+			<ul class="nav col-sm-12 col-md-7 mb-2 justify-content-center mb-md-0"   id="menu_items">
+				<li class="raleway_font"><a href="#"
+					class="nav-link px-2 link-secondary ">Home</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Eventi</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
 			</ul>
-		</div>
+			
+			
+			</div>
 	</header>
 	<!-----------END HEADER --------->
 	<div
@@ -86,20 +85,21 @@ body {
 						aria-describedby="inputGroupPrepend2" required>
 				</div>
 			</div>
-			<div class="row justify-content-md-center">
+			<div id="btn_accedi" class="row justify-content-md-center">
 				<div class="col-sm-auto">
 					<button type="submit" class="btn btn-primary m-4">Accedi</button>
 				</div>
-			</div>
+			
 
 			<div class="row justify-content-md-center">
 				<div class="col-sm-auto">
-					<a href="#" class="link-primary">Non hai ancora un account?
+					<a href="#" id="btn_registrati" onclick="hideBtn()" class="link-primary">Non hai ancora un account?
 						Registrati!</a>
 				</div>
 			</div>
 		</form>
 	</div>
+	<script type="text/javascript"  src="../js/registrazione.js"  crossorigin="anonymous"> </script>
 </body>
 </html>
 

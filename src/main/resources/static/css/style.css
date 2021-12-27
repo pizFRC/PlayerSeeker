@@ -1,22 +1,15 @@
 .raleway_font{
 	    font-family: 'Raleway', sans-serif;
 }
-body { 
-    padding-top: 70px; 
-}
-/*
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  height: 100px;
-  width: 100px;
-=======
 
+ 
+
+body {
+	background-image: url('../img/bg.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 }
-body { 
-   /* padding-top: 70px; */
+
   
-.carousel-control-prev-icon:after {
-  content: '<';
-  font-size: 55px;
-  color: red;
-}
+
