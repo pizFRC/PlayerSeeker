@@ -39,30 +39,25 @@
 	<!-----------HEADER --------->
 	<header
 		class="d-flex fixed-top navbar-light bg-light flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-		<div class="container d-flex justify-content-between"> 
-		<a href="/"
-			class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-			<img rel="icon" width="150" height="50" src="img/logo.png"
-			type="image/x-icon" />
-		</a>
+		<div class="container d-flex justify-content-between">
+			<a href="/"
+				class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+				<img rel="icon" width="150" height="50" src="img/logo.png"
+				type="image/x-icon" />
+			</a>
 
-		<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-			<li class="raleway_font"><a href="#"
-				class="nav-link px-2 link-secondary ">Home</a></li>
-			<li><a href="#" class="nav-link px-2 link-dark">Eventi</a></li>
-			<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
-			<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
-
-		</ul>
-
-		<div class="col-md-3 text-end">
-<<<<<<< HEAD
-			<button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='login'">Accedi</button>
-		</div>
-=======
-			<a type="button" class="btn btn-outline-primary me-2" href="login">Login</a>
->>>>>>> b1a876caf10564ec1599bc0cc15efc5eb86e1b01
-		</div>
+			<ul
+				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+				<li class="raleway_font"><a href="#"
+					class="nav-link px-2 link-secondary ">Home</a></li>
+				<li><a href="#" class="nav-link px-2 link-dark">Eventi</a></li>
+				<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
+				<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
+			</ul>
+			<div class="col-md-3 text-end">
+				<button type="button" class="btn btn-outline-primary me-2"
+					onclick="window.location.href='login'">Accedi</button>
+			</div>
 	</header>
 	<!-----------END HEADER --------->
 
