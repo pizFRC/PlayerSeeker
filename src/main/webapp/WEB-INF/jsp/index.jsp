@@ -44,7 +44,7 @@
 		</ul>
 
 		<div class="col-md-3 text-end">
-			<button type="button" class="btn btn-outline-primary me-2" onclick="">Login</button>
+			<a type="button" class="btn btn-outline-primary me-2" href="login">Login</a>
 		</div>
 	</header>
 	<!-----------END HEADER --------->
