@@ -1,6 +1,36 @@
 .raleway_font{
 	    font-family: 'Raleway', sans-serif;
+<<<<<<< HEAD
 }
 body { 
     padding-top: 70px; 
 }
+=======
+    
+  
+}
+/*
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  
+  background-size: 100%, 100%;
+  color:red;
+  border: 1px solid black;
+ 
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: red;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: red;
+}*/
+>>>>>>> 3259e4b8246a85e5ee9e5e5d48c3357ae5f98d99
