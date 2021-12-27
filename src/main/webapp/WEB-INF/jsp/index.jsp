@@ -14,12 +14,14 @@
 		<!-- css esterni -->
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> 
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
           <!-- FONT -->
           
           <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400" rel="stylesheet">
        
           <!--  END FONT-->
+          
+          
+
     </head>
 <body>
 <!-----------HEADER --------->
@@ -40,7 +42,7 @@
 
       <div class="col-md-3 text-end">
         <button type="button" class="btn btn-outline-primary me-2" onclick="">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
+        
       </div>
     </header>
 
@@ -76,6 +78,62 @@
 		</div>
 	</div>
 	<!-- END JUMBO -->
+	
+	
+	<!-- carousel with card-->
+	<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+    <div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Special title treatment</h5>
+								<p class="card-text">With supporting text below as a natural
+									lead-in to additional content.</p>
+								<a href="#" class="btn btn-primary">Go somewhere</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Special title treatment</h5>
+								<p class="card-text">With supporting text below as a natural
+									lead-in to additional content.</p>
+								<a href="#" class="btn btn-primary">Go somewhere</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+	</div>
+    <div class="carousel-item">
+     <!-- <img src="img/sfondo.jpeg" class="d-block w-100" alt="..."> --> 
+    </div>
+    <div class="carousel-item">
+      <img src="img/logo.jgp" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button"  data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden"  >Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" style="background-color:red " aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+	<!-- end  -->
+	
+	
+	          <!-- cdn  -->
+                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+          
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 
 
