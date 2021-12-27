@@ -8,14 +8,18 @@
 		  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>Player Seeker</title>
 
-
-      
+<!-- css personalizzati -->
+         <link type="text/css" href="css/style.css">
 		
 		<!-- css esterni -->
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> 
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+          <!-- FONT -->
+          
+          <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400" rel="stylesheet">
        
+          <!--  END FONT-->
     </head>
 <body>
 <!-----------HEADER --------->
@@ -27,7 +31,7 @@
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li class="raleway_font"><a href="#" class="nav-link px-2 link-secondary ">Home</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Eventi</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
@@ -39,12 +43,39 @@
         <button type="button" class="btn btn-primary">Sign-up</button>
       </div>
     </header>
-  
-<!-----------END HEADER --------->
+
+	<!-----------END HEADER --------->
+
+	<!-- JUMBOTRON -->
+	<div class="p-5 mb-4 bg-light rounded-3">
+		<div class="container-fluid py-5">
+			<h1 class="display-5 fw-bold">Player Seeker</h1>
+			<p class="col-md-8 fs-4">
+				Scopri gli eventi sportivi e le migliori strutture vicino a te. </br>Dimenticati
+				dello stress e pensa solo a divertirti!
+			</p>
+
+			<!-- Search -->
+
+			<div class="row">
+				<form class="form-inline">
+					<div class="mb-3 mt-3">
+						<label for="search" class="form-label">Visualizza i
+							migliori eventi e le migliori strutture nella tua città</label> <input
+							class="form-control mr-sm-2" type="search" placeholder="Inserisci la tua città"
+							aria-label="Search">
+
+						<!-- end Search -->
+					</div>
+				</form>
+			</div>
 
 
 
 
+		</div>
+	</div>
+	<!-- END JUMBO -->
 </body>
 
 
