@@ -76,13 +76,15 @@
 	<div class="container">
 		<p class="col-md-8 fs-4">Migliori eventi </p>
 	</div>
-	<div id="carouselExampleControls" class="carousel slide"
-		data-bs-ride="carousel">
-		<div class="carousel-inner">
+	<div id="carousel_strutture" class="carousel slide row" data-bs-ride="carousel">
+
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner col-md-6 col-sm-10">
 			<div class="carousel-item active">
-				<div class="container pl-30">
+				<div class="container">
 					<div class="row">
-						<div class="col-sm-4">
+						<div class="col-12 col-md-4">
+
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
@@ -92,7 +94,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-4">
+
+						<div class="col-12 col-md-4">
+
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
@@ -102,7 +106,51 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-4">
+
+
+						<div class="col-12 col-md-4">
+
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a
+										natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+   
+	
+
+	
+			</div>
+			<div class="carousel-item">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 col-md-4">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a
+										natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-4">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a
+										natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-md-4">
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
@@ -115,38 +163,74 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<button class="carousel-control-prev" type="button"
-			data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" style="background-color: black" aria-hidden="true"></span> <span
-				class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button"
-			data-bs-target="#carouselExampleControls" data-bs-slide="next">
-			<span class="carousel-control-next-icon"
-				style="background-color: black" aria-hidden="true"></span> <span
-				class="visually-hidden">Next</span>
-		</button>
-	</div>
+    <div class="carousel-item">
+          <div class="container">
+  	<div class="row">
+						<div class="col-12 col-md-4">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a
+										natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-4">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a
+										natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-md-4">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a
+										natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+					</div>
+    </div>
+    </div>
+    
+  </div>
+  
+<div class="col-md-6 col-sm-1">
+  <!-- Left and right controls/icons -->
+  
+  <div class="">
+  <button class="carousel-control-prev btn_colorato" type="button" style="color: black; font-size: 40px;" data-bs-target="#carousel_strutture" data-bs-slide="prev">
+   <!--  <span class="carousel-control-prev-icon btn_colorato "></span> -->
+    <span><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+    <span class="sr-only">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" style="color: black; font-size: 40px;"   data-bs-target="#carousel_strutture" data-bs-slide="next">
+    <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+    <span class="sr-only">Next</span>
+  </button>
+  </div>
+  </div>
+</div>
 	<!-- END Events Carousel  -->
 	
-<<<<<<< HEAD
-	<!-- Structures Carousel-->
-	<div class="container mt-4">
-		<p class="col-md-8 fs-4">Migliori strutture </p>
-	</div>
-	<div id="carouselExampleControls" class="carousel slide"
-		data-bs-ride="carousel">
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<div class="container pl-30">
-					<div class="row">
-						<div class="col-sm-4">
-=======
+
+
+
 
 	
 	
-	<!-- CAROUSEL -->	
+		<!-- Structures Carousel-->
+	<div class="container mt-4">
+		<p class="col-md-8 fs-4">Migliori strutture </p>
+	</div>
 	
 <div id="carousel_strutture" class="carousel slide row" data-bs-ride="carousel">
 
@@ -156,7 +240,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-md-4">
->>>>>>> 3259e4b8246a85e5ee9e5e5d48c3357ae5f98d99
+
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
@@ -166,26 +250,22 @@
 								</div>
 							</div>
 						</div>
-<<<<<<< HEAD
-						<div class="col-sm-4">
-=======
-						<div class="col-12 col-md-4">
->>>>>>> 3259e4b8246a85e5ee9e5e5d48c3357ae5f98d99
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-<<<<<<< HEAD
-						<div class="col-sm-4">
-=======
 
 						<div class="col-12 col-md-4">
->>>>>>> 3259e4b8246a85e5ee9e5e5d48c3357ae5f98d99
+
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Special title treatment</h5>
+									<p class="card-text">With supporting text below as a
+										natural lead-in to additional content.</p>
+									<a href="#" class="btn btn-primary">Go somewhere</a>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-12 col-md-4">
+
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
@@ -197,32 +277,10 @@
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
-			</div>
-		</div>
-		<button class="carousel-control-prev" type="button"
-			data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" style="background-color: black" aria-hidden="true"></span> <span
-				class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button"
-			data-bs-target="#carouselExampleControls" data-bs-slide="next">
-			<span class="carousel-control-next-icon"
-				style="background-color: black" aria-hidden="true"></span> <span
-				class="visually-hidden">Next</span>
-		</button>
-	</div>
+   
 	
-	<!-- END Structures Carousel  -->
 
-	<!-- Bootstrap JavaScript -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-=======
+	
 			</div>
 			<div class="carousel-item">
 				<div class="container">
@@ -349,7 +407,7 @@
                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
           
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
->>>>>>> 3259e4b8246a85e5ee9e5e5d48c3357ae5f98d99
+
 </body>
 </html>
 
