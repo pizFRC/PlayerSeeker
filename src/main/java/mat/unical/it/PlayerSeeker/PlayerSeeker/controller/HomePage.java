@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomePage {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 317b7a4b4721f2c0e8d97e4c10a667dd3b6a5123
 	@GetMapping("/")
 	public String homePage(HttpServletRequest req, HttpServletResponse resp) {
 		return "index";
 	}
+	
 }
