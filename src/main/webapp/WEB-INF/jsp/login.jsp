@@ -28,11 +28,6 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400"
-	rel="stylesheet">
 
 <style>
 body {
@@ -96,16 +91,16 @@ body {
 					<button type="submit" class="btn btn-primary m-4">Accedi</button>
 				</div>
 			</div>
-			
+
 			<div class="row justify-content-md-center">
 				<div class="col-sm-auto">
-					<a href="#" class="link-primary">Non hai ancora un account? Registrati!</a>
+					<a href="#" class="link-primary">Non hai ancora un account?
+						Registrati!</a>
 				</div>
 			</div>
-
-
 		</form>
 	</div>
-
 </body>
 </html>
+
+

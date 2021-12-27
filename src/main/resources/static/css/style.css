@@ -1,5 +1,6 @@
 .raleway_font{
 	    font-family: 'Raleway', sans-serif;
+<<<<<<< HEAD
 }
 body { 
     padding-top: 70px; 
@@ -9,22 +10,51 @@ body {
 .carousel-control-next-icon {
   height: 100px;
   width: 100px;
+=======
+
+}
+body { 
+   /* padding-top: 70px; */
+   
+}
+>>>>>>> b1a876caf10564ec1599bc0cc15efc5eb86e1b01
   
-  background-size: 100%, 100%;
-  color:red;
-  border: 1px solid black;
+.logo{
+	
+	
  
+ 
+  opacity: 0.8;
 }
 
-.carousel-control-next-icon:after
+.form_autenticazione
 {
-  content: '>';
-  font-size: 55px;
-  color: red;
+	max-width: 60%;
+	background-color: white;
+}
+.space_bottom{
+	margin-bottom:1em;
+}
+.space_top{
+	margin-top:1em;
 }
 
+<<<<<<< HEAD
 .carousel-control-prev-icon:after {
   content: '<';
   font-size: 55px;
   color: red;
 }*/
+=======
+.hero-image {
+  background-image: url("/img/forest.jpg");
+  
+  background-color: #cccccc;
+ 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+ 
+}
+>>>>>>> b1a876caf10564ec1599bc0cc15efc5eb86e1b01

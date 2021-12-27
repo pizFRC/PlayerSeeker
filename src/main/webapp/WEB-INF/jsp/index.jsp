@@ -56,8 +56,12 @@
 		</ul>
 
 		<div class="col-md-3 text-end">
+<<<<<<< HEAD
 			<button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='login'">Accedi</button>
 		</div>
+=======
+			<a type="button" class="btn btn-outline-primary me-2" href="login">Login</a>
+>>>>>>> b1a876caf10564ec1599bc0cc15efc5eb86e1b01
 		</div>
 	</header>
 	<!-----------END HEADER --------->
