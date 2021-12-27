@@ -9,13 +9,15 @@
 		<title>Player Seeker</title>
 
 <!-- css personalizzati -->
-         <link type="text/css" href="css/style.css">
+ 
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+        
 		
 		<!-- css esterni -->
-
+   
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> 
           <!-- FONT -->
-          
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
           <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400" rel="stylesheet">
        
           <!--  END FONT-->
@@ -205,12 +207,18 @@
   
 <div class="col-md-6 col-sm-1">
   <!-- Left and right controls/icons -->
-  <button class="carousel-control-prev" type="button" style="background-color: red;" data-bs-target="#carousel_strutture" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
+  
+  <div class="">
+  <button class="carousel-control-prev btn_colorato" type="button" style="color: black; font-size: 40px;" data-bs-target="#carousel_strutture" data-bs-slide="prev">
+   <!--  <span class="carousel-control-prev-icon btn_colorato "></span> -->
+    <span><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+    <span class="sr-only">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" style="background-color: red;"data-bs-target="#carousel_strutture" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
+  <button class="carousel-control-next" type="button" style="color: black; font-size: 40px;"   data-bs-target="#carousel_strutture" data-bs-slide="next">
+    <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+    <span class="sr-only">Next</span>
   </button>
+  </div>
   </div>
 </div>
 	
