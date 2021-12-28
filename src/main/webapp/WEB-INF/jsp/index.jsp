@@ -51,7 +51,7 @@
 				<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
 			</ul>
-			<div class="col-md-2 text-end" id="login_div">
+			<div class="col-md-2 text-end  " id="login_div">
 				<a type="button" class="btn btn-outline-primary me-2" href="login">Accedi</a>
 			</div>
 			

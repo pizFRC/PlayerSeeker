@@ -61,7 +61,8 @@
 	<!-----------END HEADER --------->
 	<div
 		class="position-absolute top-50 start-50 translate-middle p-3 shadow-lg p-5 bg-body rounded">
-		<form method="post" action="...">
+		<form method="post"  id="form_registrazione" action="checkUsername">
+		<div id="divUPC">
 			<div class="row justify-content-md-center">
 				<div class="col-sm-auto">
 					<img class="m-3" rel="icon" width="200" height="65"
@@ -72,9 +73,9 @@
 				<div class="col-sm-12">
 					<label for="validationDefaultUsername" class="form-label">Username</label>
 					<div class="input-group">
-						<span class="input-group-text" id="inputGroupPrepend2">@</span> <input
-							type="text" class="form-control" id="validationDefaultUsername"
-							aria-describedby="inputGroupPrepend2" required>
+						<span class="input-group-text" id="inputGroupPrepend2">@</span> 
+						<input	type="text" class="form-control" id="validationDefaultUsername"
+							aria-describedby="inputGroupPrepend2" name="validationDefaultUsername" required>
 					</div>
 				</div>
 			</div>
@@ -87,16 +88,18 @@
 			</div>
 			<div id="btn_accedi" class="row justify-content-md-center">
 				<div class="col-sm-auto">
-					<button type="submit" class="btn btn-primary m-4">Accedi</button>
+					<button type="" onclick="ajaxThree()" class="btn btn-primary m-4">Accedi</button>
 				</div>
 			
 
 			<div class="row justify-content-md-center">
 				<div class="col-sm-auto">
-					<a href="#" id="btn_registrati" onclick="hideBtn()" class="link-primary">Non hai ancora un account?
+					<a  id="btn_registrati" onclick="hideBtn()" class="link-primary">Non hai ancora un account?
 						Registrati!</a>
 				</div>
 			</div>
+			</div>
+		</div>
 		</form>
 	</div>
 	<script type="text/javascript"  src="../js/registrazione.js"  crossorigin="anonymous"> </script>
