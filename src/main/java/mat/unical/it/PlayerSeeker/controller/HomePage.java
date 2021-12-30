@@ -1,4 +1,4 @@
-package mat.unical.it.PlayerSeeker.PlayerSeeker.controller;
+package mat.unical.it.PlayerSeeker.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

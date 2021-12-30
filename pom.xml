@@ -9,7 +9,7 @@
 		<version>2.6.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>mat.unical.it.PlayerSeeker</groupId>
+	<groupId>mat.unical.it</groupId>
 	<artifactId>PlayerSeeker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PlayerSeeker</name>
@@ -44,6 +44,14 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>5.5.0</version>
+		</dependency>
+			
 	</dependencies>
 
 	<build>
