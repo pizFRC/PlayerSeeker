@@ -8,7 +8,9 @@
 
 <title>Player Seeker -Eventi</title>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script><!-- Bootstrap CSS -->
 <link
@@ -128,25 +130,26 @@
 
 
 <section class="container" style="background-color:white">
-    <div class="row">
-    
-                <div class="col-lg-12 col-xl-12 col-sm-12">
-                <div class="tasti_da_nascondere mx-auto pt.">
-                <button  id="btn_list" class="btn btn-primary btn-rounded btn-block" type="submit" value="Search" >
-                <span><i class="bi bi-list"></i></span> <span
-						class="sr-only">Lista</span>
-						</button>
-						
-						<button  id="btn_grid"class="btn btn-primary btn-rounded btn-block" type="submit" value="Search" >
-						<span><i class="bi bi-grid-fill"></i></span><span
-						class="sr-only">Griglia</span>
-						</button>
+		<div class="row">
 
-                 </div>
+			<div class="col-lg-12  col-xxl-12 col-xl-12 col-sm-12">
+				<div class="tasti_da_nascondere mx-auto ">
+					<button id="btn_list" class="btn btn-primary btn-rounded btn-block"
+						type="submit" value="Search">
+						<span><i class="bi bi-list"></i></span> <span class="sr-only">Lista</span>
+					</button>
+
+					<button id="btn_grid" class="btn btn-primary btn-rounded btn-block"
+						type="submit" value="Search">
+						<span><i class="bi bi-grid-fill"></i></span><span class="sr-only">Griglia</span>
+					</button>
+
+				</div>
 				<div class="row">
 
-					
-					<div class="item col-md-6 col-sm-12 col-lg-4 col-xxl-12 mx-auto m-1 pb-1">
+
+					<div
+						class="item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12 mx-auto m-1 pb-1">
 
 						<div class="card">
 							<div class="card-body">
@@ -158,8 +161,9 @@
 						</div>
 
 					</div>
-					
-					<div class="item col-md-6 col-sm-12 col-lg-4 col-xxl-12 mx-auto m-1 pb-1">
+
+					<div
+						class="item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12 mx-auto m-1 pb-1">
 
 						<div class="card">
 							<div class="card-body">
@@ -171,8 +175,9 @@
 						</div>
 
 					</div>
-					
-					<div class="item col-md-6 col-sm-12 col-lg-4 col-xxl-12  mx-auto m-1 pb-1">
+
+					<div
+						class="item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12  mx-auto m-1 pb-1">
 
 						<div class="card">
 							<div class="card-body">
@@ -184,14 +189,15 @@
 						</div>
 
 					</div>
-							
-					
+
+
 
 				</div>
 
 			</div>
-    </div>
-</section>
+		</div>
+	</section>
+	<script type="text/javascript"  src="../js/eventi.js"  crossorigin="anonymous"> </script>
 
 </body>
 </html>
