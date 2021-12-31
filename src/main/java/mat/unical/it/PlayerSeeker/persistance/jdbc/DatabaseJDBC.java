@@ -16,15 +16,14 @@ public class DatabaseJDBC implements Database{
 	Connection connection;
 	
 	public static DatabaseJDBC getInstance() {
-		if (instance == null) {
+		if (instance == null) 
 			instance = new DatabaseJDBC();
-		}
 		return instance;
 	}
 
 	private DatabaseJDBC() {
 		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "Player Seeker", "postgres");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/player_seeker", "postgres", "admin");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

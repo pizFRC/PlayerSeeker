@@ -2,14 +2,12 @@
 	    font-family: 'Raleway', sans-serif;
 }
 
- 
+.open_sans_font{
+	    font-family: 'Open Sans', sans-serif;
+}
 
 body {
-	padding:10%;
-	background-image: url('../img/bg.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
+	margin-top: 70px;
 }
 
   

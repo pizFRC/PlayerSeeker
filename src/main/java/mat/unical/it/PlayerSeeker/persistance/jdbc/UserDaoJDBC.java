@@ -39,19 +39,25 @@ public class UserDaoJDBC implements UserDao {
 	public User doRetrieveByKey(String username)  {
 		PreparedStatement query;
 		try {
-			query = connection.prepareStatement("SELECT * FROM users WHERE username=?;");
-			query.setString(1, username);
-			ResultSet result = query.executeQuery(); 
-			if(result.next()) {
-				if(result.getBoolean(3)) 
-					return DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(username);
-				else
-					return DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(username);
+			if(checkConnection()) {
+				query = connection.prepareStatement("SELECT * FROM users WHERE username=?;");
+				query.setString(1, username);
+				ResultSet result = query.executeQuery(); 
+				if(result.next()) {
+					if(result.getBoolean(3)) 
+						return DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(username);
+					else
+						return DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(username);
+				}
+				else {
+					query.close();
+					return null;
+				}
 			}
 			else {
-				query.close();
 				return null;
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
