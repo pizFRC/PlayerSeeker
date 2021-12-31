@@ -46,63 +46,64 @@
 				<img rel="icon" width="150" height="50" src="img/logo.png"
 				type="image/x-icon" />
 			</a>
-   
-			<ul class="nav col-sm-12 col-md-7 mb-2 justify-content-center mb-md-0"   id="menu_items">
+
+			<ul
+				class="nav col-sm-12 col-md-7 mb-2 justify-content-center mb-md-0"
+				id="menu_items">
 				<li class="raleway_font"><a href="#"
 					class="nav-link px-2 link-secondary ">Home</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Eventi</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
 			</ul>
-			
-			
-			</div>
+
+
+		</div>
 	</header>
 	<!-----------END HEADER --------->
-	<div
-		class="position-absolute top-50 start-50 translate-middle p-3 shadow-lg p-5 bg-body rounded">
-		<form method="post"  id="form_registrazione" action="checkUsername">
-		<div id="divUPC">
-			<div class="row justify-content-md-center">
-				<div class="col-sm-auto">
-					<img class="m-3" rel="icon" width="200" height="65"
-						src="img/logo.png" type="image/x-icon" />
+	<div class="position-absolute top-50 start-50 translate-middle p-3 shadow-lg p-5 bg-body rounded">
+		<form method="post" id="form_registrazione" action="checkUser">
+			<div id="divUPC">
+				<div class="row justify-content-md-center">
+					<div class="col-sm-auto">
+						<img class="m-3" rel="icon" width="200" height="65"
+							src="img/logo.png" type="image/x-icon" />
+					</div>
 				</div>
-			</div>
-			<div class="row justify-content-md-center">
-				<div class="col-sm-12">
-					<label for="validationDefaultUsername" class="form-label">Username</label>
-					<div class="input-group">
-						<span class="input-group-text" id="inputGroupPrepend2">@</span> 
-						<input	type="text" class="form-control" id="validationDefaultUsername"
-							aria-describedby="inputGroupPrepend2" name="validationDefaultUsername" required>
+				<div class="row justify-content-md-center">
+					<div class="col-sm-12">
+						<label for="validationDefaultUsername" class="form-label">Username</label>
+						<div class="input-group">
+							<span class="input-group-text" id="inputGroupPrepend2">@</span> <input
+								type="text" class="form-control" id="validationDefaultUsername"
+								aria-describedby="inputGroupPrepend2"
+								name="validationDefaultUsername" required>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-md-center">
+					<div class="col-sm-12">
+						<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+						<input type="password" class="form-control" id="inputPassword"
+							aria-describedby="inputGroupPrepend2" required>
+					</div>
+				</div>
+				<div id="btn_accedi" class="row justify-content-md-center">
+					<div class="col-sm-auto">
+						<button type="" onclick="ajaxThree()" class="btn btn-primary m-4">Accedi</button>
+					</div>
+					<div class="row justify-content-md-center">
+						<div class="col-sm-auto">
+							<a id="btn_registrati" onclick="hideBtn()" class="link-primary">Non
+								hai ancora un account? Registrati!</a>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row justify-content-md-center">
-				<div class="col-sm-12">
-					<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-					<input type="password" class="form-control" id="inputPassword"
-						aria-describedby="inputGroupPrepend2" required>
-				</div>
-			</div>
-			<div id="btn_accedi" class="row justify-content-md-center">
-				<div class="col-sm-auto">
-					<button type="" onclick="ajaxThree()" class="btn btn-primary m-4">Accedi</button>
-				</div>
-			
-
-			<div class="row justify-content-md-center">
-				<div class="col-sm-auto">
-					<a  id="btn_registrati" onclick="hideBtn()" class="link-primary">Non hai ancora un account?
-						Registrati!</a>
-				</div>
-			</div>
-			</div>
-		</div>
 		</form>
 	</div>
-	<script type="text/javascript"  src="../js/registrazione.js"  crossorigin="anonymous"> </script>
+	
+	<script type="text/javascript"  src="../js/registrazione.js"> </script>
 </body>
 </html>
 

@@ -2,11 +2,13 @@ package mat.unical.it.PlayerSeeker.model;
 
 public class SportsFacility extends User implements java.io.Serializable {
 
-    private int id = 0;
+	private static final long serialVersionUID = 340303583378633552L;
+	
+	private int id = 0;
     private String nome = null;
     private Address address = null;
     private int telefono = 0;
-    private String posizione = null;
+    //private String posizione = null;
 
     public SportsFacility() {}
 

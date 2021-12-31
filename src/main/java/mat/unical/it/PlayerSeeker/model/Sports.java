@@ -1,10 +1,10 @@
 package mat.unical.it.PlayerSeeker.model;
 
-import mat.unical.it.PlayerSeeker.persistance.jdbc.SportEventDaoJDBC;
-
 public class Sports implements java.io.Serializable {
 
-    private int partecipanti = 0;
+	private static final long serialVersionUID = 4517712161096114310L;
+	
+	private int partecipanti = 0;
     private SportTypes sportType = null;
 
     public Sports() {}

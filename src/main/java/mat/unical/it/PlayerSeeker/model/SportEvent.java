@@ -6,7 +6,9 @@ import java.util.List;
 
 public class SportEvent implements java.io.Serializable {
 
-    private int id = 0;
+	private static final long serialVersionUID = -1807415135910177674L;
+	
+	private int id = 0;
     private Date data = null;
     private SportsFacility facility = null;
     private Sports sports = null;

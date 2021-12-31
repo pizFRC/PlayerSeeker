@@ -1,6 +1,8 @@
 package mat.unical.it.PlayerSeeker.controller;
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/checkUser")
-	public String loginCheck(HttpServletRequest req ,HttpServletResponse res, @RequestBody String username, @RequestBody String password) {	 
+	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String username, @RequestBody String password) {	 
 		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
 		if(user == null) {
 			//Messaggio di errore: l'utente non esiste
@@ -34,9 +36,15 @@ public class LoginController {
 			return "login";
 		}
 		if(user instanceof Player) {
+			Player player = (Player) user;
+			HttpSession session = req.getSession(true);
+			session.setAttribute("user", player);
 			return "playerInterface";
 		}
 		else {
+			SportsFacility sportsFacility = (SportsFacility) user;
+			HttpSession session = req.getSession(true);
+			session.setAttribute("user", sportsFacility);
 			return "sportFacilityInterface";
 		}
 	}
