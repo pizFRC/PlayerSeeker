@@ -1,9 +1,11 @@
 package mat.unical.it.PlayerSeeker.model;
 
-public class User {
+public class User implements java.io.Serializable{
 	
-	private String username;
-	private String password;
+	private String username = null;
+	private String password = null;
+
+	public User() {}
 	
 	public String getPassword() {
 		return password;
