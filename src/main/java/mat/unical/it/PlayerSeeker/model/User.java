@@ -7,7 +7,7 @@ public class User implements java.io.Serializable{
 	private String username = null;
 	private String password = null;
 
-	public User() {}
+	public User() {super();}
 	
 	public String getPassword() {
 		return password;

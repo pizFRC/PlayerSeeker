@@ -10,7 +10,7 @@ public class Player extends User implements java.io.Serializable{
     private String email = null;
     private Address address = null;
 
-    public Player() {}
+    public Player() {super();}
 
     public String getNome() {
         return nome;

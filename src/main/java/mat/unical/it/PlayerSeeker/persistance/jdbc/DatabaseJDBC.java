@@ -42,7 +42,7 @@ public class DatabaseJDBC implements Database{
 	}
 
 	@Override
-	public SportEventDao getspoSportEventDao() {
+	public SportEventDao getSportsEventDao() {
 		return new SportEventDaoJDBC(connection);
 	}
 

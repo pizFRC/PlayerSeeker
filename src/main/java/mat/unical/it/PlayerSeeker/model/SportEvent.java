@@ -15,7 +15,7 @@ public class SportEvent implements java.io.Serializable {
     private Player organizzatore = null;
     private List<Player> players = new ArrayList<Player>();
 
-    public SportEvent() {}
+    public SportEvent() {super();}
 
     public int getId() {
         return id;

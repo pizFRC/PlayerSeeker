@@ -7,7 +7,7 @@ public class Sports implements java.io.Serializable {
 	private int partecipanti = 0;
     private SportTypes sportType = null;
 
-    public Sports() {}
+    public Sports() {super();}
 
     public int getPartecipanti() {
         return partecipanti;

@@ -1,6 +1,7 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import mat.unical.it.PlayerSeeker.model.Player;
@@ -16,7 +17,9 @@ public class PlayerDaoJDBC implements PlayerDao{
 
 	@Override
 	public List<Player> doRetrieveAll() {
-		return null;
+		List<Player> playerList = new ArrayList<Player>();
+
+		return playerList;
 	}
 
 	@Override
