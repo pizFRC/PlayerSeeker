@@ -28,11 +28,13 @@ public class LoginController {
 		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
 		if(user == null) {
 			//Messaggio di errore: l'utente non esiste
+			req.setAttribute("errorMessage", "L'username inserito non esiste.");
 			return "login";
 		}
 		//Controllo password
 		if(!BCrypt.checkpw(user.getPassword(), password)) {
 			//Messaggio di errore: password sbagliata
+			req.setAttribute("errorMessage", "La password inserita non è corretta.");
 			return "login";
 		}
 		if(user instanceof Player) {
