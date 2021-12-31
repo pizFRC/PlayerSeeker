@@ -6,6 +6,7 @@ public class Player extends User implements java.io.Serializable{
     private String cognome = null;
     private int eta = 0;
     private String email = null;
+    private Address address = null;
 
     public Player() {}
 
@@ -39,5 +40,13 @@ public class Player extends User implements java.io.Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

@@ -1,6 +1,7 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import mat.unical.it.PlayerSeeker.model.SportEvent;
@@ -12,6 +13,16 @@ public class SportEventDaoJDBC implements SportEventDao {
 	
 	public SportEventDaoJDBC(Connection connection) {
 		this.connection = connection;
+	}
+
+	private boolean checkConnnection() {
+		try {
+			if(connection == null || connection.isClosed())
+				return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 	@Override

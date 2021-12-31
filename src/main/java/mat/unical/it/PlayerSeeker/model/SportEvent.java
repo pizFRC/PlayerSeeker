@@ -1,14 +1,17 @@
 package mat.unical.it.PlayerSeeker.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SportEvent implements java.io.Serializable {
 
     private int id = 0;
     private Date data = null;
-    private int idStruttura = 0;
-    private int idSport = 0;
-    private int idOrganizzatore = 0;
+    private SportsFacility facility = null;
+    private Sports sports = null;
+    private Player organizzatore = null;
+    private List<Player> players = new ArrayList<Player>();
 
     public SportEvent() {}
 
@@ -28,27 +31,35 @@ public class SportEvent implements java.io.Serializable {
         this.data = data;
     }
 
-    public int getIdStruttura() {
-        return idStruttura;
+    public SportsFacility getFacility() {
+        return facility;
     }
 
-    public void setIdStruttura(int idStruttura) {
-        this.idStruttura = idStruttura;
+    public void setFacility(SportsFacility facility) {
+        this.facility = facility;
     }
 
-    public int getIdSport() {
-        return idSport;
+    public Sports getSport() {
+        return sports;
     }
 
-    public void setIdSport(int idSport) {
-        this.idSport = idSport;
+    public void setSport(Sports sports) {
+        this.sports = sports;
     }
 
-    public int getIdOrganizzatore() {
-        return idOrganizzatore;
+    public Player getOrganizzatore() {
+        return organizzatore;
     }
 
-    public void setIdOrganizzatore(int idOrganizzatore) {
-        this.idOrganizzatore = idOrganizzatore;
+    public void setOrganizzatore(Player organizzatore) {
+        this.organizzatore = organizzatore;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }

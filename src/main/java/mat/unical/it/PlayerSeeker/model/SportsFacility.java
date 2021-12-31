@@ -4,7 +4,7 @@ public class SportsFacility extends User implements java.io.Serializable {
 
     private int id = 0;
     private String nome = null;
-    private String indirizzo = null;
+    private Address address = null;
     private int telefono = 0;
     private String posizione = null;
 
@@ -26,19 +26,19 @@ public class SportsFacility extends User implements java.io.Serializable {
         this.nome = nome;
     }
 
-    public String getIndirizzo() {
-        return indirizzo;
-    }
-
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
-    }
-
     public int getTelefono() {
         return telefono;
     }
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
