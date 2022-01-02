@@ -54,7 +54,7 @@ $.ajax({
 	});
 	}
 	
-	
+	//cliccando su avanti viene mandata questa richuiesta
 	function ajaxOne(){
 		var username=$("#validationDefaultUsername").val();
 		var typeAccount=$("#categoriaAccount").val();

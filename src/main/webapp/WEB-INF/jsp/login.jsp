@@ -13,12 +13,7 @@
 <link rel="icon" href="img/favicon.png">
 
 <style>
-body { 
-	background-image: url('../img/bg.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-}
+
 </style>
 <!-- Jquery -->
 <script
@@ -49,7 +44,7 @@ body {
 
 </head>
 
-<body>
+<body id="login_body">
 	<!-----------HEADER --------->
 	<header
 		class="d-flex fixed-top navbar-light bg-light flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -77,20 +72,24 @@ body {
 	
 	<div id = "login"
 		class="position-absolute top-50 start-50 translate-middle p-3 shadow-lg p-5 bg-body rounded">
+
 		<c:if test="${errorMessage != null}">
 			<div class="alert alert-danger d-flex align-items-center" role="alert">
 			<i class="bi bi-exclamation-triangle-fill me-2" width="24" height="24" role="img" aria-label="Danger:"> <use xlink:href="#exclamation-triangle-fill" /></i>
 				<div>${errorMessage}</div>
+               </c:if>
+		
+		<div id="divUPC">
+			<div class="row justify-content-md-center">
+				<div class="col-sm-auto">
+					<img class="m-3" rel="icon" width="200" height="65"
+						src="img/logo.png" type="image/x-icon" />
+				</div>
 			</div>
-		</c:if>
+		
 		<form method="post" id="form_login" action="checkUser">
 			<div>
-				<div class="row justify-content-md-center">
-					<div class="col-sm-auto">
-						<img class="m-3" rel="icon" width="200" height="65"
-							src="img/logo.png" type="image/x-icon" />
-					</div>
-				</div>
+				
 				<div class="row justify-content-md-center">
 					<div class="col-sm-12">
 						<label for="validationDefaultUsername" class="form-label">Username</label>
@@ -121,58 +120,22 @@ body {
 					</div>
 				</div>
 			</div>
+
 		</form>
 		<div class="row align-items-center m-4">
 			<hr class="col-sm-4">
 			<p class="col-sm-4 open_sans_font" align="center"> oppure </p>
 			<hr class="col-sm-4">
+
+			
+	
+          <hr class="my-4">
+          <h2 class="fs-5 fw-bold mb-3" style="text-align:center;">Puoi anche accedere con</h2>
+          <div class="g-signin2 row justify-content-md-center" data-onsuccess="onSignIn"></div>
+			</div>
 		</div>
 		
-		<div class="g-signin2 row justify-content-md-center" data-onsuccess="onSignIn"></div>
-	</div>
-	
-	<div id = "registration"
-		class="position-absolute top-50 start-50 translate-middle p-3 shadow-lg p-5 bg-body rounded">
 		
-		<form method="post" id="form_registrazione" action="registrationUser">
-			<div>
-				<div class="row justify-content-md-center">
-					<div class="col-sm-auto">
-						<img class="m-3" rel="icon" width="200" height="65"
-							src="img/logo.png" type="image/x-icon" />
-					</div>
-				</div>
-				<div class="row justify-content-md-center">
-					<div class="col-sm-12">
-						<label for="validationDefaultUsername" class="form-label">Username</label>
-						<div class="input-group">
-							<span class="input-group-text" id="inputGroupPrepend2">@</span> <input
-								type="text" class="form-control" id="validationDefaultUsername"
-								aria-describedby="inputGroupPrepend2"
-								name="validationDefaultUsername" required>
-						</div>
-					</div>
-				</div>
-				<div class="row justify-content-md-center">
-					<div class="col-sm-12">
-						<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-						<input type="password" class="form-control" id="inputPassword"
-							aria-describedby="inputGroupPrepend2" required>
-					</div>
-				</div>
-				<div id="btn_accedi" class="row justify-content-md-center">
-					<div class="col-sm-auto">
-						<button type="submit" class="btn btn-primary m-4">Accedi</button>
-					</div>
-					<div class="row justify-content-md-center">
-						<div class="col-sm-auto">
-							<a id="btn_registrati" onclick="hideBtn()" class="link-primary">Non
-								hai ancora un account? Registrati!</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
 	</div>
 	
 	<script type="text/javascript"  src="../js/registrazione.js"> </script>
