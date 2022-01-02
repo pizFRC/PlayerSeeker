@@ -2,6 +2,17 @@ package mat.unical.it.PlayerSeeker.model;
 
 public class Player extends User implements java.io.Serializable{
 
+	public Player(String nome, String cognome, int eta, String email) {
+		super();
+		super.setUsername("franco123");
+		super.setPassword("pwd11");
+		this.nome = nome;
+		this.cognome = cognome;
+		this.eta = eta;
+		this.email = email;
+	
+	}
+
 	private static final long serialVersionUID = -23201302077253540L;
 	
 	private String nome = null;

@@ -72,7 +72,7 @@
 	
 	<div id = "login"
 		class="position-absolute top-50 start-50 translate-middle p-3 shadow-lg p-5 bg-body rounded">
-
+<div id="form_registrazione"></div>
 		<c:if test="${errorMessage != null}">
 			<div class="alert alert-danger d-flex align-items-center" role="alert">
 			<i class="bi bi-exclamation-triangle-fill me-2" width="24" height="24" role="img" aria-label="Danger:"> <use xlink:href="#exclamation-triangle-fill" /></i>
@@ -122,20 +122,20 @@
 			</div>
 
 		</form>
-		<div class="row align-items-center m-4">
+		</div>
+		
+		<div class="row align-items-center m-4" id="google_signIn_button">
 			<hr class="col-sm-4">
 			<p class="col-sm-4 open_sans_font" align="center"> oppure </p>
 			<hr class="col-sm-4">
 
 			
 	
-          <hr class="my-4">
+     
           <h2 class="fs-5 fw-bold mb-3" style="text-align:center;">Puoi anche accedere con</h2>
           <div class="g-signin2 row justify-content-md-center" data-onsuccess="onSignIn"></div>
 			</div>
-		</div>
-		
-		
+
 	</div>
 	
 	<script type="text/javascript"  src="../js/registrazione.js"> </script>

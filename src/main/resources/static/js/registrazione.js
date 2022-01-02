@@ -13,6 +13,32 @@ $(document).ready(function(){
   });
 });
 }
+
+
+function Account(username, psw){
+	this.username = username;
+	this.psw = psw;
+	
+
+	this.dammiInfo = function(){
+		return this.username + " " + this.psw ;
+	}
+}
+
+
+function hideGoogleBtn(){
+	
+	
+	
+	$(document).ready(function(){
+ 
+    $("#google_signIn_button").hide(1000);
+    
+  
+});
+}
+	
+
 function hideDivUPC(){
 	
 	$(document).ready(function(){
@@ -56,41 +82,56 @@ $.ajax({
 	
 	//cliccando su avanti viene mandata questa richuiesta
 	function ajaxOne(){
+		hideGoogleBtn();
 		var username=$("#validationDefaultUsername").val();
 		var typeAccount=$("#categoriaAccount").val();
 		alert(typeAccount);
-		$.ajax({
+		var account1 =new Account(username,"psw"); 
+		 $.ajax({
 
 		type:"POST",
-		url:"/check",
-		contentType:"application/text",
-		data:username,
-		success:function(risposta){//status = 200
-				
-				alert("La richiesta ajax è stata inviata correttamente")
-				//	var messRisposta=JSON.parse(risposta.responseText);
-				//	var n=JSON.parse(messRisposta);
-				//	alert("successo"+n.title);
-				if(typeAccount==="Giocatore")	
+		url:"/checkUser",
+		contentType:"application/json",
+		    dataType: 'json',
+		data:JSON.stringify(account1),statusCode: {
+        200: function(responseObject, textStatus, jqXHR) {
+	
+	console.log(responseObject+ textStatus);
+               if(typeAccount==="Giocatore")	
 				addInfoAccountGiocatore();
 				else
 				addInfoAccountStruttura();
 				
-				
-			},
-			error: function(xhr){
-				
-					alert("LA RICHIESTA NON È ANDATA A BUON FINE");
-			}
-	});
+        },
+         400: function(responseObject, textStatus, jqXHR){
+	
+	   alert("il nome utente esiste già");
+	
+},
+
+        503: function(responseObject, textStatus, errorThrown) {
+            // Service Unavailable (503)
+            // This code will be executed if the server returns a 503 response
+        }           
+    }
+	});	
+		
+	
 	}
 		function ajaxTwo(){
 		var username=$("#validationDefaultUsername").val();
 		var typeAccount=$("#categoriaAccount").val();
+		if(typeAccount==="Giocatore")
+			console.log("giocatore");
+		//crea json object giocatore e mandalo
+		else
+		console.log("struttura");
+		//crea json object struttura e mandalo
 		alert(typeAccount);
 	$.ajax({
 
 		type:"POST",
+		//url a cui mandare i dati della registrazione
 		url:"/endValidation",
 		contentType:"application/text",
 		data:username,

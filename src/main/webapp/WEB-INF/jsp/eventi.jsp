@@ -35,7 +35,7 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400"
 	rel="stylesheet">
 </head>
-<body>
+<body onload="loadJSONEventsFromRestController()">
 <!-----------HEADER --------->
 	<header
 		class="d-flex fixed-top navbar-light bg-light flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -72,7 +72,7 @@
         
         <!--  -->
         <div class="container">
-        <p class="display-4 font-weight-bold mb-5 text-dark">Discover the Amazing City</p>
+        <p class="display-4 font-weight-bold mb-5 text-dark">Scogli gli eventi della tua città</p>
         <div class="card">
           <div class="card-body">
             <div class="row justify-content-center">
@@ -84,15 +84,7 @@
                 <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 170.4px;"></div><div class="form-notch-trailing"></div></div></div>
               </div>
               
-               <!-- <label for="browser" class="form-label">Choose your browser from the list:</label>
-<input class="form-controlform-control-lg" list="browsers" name="browser" id="browser">
-<datalist id="browsers">
-  <option value="Edge">
-  <option value="Firefox">
-  <option value="Chrome">
-  <option value="Opera">
-  <option value="Safari">
-</datalist -->
+          
 								<div class="col-md-4 mb-3 mb-md-0">
 								
 							                 
@@ -145,7 +137,7 @@
 					</button>
 
 				</div>
-				<div class="row">
+				<div class="row" id="card_container">
 
 
 					<div

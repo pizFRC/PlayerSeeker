@@ -67,6 +67,7 @@ public class UserDaoJDBC implements UserDao {
 				query.setString(1, username);
 				ResultSet result = query.executeQuery(); 
 				if(result.next()) {
+					//qui mi serve l'utente che
 					if(result.getBoolean(3)) 
 						return DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(username);
 					else
