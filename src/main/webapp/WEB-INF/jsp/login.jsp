@@ -16,10 +16,13 @@
 	<jsp:include page="header.jsp" />
 	
 	<div id = "login" class="m-5 d-flex align-items-center justify-content-center text-center">
+	
 		<form class="shadow-lg bg-body rounded p-5" method="post"
 			id="form_login" action="checkUser">
+		<div id="dentro_form">
 			<img class="m-3" rel="icon" width="200" height="65"
 				src="img/logo.png" type="image/x-icon">
+				
 			<c:if test="${errorMessage != null}">
 				<div class="alert alert-danger d-flex align-items-center"
 					role="alert">
@@ -29,12 +32,19 @@
 					<div>${errorMessage}</div>
 				</div>
 			</c:if>
-			<label for="username" class="sr-only"> Username </label> <input
-				type="text" class="form-control mb-3" id="username"
-				placeholder="Username" required autofocus> <label
-				for="password" class="sr-only"> Password </label> <input
-				type="password" class="form-control mb-3" id="password"
+			
+			<label for="username" class="sr-only"> Username </label> 
+			<input type="text" class="form-control mb-3" name="username" id="username"
+				placeholder="Username" required autofocus>
+				
+				 <label
+				for="password" class="sr-only"> Password </label> 
+				<input type="password" class="form-control mb-3" id="psw" name="psw"
 				placeholder="Password" required autofocus>
+		
+		
+		<!--  -->
+		<div id="form_login_nsc">
 			<div class="mb-3">
 				<button type="submit" class="btn btn-primary">Accedi</button>
 			</div>
@@ -50,6 +60,10 @@
 				anche accedere con</h3>
 			<div class="g-signin2 row justify-content-md-center"
 				data-onsuccess="onSignIn"></div>
+			</div>	
+			
+			</div>
+				<!--  -->	
 		</form>
 
 	</div>
