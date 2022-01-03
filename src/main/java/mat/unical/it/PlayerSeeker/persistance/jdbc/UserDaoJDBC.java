@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mat.unical.it.PlayerSeeker.model.Player;
+import mat.unical.it.PlayerSeeker.model.SportEvent;
+import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.model.User;
 import mat.unical.it.PlayerSeeker.persistance.Database;
 import mat.unical.it.PlayerSeeker.persistance.UserDao;
@@ -103,6 +105,9 @@ public class UserDaoJDBC implements UserDao {
 			if(user instanceof Player) {
 				Player player = (Player) user;
 				DatabaseJDBC.getInstance().getPlayerDao().saveOrUpdate(player);
+			} else if(user instanceof SportsFacility) {
+				SportsFacility sportsFacility = (SportsFacility) user;
+				DatabaseJDBC.getInstance().getSportsFacilityDao().saveOrUpdate(sportsFacility);
 			}
 
 			query.close();
@@ -116,7 +121,26 @@ public class UserDaoJDBC implements UserDao {
 
 	@Override
 	public boolean delete(User user) {
-		return false;
+		PreparedStatement query;
+
+		try{
+			query = connection.prepareStatement("DELETE users WHERE username=?;");
+
+			if(user instanceof Player) {
+				Player player = (Player) user;
+				DatabaseJDBC.getInstance().getPlayerDao().saveOrUpdate(player);
+			} else if(user instanceof SportsFacility) {
+				SportsFacility sportsFacility = (SportsFacility) user;
+				DatabaseJDBC.getInstance().getSportsFacilityDao().saveOrUpdate(sportsFacility);
+			}
+
+			query.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
 	}
 
 }
