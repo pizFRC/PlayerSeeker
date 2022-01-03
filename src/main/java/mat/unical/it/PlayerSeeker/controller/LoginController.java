@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
@@ -29,11 +30,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("/checkUser")
-	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String JSONuser, String password) {	 
+	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String username, @RequestBody String password) {	 
 
 		//JSONuser è l'oggetto mandato nella richiesta ajax ,altrimenti usare @RequestParam prendendo nel form i valori interessati
-		System.out.println("l'account  ricevuto è"+ JSONuser);
-		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(JSONuser);
+		System.out.println("l'account  ricevuto è"+ username);
+		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
 		System.out.println(user);
 		res.setStatus(200);
 		

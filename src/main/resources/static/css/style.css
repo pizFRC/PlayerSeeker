@@ -8,10 +8,10 @@
 
 
 body {
-	padding-top: 70px;
+	padding-top: 100px;
 }
+
 #login_body  {
-	padding:10%;
 	background-image: url('../img/bg.jpg');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
