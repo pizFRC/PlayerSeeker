@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.RequestScope;
 
 import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
@@ -28,18 +30,27 @@ public class LoginController {
 		return "eventi";
 	}
 	
+
+	@PostMapping("/checkRegistrazione")
+	public String checkUsernameRegistrazione( HttpServletResponse res,@RequestBody String dati ) {
+		System.out.println(" prova"+dati);
+		res.setStatus(200);
+		return null;
+	}
 	@PostMapping("/checkUser")
-	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String JSONuser, String password) {	 
+	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestParam("username") String username,@RequestParam("psw")String password) {	 
 
 		//JSONuser è l'oggetto mandato nella richiesta ajax ,altrimenti usare @RequestParam prendendo nel form i valori interessati
-		System.out.println("l'account  ricevuto è"+ JSONuser);
-		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(JSONuser);
-		System.out.println(user);
+		System.out.println("l'account  ricevuto è"+ username + "psw:"+ password);
+		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
+		System.out.println("user: "+ user);
 		res.setStatus(200);
-		
+	  
 		if(user == null) {
 			req.setAttribute("errorMessage", "L'username inserito non esiste.");
-			return "login";
+			 
+				
+			return "redirect:/login";
 		}
 		//Controllo password
 		if(!BCrypt.checkpw(user.getPassword(), password)) {

@@ -15,71 +15,58 @@
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
 	
-	<div id = "login" class="position-absolute top-50 start-50 translate-middle shadow-lg p-5 m-5 bg-body rounded">
-		<c:if test="${errorMessage != null}">
-			<div class="alert alert-danger d-flex align-items-center" role="alert">
-				<i class="bi bi-exclamation-triangle-fill me-2" width="24" height="24" role="img" aria-label="Danger:"> <use xlink:href="#exclamation-triangle-fill" /></i>
-				<div>${errorMessage}</div>
-			</div>
-        </c:if>
-		
-		<div id="divUPC">
-			<div class="row justify-content-md-center">
-				<div class="col-sm-auto">
-					<img class="m-3" rel="icon" width="200" height="65"
-						src="img/logo.png" type="image/x-icon" />
-				</div>
-			</div>
-		
-		<form method="post" id="form_login" action="checkUser">
-			<div>
-				
-				<div class="row justify-content-md-center">
-					<div class="col-sm-12">
-						<label for="validationDefaultUsername" class="form-label">Username</label>
-						<div class="input-group">
-							<span class="input-group-text" id="inputGroupPrepend2">@</span> <input
-								type="text" class="form-control" id="validationDefaultUsername"
-								aria-describedby="inputGroupPrepend2"
-								name="validationDefaultUsername" required>
-						</div>
-					</div>
-				</div>
-				<div class="row justify-content-md-center">
-					<div class="col-sm-12">
-						<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-						<input type="password" class="form-control" id="inputPassword"
-							aria-describedby="inputGroupPrepend2" required>
-					</div>
-				</div>
-				<div id="btn_accedi" class="row justify-content-md-center">
-					<div class="col-sm-auto">
-						<button type="submit" class="btn btn-primary m-4">Accedi</button>
-					</div>
-					<div class="row justify-content-md-center">
-						<div class="col-sm-auto">
-							<a id="btn_registrati" onclick="hideBtn()" class="link-primary">Non
-								hai ancora un account? Registrati!</a>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</form>
-		</div>
-		
-		<div class="row align-items-center m-4" id="google_signIn_button">
-			<hr class="col-sm-4">
-			<p class="col-sm-4 open_sans_font" align="center"> oppure </p>
-			<hr class="col-sm-4">
-		</div>
-     
-          <h2 class="fs-5 fw-bold mb-3" style="text-align:center;">Puoi anche accedere con</h2>
-          <div class="g-signin2 row justify-content-md-center" data-onsuccess="onSignIn"></div>
-	</div>
+	<div id = "login" class="m-5 d-flex align-items-center justify-content-center text-center">
 	
-	<!-- FOOTER -->
-	<jsp:include page="footer.jsp"/>
+		<form class="shadow-lg bg-body rounded p-5" method="post"
+			id="form_login" action="checkUser">
+		<div id="dentro_form">
+			<img class="m-3" rel="icon" width="200" height="65"
+				src="img/logo.png" type="image/x-icon">
+				
+			<c:if test="${errorMessage != null}">
+				<div class="alert alert-danger d-flex align-items-center"
+					role="alert">
+					<i class="bi bi-exclamation-triangle-fill me-2" width="24"
+						height="24" role="img" aria-label="Danger:"> <use
+							xlink:href="#exclamation-triangle-fill" /></i>
+					<div>${errorMessage}</div>
+				</div>
+			</c:if>
+			
+			<label for="username" class="sr-only"> Username </label> 
+			<input type="text" class="form-control mb-3" name="username" id="username"
+				placeholder="Username" required autofocus>
+				
+				 <label
+				for="password" class="sr-only"> Password </label> 
+				<input type="password" class="form-control mb-3" id="psw" name="psw"
+				placeholder="Password" required autofocus>
+		
+		
+		<!--  -->
+		<div id="form_login_nsc">
+			<div class="mb-3">
+				<button type="submit" class="btn btn-primary">Accedi</button>
+			</div>
+			<a href="#" id="btn_registrati" onclick="hideBtn()"
+				class="link-primary">Non hai ancora un account? Registrati!</a>
+
+			<div class="row m-4 d-flex align-items-center">
+				<hr class="col-sm-4">
+				<p class="col-sm-4 open_sans_font" align="center">oppure</p>
+				<hr class="col-sm-4">
+			</div>
+			<h3 class="fs-6 fw-bold mb-3" style="text-align: center;">Puoi
+				anche accedere con</h3>
+			<div class="g-signin2 row justify-content-md-center"
+				data-onsuccess="onSignIn"></div>
+			</div>	
+			
+			</div>
+				<!--  -->	
+		</form>
+
+	</div>
 	
 	<!-- CDN -->
 	<script
