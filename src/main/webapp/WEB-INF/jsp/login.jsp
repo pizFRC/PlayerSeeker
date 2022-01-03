@@ -4,71 +4,16 @@
 
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="google-signin-client_id" content="345576690488-5jgneq5npfclnad4b92mvflcuhsundgs.apps.googleusercontent.com">
-
-<title>Player Seeker</title>
-
-<link rel="icon" href="img/favicon.png">
-
-<style>
-
-</style>
-<!-- Jquery -->
-<script
-			  src="https://code.jquery.com/jquery-3.6.0.min.js"
-			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-			  crossorigin="anonymous"></script>
-			  
-<!-- Google login -->
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-
-<!-- Custom CSS -->
-<link href="css/style.css" rel="stylesheet" type="text/css">
-
-<!--Bootstrap Icon -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-<!-- Font -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400"
-	rel="stylesheet">
-
+	<jsp:include page="head.jsp"/>
+	<meta name="google-signin-client_id" content="345576690488-5jgneq5npfclnad4b92mvflcuhsundgs.apps.googleusercontent.com">  
+	<!-- Google login -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<title>Player Seeker - Login</title>	
 </head>
 
 <body id="login_body">
-	<!-----------HEADER --------->
-	<header
-		class="d-flex fixed-top navbar-light bg-light flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-		<div class="container d-flex justify-content-between row">
-			<a href="/"
-				class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-				<img rel="icon" width="150" height="50" src="img/logo.png"
-				type="image/x-icon" />
-			</a>
-
-			<ul
-				class="nav col-sm-12 col-md-7 mb-2 justify-content-center mb-md-0"
-				id="menu_items">
-				<li class="raleway_font"><a href="#"
-					class="nav-link px-2 link-secondary ">Home</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">Eventi</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
-			</ul>
-
-
-		</div>
-	</header>
-	<!-----------END HEADER --------->
+	<!-- HEADER --->
+	<jsp:include page="header.jsp" />
 	
 	<div id = "login" class="position-absolute top-50 start-50 translate-middle shadow-lg p-5 m-5 bg-body rounded">
 		<c:if test="${errorMessage != null}">
@@ -132,6 +77,17 @@
           <h2 class="fs-5 fw-bold mb-3" style="text-align:center;">Puoi anche accedere con</h2>
           <div class="g-signin2 row justify-content-md-center" data-onsuccess="onSignIn"></div>
 	</div>
+	
+	<!-- FOOTER -->
+	<jsp:include page="footer.jsp"/>
+	
+	<!-- CDN -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
 	<script type="text/javascript"  src="../js/registrazione.js"> </script>
 	<script type="text/javascript"  src="../js/login.js"> </script>

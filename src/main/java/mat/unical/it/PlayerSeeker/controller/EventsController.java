@@ -14,7 +14,6 @@ import mat.unical.it.PlayerSeeker.model.Sports;
 @RestController
 public class EventsController {
 
-	
 	@GetMapping("/listaEventi")
 	public Events getEvents() {
 		
@@ -40,8 +39,6 @@ public class EventsController {
 		eventi.add(tmpS4);
 		eventi.add(tmpS5);
 		eventi.add(tmpS6);
-		return eventi;
-		
+		return eventi;	
 	}
-	
 }

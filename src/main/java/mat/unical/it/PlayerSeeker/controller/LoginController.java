@@ -22,15 +22,15 @@ public class LoginController {
 	public String loginPage() {
 		return "login";
 	}
+	
 	@GetMapping("/eventi")
 	public String events() {
 		return "eventi";
 	}
 	
 	@PostMapping("/checkUser")
-	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String JSONuser,String password) {	 
-		
-		
+	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String JSONuser, String password) {	 
+
 		//JSONuser è l'oggetto mandato nella richiesta ajax ,altrimenti usare @RequestParam prendendo nel form i valori interessati
 		System.out.println("l'account  ricevuto è"+ JSONuser);
 		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(JSONuser);
@@ -38,17 +38,15 @@ public class LoginController {
 		res.setStatus(200);
 		
 		if(user == null) {
-			
-			//Messaggio di errore: l'utente non esiste
 			req.setAttribute("errorMessage", "L'username inserito non esiste.");
 			return "login";
 		}
 		//Controllo password
 		if(!BCrypt.checkpw(user.getPassword(), password)) {
-			//Messaggio di errore: password sbagliata
 			req.setAttribute("errorMessage", "La password inserita non è corretta.");
 			return "login";
 		}
+		
 		if(user instanceof Player) {
 			Player player = (Player) user;
 			HttpSession session = req.getSession(true);

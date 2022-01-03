@@ -4,63 +4,13 @@
 
 <html lang="it">
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<title>Player Seeker</title>
-<link rel="icon" href="img/favicon.png">
-
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-
-<!-- Custom CSS -->
-<link href="css/style.css" rel="stylesheet" type="text/css">
-
-<!--Bootstrap Icon -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-<!-- Font -->
-
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:300,400"
-	rel="stylesheet">
+	<jsp:include page="head.jsp"/>
+	<title>Player Seeker</title>
 </head>
 
 <body>
-	<!-----------HEADER --------->
-	<header
-		class="d-flex fixed-top navbar-light bg-light flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-		<div class="container d-flex justify-content-between row">
-			<a href="/"
-				class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-				<img rel="icon" width="150" height="50" src="img/logo.png"
-				type="image/x-icon" />
-			</a>
-   
-			<ul class="nav col-sm-12 col-md-7 mb-2 justify-content-center mb-md-0"   id="menu_items">
-				<li class="raleway_font"><a href="#"
-					class="nav-link px-2 link-secondary ">Home</a></li>
-				<li><a href="/eventi" class="nav-link px-2 link-dark">Eventi</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
-			</ul>
-			<div class="col-md-2 text-end  " id="login_div">
-		
-				<a type="button" class="btn btn-outline-primary me-2" href="login">Accedi</a>
-				
-			</div>
-			
-			</div>
-	</header>
-	<!-----------END HEADER --------->
+	<!-- HEADER --->
+	<jsp:include page="header.jsp" />
 
 	<!-- JUMBOTRON -->
 	<div id="jumbotron" class="p-5 mb-4 rounded-3 bg-light">
@@ -137,9 +87,6 @@
 						</div>
 					</div>
 				</div>
-
-
-
 
 			</div>
 			<div class="carousel-item">
@@ -390,34 +337,18 @@
 			</div>
 		</div>
 	</div>
-
-
-	<!-- end carousel -->
+	<!-- END CAROUSEL -->
 
 	<!-- FOOTER -->
-	<footer
-		class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-		<div class="container justify-content-center">
-			<span class="text-muted">© 2021 Player seeker</span>
-		</div>
-		<!--
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-    
-       <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-      <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-    </ul>
-    -->
-	</footer>
+	<jsp:include page="footer.jsp" />
 
-	<!--  -->
-	<!-- cdn  -->
+	<!-- CDN -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </body>
 </html>
