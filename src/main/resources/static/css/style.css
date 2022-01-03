@@ -6,9 +6,30 @@
 	    font-family: 'Open Sans', sans-serif;
 }
 
+
 body {
 	padding-top: 70px;
 }
+#login_body  {
+	padding:10%;
+	background-image: url('../img/bg.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
 
   
+@media screen and (max-width:1000px){
+.tasti_da_nascondere{
+	
+	  
+}
+}
+  
+@media screen and (max-width:900px){
+.item{
+	
 
+}
+}

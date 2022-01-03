@@ -23,7 +23,7 @@ public class DatabaseJDBC implements Database{
 
 	private DatabaseJDBC() {
 		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/player_seeker", "postgres", "admin");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/player_seeker", "postgres", "1234");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class DatabaseJDBC implements Database{
 	}
 
 	@Override
-	public SportEventDao getspoSportEventDao() {
+	public SportEventDao getSportsEventDao() {
 		return new SportEventDaoJDBC(connection);
 	}
 

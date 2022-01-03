@@ -22,11 +22,23 @@ public class LoginController {
 	public String loginPage() {
 		return "login";
 	}
+	@GetMapping("/eventi")
+	public String events() {
+		return "eventi";
+	}
 	
 	@PostMapping("/checkUser")
-	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String username, @RequestBody String password) {	 
-		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
+	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String JSONuser,String password) {	 
+		
+		
+		//JSONuser è l'oggetto mandato nella richiesta ajax ,altrimenti usare @RequestParam prendendo nel form i valori interessati
+		System.out.println("l'account  ricevuto è"+ JSONuser);
+		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(JSONuser);
+		System.out.println(user);
+		res.setStatus(200);
+		
 		if(user == null) {
+			
 			//Messaggio di errore: l'utente non esiste
 			req.setAttribute("errorMessage", "L'username inserito non esiste.");
 			return "login";

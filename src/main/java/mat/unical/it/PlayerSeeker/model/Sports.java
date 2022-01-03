@@ -2,12 +2,18 @@ package mat.unical.it.PlayerSeeker.model;
 
 public class Sports implements java.io.Serializable {
 
+	public Sports(int partecipanti, String sportType) {
+		super();
+		this.partecipanti = partecipanti;
+		this.sportType = sportType;
+	}
+
 	private static final long serialVersionUID = 4517712161096114310L;
 	
 	private int partecipanti = 0;
-    private SportTypes sportType = null;
+    private String sportType = null;
 
-    public Sports() {}
+    public Sports() {super();}
 
     public int getPartecipanti() {
         return partecipanti;
@@ -17,11 +23,11 @@ public class Sports implements java.io.Serializable {
         this.partecipanti = partecipanti;
     }
 
-    public SportTypes getSportType() {
+    public String getSportType() {
         return sportType;
     }
 
-    public void setSportType(SportTypes sportType) {
+    public void setSportType(String sportType) {
         this.sportType = sportType;
     }
 }

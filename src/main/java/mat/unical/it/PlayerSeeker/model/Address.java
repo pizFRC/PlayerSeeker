@@ -10,7 +10,7 @@ public class Address implements java.io.Serializable{
     private String province = null;
     private String position = null;
 
-    public Address() {}
+    public Address() {super();}
 
     public String getCity() {
         return city;

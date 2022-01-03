@@ -15,7 +15,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 		this.connection = connection;
 	}
 
-	private boolean checkConnnection() {
+	private boolean checkConnection() {
 		try {
 			if(connection == null || connection.isClosed())
 				return false;

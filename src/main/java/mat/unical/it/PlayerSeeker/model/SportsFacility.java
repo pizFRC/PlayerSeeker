@@ -10,7 +10,7 @@ public class SportsFacility extends User implements java.io.Serializable {
     private int telefono = 0;
     //private String posizione = null;
 
-    public SportsFacility() {}
+    public SportsFacility() {super();}
 
     public int getId() {
         return id;

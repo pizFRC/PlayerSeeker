@@ -48,12 +48,14 @@
 			<ul class="nav col-sm-12 col-md-7 mb-2 justify-content-center mb-md-0"   id="menu_items">
 				<li class="raleway_font"><a href="#"
 					class="nav-link px-2 link-secondary ">Home</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">Eventi</a></li>
+				<li><a href="/eventi" class="nav-link px-2 link-dark">Eventi</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Strutture</a></li>
 				<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
 			</ul>
 			<div class="col-md-2 text-end  " id="login_div">
+		
 				<a type="button" class="btn btn-outline-primary me-2" href="login">Accedi</a>
+				
 			</div>
 			
 			</div>
