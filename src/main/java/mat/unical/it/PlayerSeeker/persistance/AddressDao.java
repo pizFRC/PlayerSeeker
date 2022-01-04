@@ -6,6 +6,5 @@ import mat.unical.it.PlayerSeeker.model.SportsFacility;
 
 public interface AddressDao {
 
-    public Address doRetrieveByPlayer(Player player);
-    public Address doRetrieveBySportFacility(SportsFacility sportsFacility);
+    public Address doRetrieveByInteger(int address);
 }

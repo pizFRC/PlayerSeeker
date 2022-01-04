@@ -46,7 +46,7 @@ public class PlayerDaoJDBC implements PlayerDao{
 				tmpPlayer.setCognome(result.getString("cognome"));
 				tmpPlayer.setEta(result.getInt("eta"));
 				tmpPlayer.setEmail(result.getString("email"));
-				//tmpPlayer.setAddress(result.getString("address"));
+				tmpPlayer.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByInteger(result.getInt(("address"))));
 
 				playerList.add(tmpPlayer);
 			}
