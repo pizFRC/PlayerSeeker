@@ -19,7 +19,29 @@ body {
 }
 
 
-  
+#login_form label.error {
+	color: red;
+	font-weight: normal;
+}
+
+#geocoder {
+	z-index: 1;
+	margin: 20px;
+}
+
+.mapboxgl-ctrl-geocoder {
+	min-width: 100%;
+	box-shadow: none;
+	border: 1px solid #ced4da;
+}
+
+.slick-prev:before {
+  color: black;
+}
+.slick-next:before {
+  color: black;
+}
+
 @media screen and (max-width:1000px){
 .tasti_da_nascondere{
 	

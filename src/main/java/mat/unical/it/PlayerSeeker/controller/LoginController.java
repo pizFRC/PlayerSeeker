@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import mat.unical.it.PlayerSeeker.model.Player;
@@ -30,14 +29,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/checkUser")
-	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestBody String username, @RequestBody String password) {	 
-
-		//JSONuser è l'oggetto mandato nella richiesta ajax ,altrimenti usare @RequestParam prendendo nel form i valori interessati
-		System.out.println("l'account  ricevuto è"+ username);
+	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) {	 
 		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
 		System.out.println(user);
-		res.setStatus(200);
-		
 		if(user == null) {
 			req.setAttribute("errorMessage", "L'username inserito non esiste.");
 			return "login";
