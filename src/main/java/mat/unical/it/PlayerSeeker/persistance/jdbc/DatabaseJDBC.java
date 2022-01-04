@@ -4,11 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import mat.unical.it.PlayerSeeker.persistance.Database;
-import mat.unical.it.PlayerSeeker.persistance.PlayerDao;
-import mat.unical.it.PlayerSeeker.persistance.SportEventDao;
-import mat.unical.it.PlayerSeeker.persistance.SportsFacilityDao;
-import mat.unical.it.PlayerSeeker.persistance.UserDao;
+import mat.unical.it.PlayerSeeker.persistance.*;
 
 public class DatabaseJDBC implements Database{
 	
@@ -48,6 +44,11 @@ public class DatabaseJDBC implements Database{
 	@Override
 	public UserDao getUserDao() {
 		return new UserDaoJDBC(connection);
+	}
+
+	@Override
+	public AddressDao getAddressDao() {
+		return new AddressDaoJDBC(connection);
 	}
 
 }

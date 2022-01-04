@@ -6,5 +6,6 @@ public interface Database {
 	public SportsFacilityDao getSportsFacilityDao();
 	public SportEventDao getSportsEventDao();
 	public UserDao getUserDao();
+	public AddressDao getAddressDao();
 
 }

@@ -23,7 +23,7 @@
 <body id="login_body">
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
-	
+
 	<div class="m-5 align-items-center justify-content-center">
 		<form class="shadow-lg bg-body rounded p-5" method="post"
 			id="login_form" action="checkUser" style="max-width: 450px; margin: auto">
@@ -53,7 +53,6 @@
 				</div>
 				<a href="#" id="btn_registrati" onclick="switchToRegistration()"
 					class="link-primary">Non hai ancora un account? Registrati!</a>
-
 				<div class="row m-4 d-flex align-items-center">
 					<hr class="col-sm-4">
 					<p class="col-sm-4 open_sans_font" align="center">oppure</p>
