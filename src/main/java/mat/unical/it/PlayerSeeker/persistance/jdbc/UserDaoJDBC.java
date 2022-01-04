@@ -97,9 +97,29 @@ public class UserDaoJDBC implements UserDao {
 		try {
 			User tmp = doRetrieveByKey(user.getUsername());
 			if(tmp == null) {
-				query = connection.prepareStatement("INSERT INTO users");
+				String statement = "insert into users(username,password,is_player) values(?,?,?);";
+				query = connection.prepareStatement(statement);
+				query.setString(1,user.getUsername());
+				query.setString(2, user.getPassword());
+
+				if(user instanceof Player)
+					query.setBoolean(3,true);
+				else
+					query.setBoolean(3,false);
+
+				query.executeUpdate();
 			} else {
-				query = connection.prepareStatement("UPDATE users WHERE username=?");
+				query = connection.prepareStatement("UPDATE users SET username=?,password=?,is_player=? WHERE username=?;");
+				query.setString(1, user.getUsername());
+				query.setString(2, user.getPassword());
+				query.setString(1, user.getUsername());
+
+				if(user instanceof Player)
+					query.setBoolean(3,true);
+				else
+					query.setBoolean(3,false);
+
+				query.executeUpdate();
 			}
 
 			if(user instanceof Player) {
@@ -125,13 +145,13 @@ public class UserDaoJDBC implements UserDao {
 
 		try{
 			query = connection.prepareStatement("DELETE users WHERE username=?;");
-
+			query.setString(1, user.getUsername());
 			if(user instanceof Player) {
 				Player player = (Player) user;
-				DatabaseJDBC.getInstance().getPlayerDao().saveOrUpdate(player);
+				DatabaseJDBC.getInstance().getPlayerDao().delete(player);
 			} else if(user instanceof SportsFacility) {
 				SportsFacility sportsFacility = (SportsFacility) user;
-				DatabaseJDBC.getInstance().getSportsFacilityDao().saveOrUpdate(sportsFacility);
+				DatabaseJDBC.getInstance().getSportsFacilityDao().delete(sportsFacility);
 			}
 
 			query.close();
