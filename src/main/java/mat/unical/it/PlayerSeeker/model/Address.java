@@ -4,51 +4,29 @@ public class Address implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1818521083889150483L;
 	
-	private String city = null;
-    private String via = null;
-    private int zip = 0;
-    private String province = null;
-    private String position = null;
+	private float longitude;
+    private float latitude;
+    private int id;
 
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public int getID() {return id;}
+
+    public void setId(int id) {this.id = id;}
+    
     public Address() {super();}
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getVia() {
-        return via;
-    }
-
-    public void setVia(String via) {
-        this.via = via;
-    }
-
-    public int getZip() {
-        return zip;
-    }
-
-    public void setZip(int zip) {
-        this.zip = zip;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
 }
