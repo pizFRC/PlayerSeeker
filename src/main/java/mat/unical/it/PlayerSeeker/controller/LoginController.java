@@ -28,6 +28,10 @@ public class LoginController {
 	public String events() {
 		return "eventi";
 	}
+	@GetMapping("/strutture")
+	public String structures() {
+		return "strutture";
+	}
 	
 	@PostMapping("/checkUser")
 

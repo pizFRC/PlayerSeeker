@@ -4,7 +4,7 @@
 <html>
 <head>
 	<jsp:include page="head.jsp" />
-	<title>Player Seeker - Eventi</title>
+	<title>Player Seeker - Strutture</title>
 </head>
 
 <body onload="loadJSONEventsFromRestController()">
@@ -17,8 +17,7 @@
 			<div class="mask d-flex align-items-center h-100"
 				style="background-color: white;">
 				<div class="container">
-					<p class="display-4 font-weight-bold mb-5 text-dark">Scegli gli
-						eventi della tua città</p>
+					<p class="display-4 font-weight-bold mb-5 text-dark">Scegli le Strutture della tua città</p>
 					<div class="card">
 						<div class="card-body">
 							<div class="row justify-content-center">
@@ -157,7 +156,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
-	<script type="text/javascript" src="../js/eventi.js"
+	<script type="text/javascript" src="../js/strutture.js"
 		crossorigin="anonymous">
 		
 	</script>
