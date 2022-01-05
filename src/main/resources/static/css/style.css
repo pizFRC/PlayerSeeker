@@ -36,10 +36,19 @@ body {
 }
 
 .slick-prev:before {
-  color: black;
+	color: black;
 }
 .slick-next:before {
-  color: black;
+	color: black;
+}
+
+.slick-slide {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.prova {
+	padding: 10px;
 }
 
 @media screen and (max-width:1000px){
