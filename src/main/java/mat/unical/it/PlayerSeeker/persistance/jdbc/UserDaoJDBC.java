@@ -146,6 +146,7 @@ public class UserDaoJDBC implements UserDao {
 		try{
 			query = connection.prepareStatement("DELETE users WHERE username=?;");
 			query.setString(1, user.getUsername());
+			query.executeQuery();
 			if(user instanceof Player) {
 				Player player = (Player) user;
 				DatabaseJDBC.getInstance().getPlayerDao().delete(player);

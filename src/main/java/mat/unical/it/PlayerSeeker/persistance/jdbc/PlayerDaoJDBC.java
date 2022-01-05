@@ -46,7 +46,7 @@ public class PlayerDaoJDBC implements PlayerDao{
 				tmpPlayer.setCognome(result.getString("cognome"));
 				tmpPlayer.setEta(result.getInt("eta"));
 				tmpPlayer.setEmail(result.getString("email"));
-				tmpPlayer.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByInteger(result.getInt(("address"))));
+				tmpPlayer.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getInt(("address"))));
 
 				playerList.add(tmpPlayer);
 			}
@@ -73,7 +73,7 @@ public class PlayerDaoJDBC implements PlayerDao{
 				tmpPlayer.setCognome(result.getString("cognome"));
 				tmpPlayer.setEta(result.getInt("eta"));
 				tmpPlayer.setEmail(result.getString("email"));
-				//tmpPlayer.setAddress(result.getObject("address")); da rivedere
+				tmpPlayer.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getInt(("address"))));
 			}
 			query.close();
 		} catch (SQLException e) {
@@ -91,10 +91,25 @@ public class PlayerDaoJDBC implements PlayerDao{
 		try{
 			Player tmp = doRetrieveByKey(player.getUsername());
 			if(tmp == null) {
-				//INSERT da vedere come fare
-				query = connection.prepareStatement("INSERT INTO players");
+				String statement = "insert into players(username,name,surname,birthday,sex,address) values(?,?,?,?,?,?);";
+				query = connection.prepareStatement(statement);
+				query.setString(1,player.getUsername());
+				query.setString(2,player.getNome());
+				query.setString(3,player.getCognome());
+				query.setInt(4,player.getEta());
+				query.setString(5,player.getSesso());
+				query.setInt(6,player.getAddress().getID());
+				query.executeUpdate();
 			} else {
-				//UPDATE
+				query = connection.prepareStatement("UPDATE users SET username=?,name=?,surname=?,birthday=?,sex=?,address=? WHERE username=?;");
+				query.setString(1,player.getUsername());
+				query.setString(2,player.getNome());
+				query.setString(3,player.getCognome());
+				query.setInt(4,player.getEta());
+				query.setString(5,player.getSesso());
+				query.setInt(6,player.getAddress().getID());
+				query.setString(7,player.getUsername());
+				query.executeUpdate();
 			}
 
 			query.close();
@@ -111,8 +126,9 @@ public class PlayerDaoJDBC implements PlayerDao{
 		PreparedStatement query = null;
 
 		try{
-			query = connection.prepareStatement("DELETE players WHERE id=?;");
-
+			query = connection.prepareStatement("DELETE players WHERE username=?;");
+			query.setString(1,player.getUsername());
+			query.executeQuery();
 			query.close();
 		} catch(SQLException e) {
 			e.printStackTrace();
