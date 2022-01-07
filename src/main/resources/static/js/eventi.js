@@ -106,6 +106,45 @@ console.log(larghezza + lastViewPressed);
 });
 
 
+$(document).ready(function() {
+	var addressLabel = document.createElement("label");
+	addressLabel.innerText = "Cerca qui la tua città";
+	addressLabel.className = "form-label autocomplete-label";
+	addressLabel.htmlFor="form1";
+	addressLabel.style="margin-left: 0px;";
+
+	var address = document.createElement("div");
+	address.id = "address";
+	address.className = "w-100 p-3";
+
+	var buttonContainer = document.createElement("div");
+	buttonContainer.className = "text-center mt-3";
+	buttonContainer.id = "bottone";
+
+	var button = document.createElement("button");
+	button.className = "btn btn-primary";
+	button.id = "validate_player_form";
+	button.innerText = "Registrati";
+	buttonContainer.append(button);
+	
+	$("#basic").append(addressLabel);
+	$("#basic").append(address);
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q';
+	const addressGeocoder = new MapboxGeocoder({
+		accessToken: mapboxgl.accessToken,
+		placeholder: 'Città, Via, Numero Civico',
+	});
+	addressGeocoder.addTo("#address");
+	addressGeocoder.on('result', function(e) {
+		console.log(e.result);
+	});
+
+
+
+});
+
+
 ///funzione per creare le card
 function createCard(nome,organizzatore,sport){
 	

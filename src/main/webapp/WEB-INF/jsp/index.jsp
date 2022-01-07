@@ -5,6 +5,8 @@
 <html lang="it">
 <head>
 	<jsp:include page="head.jsp"/>
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 	<title>Player Seeker</title>
 </head>
 
@@ -22,16 +24,8 @@
 			</p>
 
 			<!-- Search -->
-			<form class="form-inline">
-				<div class="mb-3 mt-3">
-					<label for="search" class="form-label">Visualizza i
-						migliori eventi e le migliori strutture nella tua città</label>
-					<div class="d-flex justify-content-between">
-						<input class="form-control mr-sm-2" type="search"
-							placeholder="Inserisci la tua città" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
-					</div>
-				</div>
+			<form class="form-inline" id="posizione">
+
 			</form>
 		</div>
 	</div>
@@ -349,6 +343,12 @@
 		crossorigin="anonymous"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/index.js"
+		crossorigin="anonymous">
+		
+	</script>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
 
 </body>
 </html>
