@@ -43,4 +43,11 @@ public class SportsFacility extends User implements java.io.Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+    public SportsFacility(int i, String n, int t)
+    {
+    	
+    	this.id=i;
+    	this.nome=n;
+    	this.telefono=t;
+    }
 }

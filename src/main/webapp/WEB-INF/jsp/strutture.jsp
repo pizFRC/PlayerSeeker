@@ -4,28 +4,28 @@
 <html>
 <head>
 	<jsp:include page="head.jsp" />
-	<title>Player Seeker - Eventi</title>
+	<title>Player Seeker - Strutture</title>
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body onload="loadJSONEventsFromRestController()">
 
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
-	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
-	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 
 	<section class="intro">
 		<div class="bg-image h-100">
 			<div class="mask d-flex align-items-center h-100"
 				style="background-color: white;">
 				<div class="container">
-					<p class="display-4 font-weight-bold mb-5 text-dark">Scegli gli
-						eventi della tua città</p>
+					<p class="display-4 font-weight-bold mb-5 text-dark">Scegli le Strutture della tua città</p>
 					<div class="card">
 						<div class="card-body">
 							<div class="row justify-content-center">
 								<div class="col-md-6 mb-3 mb-md-0">
-									<div id="basic" class="form-outline"> 
+									<div id="basic" class="form-outline">
+										
 										<div class="form-notch">
 											<div class="form-notch-leading" style="width: 9px;"></div>
 											<div class="form-notch-middle" style="width: 170.4px;"></div>
@@ -151,7 +151,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
-	<script type="text/javascript" src="../js/eventi.js"
+	<script type="text/javascript" src="../js/strutture.js"
 		crossorigin="anonymous">
 		
 	</script>

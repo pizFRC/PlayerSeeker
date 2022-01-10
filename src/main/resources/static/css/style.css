@@ -24,7 +24,8 @@ body {
 	font-weight: normal;
 }
 
-#geocoder {
+.geocoder {
+	border: 1px solid #ced4da;
 	z-index: 1;
 	margin: 20px;
 }

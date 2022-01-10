@@ -177,6 +177,7 @@ function showPlayerForm() {
 
 	//CAROUSEL DI PROVA
 	var div1 = document.createElement("span");
+
 	div1.innerHTML = "PROVA";
 	div1.className = "prova badge rounded-pill bg-primary ";
 
@@ -200,6 +201,7 @@ function showPlayerForm() {
 	div7.className = "prova badge rounded-pill bg-primary";
 	var div8 = document.createElement("div");
 	div8.innerHTML = "PROVA";
+
 	div8.className = "prova badge rounded-pill bg-primary";
 	
 	sportsContainer.append(div1);
@@ -237,6 +239,7 @@ function showPlayerForm() {
 		console.log(e.result);
 	});
 }
+
 
 function showSportFacilityForm() {
 	emptyForm();

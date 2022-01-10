@@ -60,6 +60,41 @@ window.addEventListener("resize", function(){
 
 });
 
+$(document).ready(function() {
+	var addressLabel = document.createElement("label");
+	addressLabel.innerText = "Cerca qui la tua città";
+	addressLabel.className = "form-label autocomplete-label";
+	addressLabel.htmlFor="form1";
+	addressLabel.style="margin-left: 0px;";
+
+	var address = document.createElement("div");
+	address.id = "address";
+	address.className = "w-100 p-3";
+
+	var buttonContainer = document.createElement("div");
+	buttonContainer.className = "text-center mt-3";
+	buttonContainer.id = "bottone";
+
+	var button = document.createElement("button");
+	button.className = "btn btn-primary";
+	button.id = "validate_player_form";
+	button.innerText = "Registrati";
+	buttonContainer.append(button);
+	
+	$("#basic").append(addressLabel);
+	$("#basic").append(address);
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q';
+	const addressGeocoder = new MapboxGeocoder({
+		accessToken: mapboxgl.accessToken,
+		placeholder: 'Città, Via, Numero Civico',
+	});
+	addressGeocoder.addTo("#address");
+	addressGeocoder.on('result', function(e) {
+		console.log(e.result);
+	});
+	});
+
 
 
 
@@ -106,45 +141,6 @@ console.log(larghezza + lastViewPressed);
 });
 
 
-$(document).ready(function() {
-	var addressLabel = document.createElement("label");
-	addressLabel.innerText = "Cerca qui la tua città";
-	addressLabel.className = "form-label autocomplete-label";
-	addressLabel.htmlFor="form1";
-	addressLabel.style="margin-left: 0px;";
-
-	var address = document.createElement("div");
-	address.id = "address";
-	address.className = "w-100 p-3";
-
-	var buttonContainer = document.createElement("div");
-	buttonContainer.className = "text-center mt-3";
-	buttonContainer.id = "bottone";
-
-	var button = document.createElement("button");
-	button.className = "btn btn-primary";
-	button.id = "validate_player_form";
-	button.innerText = "Registrati";
-	buttonContainer.append(button);
-	
-	$("#basic").append(addressLabel);
-	$("#basic").append(address);
-
-	mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q';
-	const addressGeocoder = new MapboxGeocoder({
-		accessToken: mapboxgl.accessToken,
-		placeholder: 'Città, Via, Numero Civico',
-	});
-	addressGeocoder.addTo("#address");
-	addressGeocoder.on('result', function(e) {
-		console.log(e.result);
-	});
-
-
-
-});
-
-
 ///funzione per creare le card
 function createCard(nome,organizzatore,sport){
 	
@@ -157,11 +153,11 @@ function createCard(nome,organizzatore,sport){
                                    var divBodyCard= document.createElement("div");
                                         divBodyCard.className="card-body";
                                               
-                                               var titleCard=document.createElement("h5");
-                                                        titleCard.className="card-title"; titleCard.innerHTML=nome + " organizzatore:"+organizzatore;
+                                              var titleCard=document.createElement("h5");
+                                                        titleCard.className="card-title"; titleCard.innerHTML=nome;
                                                             
   																var  contentCard=document.createElement("p");
-                                                        contentCard.className="card-text"; contentCard.innerHTML="sport : "+sport;
+                                                        contentCard.className="card-text";
 
 
                                                                   var btnCard=document.createElement("a");
@@ -204,18 +200,18 @@ function loadJSONEvents(){
 	
 }*/
 function loadJSONEventsFromRestController(){
-	var fileName="/listaEventi";
+	var fileName="/listaStrutture";
 	var xhttp =new XMLHttpRequest();
 	
 	xhttp.onreadystatechange=function(){
 		if(this.readyState ==4 && this.status==200){
 			var jsonObj=JSON.parse(xhttp.response);
 			//console.log("id :"+jsonObj.listaEventi[0].id + jsonObj.listaEventi[0].sport.sportType);
-		for(var i=0;i<jsonObj.listaEventi.length;i++){
-				var evento=jsonObj.listaEventi[i];
+		for(var i=0;i<jsonObj.listaStrutture.length;i++){
+				var struttura=jsonObj.listaStrutture[i];
 				
-				console.log("evento id :"+ evento.id + " organizzato da :" +evento.organizzatore.username + " sport :"+evento.sport.sportType);
-				var card=createCard("evento id :"+ evento.id , " organizzato da :" +evento.organizzatore.username , " sport :"+evento.sport.sportType);
+				//console.log("evento id :"+ evento.id + " " +evento.nome + " "+evento.telefono);
+				var card=createCard("Struttura "+ struttura.id , " nome: " +struttura.nome , " numero di telefono: "+struttura.telefono);
 	document.querySelector("#card_container").append(card);
 			}
 		}

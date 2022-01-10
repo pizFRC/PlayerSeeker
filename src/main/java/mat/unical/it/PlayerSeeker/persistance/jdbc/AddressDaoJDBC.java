@@ -19,7 +19,7 @@ public class AddressDaoJDBC implements AddressDao {
     }
 
     @Override
-    public Address doRetrieveByInteger(int address) {
+    public Address doRetrieveByID(int id) {
         PreparedStatement query;
         ResultSet result;
 
@@ -29,15 +29,13 @@ public class AddressDaoJDBC implements AddressDao {
 
             query = connection.prepareStatement("SELECT * FROM address WHERE id=?");
             result = query.executeQuery();
-            query.setInt(1,address);
+            query.setInt(1,id);
 
             while(result.next()) {
                 tmp = new Address();
-                tmp.setCity(result.getString(1));
-                tmp.setVia(result.getString(4));
-                tmp.setZip(result.getInt(3));
-                tmp.setProvince(result.getString(2));
-                tmp.setPosition(result.getString("position"));
+                tmp.setLatitude(result.getFloat(1));
+                tmp.setLongitude(result.getFloat(2));
+                tmp.setId(result.getInt(3));
             }
 
             query.close();
