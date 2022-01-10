@@ -177,28 +177,29 @@ function showPlayerForm() {
 
 	//CAROUSEL DI PROVA
 	var div1 = document.createElement("span");
-	div1.innerHTML = "PROVA"
-	div1.className = "prova badge rounded-pill bg-primary";
+	div1.innerHTML = "PROVA";
+	div1.className = "prova badge rounded-pill bg-primary ";
+
 	var div2 = document.createElement("div");
-	div2.innerHTML = "PROVA"
+	div2.innerHTML = "PROVA";
 	div2.className = "prova badge rounded-pill bg-primary";
 	var div3 = document.createElement("div");
-	div3.innerHTML = "PROVA"
+	div3.innerHTML = "PROVA";
 	div3.className = "prova badge rounded-pill bg-primary";
 	var div4 = document.createElement("div");
-	div4.innerHTML = "PROVA"
+	div4.innerHTML = "PROVA";
 	div4.className = "prova badge rounded-pill bg-primary";
 	var div5 = document.createElement("div");
-	div5.innerHTML = "PROVA"
+	div5.innerHTML = "PROVA";
 	div5.className = "prova badge rounded-pill bg-primary";
 	var div6 = document.createElement("div");
-	div6.innerHTML = "PROVA"
+	div6.innerHTML = "PROVA";
 	div6.className = "prova badge rounded-pill bg-primary";
 	var div7 = document.createElement("div");
-	div7.innerHTML = "PROVA"
+	div7.innerHTML = "PROVA";
 	div7.className = "prova badge rounded-pill bg-primary";
 	var div8 = document.createElement("div");
-	div8.innerHTML = "PROVA"
+	div8.innerHTML = "PROVA";
 	div8.className = "prova badge rounded-pill bg-primary";
 	
 	sportsContainer.append(div1);
