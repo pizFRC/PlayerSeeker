@@ -11,6 +11,8 @@
 
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 
 	<section class="intro">
 		<div class="bg-image h-100">
@@ -23,15 +25,7 @@
 						<div class="card-body">
 							<div class="row justify-content-center">
 								<div class="col-md-6 mb-3 mb-md-0">
-									<div id="basic" class="form-outline">
-										<label class="form-label autocomplete-label" for="form1"
-											style="margin-left: 0px;">Cerca qui la tua città</label> <input
-											type="text" id="form1"
-											class="form-control form-control-lg autocomplete-input"
-											role="combobox" placeholder="Cerca qui la tua città"
-											aria-expanded="false"
-											aria-owns="autocomplete-dropdown-138001" aria-haspoup="true"
-											autocomplete="off">
+									<div id="basic" class="form-outline"> 
 										<div class="form-notch">
 											<div class="form-notch-leading" style="width: 9px;"></div>
 											<div class="form-notch-middle" style="width: 170.4px;"></div>
@@ -161,6 +155,8 @@
 		crossorigin="anonymous">
 		
 	</script>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
 
 </body>
 </html>

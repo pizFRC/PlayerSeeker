@@ -24,6 +24,13 @@ label.error {
 	font-weight: normal;
 }
 
+
+.geocoder {
+	border: 1px solid #ced4da;
+	z-index: 1;
+	margin: 20px;
+}
+
 .mapboxgl-ctrl-geocoder {
 	min-width: 100%;
 	box-shadow: none;
