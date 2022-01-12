@@ -19,11 +19,31 @@ public class DatabaseJDBC implements Database{
 
 	private DatabaseJDBC() {
 		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/player_seeker", "postgres", "1234");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/player_seeker_copy", "postgres", "admin");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean checkConnection() {
+		try {
+			if(connection == null || connection.isClosed())
+				return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	@Override
+	public UserIdBroker getUserIdBroker() {
+		return new UserIdBroker(connection);
+	}
+	
+	@Override
+	public AddressIdBroker getAddressIdBroker() {
+		return new AddressIdBroker(connection);
 	}
 
 	@Override
@@ -49,6 +69,11 @@ public class DatabaseJDBC implements Database{
 	@Override
 	public AddressDao getAddressDao() {
 		return new AddressDaoJDBC(connection);
+	}
+	
+	@Override
+	public SportDao getSportDao() {
+		return new SportDaoJDBC(connection);
 	}
 
 }

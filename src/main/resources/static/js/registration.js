@@ -1,6 +1,5 @@
 function switchToRegistration(){
 	$("#login_form").find("#to_hide").hide(300);
-	//$("#login_form").attr('action', '/checkUsername');
 	addAccountSelector();
 }
 
@@ -59,6 +58,7 @@ function addAccountSelector() {
 	$("#login_form").append(container);
 	$("#login_form").append(buttonContainer);
 }
+
 
 function validateForm() {
 	var validator = $("#login_form").validate({
@@ -151,7 +151,7 @@ function showPlayerForm() {
 	addressLabel.className = "mt-3";
 	
 	var address = document.createElement("div");
-	address.id = "address";
+	address.id = "addressDiv";
 	address.className = "mt-2";
 	
 	var buttonContainer = document.createElement("div");
@@ -174,41 +174,37 @@ function showPlayerForm() {
 	var sportsContainer = document.createElement("div");
 	sportsContainer.className = "carousel d-flex m-4 mt-3";
 	sportsContainer.id = "sportsContainer";
-
-	//CAROUSEL DI PROVA
-	var div1 = document.createElement("span");
-	div1.innerHTML = "PROVA1"
-	div1.className = "prova badge rounded-pill bg-primary";
-	var div2 = document.createElement("div");
-	div2.innerHTML = "PROVA2"
-	div2.className = "prova badge rounded-pill bg-primary";
-	var div3 = document.createElement("div");
-	div3.innerHTML = "PROVA3"
-	div3.className = "prova badge rounded-pill bg-primary";
-	var div4 = document.createElement("div");
-	div4.innerHTML = "PROVA4"
-	div4.className = "prova badge rounded-pill bg-primary";
-	var div5 = document.createElement("div");
-	div5.innerHTML = "PROVA5"
-	div5.className = "prova badge rounded-pill bg-primary";
-	var div6 = document.createElement("div");
-	div6.innerHTML = "PROVA6"
-	div6.className = "prova badge rounded-pill bg-primary";
-	var div7 = document.createElement("div");
-	div7.innerHTML = "PROVA7"
-	div7.className = "prova badge rounded-pill bg-primary";
-	var div8 = document.createElement("div");
-	div8.innerHTML = "PROVA8"
-	div8.className = "prova badge rounded-pill bg-primary";
 	
-	sportsContainer.append(div1);
-	sportsContainer.append(div2);
-	sportsContainer.append(div3);
-	sportsContainer.append(div4);
-	sportsContainer.append(div5);
-	sportsContainer.append(div6);
-	sportsContainer.append(div7);
-	sportsContainer.append(div8);
+	$.ajax({
+		type: "POST",
+		url: "/getSportList",
+		contentType: "application/json",
+		dataType: 'json',
+		async: false,
+		success: function (list) { 
+			$.each(list, function(index, sport) {
+				var form = document.createElement("div");
+				form.className = "container";
+				var input = document.createElement("input");
+				input.type = "checkbox";
+				input.className = "btn-check";
+				input.id = sport.type;
+				var label = document.createElement("label");
+				label.className = "btn btn-primary";
+				label.htmlFor = sport.type;
+				label.innerText = sport.type;
+				label.style = "font-size: 85%";
+				form.append(input);
+				form.append(label);
+				sportsContainer.append(form);
+			});
+    	},
+	 	statusCode: {
+    		503: function() {
+    	  		 	alert( "Problema");
+ 				 }
+		}
+	});
 	
 	$("#login_form").append(container);
 	$("#login_form").append(email);
@@ -222,8 +218,8 @@ function showPlayerForm() {
 	$(".carousel").slick({
     	infinite: false,
   		speed: 300,
-  		slidesToShow: 4,
-  		slidesToScroll: 4
+  		slidesToShow: 3,
+  		slidesToScroll: 3
   	});
 
 	mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q';
@@ -231,9 +227,12 @@ function showPlayerForm() {
 		accessToken: mapboxgl.accessToken,
 		placeholder: 'Città, Via, Numero Civico',
 	});
-	addressGeocoder.addTo("#address");
+	addressGeocoder.addTo("#addressDiv");
+	$($("#addressDiv").find("input")).attr("id", "address");
+	$($("#addressDiv").find("input")).attr("name", "address");
 	addressGeocoder.on('result', function(e) {
 		console.log(e.result);
+		window.address = e.result;
 	});
 }
 
@@ -243,5 +242,160 @@ function showSportFacilityForm() {
 }
 
 function validatePlayerForm(){
+	var validator = $("#login_form").validate();
 	
+	$("#name").rules("add", {
+  		required: true,
+  		maxlength: 20,
+  		messages: {
+    		required: "Inserisci il tuo nome",
+			maxlength: "il nome deve essere lungo al massimo 20 caratteri"
+  		}
+	});
+	
+	$("#surname").rules("add", {
+  		required: true,
+  		maxlength: 20,
+  		messages: {
+    		required: "Inserisci il tuo cognome",
+			maxlength: "il cognome deve essere lungo al massimo 20 caratteri"
+  		}
+	});
+	
+	$("#email").rules("add", {
+  		required: true,
+  		email: true,
+  		messages: {
+    		required: "Inserisci la tua email",
+			email: "Inserire un indirizzo email valido"
+  		}
+	});
+	
+	$("#birthday").rules("add", {
+  		required: true,
+  		date: true,
+  		messages: {
+    		required: "Inserisci la tua data di nascita",
+			date: "Inserisci una data valida"
+  		}
+	});
+	
+	$.validator.addMethod('isValid', function () {
+		if((window.address.place_type[0] === "address" || window.address.place_type[0] === "poi") 
+		 	&& window.address.place_name === $("#address").val())
+			return true;
+		else
+			return false;
+	}, 'Inserire un indirizzo valido');
+	
+	$("#address").rules("add", {
+  		required: true,
+		isValid: true,
+  		messages: {
+    		required: "Inserisci il tuo indirizzo"
+  		}
+	});
+	
+	if(validator.form()) 
+		registerPlayer();
+}
+
+function registerPlayer() {
+	
+	const user = {
+		username: $("#username").val(),
+		password: $("#password").val(),
+		userType: "player"
+	};
+	
+	$.ajax({
+		type: "POST",
+		url: "/registerUser",
+		contentType: "application/json",
+		data: JSON.stringify(user),
+		success: function(User) {
+			const player = {
+				id: User.id,
+				name: $("#name").val(),
+				surname: $("#surname").val(),
+				email: $("#email").val(),
+				birthday: new Date($("#birthday").val()),
+				address: {
+					longitude: window.address.geometry.coordinates[0],
+					latitude: window.address.geometry.coordinates[1],
+				}
+			};
+			$.ajax({
+				type: "POST",
+				url: "/registerPlayer",
+				contentType: "application/json",
+				data: JSON.stringify(player),
+				success: function() {
+					//INVIO EMAIL
+					emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
+					var templateParams = {
+						to_name: $("#name").val(),
+						to_email: $("#email").val(),
+						message: "Complimenti, la registrazione è avvenuta con successo."
+					};
+					emailjs.send('player_seeker_service', 'player_seeker_template', templateParams)
+						.then(function(response) {
+							console.log('SUCCESS!', response.status, response.text);
+						}, function(error) {
+							console.log('FAILED...', error);
+						});
+				},
+				error: function(textStatus) {
+					console.log(textStatus);
+				}
+			});
+    	},
+		error: function(textStatus){
+			consoe.log(textStatus);
+		}
+	});
+	
+	/*const player = {
+  		name: $("#name").val(),
+  		surname: $("#surname").val(),
+		email: $("#email").val(),
+		birthday: new Date($("#birthday").val()),
+		address: {
+			longitude: window.address.geometry.coordinates[0],
+			latitude: window.address.geometry.coordinates[1],
+		}
+	};
+	
+	const data = {
+		obj1: user,
+		obj2: player
+	}
+	
+	$.ajax({
+		type: "POST",
+		url: "/registerPlayer",
+		contentType: "application/json",
+		data: JSON.stringify(data),
+		complete: function(xhr) {
+			var status = JSON.parse(xhr.responseText);
+			if(status === 200){
+				emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
+				var templateParams = {
+					to_name: $("#name").val(),
+					to_email: $("#email").val(),
+					message: "Complimenti, la registrazione è avvenuta con successo."
+				};
+				
+				emailjs.send('player_seeker_service', 'Yplayer_seeker_template', templateParams)
+					.then(function(response) {
+						console.log('SUCCESS!', response.status, response.text);
+					}, function(error) {
+						console.log('FAILED...', error);
+					});
+			}
+			else if (status === 409) {
+				
+			}
+		}
+	});*/
 }

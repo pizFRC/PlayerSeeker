@@ -1,74 +1,94 @@
 package mat.unical.it.PlayerSeeker.model;
 
-public class Player extends User implements java.io.Serializable{
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
-	public Player(String nome, String cognome, int eta, String email) {
-		super();
-		super.setUsername("franco123");
-		super.setPassword("pwd11");
-		this.nome = nome;
-		this.cognome = cognome;
-		this.eta = eta;
-		this.email = email;
-	
-	}
+public class Player implements java.io.Serializable{
 
 	private static final long serialVersionUID = -23201302077253540L;
 	
-	private String nome = null;
-    private String cognome = null;
-    private int eta = 0;
+	private Long id = null;
+	private String name = null;
+    private String surname = null;
     private String email = null;
+    private LocalDate birthday = null;
     private Address address = null;
-    private String sesso = null;
+    private List<SportEvent> events = null;
+    private List<Sport> sports = null;
 
-    public Player() {super();}
+    public Player(String nome, String cognome, int eta, String email) {
+		this.setName(nome);
+		this.setSurname(cognome);
+		this.setEmail(email);
+	}
+    
+    public Player() {}
+    
+    public Long getId() {
+		return id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getCognome() {
-        return cognome;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
+	public String getSurname() {
+		return surname;
+	}
 
-    public int getEta() {
-        return eta;
-    }
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
-    public void setEta(int eta) {
-        this.eta = eta;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public LocalDate getBirthday() {
+		return birthday;
+	}
 
-    public Address getAddress() {
-        return address;
-    }
+	public void setBirthday(LocalDate birthday) {
+		birthday.format(DateTimeFormatter.ISO_LOCAL_DATE);
+		this.birthday = birthday;
+	}
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+	public Address getAddress() {
+		return address;
+	}
 
-    public String getSesso() {
-        return sesso;
-    }
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
-    public void setSesso(String sesso) {
-        this.sesso = sesso;
-    }
+	public List<SportEvent> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<SportEvent> events) {
+		this.events = events;
+	}
+
+	public List<Sport> getSports() {
+		return sports;
+	}
+
+	public void setSports(List<Sport> sports) {
+		this.sports = sports;
+	}
+
+  
 }

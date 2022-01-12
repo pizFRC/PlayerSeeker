@@ -1,15 +1,26 @@
 package mat.unical.it.PlayerSeeker.model;
 
+import java.time.LocalDate;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class SportEvent implements java.io.Serializable {
+	
+	private static final long serialVersionUID = -1807415135910177674L;
+	
+	private Long id;
+    private LocalDate start = null;
+    private Sport sports = null;
+    private Playground playground = null;
+    private Player organizzatore = null;
+    private String description = null;
+    private List<Player> players = new ArrayList<Player>();
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(data, id, organizzatore, sports);
+		return Objects.hash(start, id, organizzatore, sports);
 	}
 
 	@Override
@@ -21,21 +32,20 @@ public class SportEvent implements java.io.Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		SportEvent other = (SportEvent) obj;
-		return Objects.equals(data, other.data) && id == other.id && Objects.equals(organizzatore, other.organizzatore)
+		return Objects.equals(start, other.start) && id == other.id && Objects.equals(organizzatore, other.organizzatore)
 				&& Objects.equals(sports, other.sports);
 	}
 
-	public SportEvent(int id, Date data, SportsFacility facility, Sports sports, Player organizzatore,
+	public SportEvent(Long id, LocalDate data, Sport sports, Player organizzatore,
 			List<Player> players) {
 		super();
 		this.id = id;
-		this.data = data;
-		this.facility = facility;
+		this.start = data;
 		this.sports = sports;
 		this.organizzatore = organizzatore;
 		this.players = players;
 	}
-	public SportEvent(int id, Sports sports, Player organizzatore,
+	public SportEvent(Long id, Sport sports, Player organizzatore,
 			List<Player> players) {
 		super();
 		this.id = id;
@@ -44,47 +54,30 @@ public class SportEvent implements java.io.Serializable {
 		this.organizzatore = organizzatore;
 		this.players = players;
 	}
-
-	private static final long serialVersionUID = -1807415135910177674L;
-	
-	private int id = 0;
-    private Date data = null;
-    private SportsFacility facility = null;
-    private Sports sports = null;
-    private Player organizzatore = null;
-    private List<Player> players = new ArrayList<Player>();
 
     public SportEvent() {super();}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Date getData() {
-        return data;
+    public LocalDate getData() {
+        return start;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setData(LocalDate data) {
+        this.start = data;
     }
 
-    public SportsFacility getFacility() {
-        return facility;
-    }
-
-    public void setFacility(SportsFacility facility) {
-        this.facility = facility;
-    }
-
-    public Sports getSport() {
+    public Sport getSport() {
         return sports;
     }
 
-    public void setSport(Sports sports) {
+    public void setSport(Sport sports) {
         this.sports = sports;
     }
 
@@ -103,4 +96,20 @@ public class SportEvent implements java.io.Serializable {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
+
+	public Playground getPlayground() {
+		return playground;
+	}
+
+	public void setPlayground(Playground playground) {
+		this.playground = playground;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

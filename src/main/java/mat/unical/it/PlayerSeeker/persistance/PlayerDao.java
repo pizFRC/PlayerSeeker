@@ -6,7 +6,7 @@ import mat.unical.it.PlayerSeeker.model.Player;
 public interface PlayerDao {
 	
 	public List<Player> doRetrieveAll();
-	public Player doRetrieveByKey(String username);
+	public Player doRetrieveByKey(Long userId);
 	public boolean saveOrUpdate(Player player);
 	public boolean delete(Player player);
 	

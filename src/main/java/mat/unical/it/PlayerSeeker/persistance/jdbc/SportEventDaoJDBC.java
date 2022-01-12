@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mat.unical.it.PlayerSeeker.model.SportEvent;
-import mat.unical.it.PlayerSeeker.model.Sports;
+import mat.unical.it.PlayerSeeker.model.Sport;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.SportEventDao;
 
@@ -44,8 +44,8 @@ public class SportEventDaoJDBC implements SportEventDao {
 
 			while(result.next()) {
 				tmp = new SportEvent();
-				tmp.setId(result.findColumn("id"));
-				tmp.setData(result.getDate("date"));
+				tmp.setId(result.getLong("id"));
+				tmp.setData(result.getDate("date").toLocalDate());
 				//altri tipi da rivedere
 				sportEvents.add(tmp);
 			}
@@ -70,8 +70,8 @@ public class SportEventDaoJDBC implements SportEventDao {
 
 				if(result.next()) {
 					tmp = new SportEvent();
-					tmp.setId(result.getInt("id"));
-					tmp.setData(result.getDate("date"));
+					tmp.setId(result.getLong("id"));
+					tmp.setData(result.getDate("date").toLocalDate());
 				}
 			}
 			query.close();

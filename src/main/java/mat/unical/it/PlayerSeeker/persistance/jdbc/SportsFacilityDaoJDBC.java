@@ -44,10 +44,10 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 
 			while(result.next()) {
 				tmp = new SportsFacility();
-				tmp.setId(result.getInt("id"));
+				tmp.setId(result.getLong("id"));
 				tmp.setNome(result.getString("nome"));
 				//tmp.setAddress(result.getObject(3, Class< Address > type));
-				tmp.setTelefono(result.getInt("telefono"));
+				tmp.setPhone(result.getString("phone"));
 
 				facilityList.add(tmp);
 			}
@@ -61,7 +61,7 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 	}
 
 	@Override
-	public SportsFacility doRetrieveByKey(String ID) {
+	public SportsFacility doRetrieveByKey(Long ID) {
 		PreparedStatement query = null;
 		SportsFacility tmp = null;
 
@@ -72,10 +72,10 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 
 				if(result.next()) {
 					tmp = new SportsFacility();
-					tmp.setId(result.getInt("id"));
+					tmp.setId(result.getLong("id"));
 					tmp.setNome(result.getString("nome"));
 					//tmp.setAddress(result.getObject(3, Class< Address > type));
-					tmp.setTelefono(result.getInt("telefono"));
+					tmp.setPhone(result.getString("phone"));
 				}
 			}
 			query.close();
@@ -91,7 +91,7 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 		PreparedStatement query = null;
 
 		try{
-			SportsFacility tmp = doRetrieveByKey(sportsFacility.getUsername());
+			SportsFacility tmp = doRetrieveByKey(sportsFacility.getId());
 			if(tmp == null) {
 				//INSERT da vedere come fare
 				query = connection.prepareStatement("INSERT INTO sportsfacility");

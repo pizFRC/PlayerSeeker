@@ -4,9 +4,10 @@ public class Address implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1818521083889150483L;
 	
+	private Long id;
 	private float longitude;
     private float latitude;
-    private int id;
+    
 
     public float getLongitude() {
         return longitude;
@@ -24,9 +25,9 @@ public class Address implements java.io.Serializable{
         this.latitude = latitude;
     }
 
-    public int getID() {return id;}
+    public Long getID() {return id;}
 
-    public void setId(int id) {this.id = id;}
+    public void setId(Long id) {this.id = id;}
     
     public Address() {super();}
 }
