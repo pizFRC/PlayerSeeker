@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+
 import mat.unical.it.PlayerSeeker.model.Address;
 import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.User;
@@ -16,8 +18,11 @@ public class RegistrationController {
 
 	@PostMapping("/checkUsername")
 	public int checkUsername(HttpServletResponse res, @RequestBody String username) {
+		Gson gson = new Gson();
+		username = gson.fromJson(username, String.class);
 		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
 		if(user == null) {
+			System.out.println("sono qui");
 			res.setStatus(HttpServletResponse.SC_OK);
 			return HttpServletResponse.SC_OK;
 		}

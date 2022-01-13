@@ -332,7 +332,7 @@ function registerPlayer() {
 				data: JSON.stringify(player),
 				success: function() {
 					//INVIO EMAIL
-					emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
+					/*emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
 					var templateParams = {
 						to_name: $("#name").val(),
 						to_email: $("#email").val(),
@@ -343,7 +343,7 @@ function registerPlayer() {
 							console.log('SUCCESS!', response.status, response.text);
 						}, function(error) {
 							console.log('FAILED...', error);
-						});
+						});*/
 				},
 				error: function(textStatus) {
 					console.log(textStatus);
@@ -354,48 +354,4 @@ function registerPlayer() {
 			consoe.log(textStatus);
 		}
 	});
-	
-	/*const player = {
-  		name: $("#name").val(),
-  		surname: $("#surname").val(),
-		email: $("#email").val(),
-		birthday: new Date($("#birthday").val()),
-		address: {
-			longitude: window.address.geometry.coordinates[0],
-			latitude: window.address.geometry.coordinates[1],
-		}
-	};
-	
-	const data = {
-		obj1: user,
-		obj2: player
-	}
-	
-	$.ajax({
-		type: "POST",
-		url: "/registerPlayer",
-		contentType: "application/json",
-		data: JSON.stringify(data),
-		complete: function(xhr) {
-			var status = JSON.parse(xhr.responseText);
-			if(status === 200){
-				emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
-				var templateParams = {
-					to_name: $("#name").val(),
-					to_email: $("#email").val(),
-					message: "Complimenti, la registrazione è avvenuta con successo."
-				};
-				
-				emailjs.send('player_seeker_service', 'Yplayer_seeker_template', templateParams)
-					.then(function(response) {
-						console.log('SUCCESS!', response.status, response.text);
-					}, function(error) {
-						console.log('FAILED...', error);
-					});
-			}
-			else if (status === 409) {
-				
-			}
-		}
-	});*/
 }
