@@ -1,5 +1,7 @@
-package mat.unical.it.PlayerSeeker.model;
+package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
+import mat.unical.it.PlayerSeeker.model.Player;
+import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
 import java.sql.Connection;

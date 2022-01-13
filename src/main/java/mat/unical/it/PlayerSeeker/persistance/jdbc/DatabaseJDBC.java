@@ -81,4 +81,9 @@ public class DatabaseJDBC implements Database{
 		return new SportDaoJDBC(connection);
 	}
 
+	@Override
+	public SportEventProxy getSportEventProxy() {
+		return null;
+	}
+
 }
