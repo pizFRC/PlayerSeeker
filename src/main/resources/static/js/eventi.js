@@ -135,6 +135,7 @@ $(document).ready(function() {
 		accessToken: mapboxgl.accessToken,
 		placeholder: 'Città, Via, Numero Civico',
 	});
+	
 	addressGeocoder.addTo("#address");
 	addressGeocoder.on('result', function(e) {
 		console.log(e.result);
@@ -210,6 +211,8 @@ function loadJSONEventsFromRestController(){
 	xhttp.onreadystatechange=function(){
 		if(this.readyState ==4 && this.status==200){
 			var jsonObj=JSON.parse(xhttp.response);
+						
+       
 			//console.log("id :"+jsonObj.listaEventi[0].id + jsonObj.listaEventi[0].sport.sportType);
 		for(var i=0;i<jsonObj.listaEventi.length;i++){
 				var evento=jsonObj.listaEventi[i];
