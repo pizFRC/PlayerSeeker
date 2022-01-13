@@ -1,39 +1,42 @@
 package mat.unical.it.PlayerSeeker.model;
 
-public class SportsFacility extends User implements java.io.Serializable {
+import java.util.List;
+
+public class SportsFacility implements java.io.Serializable {
 
 	private static final long serialVersionUID = 340303583378633552L;
 	
-	private int id = 0;
-    private String nome = null;
+	private Long id;
+    private String name = null;
     private Address address = null;
-    private int telefono = 0;
-    //private String posizione = null;
+    private String phone = null;
+    private List<Playground> playgrounds = null;
+    private List<SportEvent> events = null;
 
     public SportsFacility() {super();}
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public String getNome() {
-        return nome;
+        return name;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.name = nome;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Address getAddress() {
@@ -43,11 +46,27 @@ public class SportsFacility extends User implements java.io.Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
-    public SportsFacility(int i, String n, int t)
+    public SportsFacility(Long i, String n, String t)
     {
     	
     	this.id=i;
-    	this.nome=n;
-    	this.telefono=t;
+    	this.name=n;
+    	this.phone=t;
     }
+
+	public List<Playground> getPlaygrounds() {
+		return playgrounds;
+	}
+
+	public void setPlaygrounds(List<Playground> playgrounds) {
+		this.playgrounds = playgrounds;
+	}
+	
+	public List<SportEvent> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<SportEvent> events) {
+		this.events = events;
+	}
 }

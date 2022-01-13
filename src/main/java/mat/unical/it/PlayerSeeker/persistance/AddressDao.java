@@ -1,10 +1,10 @@
 package mat.unical.it.PlayerSeeker.persistance;
 
 import mat.unical.it.PlayerSeeker.model.Address;
-import mat.unical.it.PlayerSeeker.model.Player;
-import mat.unical.it.PlayerSeeker.model.SportsFacility;
 
 public interface AddressDao {
 
-    public Address doRetrieveByID(int id);
+    public Address doRetrieveByID(Long id);
+    public Address doRetrieveByPosition(float latitude, float longitude);
+    public boolean saveOrUpdate(Address address);
 }

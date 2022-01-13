@@ -2,9 +2,9 @@ package mat.unical.it.PlayerSeeker.model;
 
 import java.util.ArrayList;
 
-public class Events {
+public class EventList {
 
-	public Events() {
+	public EventList() {
 		listaEventi=new  ArrayList<SportEvent>();
 	}
 	
@@ -20,10 +20,10 @@ public class Events {
 	
 	public void add(SportEvent event) {
 		listaEventi.add(event);
-		}
+	}
 	
 	public void remove(SportEvent event) {
 		listaEventi.remove(event);
 	}
-	}
+}
 

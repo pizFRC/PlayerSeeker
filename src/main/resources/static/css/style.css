@@ -19,10 +19,11 @@ body {
 }
 
 
-#login_form label.error {
+label.error {
 	color: red;
 	font-weight: normal;
 }
+
 
 .geocoder {
 	border: 1px solid #ced4da;
@@ -33,7 +34,12 @@ body {
 .mapboxgl-ctrl-geocoder {
 	min-width: 100%;
 	box-shadow: none;
+	border: none;
+}
+
+.mapboxgl-ctrl-geocoder--input {
 	border: 1px solid #ced4da;
+	border-radius: 5px;
 }
 
 .slick-prev:before {
