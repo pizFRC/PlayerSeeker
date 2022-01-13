@@ -44,9 +44,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 
 			while(result.next()) {
 				tmp = new SportEvent();
-				tmp.setId(result.getLong("id"));
-				tmp.setData(result.getDate("date").toLocalDate());
-				//altri tipi da rivedere
+
 				sportEvents.add(tmp);
 			}
 

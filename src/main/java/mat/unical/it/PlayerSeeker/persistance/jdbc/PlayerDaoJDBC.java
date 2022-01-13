@@ -119,7 +119,8 @@ public class PlayerDaoJDBC implements PlayerDao{
 		PreparedStatement query = null;
 
 		try{
-			query = connection.prepareStatement("DELETE players WHERE username=?;");
+			query = connection.prepareStatement("DELETE players WHERE id=?;");
+			query.setLong(1,player.getId());
 			query.executeQuery();
 			query.close();
 		} catch(SQLException e) {
