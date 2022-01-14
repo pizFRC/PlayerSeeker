@@ -42,4 +42,10 @@ public class LoginController {
 		}
 		return "login";
 	}
+	
+	
+	@GetMapping("/nuovoEvento")
+	public String nuovoEvento() {
+		return "nuovoEvento";
+	}
 }

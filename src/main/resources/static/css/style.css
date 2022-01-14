@@ -9,8 +9,18 @@
 
 body {
 	padding-top: 100px;
-}
 
+}
+#form_creazione_evento {
+	width:90%;
+	min-width: 90%;
+    min-height: 60%;
+	
+}
+#map{
+	
+    min-height: 500px;
+}
 #login_body  {
 	background-image: url('../img/bg.jpg');
 	background-repeat: no-repeat;
@@ -33,13 +43,20 @@ label.error {
 
 .mapboxgl-ctrl-geocoder {
 	min-width: 100%;
+	width: 300px !important;
 	box-shadow: none;
 	border: none;
+	   margin:auto;
+    max-width: 360px;
+
+	
 }
 
 .mapboxgl-ctrl-geocoder--input {
 	border: 1px solid #ced4da;
 	border-radius: 5px;
+		min-width: 100%;
+		width: 300px !important;
 }
 
 .slick-prev:before {
@@ -49,14 +66,26 @@ label.error {
 	color: black;
 }
 
+
 .slick-slide {
 	margin-right: 5px;
 	margin-left: 5px;
 }
 
-.prova {
-	padding: 10px;
+
+.d-n{
+	display: none;
 }
+.d-y{
+	 display:inline-block;
+}
+
+
+
+
+
+
+
 
 @media screen and (max-width:1000px){
 .tasti_da_nascondere{
