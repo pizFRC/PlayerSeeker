@@ -65,6 +65,29 @@ public class SportDaoJDBC implements SportDao{
 	}
 
 	@Override
+	public Sport doRetrieveById(Long id) {
+		Sport tmp = new Sport();
+
+		try {
+			PreparedStatement query = connection.prepareStatement("SELECT * FROM sport WHERE id=?;");
+			ResultSet result = query.executeQuery();
+			query.setLong(1,id);
+
+			while(result.next()) {
+				tmp.setId(result.getLong("id"));
+				tmp.setType(result.getString("type"));
+				tmp.setrequiredPlayers(result.getInt("required_players"));
+			}
+			query.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return tmp;
+	}
+
+	@Override
 	public boolean saveOrUpdate(Sport sport) {
 		// TODO Auto-generated method stub
 		return false;
