@@ -65,51 +65,10 @@ const geojson = {
       $(".d-y:first").next().addClass('d-y');
        $(".d-y:first").next().removeClass('d-n');
   $(".d-y:first").addClass('d-n').removeClass('d-y');
-   
-  $("span:not(.border-dark)").first().addClass("border-dark");
+   $( "span:not(.border-primary)  > i").first().addClass("text-primary");
+  $("span:not(.border-primary)").first().addClass("border-primary");
 
-     //) $(".d-y:last").prev().addClass('d-n');//
-                     //      .removeClass('d-y');
-
-            //   $(".d-y:first").addClass('d-n')
-console.log(  $(".d-n:first"))
-console.log(   $(".d-n:last"))
-
-
-console.log(  $(".d-n:first").next())
-console.log(   $(".d-n:last").next())
-
-console.log(  $(".d-n:first").prev())
-console.log(   $(".d-n:last").prev())
-
-
-
-
-
-     
-console.log(  $(".d-y:first"))
-console.log(   $(".d-y:last"))
-
-console.log(  $(".d-y:first").next())
-console.log(   $(".d-y:last").next())
-
-     
-console.log(  $(".d-y:first").prev)
-console.log(   $(".d-y:last").prev)
-          //il primo elemento con classe d-n ,e lo rendo visibile
-      /*$(".d-y:first").addClass('d-n');
-        $(".d-n:first").removeClass('d-y') ;
-          //  $(".d-y:first").removeClass('d-n');
-      console.log( $(".d-y:first") );
-
-
-       /*  $(".d-y:first").addClass('d-n');
-           $(".d-n:first").removeClass('d-y');
-    //$(".d-y:first").addClass('d-n').removeClass('d-y') ;
-      console.log( $(".d-y:first") );//.removeClass('d-y').addClass('d-n') ;
-          //Controllo se il div con il time picker  è già presente
-     */
-	
+     	
 }
 
 
@@ -121,8 +80,9 @@ console.log(   $(".d-y:last").prev)
 	      $(".d-y:first").removeClass('d-n');
 $(".d-y:last").addClass('d-n').removeClass('d-y');
 
+  $( "span.border-primary:last > i").first().removeClass("text-primary")
+$("span.border-primary:last").removeClass("border-primary");
 
-$("span.border-dark:last").removeClass("border-dark");
 /*   $(".d-y:first").next().addClass('d-y');
        $(".d-y:first").next().removeClass('d-n');
   $(".d-y:first").addClass('d-n').removeClass('d-y');
@@ -375,12 +335,13 @@ function addAddressInput(){
 				         alert(e.result.geometry);
 
                      //devo anche passare la città(lat,lang)del giocatore e una lista di strutture
-				        InserisciMarkerVicini(mapboxgl,map);
+				       
 		
 				}).on('results',function(e){
 					    rimuoviMarker();
 				})
 			);			
+			 InserisciMarkerVicini(mapboxgl,map);
  console.log("MAPPA CRE");
        }
 	

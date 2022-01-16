@@ -55,53 +55,86 @@
 
 <!-- HEADER --->
  	<jsp:include page="header.jsp" />
-	
+ 	
+ 	 <div class="container-fluid" id="title">
+            
+            <h1 class="h1" align="center">Crea il tuo evento </h1>
+            
+            </div>
 	<!-- FORM -->
 <div class="container shadow rounded-2 bg-body bg-dark p-5" id="form_creazione_evento">
 
 		<form class=" needs-validation container-fluid w-75 mx-auto " id="form_evento">
-		
+		  
 	
           <div class="row">
 
 
-            <div class="col-12" id="title">
-            
-            <h1 class="h1">Seleziona uno sport per l'evento da creare</h1>
-            
-            </div>
 
-			<div  id="contenitore" class="col-12 mb-3"  style="position: relative; height: 20px;">
-			
-			<div id="step" class="d-flex justify-content-between w-100 "  style="z-index:9;">
-			
-				    <span class="badge badge-pill border border-2 border-dark point bg-light "  ><i class="fas fa-volleyball-ball" ></i></span>
-			<span class="badge badge-pill point border border-2 bg-light  " ><i class="far fa-calendar-alt"></i> </span>
-				<span class="badge badge-pill point border border-2 bg-light  " ><i class="fas fa-map-marked-alt"></i>  </span>
-			<span class="badge badge-pill point border border-2 bg-light " > <i class="fas fa-users-cog"></i> </span>
-			<span class="badge badge-pill  point border border-2 bg-light  " >  <i class="fas fa-check-circle"></i>  </span> 	
-			</div>
-				
-				<div  id="progress" class="progress " style="height: 1px;z-index:6;">
-				
-					<div id="progress_bar" class="progress-bar bg-dark "
-						role="progressbar" style="width: 0%;" aria-valuenow="0"
-						aria-valuemin="0" aria-valuemax="100">
+
+				<div id="contenitore" class="col-12 mb-3" style="position:relative; height:50px;">
+
+					<div id="step" class="d-flex justify-content-between w-100 " style="z-index: 9;">
+
+						<div >
+							<span class=" badge border border-primary point bg-light " ><i
+								class="fas fa-volleyball-ball text-primary"> </i> </span>
+								 <label
+								class="lbl_progress" > Sport</label>
+						</div>
 						
+						<div>
+							<span class="badge point border bg-light" >
+							     <i class="far fa-calendar-alt "></i> 
+							</span> 
+								<label class="lbl_progress" >Data e ora</label>
+						</div>
+						<div>
+							<span class="badge  point border bg-light"><i
+								class="fas fa-map-marked-alt"></i> </span> <label class="lbl_progress">Struttura</label>
+						</div>
+						<div>
+							<span class="badge point border bg-light"> <i
+								class="fas fa-users-cog"></i>
+							</span> <label class="lbl_progress">Partecipanti</label>
+						</div>
+						<div>
+							<span class="badge point border bg-light"> <i
+								class="fas fa-check-circle"></i>
+							</span> <label class="lbl_progress">Privacy</label>
+						</div>
 					</div>
-				</div>
-				
-				
-			</div>
-			
-             <!-- Carousel -->
-			<div  class="col-12 d-y" id="first_step">
-				<div class="carousel d-flex m-4 mt-3"></div>
-			</div>
 
+					<div id="progress" class="progress "
+						style="height: 1px; z-index: 6;">
+
+						<div id="progress_bar" class="progress-bar bg-primary "
+							role="progressbar" style="width: 0%;" aria-valuenow="0"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+
+
+				</div>
+
+				<!-- Carousel -->
+				
+				
+			<div  class="col-12 d-y" id="first_step">
+			
+				<hr class="my-4">
+				<h6>Seleziona uno sport</h6>
+				<hr class="my-4">
+				<div class="carousel d-flex m-4 mt-3"></div>
+				
+				
+			</div>
+               
             <!-- TIME PICKER -->
 				<div class="col-12 mb-3 d-n " id="second_step" name="second_step">
-
+                   
+                   <hr class="my-4">
+				<h6>Seleziona la data e l'ora che preferisci troveremo le strutture disponili</h6>
+				<hr class="my-4">
 					<div class="row">
 
 						<div class="col-sm-10">
@@ -139,8 +172,9 @@
 
 				<!-- MAP -->
 			<div class="col-12 mb-5 d-n" id="third_step">
-
-				<h1>Seleziona una struttura</h1>
+              <hr class="my-4">
+				<h5>Seleziona una struttura nella tua città o cercane una</h5>
+				<hr class="my-4">
 
 
 
@@ -157,7 +191,9 @@
 
            <!-- SET NUMERO GIOCATORI -->
 			<div class="col-12 mb-3 d-n" id="four_step">
-
+             <hr class="my-4">
+				<h6>Aggiungi qui i giocatori </h6>
+				<hr class="my-4">
 				<label class="form-label" for="num_giocatori">Numero
 					giocatori mancati</label>
 				<div class="input-group mb-3">
