@@ -12,6 +12,32 @@ public class SportsFacility implements java.io.Serializable {
     private String phone = null;
     private List<Playground> playgrounds = null;
     private List<SportEvent> events = null;
+    private String webSiteUrl = null;
+    private List<OpeningHours> openingHours = null;
+
+    public List<OpeningHours> getOpeningHours() {
+        return openingHours;
+    }
+
+    public void setOpeningHours(List<OpeningHours> openingHours) {
+        this.openingHours = openingHours;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getWebSiteUrl() {
+        return webSiteUrl;
+    }
+
+    public void setWebSiteUrl(String webSiteUrl) {
+        this.webSiteUrl = webSiteUrl;
+    }
 
     public SportsFacility() {super();}
 

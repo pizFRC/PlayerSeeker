@@ -33,8 +33,11 @@ public class UserDaoJDBC implements UserDao {
 			while(rs.next()) {
 				tmpUser = new User();
 
+				tmpUser.setId(rs.getLong("id"));
 				tmpUser.setUsername(rs.getString("username"));
 				tmpUser.setPassword(rs.getString("password"));
+				tmpUser.setUserType(rs.getString("user_types"));
+				tmpUser.setEmail(rs.getString("email"));
 
 				userList.add(tmpUser);
 			}
@@ -61,6 +64,7 @@ public class UserDaoJDBC implements UserDao {
 				user.setUsername(username);
 				user.setPassword(result.getString("password"));
 				user.setUserType(result.getString("type"));
+				user.setEmail(result.getString("email"));
 				return user;
 			}
 			else 
@@ -70,6 +74,30 @@ public class UserDaoJDBC implements UserDao {
 			return null;
 		}
 	}
+
+	@Override
+	public User doRetrieveByMail(String mail) {
+		String query = "SELECT u.*, t.type FROM users u INNER JOIN user_types t ON u.user_type_id = t.id WHERE m.email = ?;";
+		User user;
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, mail);
+			ResultSet result = statement.executeQuery();
+			if(result.next()) {
+				user = new User();
+				user.setId(result.getLong("id"));
+				user.setUsername(result.getString("username"));
+				user.setPassword(result.getString("password"));
+				user.setUserType(result.getString("type"));
+				user.setEmail(mail);
+				return user;
+			}
+			else
+				return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}	}
 
 	@Override
 	public boolean saveOrUpdate(User user) {
@@ -84,12 +112,13 @@ public class UserDaoJDBC implements UserDao {
 			if(doRetrieveByKey(user.getUsername()) == null) {
 				//INSERT
 				statement.close();
-				query = "INSERT INTO users values(?,?,?,?)";
+				query = "INSERT INTO users values(?,?,?,?,?)";
 				statement = connection.prepareStatement(query);
 				statement.setLong(1, user.getId());
 				statement.setString(2, user.getUsername());
 				statement.setString(3, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
-				statement.setLong(4, user_type_id);	
+				statement.setLong(4, user_type_id);
+				statement.setString(5, user.getEmail());
 				statement.execute();
 				statement.close();
 			}
@@ -102,6 +131,7 @@ public class UserDaoJDBC implements UserDao {
 				statement.setString(2, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
 				statement.setLong(3, user_type_id);	
 				statement.setLong(4, user.getId());
+				statement.setString(5, user.getEmail());
 				statement.executeUpdate();
 				statement.close();
 			}

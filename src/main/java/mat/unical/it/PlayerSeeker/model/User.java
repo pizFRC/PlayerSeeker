@@ -8,6 +8,7 @@ public class User implements java.io.Serializable{
 	private String username = null;
 	private String password = null;
 	private String userType = null;
+	private String email = null;
 
 	public User() {}
 	
@@ -41,4 +42,11 @@ public class User implements java.io.Serializable{
 		this.userType = userType;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
