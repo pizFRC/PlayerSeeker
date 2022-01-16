@@ -22,7 +22,21 @@ public class RegistrationController {
 		username = gson.fromJson(username, String.class);
 		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
 		if(user == null) {
-			System.out.println("sono qui");
+			res.setStatus(HttpServletResponse.SC_OK);
+			return HttpServletResponse.SC_OK;
+		}
+		else {
+			res.setStatus(HttpServletResponse.SC_CONFLICT);
+			return HttpServletResponse.SC_CONFLICT;
+		}
+	}
+	
+	@PostMapping("/checkEmail")
+	public int checkEmail(HttpServletResponse res, @RequestBody String email) {
+		Gson gson = new Gson();
+		email = gson.fromJson(email, String.class);
+		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(email);
+		if(user == null) {
 			res.setStatus(HttpServletResponse.SC_OK);
 			return HttpServletResponse.SC_OK;
 		}
