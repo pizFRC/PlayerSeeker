@@ -59,6 +59,10 @@ label.error {
 		width: 300px !important;
 }
 
+	  .progress{
+	  height:5px !important;
+	  }
+
 .slick-prev:before {
 	color: black;
 }
@@ -79,24 +83,54 @@ label.error {
 .d-y{
 	 display:inline-block;
 }
-
-
-
-
-
-
-
-
-@media screen and (max-width:1000px){
-.tasti_da_nascondere{
+#step,#progress{
+	width:100%;
+	height:100%;
+	position:absolute;
+	z-index:2;
 	
-	  
-}
-}
+        top: 0;
+        left: 0;
+         color:red;
+         
   
-@media screen and (max-width:900px){
-.item{
+}
+#contenitore{
+	
+	
+	
+}
+.point{
+	
+	font-size: 18px;
+	color:black;
+	padding: 13px;
+	 display: inline-flex;
+  align-items: center;
 	
 
+	
+}
+#progress{
+	margin-top: 10px;
+	
+	margin-bottom: 10px;
+
+	
+}
+
+
+@media screen and (max-width:500px){
+#form_creazione_evento{
+	margin-top:30%;
+margin-bottom:20%;
+}
+}
+
+  
+@media screen and (max-width:768px){
+#form_creazione_evento{
+	margin-top:20%;
+margin-bottom:20%;
 }
 }
