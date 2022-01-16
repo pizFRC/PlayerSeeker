@@ -82,20 +82,20 @@ public class PlayerDaoJDBC implements PlayerDao{
 			PreparedStatement statement;
 			if(doRetrieveByKey(player.getId()) == null) {
 				//INSERT
-				query = "INSERT INTO player values(?,?,?,?,?,?)";
+				query = "INSERT INTO player values(?,?,?,?,?)";
 				statement = connection.prepareStatement(query);
 				statement.setLong(1, player.getId());
 				statement.setString(2, player.getName());
 				statement.setString(3, player.getSurname());
-				statement.setDate(5, Date.valueOf(player.getBirthday()));
-				statement.setLong(6, player.getAddress().getID());
+				statement.setDate(4, Date.valueOf(player.getBirthday()));
+				statement.setLong(5, player.getAddress().getID());
 				statement.execute();
 				statement.close();
-				//this.saveInterested(player);
+				this.saveInterested(player);
 			}
 			else {
 				//UPDATE
-				query = "UPDATE player SET name = ?, surname = ?, email = ?, birthday = ?, address_id = ? WHERE id = ?";
+				query = "UPDATE player SET name = ?, surname = ?, birthday = ?, address_id = ? WHERE id = ?";
 				statement = connection.prepareStatement(query);
 				statement.setString(1, player.getName());
 				statement.setString(2, player.getSurname());
@@ -104,7 +104,7 @@ public class PlayerDaoJDBC implements PlayerDao{
 				statement.setLong(5, player.getId());
 				statement.executeUpdate();
 				statement.close();
-				//this.updateInterested(player);
+				this.updateInterested(player);
 			}
 
 		} catch (SQLException e) {

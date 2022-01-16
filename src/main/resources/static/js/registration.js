@@ -3,7 +3,7 @@ function switchToRegistration(){
 	addAccountSelector();
 }
 
-function nextStep() {
+/*function nextStep() {
 	$("#back_button").prop("disabled", false);
 	var index = $(".step.active").index(".step"),
     	stepsCount = $(".step").length;
@@ -16,7 +16,6 @@ function nextStep() {
 function prevStep() {
 	$("#next_button").text("Avanti");
 	var index = $(".step.active").index(".step");
-	//$("#next_button").prop("disabled", false);
 	if (index > 0) {
         index--;
 		$(".step.active").remove();
@@ -25,6 +24,103 @@ function prevStep() {
 	if (index === 0) {
 		$("#back_button").prop("disabled", true);
 	}
+}*/
+
+function nextStep() {
+	$("#back_button").prop("disabled", false);
+	var index = $(".step.active").index(".step"),
+    	stepsCount = $(".step").length;
+	if (index < stepsCount - 1) {
+        index++;
+        $(".step").hide();
+		$(".step").removeClass("active")
+		$(".step").eq(index).addClass("active");
+		$(".step.active").show();
+    }
+}
+
+function prevStep() {
+	$("#next_button").text("Avanti");
+	var index = $(".step.active").index(".step");
+	if (index > 0) {
+        index--;
+		$(".step.active").remove();
+        $(".step").eq(index).addClass("active");
+		$(".step.active").show();
+    };
+	if (index === 0) {
+		$("#back_button").prop("disabled", true);
+	}
+}
+
+function userEventHandler() {
+	$("#next_button").unbind();
+	$("#next_button").on("click", function(event) {
+		event.preventDefault();
+		validateForm();
+	});
+	$("#back_button").unbind();
+	$("#back_button").on("click", function(event) {
+		event.preventDefault();
+		prevStep();
+	});
+}
+
+function playerEventHandler(){
+	$("#next_button").unbind();
+	$("#next_button").on("click", function(event) {
+		event.preventDefault();
+		validatePlayerForm();
+	});
+	$("#back_button").unbind();
+	$("#back_button").on("click", function(event) {
+		event.preventDefault();
+		userEventHandler();
+		prevStep();
+	});
+}
+
+function sportFacilityEventHandler() {
+	$("#next_button").unbind();
+	$("#next_button").on("click", function(event) {
+		event.preventDefault();
+		validateSportFacilityForm();
+	});
+	$("#back_button").unbind();
+	$("#back_button").on("click", function(event) {
+		event.preventDefault();
+		userEventHandler();
+		prevStep();
+	});
+}
+
+function openHourEventHandler() {
+	$("#next_button").unbind();
+	$("#next_button").on("click", function(event) {
+		event.preventDefault();
+		//validateOpenHourForm();
+		showPlaygroundForm();
+	});
+	$("#back_button").unbind();
+	$("#back_button").on("click", function(event) {
+		event.preventDefault();
+		$("#login_form").css('max-width', '450px');
+		sportFacilityEventHandler();
+		prevStep();
+	});
+}
+
+function registrationSuccessfulMessageEventHandler() {
+	$("#next_button").unbind();
+	$("#next_button").on("click", function(event) {
+		event.preventDefault();
+		document.location.href = "/login";
+	});
+	$("#back_button").unbind();
+	$("#back_button").on("click", function(event) {
+		event.preventDefault();
+		document.location.href = "/";
+	});
 }
 
 function createInputField(type, id, placeholder){
@@ -39,7 +135,21 @@ function createInputField(type, id, placeholder){
 	return input;
 }
 
-function addAccountSelector() {	
+function addAccountSelector() {
+	var messageDiv = document.createElement("div");
+	messageDiv.id = "message_div";
+	var messageContainer = document.createElement("div");
+	messageContainer.id = "message_container";
+	messageContainer.className = "alert alert-danger d-flex align-items-center";
+	$(messageContainer).attr("role", "alert");
+	var icon = document.createElement("i");
+	icon.className = "bi bi-exclamation-triangle-fill me-2";
+	$(icon).attr("role", "img");
+	var message = document.createElement("div");
+	message.id = "message";
+	messageContainer.append(icon, message);
+	messageDiv.append(messageContainer);
+	
 	var step = document.createElement("div");
 	step.id = "step";
 	step.className = "step active";
@@ -87,6 +197,8 @@ function addAccountSelector() {
 	backButton.innerText = "Indietro";
 	navigationBar.append(backButton, nextButton);
 	
+	$("#login_form").find('img').after(messageDiv);
+	$(messageDiv).hide();
 	$("#login_form").append(step);
 	$("#login_form").append(navigationBar);
 	$("#back_button").prop("disabled", true);
@@ -96,18 +208,8 @@ function addAccountSelector() {
 	
 }
 
-function userEventHandler() {
-	$("#next_button").unbind();
-	$("#next_button").on("click", function(event) {
-		event.preventDefault();
-		validateForm();
-	});
-	$("#back_button").unbind();
-	$("#back_button").on("click", function(event) {
-		event.preventDefault();
-		prevStep();
-	});
-}
+var allSports = new Array();
+var sports = new Array();
 
 function showPlayerForm() {
 	var step = document.createElement("div");
@@ -136,6 +238,7 @@ function showPlayerForm() {
 	sportLabel.innerText = "Seleziona i tuoi sport preferiti";
 	sportLabel.className = "mt-3";
 	
+	var sportsDiv = document.createElement("div");
 	var sportsContainer = document.createElement("div");
 	sportsContainer.className = "carousel d-flex m-4 mt-3";
 	sportsContainer.id = "sportsContainer";
@@ -148,22 +251,38 @@ function showPlayerForm() {
 		async: false,
 		success: function (list) { 
 			$.each(list, function(index, sport) {
+				allSports.push(sport);
 				var form = document.createElement("div");
 				form.className = "container d-flex";
 				var input = document.createElement("input");
 				input.type = "checkbox";
 				input.className = "btn-check";
-				input.id = sport.type;
-				$(input).attr("onchange", "handleChange(this)");
+				input.id = sport.id;
+				$(sportsContainer).on("change", "#" + input.id, function() {
+					var id = this.id;
+					$("#" + id + "_icon").toggleClass("bi bi-plus-lg bi bi-check-lg");
+					$("#" + id + "_label").toggleClass("selected_sport");
+					var index = sports.findIndex(function(element) {
+						return element.id == id;
+					});
+					if (index !== -1) {
+						sports.splice(index, 1);
+					}
+					else {
+						sports.push(allSports.find(function(element) {
+							return element.id == id;
+						}));
+					}		
+				});
 				var icon = document.createElement("i");
 				icon.className = "bi bi-plus-lg me-1";
-				icon.id = sport.type + "_icon";
+				icon.id = sport.id + "_icon";
 				var text = document.createElement("p");
 				text.innerText = sport.type; 
 				var label = document.createElement("label");
 				label.className = "sport_selector d-flex justify-content-center align-items-center flex-fill btn btn-outline-light shadow-sm p-1 mb-3 bg-body rounded";
-				label.htmlFor = sport.type;
-				label.id = sport.type + "_label";
+				label.htmlFor = sport.id;
+				label.id = sport.id + "_label";
 				label.append(icon);
 				label.append(text);
 				label.style = "font-size: 85%";
@@ -172,14 +291,13 @@ function showPlayerForm() {
 				sportsContainer.append(form);
 			});
     	},
-	 	statusCode: {
-    		503: function() {
-    	  		 	alert( "Problema");
- 				 }
+	 	error: {
+    		
 		}
 	});
-	step.append(name, surname, dateLabel, birthday, addressLabel, address, sportLabel, sportsContainer);
-	
+	sportsDiv.append(sportsContainer);
+	step.append(name, surname, dateLabel, birthday, addressLabel, address, sportLabel, sportsDiv);
+
 	$("#login_form").find("#navigation_bar").before(step);
 	
 	$(".carousel").slick({
@@ -209,31 +327,12 @@ function showPlayerForm() {
 	nextStep();
 }
 
-function playerEventHandler(){
-	$("#next_button").unbind();
-	$("#next_button").on("click", function(event) {
-		event.preventDefault();
-		validatePlayerForm();
-	});
-	$("#back_button").unbind();
-	$("#back_button").on("click", function(event) {
-		event.preventDefault();
-		userEventHandler();
-		prevStep();
-	});
-}
-
-function handleChange(checkbox) {
-	console.log(checkbox.id);
-	$("#" + checkbox.id + "_icon").toggleClass("bi bi-plus-lg bi bi-check-lg");
-	$("#" + checkbox.id + "_label").toggleClass("selected_sport");	
-}
-
 function registerPlayer() {
 	const user = {
 		username: $("#username").val(),
 		password: $("#password").val(),
-		userType: "player"
+		userType: "player",
+		email: $("#email").val()
 	};
 	
 	$.ajax({
@@ -246,12 +345,12 @@ function registerPlayer() {
 				id: User.id,
 				name: $("#name").val(),
 				surname: $("#surname").val(),
-				email: $("#email").val(),
 				birthday: new Date($("#birthday").val()),
 				address: {
 					longitude: window.address.geometry.coordinates[0],
 					latitude: window.address.geometry.coordinates[1],
-				}
+				},
+				sports
 			};
 			$.ajax({
 				type: "POST",
@@ -259,19 +358,42 @@ function registerPlayer() {
 				contentType: "application/json",
 				data: JSON.stringify(player),
 				success: function() {
+					registrationSuccessfulMessage();
 					//INVIO EMAIL
-					/*emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
+					emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
 					var templateParams = {
 						to_name: $("#name").val(),
 						to_email: $("#email").val(),
 						message: "Complimenti, la registrazione è avvenuta con successo."
 					};
 					emailjs.send('player_seeker_service', 'player_seeker_template', templateParams)
-						.then(function(response) {
-							console.log('SUCCESS!', response.status, response.text);
-						}, function(error) {
-							console.log('FAILED...', error);
-						});*/
+						.then(function() {
+							var messageContainer = document.createElement("div");
+							messageContainer.id = "message_container";
+							messageContainer.className = "alert alert-primary d-flex align-items-center mb-3";
+							$(messageContainer).attr("role", "alert");
+							var icon = document.createElement("i");
+							icon.className = "bi bi-info-circle-fill me-2";
+							$(icon).attr("role", "img");
+							var message = document.createElement("div");
+							message.id = "message";
+							$(message).text("Ti è stata inviata un'email di conferma")
+							messageContainer.append(icon, message);
+							$("#login_form").find("#navigation_bar").before(messageContainer);
+						}, function() {
+							var messageContainer = document.createElement("div");
+							messageContainer.id = "message_container";
+							messageContainer.className = "alert alert-warning d-flex align-items-center mb-3";
+							$(messageContainer).attr("role", "alert");
+							var icon = document.createElement("i");
+							icon.className = "bi bi-exclamation-triangle-fill me-2";
+							$(icon).attr("role", "img");
+							var message = document.createElement("div");
+							message.id = "message";
+							$(message).text("A causa di un problema temporaneo non è stato possibile inviare l'email di conferma'")
+							messageContainer.append(icon, message);
+							$("#login_form").find("#navigation_bar").before(messageContainer);
+						});
 				},
 				error: function(textStatus) {
 					console.log(textStatus);
@@ -279,9 +401,37 @@ function registerPlayer() {
 			});
     	},
 		error: function(textStatus){
-			consoe.log(textStatus);
+			console.log(textStatus);
 		}
 	});
+}
+
+function registrationSuccessfulMessage() {
+	var step = document.createElement("div");
+	step.id = "step";
+	step.className = "step";
+
+	var alert = document.createElement("div");
+	alert.className = "alert alert-success mt-3 mb-3";
+	alert.id = "successful_message";
+	$(alert).attr("role", "alert");
+	var title = document.createElement("h4");
+	title.className = "alert-heading";
+	title.innerText = "Registrazione avvenuta con successo!";
+	var line = document.createElement("hr");
+	var text = document.createElement("p");
+	text.innerText = "Benvenuto nella community di Player Seeker. Effettua subito il login ed inizia a cercare" 
+				   + " eventi sportivi o a crearne di nuovi!"
+	
+	alert.append(title, line, text);
+	step.append(alert);
+	$("#next_button").text("Effettua il login");
+	$("#back_button").text("Torna alla home");
+	$("#login_form").find("#navigation_bar").before(step);
+	
+	//CAMBIO EVENT HANDLER
+	registrationSuccessfulMessageEventHandler();
+	nextStep();
 }
 
 function showSportFacilityForm() {
@@ -322,20 +472,6 @@ function showSportFacilityForm() {
 	//CAMBIO EVENT HANDLER
 	sportFacilityEventHandler();
 	nextStep();
-}
-
-function sportFacilityEventHandler() {
-	$("#next_button").unbind();
-	$("#next_button").on("click", function(event) {
-		event.preventDefault();
-		validateSportFacilityForm();
-	});
-	$("#back_button").unbind();
-	$("#back_button").on("click", function(event) {
-		event.preventDefault();
-		userEventHandler();
-		prevStep();
-	});
 }
 
 function createDayRow(dayName, id) {
@@ -433,22 +569,6 @@ function showOpeningHours() {
 	openHourEventHandler();
 	
 	nextStep();
-}
-
-function openHourEventHandler() {
-	$("#next_button").unbind();
-	$("#next_button").on("click", function(event) {
-		event.preventDefault();
-		//validateOpenHourForm();
-		showPlaygroundForm();
-	});
-	$("#back_button").unbind();
-	$("#back_button").on("click", function(event) {
-		event.preventDefault();
-		$("#login_form").css('max-width', '450px');
-		sportFacilityEventHandler();
-		prevStep();
-	});
 }
 
 function addPlaygrund(index) {

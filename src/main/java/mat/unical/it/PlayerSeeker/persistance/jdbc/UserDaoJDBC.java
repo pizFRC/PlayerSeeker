@@ -77,7 +77,7 @@ public class UserDaoJDBC implements UserDao {
 
 	@Override
 	public User doRetrieveByMail(String mail) {
-		String query = "SELECT u.*, t.type FROM users u INNER JOIN user_types t ON u.user_type_id = t.id WHERE m.email = ?;";
+		String query = "SELECT u.*, t.type FROM users u INNER JOIN user_types t ON u.user_type_id = t.id WHERE u.email = ?;";
 		User user;
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -97,7 +97,8 @@ public class UserDaoJDBC implements UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
-		}	}
+		}	
+	}
 
 	@Override
 	public boolean saveOrUpdate(User user) {

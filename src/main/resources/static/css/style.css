@@ -70,7 +70,7 @@ p {
 }
 
 .step {
-  display: none;
+  display: block;
 }
 
 .step.active {
