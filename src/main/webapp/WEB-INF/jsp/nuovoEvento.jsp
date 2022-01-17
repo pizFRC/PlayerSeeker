@@ -13,7 +13,7 @@
 	
 	<jsp:include page="head.jsp"/>
 	<!-- Custom CSS -->
-<link href="../css/style.css"rel="stylesheet" type="text/css">
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
@@ -24,7 +24,8 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
 <style>
 
-#map {  width: 100%; height:50%; }
+#map { max-width: 100%;
+        min-width: 100%  }
 .marker{
 
 }
@@ -51,7 +52,7 @@
 	<title>Player Seeker</title>
 </head>
 
-<body>
+<body class="h-100">
 
 <!-- HEADER --->
  	<jsp:include page="header.jsp" />
@@ -62,9 +63,18 @@
             
             </div>
 	<!-- FORM -->
-<div class="container shadow-sm   bg-body  p-5 border border-2 rounded-2 h-100" id="form_creazione_evento">
-
-		<form class=" needs-validation container w-100  h-100 p-3 " id="form_evento" >
+<div class="container shadow-sm   bg-body  pb-2 border border-2 rounded-2 h-75" id="form_creazione_evento">
+        
+    <div class="d-flex justify-content-between h-100">
+				<div class="align-self-center"  >
+					<button class="btn btn-outline-primary float-start "
+						type="button" onclick="prev()" id="btn_prev">
+						<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
+							class="sr-only">Previous</span>
+					</button>
+				</div>
+				
+		<form class=" needs-validation container w-75  h-100 p-3 " id="form_evento" >
 		  
 	
           <div class="row mx-auto h-75 "  id="row">
@@ -76,8 +86,8 @@
 
 					<div id="step" class="d-flex justify-content-between w-100 " style="z-index: 9;">
 
-						<div  class="text-wrap" >
-							<span class=" badge border border-primary point bg-light " ><i
+						<div   >
+							<span class=" badge border border-primary point bg-light active " ><i
 								class="fas fa-volleyball-ball text-primary"> </i> </span>
 								 <label
 								class="lbl_progress " > Sport</label>
@@ -96,7 +106,8 @@
 						<div>
 							<span class="badge point border bg-light"> <i
 								class="fas fa-users-cog"></i>
-							</span> <label class="lbl_progress">Partecipanti</label>
+							</span>
+							 <label class="lbl_progress">Partecipanti</label>
 						</div>
 						<div>
 							<span class="badge point border bg-light"> <i
@@ -172,43 +183,77 @@
 
 
 				<!-- MAP -->
-			<div class="col-12 mb-5 d-n h-100" id="third_step">
-			
-			<div class="container border border-2 rounded shadow mb-3 text-primary">
-              <hr class="my-4">
-						<div>
-							<h5 clss="fs-2">Seleziona una struttura nella tua città o
-								cercane una</h5>
+			<div class="col-12 d-n h-100 " id="third_step">
+			<div style="position:relative; width: 100%; height: 100%;">
+			 <div id="map" class="border border-2 border-primary h-100 w-100" style="position:absolute;z-index: 90;">
+			    	
+			 
+			 </div>
+			 
+			 <div class="border border-2 border-primary text-primary  bg-light "   id="info_struttura_selezionata">
+								
+								<div>
+									<h5 class="fs-4">Seleziona una struttura nella tua città o
+										cercane una</h5>
+
+								</div>
+							<hr class="my-4">
+								<address class="fs-4">
+
+									Città attuale: <br> <i class="fas fa-map-marker-alt"
+										aria-hidden="true"></i>Cosenza,Italia
+								</address>
+
+								<hr class="my-4">
+
+
 							
-						</div>
-						<address class="fs-2">
+							</div>
+						<!-- <div class="row h-100 ">
+							<div
+								class="col-5 border rounded shadow mb-3 text-primary">
+								<hr class="my-4">
+								<div>
+									<h5 class="fs-2">Seleziona una struttura nella tua città o
+										cercane una</h5>
+
+								</div>
+								<address class="fs-2">
+
+									Città attuale: <br> <i class="fas fa-map-marker-alt"
+										aria-hidden="true"></i>Cosenza,Italia
+								</address>
+
+								<hr class="my-4">
+
+
+							</div>
+                             <div class="col-6 border border-2 border-primary" id="map">
+                             
+                             
+                             </div>
+
 						
-						Città attuale: <br>  <i class="fas fa-map-marker-alt" aria-hidden="true"></i>Cosenza,Italia
-					</address>
-
-					<hr class="my-4">
-
-
-             </div>
-
-
-				<div class="container border border-2 rounded h-75 " id="map"></div>
-
-
-
-
-			</div>
+       
+						</div>
+-->
+                  </div>
+					</div>
 
 		
 
            <!-- SET NUMERO GIOCATORI -->
-			<div class="col-12 mb-3 d-n" id="four_step">
+			<div class="col-12 mb-3 d-n " id="four_step">
+			<div class="" >
+			
              <hr class="my-4">
 				<h6>Aggiungi qui i giocatori </h6>
 				<hr class="my-4">
 				<label class="form-label" for="num_giocatori">Numero
 					giocatori mancati</label>
-				<div class="input-group mb-3">
+					</div>
+					
+				<div class="input-group mb-3 " >
 					<input type="text" class="form-control" id="num_giocatori"
 						placeholder="" aria-label="" aria-describedby="button-addon2"
 						disabled pattern="[0-9]+">
@@ -220,22 +265,12 @@
 
 				</div>
 
-				<div id="set_giocatori" class="container-fluid"></div>
+				<div id="set_giocatori" class="container " ></div>
 			</div>
 
 
 
-   <!-- COMMENTO
-			<div class="col-12 mt-4  d-n " id="comment_step">
-
-				<div class="container mb-3 mt-3">
-					<label for="comment">Inserisci un promemoria per l'evento:</label>
-					<textarea class="form-control w-100" rows="5" id="comment"
-						name="text"></textarea>
-				</div>
-
-			</div>
-			 -->
+ 
 			
 
 
@@ -266,41 +301,33 @@
 			<!-- END ROW -->
 			
           </div>
+          
+          
+          
+          	
 		</form>
 
 
-     
+
+
+
+		<div class="align-self-center " >
+			<button class="btn btn-outline-primary  " type="button"
+				onclick="next()" id="btn_next">
+				<span><i class="fa fa-angle-right" aria-hidden="true"></i></span> <span
+					class="sr-only">Next</span>
+			</button>
+		</div>
 		
-
-
+		
+		</div>
 	</div>
 	
 	<!-- end FORM -->
-	<div class="container pt-3" style="z-index: 99;">
-
-			<div class="d-flex justify-content-around">
-
-				<div  >
-					<button class="btn btn-outline-primary float-start "
-						type="button" onclick="prev()" id="btn_prev">
-						<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
-							class="sr-only">Previous</span>
-					</button>
-				</div>
-				
-				
-				<div >
-					<button class="btn btn-outline-primary float-end" type="button"
-						onclick="next()" id="btn_next" >
-						<span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-						<span class="sr-only">Next</span>
-					</button>
-				</div>
-
-			</div>
 
 
-		</div>
+
+		
 
 	
 <!-- FOOTER -->
@@ -335,7 +362,7 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 	
-
+<link href="css/nuovoEventoStyle.css" rel="stylesheet" type="text/css">
 </body>
 </html>
 

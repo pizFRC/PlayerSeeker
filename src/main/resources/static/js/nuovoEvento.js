@@ -65,11 +65,10 @@ const geojson = {
       $(".d-y:first").next().addClass('d-y');
        $(".d-y:first").next().removeClass('d-n');
   $(".d-y:first").addClass('d-n').removeClass('d-y');
-   $( "span:not(.border-primary)  > i").first().addClass("text-primary ");
+  $("#contenitore").find(" span:not(.border-primary) > i").first().addClass("text-primary ");
  $(".active:first").removeClass("active");
-  $("span:not(.border-primary)").first().addClass("border-primary active");
-  
-     	
+ $("#contenitore").find(" span:not(.border-primary)").first().addClass("border-primary active");
+ // console.log();
 }
 
 
@@ -416,7 +415,9 @@ el.style.height = `30px`;
 el.style.backgroundSize = '100%';
  
 el.addEventListener('click', () => {
-      next();
+	var label=document.createElement("label");
+	label.innerHTML="Struttura selezionata x";
+    $("#info_struttura_selezionata").append(label);
 });
  
 // Add markers to the map.
