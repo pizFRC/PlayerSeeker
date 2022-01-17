@@ -62,12 +62,12 @@
             
             </div>
 	<!-- FORM -->
-<div class="container shadow rounded-2 bg-body bg-dark p-5" id="form_creazione_evento">
+<div class="container shadow-sm   bg-body  p-5 border border-2 rounded-2 h-100" id="form_creazione_evento">
 
-		<form class=" needs-validation container-fluid w-75 mx-auto " id="form_evento">
+		<form class=" needs-validation container w-100  h-100 p-3 " id="form_evento" >
 		  
 	
-          <div class="row">
+          <div class="row mx-auto h-75 "  id="row">
 
 
 
@@ -76,11 +76,11 @@
 
 					<div id="step" class="d-flex justify-content-between w-100 " style="z-index: 9;">
 
-						<div >
+						<div  class="text-wrap" >
 							<span class=" badge border border-primary point bg-light " ><i
 								class="fas fa-volleyball-ball text-primary"> </i> </span>
 								 <label
-								class="lbl_progress" > Sport</label>
+								class="lbl_progress " > Sport</label>
 						</div>
 						
 						<div>
@@ -119,21 +119,22 @@
 				<!-- Carousel -->
 				
 				
-			<div  class="col-12 d-y" id="first_step">
+			<div  class="col-12 d-y h-75 mx-auto" style="height: 500px" id="first_step">
 			
 				<hr class="my-4">
 				<h6>Seleziona uno sport</h6>
 				<hr class="my-4">
-				<div class="carousel d-flex m-4 mt-3"></div>
+				<div class="carousel d-flex m-4 mt-3 h-75">
+				</div>
 				
 				
 			</div>
                
             <!-- TIME PICKER -->
-				<div class="col-12 mb-3 d-n " id="second_step" name="second_step">
+				<div class="col-12 mb-3 d-n h-75" id="second_step" name="second_step">
                    
                    <hr class="my-4">
-				<h6>Seleziona la data e l'ora che preferisci troveremo le strutture disponili</h6>
+				<h6 class="text-center fs-3 text-decoration link-primary" >Seleziona la data e l'ora che preferisci troveremo le strutture disponili</h6>
 				<hr class="my-4">
 					<div class="row">
 
@@ -171,16 +172,27 @@
 
 
 				<!-- MAP -->
-			<div class="col-12 mb-5 d-n" id="third_step">
+			<div class="col-12 mb-5 d-n h-100" id="third_step">
+			
+			<div class="container border border-2 rounded shadow mb-3 text-primary">
               <hr class="my-4">
-				<h5>Seleziona una struttura nella tua città o cercane una</h5>
-				<hr class="my-4">
+						<div>
+							<h5 clss="fs-2">Seleziona una struttura nella tua città o
+								cercane una</h5>
+							
+						</div>
+						<address class="fs-2">
+						
+						Città attuale: <br>  <i class="fas fa-map-marker-alt" aria-hidden="true"></i>Cosenza,Italia
+					</address>
+
+					<hr class="my-4">
 
 
+             </div>
 
 
-
-				<div class="container border border-2 rounded" id="map"></div>
+				<div class="container border border-2 rounded h-75 " id="map"></div>
 
 
 
@@ -249,31 +261,7 @@
           </div>
           
             <!-- TASTI AVANTI E INDIETRO -->
-          <div class="col-md-12">
-
-			<div class="d-flex justify-content-around">
-
-				<div  >
-					<button class="btn btn-outline-secondary float-start "
-						type="button" onclick="prev()" id="btn_prev">
-						<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
-							class="sr-only">Previous</span>
-					</button>
-				</div>
-				
-				
-				<div >
-					<button class="btn btn-outline-secondary float-end" type="button"
-						onclick="next()" id="btn_next">
-						<span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-						<span class="sr-only">Next</span>
-					</button>
-				</div>
-
-			</div>
-
-
-		</div>
+          
 			
 			<!-- END ROW -->
 			
@@ -288,7 +276,31 @@
 	</div>
 	
 	<!-- end FORM -->
-	
+	<div class="container pt-3" style="z-index: 99;">
+
+			<div class="d-flex justify-content-around">
+
+				<div  >
+					<button class="btn btn-outline-primary float-start "
+						type="button" onclick="prev()" id="btn_prev">
+						<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
+							class="sr-only">Previous</span>
+					</button>
+				</div>
+				
+				
+				<div >
+					<button class="btn btn-outline-primary float-end" type="button"
+						onclick="next()" id="btn_next" >
+						<span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+						<span class="sr-only">Next</span>
+					</button>
+				</div>
+
+			</div>
+
+
+		</div>
 
 	
 <!-- FOOTER -->

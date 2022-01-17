@@ -65,9 +65,10 @@ const geojson = {
       $(".d-y:first").next().addClass('d-y');
        $(".d-y:first").next().removeClass('d-n');
   $(".d-y:first").addClass('d-n').removeClass('d-y');
-   $( "span:not(.border-primary)  > i").first().addClass("text-primary");
-  $("span:not(.border-primary)").first().addClass("border-primary");
-
+   $( "span:not(.border-primary)  > i").first().addClass("text-primary ");
+ $(".active:first").removeClass("active");
+  $("span:not(.border-primary)").first().addClass("border-primary active");
+  
      	
 }
 
@@ -81,8 +82,9 @@ const geojson = {
 $(".d-y:last").addClass('d-n').removeClass('d-y');
 
   $( "span.border-primary:last > i").first().removeClass("text-primary")
-$("span.border-primary:last").removeClass("border-primary");
 
+$("span.border-primary:last").removeClass("border-primary active");
+$("span.border-primary:last").addClass("active");
 /*   $(".d-y:first").next().addClass('d-y');
        $(".d-y:first").next().removeClass('d-n');
   $(".d-y:first").addClass('d-n').removeClass('d-y');
@@ -115,8 +117,10 @@ document.querySelector("#show").addEventListener("click", function () {
 
 ///////////////TIME PICKER CONFIG////////////
 
+
 $(document).ready(function(){
-   
+	
+	
 
 
 
@@ -184,11 +188,12 @@ $('#ora_fine').timepicker({
 	$(document).ready(function() {
 		 $('#privacy').prop('checked', false);
 	   addAddressInput();
-     
+        
     var sports;
 
 	sportsContainer = document.querySelector(".carousel");
-     
+   
+
 	
 	$.ajax({
 		type: "POST",
@@ -202,22 +207,24 @@ $('#ora_fine').timepicker({
  
 			$.each(list, function(index, sport) {
 				var div = document.createElement("div");
-				div.className = "container w-100";
-			
+				div.className = "container w-100 h-100 d-flex ";
+			   
 				var input = document.createElement("button");
 				input.type = "radio";
-				input.className = "btn btn-outline-dark w-100";
+				input.className = "btn btn-outline-primary rounded w-100 sport_item align-self-center";
 				input.id = sport.type;
 				
-				input.innerHTML=sport.type;
 				
+				var span=document.createElement("span");
+				span.class="text-primary";
+				span.innerHTML=sport.type;
 				
 				var i=document.createElement("i");
 				
 				
 				i.className="fas fa-soccer-ball-o";
 			   
-				input.append(i);
+				input.append(i,span);
 				
 				div.append(input);
 				sportsContainer.append(div);
@@ -251,7 +258,7 @@ $('#ora_fine').timepicker({
 
 ///////////////CONFIGURO IL CAROUSEL//////////////////
 $('.carousel').slick({
-  dots: true,
+  dots: false,
   infinite: false,
   speed: 300,
   slidesToShow: 3,
@@ -283,6 +290,8 @@ $('.carousel').slick({
    
   ]
 });
+
+//tasto confirm attivato solo se le privacy sono confermate
 $('#privacy').click(function() {
   if ($(this).is(':checked')) {
    $( "#confirm_btn" ).prop( "disabled", false );
@@ -340,7 +349,45 @@ function addAddressInput(){
 				}).on('results',function(e){
 					    rimuoviMarker();
 				})
-			);			
+			);
+			map.getCanvas().style.cursor = 'pointer';
+			// Center the map on the coordinates of any clicked circle from the 'circle' layer.
+// Example of a MapMouseEvent of type "click"
+map.on('click', (e) => {
+console.log(e.lngLat.lat + "lng " +e.lngLat.lng );
+console.log(e);
+
+map.flyTo({
+	center: [e.lngLat.lng ,e.lngLat.lat],
+zoom: 11,
+speed: 0.9,
+essential: true ,
+
+
+});
+});
+ 
+// Change the cursor to a pointer when the it enters a feature in the 'circle' layer.
+
+ 
+
+	/*OBSERVER SI ACCORGE DEL CAMBIAMENTO DELLA CLASSE E RICHIAMA IL MAP RESIZE		
+	SERVE AD EVITARE CHE LA MAPPA SI CARICHI SOLO IN PARTE
+	*/
+ const callback =(changeList,observer)=>{
+		map.resize();
+	}
+	
+   const observer =new MutationObserver(callback);
+var element = document.querySelector('#third_step');
+observer.observe(element,{
+	attributes:true,
+	attributeOldValue:true,
+	 attributeFilter:['class'],
+ 
+	
+})
+;		
 			 InserisciMarkerVicini(mapboxgl,map);
  console.log("MAPPA CRE");
        }
