@@ -27,6 +27,11 @@ public class LoginController {
 	public String structures() {
 		return "strutture";
 	}
+	@GetMapping("/visualizzaStruttura")
+	public String visualizzaStruttura() {
+		return "visualizzaStruttura";
+	}
+	
 	
 	@PostMapping("/checkUser")
 	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) {	 
