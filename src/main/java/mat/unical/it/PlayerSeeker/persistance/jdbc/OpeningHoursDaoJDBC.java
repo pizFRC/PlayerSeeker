@@ -113,6 +113,17 @@ public class OpeningHoursDaoJDBC implements OpeningHoursDao {
 
     @Override
     public boolean delete(OpeningHours hour) {
-        return false;
+        PreparedStatement query;
+
+        try {
+            query = connection.prepareStatement("DELETE facility_hours WHERE id=?");
+            query.setLong(1,hour.getId());
+            query.executeQuery();
+            query.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

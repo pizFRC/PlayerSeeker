@@ -9,6 +9,7 @@ import mat.unical.it.PlayerSeeker.persistance.*;
 public class DatabaseJDBC implements Database{
 	
 	private static DatabaseJDBC instance = null;
+
 	Connection connection;
 	
 	public static DatabaseJDBC getInstance() {
@@ -34,6 +35,10 @@ public class DatabaseJDBC implements Database{
 			e.printStackTrace();
 		}
 		return true;
+	}
+
+	public Connection getConnection() {
+		return connection;
 	}
 	
 	@Override
@@ -74,6 +79,11 @@ public class DatabaseJDBC implements Database{
 	@Override
 	public SportDao getSportDao() {
 		return new SportDaoJDBC(connection);
+	}
+
+	@Override
+	public SportEventProxy getSportEventProxy() {
+		return null;
 	}
 
 }

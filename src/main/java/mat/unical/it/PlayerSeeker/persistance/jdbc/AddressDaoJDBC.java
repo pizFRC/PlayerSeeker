@@ -3,7 +3,6 @@ package mat.unical.it.PlayerSeeker.persistance.jdbc;
 import mat.unical.it.PlayerSeeker.model.Address;
 import mat.unical.it.PlayerSeeker.persistance.AddressDao;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

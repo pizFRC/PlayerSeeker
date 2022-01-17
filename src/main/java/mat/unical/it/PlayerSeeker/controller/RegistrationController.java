@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 
 import mat.unical.it.PlayerSeeker.model.Address;
 import mat.unical.it.PlayerSeeker.model.Player;
+import mat.unical.it.PlayerSeeker.model.Sport;
 import mat.unical.it.PlayerSeeker.model.User;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
@@ -22,7 +23,21 @@ public class RegistrationController {
 		username = gson.fromJson(username, String.class);
 		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(username);
 		if(user == null) {
-			System.out.println("sono qui");
+			res.setStatus(HttpServletResponse.SC_OK);
+			return HttpServletResponse.SC_OK;
+		}
+		else {
+			res.setStatus(HttpServletResponse.SC_CONFLICT);
+			return HttpServletResponse.SC_CONFLICT;
+		}
+	}
+	
+	@PostMapping("/checkEmail")
+	public int checkEmail(HttpServletResponse res, @RequestBody String email) {
+		Gson gson = new Gson();
+		email = gson.fromJson(email, String.class);
+		User user = DatabaseJDBC.getInstance().getUserDao().doRetrieveByMail(email);
+		if(user == null) {
 			res.setStatus(HttpServletResponse.SC_OK);
 			return HttpServletResponse.SC_OK;
 		}
@@ -54,6 +69,7 @@ public class RegistrationController {
 			player.getAddress().setId(DatabaseJDBC.getInstance().getAddressIdBroker().getId());
 			DatabaseJDBC.getInstance().getAddressDao().saveOrUpdate(player.getAddress());
 		}
+		
 		if(DatabaseJDBC.getInstance().getPlayerDao().saveOrUpdate(player))
 			return HttpServletResponse.SC_OK;
 		

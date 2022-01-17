@@ -18,12 +18,14 @@ body {
 	background-size: cover;
 }
 
-
 label.error {
 	color: red;
 	font-weight: normal;
 }
 
+.btn-outline-light {
+	color: black;
+}
 
 .geocoder {
 	border: 1px solid #ced4da;
@@ -49,25 +51,34 @@ label.error {
 	color: black;
 }
 
-.slick-slide {
-	margin-right: 5px;
-	margin-left: 5px;
+.sport_selector:hover {
+	background-color: #e7e7e7 !important;
+}
+
+.selected_sport {
+	background-color: #D0E4F5 !important;
+	color: #206bc0 !important;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }
 
 .prova {
 	padding: 10px;
 }
 
-@media screen and (max-width:1000px){
-.tasti_da_nascondere{
-	
-	  
+.step {
+  display: block;
 }
-}
-  
-@media screen and (max-width:900px){
-.item{
-	
 
+.step.active {
+  display: block;
 }
+
+.add-playground {
+	background-color: transparent !important;
+	border: none !important;
+  	color: #0d6efd !important;
 }
