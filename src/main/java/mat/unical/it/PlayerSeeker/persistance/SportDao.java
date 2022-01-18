@@ -7,6 +7,7 @@ public interface SportDao {
 
 	public List<Sport> doRetrieveAll();
 	public Sport doRetrieveByKey(String type);
+	public Sport doRetrieveById(Long id);
 	public boolean saveOrUpdate(Sport sport);
 	public boolean delete(Sport sport);
 	

@@ -11,8 +11,8 @@ public class SportEvent implements java.io.Serializable {
 	private static final long serialVersionUID = -1807415135910177674L;
 	
 	private Long id;
-    private LocalDate start = null;
-    private Sport sports = null;
+	private LocalDate start = null;
+    private Sport sport = null;
     private Playground playground = null;
     private Player organizzatore = null;
     private String description = null;
@@ -20,7 +20,7 @@ public class SportEvent implements java.io.Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(start, id, organizzatore, sports);
+		return Objects.hash(start, id, organizzatore, sport);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class SportEvent implements java.io.Serializable {
 			return false;
 		SportEvent other = (SportEvent) obj;
 		return Objects.equals(start, other.start) && id == other.id && Objects.equals(organizzatore, other.organizzatore)
-				&& Objects.equals(sports, other.sports);
+				&& Objects.equals(sport, other.sport);
 	}
 
 	public SportEvent(Long id, LocalDate data, Sport sports, Player organizzatore,
@@ -41,7 +41,7 @@ public class SportEvent implements java.io.Serializable {
 		super();
 		this.id = id;
 		this.start = data;
-		this.sports = sports;
+		this.sport = sports;
 		this.organizzatore = organizzatore;
 		this.players = players;
 	}
@@ -50,7 +50,7 @@ public class SportEvent implements java.io.Serializable {
 		super();
 		this.id = id;
 	
-		this.sports = sports;
+		this.sport = sports;
 		this.organizzatore = organizzatore;
 		this.players = players;
 	}
@@ -74,11 +74,11 @@ public class SportEvent implements java.io.Serializable {
     }
 
     public Sport getSport() {
-        return sports;
+        return sport;
     }
 
     public void setSport(Sport sports) {
-        this.sports = sports;
+        this.sport = sports;
     }
 
     public Player getOrganizzatore() {
@@ -111,5 +111,13 @@ public class SportEvent implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public LocalDate getStart() {
+		return start;
+	}
+
+	public void setStart(LocalDate start) {
+		this.start = start;
 	}
 }

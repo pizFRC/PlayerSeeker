@@ -37,8 +37,6 @@ public class PlayerDaoJDBC implements PlayerDao{
 				tmpPlayer = new Player();
 				tmpPlayer.setName(result.getString("nome"));
 				tmpPlayer.setSurname(result.getString("cognome"));
-				//tmpPlayer.setEta(result.getInt("eta"));
-				tmpPlayer.setEmail(result.getString("email"));
 				tmpPlayer.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong(("address_id"))));
 
 				playerList.add(tmpPlayer);
@@ -65,7 +63,6 @@ public class PlayerDaoJDBC implements PlayerDao{
 				player.setId(result.getLong("id"));
 				player.setName(result.getString("username"));
 				player.setSurname(result.getString("surname"));
-				player.setEmail(result.getString("email"));
 				player.setBirthday(result.getDate("birthday").toLocalDate());
 				player.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
 				return player;
@@ -85,33 +82,31 @@ public class PlayerDaoJDBC implements PlayerDao{
 			PreparedStatement statement;
 			if(doRetrieveByKey(player.getId()) == null) {
 				//INSERT
-				query = "INSERT INTO player values(?,?,?,?,?,?)";
+				query = "INSERT INTO player values(?,?,?,?,?)";
 				statement = connection.prepareStatement(query);
 				statement.setLong(1, player.getId());
 				statement.setString(2, player.getName());
 				statement.setString(3, player.getSurname());
-				statement.setString(4, player.getEmail());
-				statement.setDate(5, Date.valueOf(player.getBirthday()));
-				statement.setLong(6, player.getAddress().getID());
+				statement.setDate(4, Date.valueOf(player.getBirthday()));
+				statement.setLong(5, player.getAddress().getID());
 				statement.execute();
 				statement.close();
-				//this.saveInterested(player);
+				this.saveInterested(player);
 			}
 			else {
 				//UPDATE
-				query = "UPDATE player SET name = ?, surname = ?, email = ?, birthday = ?, address_id = ? WHERE id = ?";
+				query = "UPDATE player SET name = ?, surname = ?, birthday = ?, address_id = ? WHERE id = ?";
 				statement = connection.prepareStatement(query);
 				statement.setString(1, player.getName());
 				statement.setString(2, player.getSurname());
-				statement.setString(3, player.getEmail());
-				statement.setDate(4, Date.valueOf(player.getBirthday()));
-				statement.setLong(5, player.getAddress().getID());
-				statement.setLong(6, player.getId());
+				statement.setDate(3, Date.valueOf(player.getBirthday()));
+				statement.setLong(4, player.getAddress().getID());
+				statement.setLong(5, player.getId());
 				statement.executeUpdate();
 				statement.close();
-				//this.updateInterested(player);
+				this.updateInterested(player);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -124,7 +119,8 @@ public class PlayerDaoJDBC implements PlayerDao{
 		PreparedStatement query = null;
 
 		try{
-			query = connection.prepareStatement("DELETE players WHERE username=?;");
+			query = connection.prepareStatement("DELETE players WHERE id=?;");
+			query.setLong(1,player.getId());
 			query.executeQuery();
 			query.close();
 		} catch(SQLException e) {

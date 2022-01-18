@@ -11,7 +11,6 @@ public class Player implements java.io.Serializable{
 	private Long id = null;
 	private String name = null;
     private String surname = null;
-    private String email = null;
     private LocalDate birthday = null;
     private Address address = null;
     private List<SportEvent> events = null;
@@ -20,7 +19,6 @@ public class Player implements java.io.Serializable{
     public Player(String nome, String cognome, int eta, String email) {
 		this.setName(nome);
 		this.setSurname(cognome);
-		this.setEmail(email);
 	}
     
     public Player() {}
@@ -47,14 +45,6 @@ public class Player implements java.io.Serializable{
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public LocalDate getBirthday() {
