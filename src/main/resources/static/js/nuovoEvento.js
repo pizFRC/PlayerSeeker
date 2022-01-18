@@ -546,7 +546,8 @@ function creaItemCaroseul(sport){
 				
 				//modifico il numero di giocatori richiesti
 				document.getElementById("num_giocatori").value=sport.requiredPlayers; 
-				
+			
+				$("#set_giocatori").empty();
 				//devo anche rivedere le strutture che praticano quello sport
 			
 			   //Se clicco su uno sport type del carousel non vado avanti ma ritorno alla scelta della fascia oraria

@@ -93,6 +93,7 @@
 	<script type="text/javascript"  src="../js/login.js"> </script>
 	<script type="text/javascript"  src="../js/registration.js"> </script>
 	<script type="text/javascript"  src="../js/validators.js"> </script>
+	<link href="css/style.css" rel="stylesheet" type="text/css">
 </body>
 </html>
 
