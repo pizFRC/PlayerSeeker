@@ -61,6 +61,10 @@ const geojson = {
 	   
      
 	   }*/
+//if($("#contenitore").find(".point").last().hasClass("active"))
+ if($(".point:last").hasClass("active"))
+return;
+//console.log("prova");
 	updateProgress(true);
       $(".d-y:first").next().addClass('d-y');
        $(".d-y:first").next().removeClass('d-n');
@@ -68,6 +72,7 @@ const geojson = {
   $("#contenitore").find(" span:not(.border-primary) > i").first().addClass("text-primary ");
  $(".active:first").removeClass("active");
  $("#contenitore").find(" span:not(.border-primary)").first().addClass("border-primary active");
+
  // console.log();
 }
 
@@ -75,6 +80,7 @@ const geojson = {
    function prev(){
 	if($(".d-y:first").attr('id')=="first_step")
 	    return;
+
 		updateProgress(false);
 		$(".d-y:last").prev().addClass('d-y');
 	      $(".d-y:first").removeClass('d-n');
@@ -153,6 +159,9 @@ $('#ora_fine').timepicker({
 
 
 });
+
+
+
 ///////////////PROGRESS BAR UPDATE FUNCTION////////////
 
 	
@@ -165,8 +174,10 @@ $('#ora_fine').timepicker({
 		    var	aria_val_now=(parseInt(el.getAttribute("aria-valuenow"))+25);
 			var width=(parseInt(el.style.width  )+25);	
 				}else{
-					if((parseInt(el.style.width  )<=0))
-					return;
+					if(el.style.width  <=0){
+						alert("0");
+						return;
+					}
 		    var	aria_val_now=(parseInt(el.getAttribute("aria-valuenow"))-25);
 			var width=(parseInt(el.style.width  )-25);	
 				
@@ -185,110 +196,20 @@ $('#ora_fine').timepicker({
 ///////////////CARICA I TIPI DI SPORT E LI AGGIUNGE AL CAROUSEL////////////
 
 	$(document).ready(function() {
+		
+	
 		 $('#privacy').prop('checked', false);
 	   addAddressInput();
         
     var sports;
 
 	sportsContainer = document.querySelector(".carousel");
-   
+	console.log("pre");
+	
+    	loadSportType(sportsContainer);
 
 	
-	$.ajax({
-		type: "POST",
-		url: "/getSportList",
-		contentType: "application/json",
-		dataType: 'json',
-		async: false,
-		success: function (list) {
-			
-		
- 
-			$.each(list, function(index, sport) {
-				var div = document.createElement("div");
-				div.className = "container w-100 h-100 d-flex ";
-			   
-				var input = document.createElement("button");
-				input.type = "radio";
-				input.className = "btn btn-outline-primary rounded w-100 sport_item align-self-center";
-				input.id = sport.type;
-				
-				
-				var span=document.createElement("span");
-				span.class="text-primary";
-				span.innerHTML=sport.type;
-				
-				var i=document.createElement("i");
-				
-				
-				i.className="fas fa-soccer-ball-o";
-			   
-				input.append(i,span);
-				
-				div.append(input);
-				sportsContainer.append(div);
-			
-				$(document).on('click','#'+sport.type,function(e){
-				
-				//modifico il numero di giocatori richiesti
-				document.getElementById("num_giocatori").value=sport.requiredPlayers; 
-				
-				//devo anche rivedere le strutture che praticano quello sport
-			
-			   //Se clicco su uno sport type del carousel non vado avanti ma ritorno alla scelta della fascia oraria
-			       if(($("#second_step").hasClass("d-y")))
-			             return;		
-		              
-                 next();
-	
-				       });
-			
-				});
-		
-    	},
-	 	statusCode: {
-    		503: function() {
-    	  		 	alert( "Problema");btnMeno
- 				 }
-		}
-	});
-	//aggiungo al carousel 
-	 document.querySelector("#first_step").append(sportsContainer);
 
-///////////////CONFIGURO IL CAROUSEL//////////////////
-$('.carousel').slick({
-  dots: false,
-  infinite: false,
-  speed: 300,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        infinite: false,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 800,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-   
-  ]
-});
 
 //tasto confirm attivato solo se le privacy sono confermate
 $('#privacy').click(function() {
@@ -309,13 +230,20 @@ $( "#confirm_btn" ).removeClass('btn-light').addClass('btn-success');
 	///////////////AGGIUNGO LA MAPPA///////////
 function addAddressInput(){
 		
+		
+		 
 		mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q';
 		const map = new mapboxgl.Map({
 		            container : 'map',
-		            style : 'mapbox://styles/mapbox/light-v10',
+		            style : 'mapbox://styles/mapbox/streets-v11',
 			     	center : [ 16.2537 ,39.2983],
 				    zoom : 8,
-                    });
+                     transformRequest: (url, resourceType) => {
+                    {
+	            
+             }
+       }
+    });
 	
               map.on('idle',function(){
 		          
@@ -373,6 +301,7 @@ essential: true ,
 	/*OBSERVER SI ACCORGE DEL CAMBIAMENTO DELLA CLASSE E RICHIAMA IL MAP RESIZE		
 	SERVE AD EVITARE CHE LA MAPPA SI CARICHI SOLO IN PARTE
 	*/
+	
  const callback =(changeList,observer)=>{
 		map.resize();
 	}
@@ -385,10 +314,9 @@ observer.observe(element,{
 	 attributeFilter:['class'],
  
 	
-})
-;		
-			 InserisciMarkerVicini(mapboxgl,map);
- console.log("MAPPA CRE");
+});		
+	 InserisciMarkerVicini(mapboxgl,map);
+
        }
 	
 	
@@ -485,8 +413,6 @@ return;
 
 
 document.getElementById("btnMeno_"+id).parentElement.remove();
-
-       
 document.getElementById("num_giocatori").value=parseInt(document.getElementById("num_giocatori").value)+1;
          
 
@@ -501,11 +427,80 @@ document.getElementById("set_giocatori").append(divContenitore);
 }
 
 
-		$(document).ready(function() {
+function loadSportType(sportsContainer){
+	
+	console.log("prova");
+	var fileName="/getSportList";
+	var xhttp =new XMLHttpRequest();
+	
+	xhttp.onreadystatechange=function(){
+		if(this.readyState ==4 && this.status==200){
+			var jsonObj=JSON.parse(xhttp.response);
+						
+							console.log("pre entries");
+						Object.entries(jsonObj).forEach((entry) => {
+  const [key, value] = entry;
+  console.log(value);
+var div =creaItemCaroseul(value);
+sportsContainer.append(div);
+});
+     
+
+//aggiungo al carousel 
+	 document.querySelector("#first_step").append(sportsContainer);
+
+///////////////CONFIGURO IL CAROUSEL//////////////////
+$('.carousel').slick({
+  dots: false,
+  infinite: false,
+  speed: 300,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        infinite: false,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+   
+  ]
+});
+	}else if(this.status==503 || this.status==400){
+            alert("	503 O 400")
+	
+	}
+	
+	
+
+}
+console.log("fine fetch");
+		xhttp.open("POST",fileName,true);
+	xhttp.send();
+
+}
+		//$(document).ready(function() {
 	
 ////////////////////////////
 
-
+/*
 function validatePlayerForm(){
 	console.log("player valid");
    		var validator = $('#second_step').validate();
@@ -537,6 +532,47 @@ function validatePlayerForm(){
 }
 });
 
+*/
 
-
+function creaItemCaroseul(sport){
+	var div = document.createElement("div");
+				div.className = "container w-100 h-100 d-flex ";
+			   
+				var input = document.createElement("button");
+				input.type = "radio";
+				input.className = "btn btn-outline-primary rounded w-100 sport_item align-self-center";
+				input.id = sport.type;
+				$(document).on('click','#'+sport.type,function(e){
+				
+				//modifico il numero di giocatori richiesti
+				document.getElementById("num_giocatori").value=sport.requiredPlayers; 
+				
+				//devo anche rivedere le strutture che praticano quello sport
+			
+			   //Se clicco su uno sport type del carousel non vado avanti ma ritorno alla scelta della fascia oraria
+			       if(($("#second_step").hasClass("d-y")))
+			             return;		
+		              
+                 next();
+	
+				       });
+				
+				var span=document.createElement("span");
+				span.class="text-primary";
+				span.innerHTML=sport.type;
+				
+				var i=document.createElement("i");
+				
+				
+				i.className="fas fa-soccer-ball-o";
+			   
+				input.append(i,span);
+				
+				div.append(input);
+					
+			
+			
+				
+				return div
+}
 

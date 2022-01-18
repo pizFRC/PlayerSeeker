@@ -21,11 +21,10 @@
 <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
 
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js" crossorigin="anonymous"></script>
 <style>
 
-#map { max-width: 100%;
-        min-width: 100%  }
+
 .marker{
 
 }
@@ -33,7 +32,7 @@
 
 	
 		
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+<script  crossorigin="anonymous" src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 
 
@@ -130,7 +129,7 @@
 				<!-- Carousel -->
 				
 				
-			<div  class="col-12 d-y h-75 mx-auto" style="height: 500px" id="first_step">
+			<div  class="col-12 d-y h-75 mx-auto " style="height: 500px" id="first_step">
 			
 				<hr class="my-4">
 				<h6>Seleziona uno sport</h6>
@@ -184,20 +183,17 @@
 
 				<!-- MAP -->
 			<div class="col-12 d-n h-100 " id="third_step">
+				
+			<h5 class="fs-5 text-primary">Seleziona una struttura nella tua città o	cercane una</h5>
+			<hr class="my-4">
 			<div style="position:relative; width: 100%; height: 100%;">
-			 <div id="map" class="border border-2 border-primary h-100 w-100" style="position:absolute;z-index: 90;">
+			 <div id="map" class="border border-2 h-100 w-100" style="position:absolute;z-index: 90;">
 			    	
 			 
 			 </div>
 			 
-			 <div class="border border-2 border-primary text-primary  bg-light "   id="info_struttura_selezionata">
-								
-								<div>
-									<h5 class="fs-4">Seleziona una struttura nella tua città o
-										cercane una</h5>
-
-								</div>
-							<hr class="my-4">
+			 <div class="border border-2 text-dark  glass "   id="info_struttura_selezionata">
+													
 								<address class="fs-4">
 
 									Città attuale: <br> <i class="fas fa-map-marker-alt"
@@ -205,38 +201,13 @@
 								</address>
 
 								<hr class="my-4">
+								
+								
 
 
 							
 							</div>
-						<!-- <div class="row h-100 ">
-							<div
-								class="col-5 border rounded shadow mb-3 text-primary">
-								<hr class="my-4">
-								<div>
-									<h5 class="fs-2">Seleziona una struttura nella tua città o
-										cercane una</h5>
-
-								</div>
-								<address class="fs-2">
-
-									Città attuale: <br> <i class="fas fa-map-marker-alt"
-										aria-hidden="true"></i>Cosenza,Italia
-								</address>
-
-								<hr class="my-4">
-
-
-							</div>
-                             <div class="col-6 border border-2 border-primary" id="map">
-                             
-                             
-                             </div>
-
-						
-       
-						</div>
--->
+					
                   </div>
 					</div>
 
@@ -287,7 +258,7 @@
                <div class="form-check col-12 d-n " id="last_step">
                <div>
             <input type="checkbox" class="form-check-input" id="privacy">
-            <label class="form-check-label" for="same-address" onclick="prova()">Shipping address is the same as my billing address</label>
+            <label class="form-check-label" for="same-address" >Shipping address is the same as my billing address</label>
             </div>
            <div class="d-flex ">
 				 <button class="btn btn-light mx-auto" disabled   id="confirm_btn" type="submit">Fine </button>
@@ -358,9 +329,7 @@
 		crossorigin="anonymous">
 		
          </script>
-     
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+
 	
 <link href="css/nuovoEventoStyle.css" rel="stylesheet" type="text/css">
 </body>
