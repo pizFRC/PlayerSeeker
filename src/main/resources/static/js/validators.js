@@ -189,7 +189,3 @@ function validateSportFacilityForm() {
 	if (validator.form())
 		showOpeningHours();
 }
-
-function validateOpenHourForm() {
-
-}

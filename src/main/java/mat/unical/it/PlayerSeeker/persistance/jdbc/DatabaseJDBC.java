@@ -52,6 +52,11 @@ public class DatabaseJDBC implements Database{
 	}
 
 	@Override
+	public PlaygroundIdBroker getPlaygroundIdBroker() {
+		return new PlaygroundIdBroker(connection);
+	}
+
+	@Override
 	public PlayerDao getPlayerDao() {
 		return new PlayerDaoJDBC(connection);
 	}
@@ -84,6 +89,21 @@ public class DatabaseJDBC implements Database{
 	@Override
 	public SportEventProxy getSportEventProxy() {
 		return null;
+	}
+
+	@Override
+	public PlaygroundDao getPlaygroundDao() {
+		return new PlaygroundDaoJDBC(connection);
+	}
+
+	@Override
+	public SportsFacilityProxy getSportsFacilityProxy() {
+		return new SportsFacilityProxy(connection);
+	}
+
+	@Override
+	public OpeningHoursDao getoOpeningHoursDao() {
+		return new OpeningHoursDaoJDBC(connection);
 	}
 
 }

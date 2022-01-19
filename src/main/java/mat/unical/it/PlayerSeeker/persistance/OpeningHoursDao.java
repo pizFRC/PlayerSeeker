@@ -9,6 +9,6 @@ public interface OpeningHoursDao {
 
     public List<OpeningHours> doRetrieveAll();
     public OpeningHours doRetrieveByKey(Long id);
-    public boolean saveOrUpdate(OpeningHours hour);
+    public boolean saveOrUpdate(OpeningHours hour, Long sportFacilityId);
     public boolean delete(OpeningHours hour);
 }

@@ -53,7 +53,7 @@ public class PlayerDaoJDBC implements PlayerDao{
 	@Override
 	public Player doRetrieveByKey(Long id) {
 		Player player;
-		String query = "SELECT p.*, u.username, u.password FROM player p INNER JOIN users u ON p.id = u.id WHERE p.id = ?";
+		String query = "SELECT * FROM player WHERE id = ?";
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setLong(1, id);
@@ -61,7 +61,7 @@ public class PlayerDaoJDBC implements PlayerDao{
 			if(result.next()) {
 				player = new Player();
 				player.setId(result.getLong("id"));
-				player.setName(result.getString("username"));
+				player.setName(result.getString("name"));
 				player.setSurname(result.getString("surname"));
 				player.setBirthday(result.getDate("birthday").toLocalDate());
 				player.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
