@@ -81,26 +81,27 @@ public class OpeningHoursDaoJDBC implements OpeningHoursDao {
     }
 
     @Override
-    public boolean saveOrUpdate(OpeningHours hour) {
+    public boolean saveOrUpdate(OpeningHours hour, Long sportFacilityId) {
         String query;
         PreparedStatement statement;
         try {
-            if(doRetrieveByKey(hour.getId()) == null) {
-                query = "INSERT into facility_hours values(?,?,?,?)";
+            if(hour.getId() == null) {
+                query = "INSERT INTO facility_hours (sport_facility_id, day, open_time, close_time) VALUES (?, ?,?,?)";
                 statement = connection.prepareStatement(query);
-                statement.setLong(1,hour.getId());
+                statement.setLong(1, sportFacilityId);
                 statement.setInt(2,hour.getDay());
                 statement.setTime(3,Time.valueOf(hour.getOpenTime()));
                 statement.setTime(4,Time.valueOf(hour.getCloseTime()));
                 statement.execute();
                 statement.close();
             } else {
-                query = "UPDATE facility_hours SET id=?, day=?, open_time=?, close_time=? WHERE id=?";
+                query = "UPDATE facility_hours SET sport_facility_id = ?, day = ?, open_time = ?, close_time = ? WHERE id = ?";
                 statement = connection.prepareStatement(query);
-                statement.setLong(1,hour.getId());
+                statement.setLong(1, sportFacilityId);
                 statement.setInt(2,hour.getDay());
                 statement.setTime(3,Time.valueOf(hour.getOpenTime()));
                 statement.setTime(4,Time.valueOf(hour.getCloseTime()));
+                statement.setLong(5, hour.getId());
                 statement.executeUpdate();
                 statement.close();
             }

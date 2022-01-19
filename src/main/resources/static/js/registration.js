@@ -3,29 +3,6 @@ function switchToRegistration(){
 	addAccountSelector();
 }
 
-/*function nextStep() {
-	$("#back_button").prop("disabled", false);
-	var index = $(".step.active").index(".step"),
-    	stepsCount = $(".step").length;
-	if (index < stepsCount - 1) {
-        index++;
-        $(".step").removeClass("active").eq(index).addClass("active");
-    }
-}
-
-function prevStep() {
-	$("#next_button").text("Avanti");
-	var index = $(".step.active").index(".step");
-	if (index > 0) {
-        index--;
-		$(".step.active").remove();
-        $(".step").eq(index).addClass("active");
-    };
-	if (index === 0) {
-		$("#back_button").prop("disabled", true);
-	}
-}*/
-
 function nextStep() {
 	$("#back_button").prop("disabled", false);
 	var index = $(".step.active").index(".step"),
@@ -98,14 +75,28 @@ function openHourEventHandler() {
 	$("#next_button").unbind();
 	$("#next_button").on("click", function(event) {
 		event.preventDefault();
-		//validateOpenHourForm();
-		showPlaygroundForm();
+		getOpeningHours();
 	});
 	$("#back_button").unbind();
 	$("#back_button").on("click", function(event) {
 		event.preventDefault();
 		$("#login_form").css('max-width', '450px');
 		sportFacilityEventHandler();
+		prevStep();
+	});
+}
+
+function playgroudEventHandler() {
+	$("#next_button").unbind();
+	$("#next_button").on("click", function(event) {
+		event.preventDefault();
+		getPlaygrounds();
+	});
+	$("#back_button").unbind();
+	$("#back_button").on("click", function(event) {
+		event.preventDefault();
+		playgroundCount = 1;
+		openHourEventHandler();
 		prevStep();
 	});
 }
@@ -481,11 +472,11 @@ function createDayRow(dayName, id) {
 	dayRow.className = "row row-cols-4 d-flex align-items-center mb-3";
 	
 	var day = document.createElement("div");
-	day.className = "col";
+	day.className = "col-2";
 	day.innerText = dayName;
 	
 	var toggle = document.createElement("div");
-	toggle.className = "col";
+	toggle.className = "col-2";
 
 	var form = document.createElement("div");
 	form.className = "form-check form-switch";
@@ -494,45 +485,52 @@ function createDayRow(dayName, id) {
 	input.className = "form-check-input";
 	input.type = "checkbox";
 	$(input).attr("role", "switch");
-	input.id = id + "_switch";
+	input.id = id;
+	$(input).on("change", function() {
+		if($(this).is(':checked')) {
+			$("#" + this.id + "_label").text("Aperto");
+			$(open_hour).attr("disabled", false);
+			$(close_hour).attr("disabled", false);
+		}
+		else {
+			$("#" + this.id + "_label").text("Chiuso");
+			$(open_hour).attr("disabled", "disabled");
+			$(close_hour).attr("disabled", "disabled");
+		}
+	});
 	
 	var label = document.createElement("label");
 	label.className = "form-check-label";
-	$(label).attr("for", dayName + "_switch");
+	label.id = id + "_label";
+	$(label).attr("for", id);
 	label.innerText = "Chiuso";
 	
 	form.append(input, label);
 	toggle.append(form);
 
-	var open_hour = document.createElement("div");
-	open_hour.className = "col";	
-	var open_hour_select = document.createElement("select");
-	open_hour_select.className = "form-select";
-	open_hour_select.id = id + "open_hour";
+	var open_hour_div = document.createElement("div");
+	open_hour_div.className = "d-flex justify-content-center col-4";	
+	var open_hour_label = document.createElement("label");
+	open_hour_label.className = "me-2";
+	open_hour_label.innerText = "Apre alle:"
+	var open_hour = document.createElement("input");
+	open_hour.type = "time";
+	open_hour.id = id + "_oper_hour"
+	$(open_hour).attr("disabled", "disabled");
+	open_hour_div.append(open_hour_label, open_hour);
 	
-	var placeholder_open = document.createElement("option");
-	placeholder_open.value = "";
-	$(placeholder_open).attr("disabled", "disabled");
-	$(placeholder_open).attr("selected", "selected");
-	placeholder_open.text = "Apre alle";
-	open_hour_select.append(placeholder_open);
-	open_hour.append(open_hour_select);
+	var close_hour_div = document.createElement("div");
+	close_hour_div.className = "d-flex justify-content-center col-4";	
+	var close_hour_label = document.createElement("label");
+	close_hour_label.className = "me-2";
+	close_hour_label.innerText = "Chiude alle:"
+	var close_hour = document.createElement("input");
+	close_hour.type = "time";
+	close_hour.id = id + "_close_hour"
+	$(close_hour).attr("disabled", "disabled");
+	close_hour_div.append(close_hour_label, close_hour);
 	
-	var close_hour = document.createElement("div");
-	close_hour.className = "col";
-	var close_hour_select = document.createElement("select");
-	close_hour_select.className = "form-select";
-	close_hour_select.id = id + "close_hour";
-	
-	var placeholder_close = document.createElement("option");
-	placeholder_open.value = "";
-	$(placeholder_close).attr("disabled", "disabled");
-	$(placeholder_close).attr("selected", "selected");
-	placeholder_close.text = "Chiude alle";
-	close_hour_select.append(placeholder_close);
-	close_hour.append(close_hour_select);
-	
-	dayRow.append(day, toggle, open_hour, close_hour);
+	dayRow.append(day, toggle, open_hour_div, close_hour_div);
 	return dayRow;
 }
 
@@ -553,14 +551,15 @@ function showOpeningHours() {
 	
 	var container = document.createElement("div");
 	container.className = "container";
+	container.id = "days";
 	
-	var monday = createDayRow("Lunedì", "lun");
-	var tuesday = createDayRow("Martedì", "mar");
-	var wednesday = createDayRow("Mercoledì", "mer");
-	var thursday = createDayRow("Giovedì", "gio");
-	var friday = createDayRow("Venerdì", "ven");
-	var saturday = createDayRow("Sabato", "sab");
-	var sunday = createDayRow("Domenica", "dom");
+	var monday = createDayRow("Lunedì", "1");
+	var tuesday = createDayRow("Martedì", "2");
+	var wednesday = createDayRow("Mercoledì", "3");
+	var thursday = createDayRow("Giovedì", "4");
+	var friday = createDayRow("Venerdì", "5");
+	var saturday = createDayRow("Sabato", "6");
+	var sunday = createDayRow("Domenica", "7");
 	
 	container.append(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
 	
@@ -569,16 +568,66 @@ function showOpeningHours() {
 	
 	//CAMBIO EVENT HANDLER
 	openHourEventHandler();
-	
 	nextStep();
 }
 
+var openingHours = new Array();
+function getOpeningHours() {
+	var count = 0;
+	var check = true;
+	$('#days input:checked').each(function() {
+		count++;
+		if(!$("#" + this.id + "_oper_hour").val() || !$("#" + this.id + "_close_hour").val()){
+			check = false;
+			return;
+		}
+		var day = {
+			day : this.id,
+			openTime: $("#" + this.id + "_oper_hour").val(),
+			closeTime: $("#" + this.id + "_close_hour").val()
+		}
+		openingHours.push(day);
+	});
+	if(count === 0){
+		showErrorMessage("Selezionare almeno un giorno di apertura e inserire i relativi orari");
+		return;
+	}
+	if(!check){
+		showErrorMessage("Inserire gli orari per per i giorni selezionati");
+		return;
+	}
+	$("#message_div").hide();
+	showPlaygroundForm();
+}
+
+var playgroundCount = 1;
 function addPlaygrund(index) {
 	var container = document.createElement("div");
+	container.id = "parent_" + index;
+	container.className = "playground";
 	
+	var titleDiv = document.createElement("div");
+	titleDiv.className = "d-flex mt-4";
 	var title = document.createElement("p");
-	title.className = "fs-5";
+	title.className = "fs-5 fw-bold me-3";
 	title.innerText = "Campo da gioco n. " + index;
+	if (index > 1) {
+		var deletePlaygroundButton = document.createElement("button");
+		deletePlaygroundButton.className = "delete-playground btn btn-outline-danger btn-sm";
+		deletePlaygroundButton.id = index;
+		deletePlaygroundButton.innerHTML = '<i class = "bi bi-dash" style = "color: #dc3545" ></i> Elimina campo';
+		$(deletePlaygroundButton).on("click", function(event) {
+			event.preventDefault();
+						console.log($("#parent_" + this.id));
+			$("#parent_" + this.id).remove();
+
+			playgroundCount--;
+		});
+		titleDiv.append(title, deletePlaygroundButton);
+	}
+	else {
+		titleDiv.append(title);
+	}
 	
 	var label = document.createElement("label");
 	label.className = "form-label mt-3";
@@ -597,6 +646,7 @@ function addPlaygrund(index) {
 		async: false,
 		success: function (list) { 
 			$.each(list, function(index, sport) {
+				allSports.push(sport);
 				var option = document.createElement("option");
 				option.id = sport.type;
 				option.innerHTML = sport.type;
@@ -618,16 +668,24 @@ function addPlaygrund(index) {
 	description.className = "input-group mt-2";
 	var textArea = document.createElement("textarea");
 	textArea.className = "form-control";
+	textArea.id = "description";
 	description.append(textArea);
 	
 	var photoTitle = document.createElement("p");
 	photoTitle.className = "fs-6 mt-3";
 	photoTitle.innerText = "Aggiungi le foto del campo";
 	
+	/*var photoDiv = document.createElement("div");
+	photoDiv.className = "d-flex mt-2 mb-2";
 	var addPhoto = document.createElement("button");
-	addPhoto.className = "btn btn-outline-primary text-center mt-2";
+	addPhoto.className = "btn btn-outline-primary text-center me-3";
 	addPhoto.id = "add_photo";
-	
+	addPhoto.name = index;
+	$(addPhoto).css("min-height", "100px");
+	$(addPhoto).on("click", function(event) {
+		event.preventDefault();
+		$(this).siblings("#photos").trigger('click');
+	});
 	var div = document.createElement("div");
 	div.className = "row row-cols-1";
 	var img = document.createElement("i");
@@ -635,20 +693,25 @@ function addPlaygrund(index) {
 	var p = document.createElement("p");
 	p.className = "fs-6";
 	p.innerText = "Aggiungi foto";
-	
 	div.append(img, p);
 	addPhoto.append(div);
+	var inputFile = document.createElement("input");
+	inputFile.id = "photos";
+	inputFile.type = "file";
+	$(inputFile).attr('multiple', true);
+	$(inputFile).hide();
 	
-	container.append(title, label, select, descriptionTitle, description, photoTitle, addPhoto);
+	photoDiv.append(addPhoto, inputFile);*/
+
+	container.append(titleDiv, label, select, descriptionTitle, description);
 	return container;
-	
 }
 
 function showPlaygroundForm() {
 	$("#login_form").css('max-height', '750px');
 	$("#login_form").css('overflow-y', 'auto');
 	var step = document.createElement("div");
-	step.id = "step";
+	step.id = "playgrounds";
 	step.className = "step";
 	
 	var title = document.createElement("p");
@@ -660,16 +723,129 @@ function showPlaygroundForm() {
 	subTitle.innerText = "Ai clienti sarà suggerita la tua struttura in base ai campi da gioco!";
 	
 	var addPlaygroundButton = document.createElement("button");
-	addPlaygroundButton.className = "add-playground btn btn-primary btn-sm mt-3";
-	var icon = document.createElement("i");
-	icon.className = "bi bi-plus";
-	$(icon).css('color', '#0d6efd');
-	addPlaygroundButton.append(icon);
-	addPlaygroundButton.innerText = "Aggiungi un nuovo campo";
+	addPlaygroundButton.className = "add-playground btn btn-primary btn-sm mt-4";
+	addPlaygroundButton.id = "add_playgroud_button"
+	addPlaygroundButton.innerHTML = '<i class = "bi bi-plus" style = "color: #0d6efd" ></i> Aggiungi un nuovo campo';
+	$(addPlaygroundButton).on("click", function(event) {
+		event.preventDefault();
+		$(step).find("#add_playgroud_button").before(addPlaygrund(++playgroundCount));
+	});
 	
-	step.append(title, subTitle, addPlaygrund(1), addPlaygroundButton);
+	step.append(title, subTitle, addPlaygrund(playgroundCount), addPlaygroundButton);
 	$("#login_form").find("#navigation_bar").before(step);
 	
 	//CAMBIO EVENT HANDLER
+	$("#next_button").text("Registrati");
+	playgroudEventHandler();
 	nextStep();
+}
+
+var playgrounds = new Array();
+function getPlaygrounds(){
+
+	$('#playgrounds').children('.playground').each(function () {
+		var element = this;
+		var selectedSport = $(element).find('#sport').val();
+    	$.ajax({
+		type: "POST",
+		url: "/getPlaygroundId",
+		contentType: "application/json",
+		dataType: 'json',
+		async: false,
+		success: function (id) { 
+			//Creazione playground
+			var playground = {
+				id: id,
+				description: $(element).find('textarea').val(),
+				sport: allSports.find(function(element) { return element.type == selectedSport; }),
+			}
+			playgrounds.push(playground);
+    	},
+	 	error: {
+    		
+		}
+		});
+	});
+	
+	registerSportFacility();
+}
+
+function registerSportFacility() {
+	const user = {
+		username: $("#username").val(),
+		password: $("#password").val(),
+		userType: "sport_facility",
+		email: $("#email").val()
+	};
+	
+	$.ajax({
+		type: "POST",
+		url: "/registerUser",
+		contentType: "application/json",
+		data: JSON.stringify(user),
+		success: function(User) {
+			const sportFacility = {
+				id: User.id,
+				name: $("#name").val(),
+				address: {
+					longitude: window.address.geometry.coordinates[0],
+					latitude: window.address.geometry.coordinates[1],
+				},
+				phone: $("#phone").val(),
+				webSiteUrl: $("#web_site").val(),
+				openingHours,
+				playgrounds,
+			};
+			$.ajax({
+				type: "POST",
+				url: "/registerSportFacility",
+				contentType: "application/json",
+				data: JSON.stringify(sportFacility),
+				success: function() {
+					registrationSuccessfulMessage();
+					//INVIO EMAIL
+					emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
+					var templateParams = {
+						to_name: $("#name").val(),
+						to_email: $("#email").val(),
+						message: "Complimenti, la registrazione è avvenuta con successo."
+					};
+					emailjs.send('player_seeker_service', 'player_seeker_template', templateParams)
+						.then(function() {
+							var messageContainer = document.createElement("div");
+							messageContainer.id = "message_container";
+							messageContainer.className = "alert alert-primary d-flex align-items-center mb-3";
+							$(messageContainer).attr("role", "alert");
+							var icon = document.createElement("i");
+							icon.className = "bi bi-info-circle-fill me-2";
+							$(icon).attr("role", "img");
+							var message = document.createElement("div");
+							message.id = "message";
+							$(message).text("Ti è stata inviata un'email di conferma")
+							messageContainer.append(icon, message);
+							$("#login_form").find("#navigation_bar").before(messageContainer);
+						}, function() {
+							var messageContainer = document.createElement("div");
+							messageContainer.id = "message_container";
+							messageContainer.className = "alert alert-warning d-flex align-items-center mb-3";
+							$(messageContainer).attr("role", "alert");
+							var icon = document.createElement("i");
+							icon.className = "bi bi-exclamation-triangle-fill me-2";
+							$(icon).attr("role", "img");
+							var message = document.createElement("div");
+							message.id = "message";
+							$(message).text("A causa di un problema temporaneo non è stato possibile inviare l'email di conferma'")
+							messageContainer.append(icon, message);
+							$("#login_form").find("#navigation_bar").before(messageContainer);
+						});
+				},
+				error: function(textStatus) {
+					console.log(textStatus);
+				}
+			});
+    	},
+		error: function(textStatus){
+			console.log(textStatus);
+		}
+	});
 }

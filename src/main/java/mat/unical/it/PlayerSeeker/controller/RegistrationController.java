@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import mat.unical.it.PlayerSeeker.model.Address;
+import mat.unical.it.PlayerSeeker.model.OpeningHours;
 import mat.unical.it.PlayerSeeker.model.Player;
+import mat.unical.it.PlayerSeeker.model.Playground;
 import mat.unical.it.PlayerSeeker.model.Sport;
+import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.model.User;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
@@ -73,6 +76,37 @@ public class RegistrationController {
 		if(DatabaseJDBC.getInstance().getPlayerDao().saveOrUpdate(player))
 			return HttpServletResponse.SC_OK;
 		
+		return HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+	}
+	
+	@PostMapping("/getPlaygroundId")
+	public Long gerPlaygroundId(HttpServletResponse res) {
+		return DatabaseJDBC.getInstance().getPlaygroundIdBroker().getId();
+	}
+	
+	@PostMapping("/registerSportFacility")
+	public int registerSportFacility(HttpServletResponse res, @RequestBody SportsFacility sportFacility) {
+		Address address = DatabaseJDBC.getInstance().getAddressDao().doRetrieveByPosition(sportFacility.getAddress().getLatitude(), sportFacility.getAddress().getLongitude());
+		if(address != null) {
+			sportFacility.getAddress().setId(address.getID());
+		}
+		else {
+			sportFacility.getAddress().setId(DatabaseJDBC.getInstance().getAddressIdBroker().getId());
+			DatabaseJDBC.getInstance().getAddressDao().saveOrUpdate(sportFacility.getAddress());
+		}
+		
+		if(DatabaseJDBC.getInstance().getSportsFacilityDao().saveOrUpdate(sportFacility)) {
+			for(Playground playground : sportFacility.getPlaygrounds()) {
+				DatabaseJDBC.getInstance().getPlaygroundDao().saveOrUpdate(playground, sportFacility.getId());
+			}
+			for(OpeningHours openingHours : sportFacility.getOpeningHours()) {
+				DatabaseJDBC.getInstance().getoOpeningHoursDao().saveOrUpdate(openingHours, sportFacility.getId());
+			}
+			res.setStatus(HttpServletResponse.SC_OK);
+			return HttpServletResponse.SC_OK;
+		}
+		
+		res.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
 		return HttpServletResponse.SC_SERVICE_UNAVAILABLE;
 	}
 }

@@ -102,3 +102,10 @@ p {
   	color: #0d6efd !important;
 }
 
+
+.delete-playground {
+	background-color: transparent !important;
+	border: none !important;
+	color: #dc3545 !important;
+}
+

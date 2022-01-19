@@ -1,6 +1,7 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,50 +62,65 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 	}
 
 	@Override
-	public SportsFacility doRetrieveByKey(Long ID) {
-		PreparedStatement query = null;
-		SportsFacility tmp = null;
-
+	public SportsFacility doRetrieveByKey(Long id) {
+		SportsFacilityProxy sportsFacility;
+		String query = "SELECT * FROM sport_facility WHERE id = ?";
 		try {
-			if(checkConnection()) {
-				query = connection.prepareStatement("SELECT * FROM sportsfacility WHERE id=?;");
-				ResultSet result = query.executeQuery();
-
-				if(result.next()) {
-					tmp = new SportsFacility();
-					tmp.setId(result.getLong("id"));
-					tmp.setNome(result.getString("nome"));
-					//tmp.setAddress(result.getObject(3, Class< Address > type));
-					tmp.setPhone(result.getString("phone"));
-				}
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setLong(1, id);
+			ResultSet result = statement.executeQuery(); 
+			if(result.next()) {
+				sportsFacility = DatabaseJDBC.getInstance().getSportsFacilityProxy();
+				sportsFacility.setId(result.getLong("id"));
+				sportsFacility.setName(result.getString("name"));
+				sportsFacility.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
+				sportsFacility.setPhone(result.getString("phone"));
+				sportsFacility.setWebSiteUrl(result.getString("web_site_url"));
+				return sportsFacility;
 			}
-			query.close();
-		} catch(SQLException e) {
+			else 
+				return null;
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		return tmp;
+		
 	}
 
 	@Override
 	public boolean saveOrUpdate(SportsFacility sportsFacility) {
-		PreparedStatement query = null;
-
-		try{
-			SportsFacility tmp = doRetrieveByKey(sportsFacility.getId());
-			if(tmp == null) {
-				//INSERT da vedere come fare
-				query = connection.prepareStatement("INSERT INTO sportsfacility");
-			} else {
+		try {
+			String query;
+			PreparedStatement statement;
+			if(doRetrieveByKey(sportsFacility.getId()) == null) {
+				//INSERT
+				query = "INSERT INTO sport_facility values(?,?,?,?,?)";
+				statement = connection.prepareStatement(query);
+				statement.setLong(1, sportsFacility.getId());
+				statement.setString(2, sportsFacility.getName());
+				statement.setLong(3, sportsFacility.getAddress().getID());
+				statement.setString(4, sportsFacility.getPhone());
+				statement.setString(5, sportsFacility.getWebSiteUrl());
+				statement.execute();
+				statement.close();
+			}
+			else {
 				//UPDATE
+				query = "UPDATE sport_facility SET name = ?, address_id = ?, phone = ?, web_site_url = ? WHERE id = ?";
+				statement = connection.prepareStatement(query);
+				statement.setString(1, sportsFacility.getName());
+				statement.setLong(2, sportsFacility.getAddress().getID());
+				statement.setString(3, sportsFacility.getPhone());
+				statement.setString(4, sportsFacility.getWebSiteUrl());
+				statement.setLong(5, sportsFacility.getId());
+				statement.executeUpdate();
+				statement.close();
 			}
 
-			query.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-
 		return true;
 	}
 

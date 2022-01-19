@@ -86,9 +86,9 @@
 	<!-- EmailJS -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 		
-	<!--Slick -->
+	<!-- Slick -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-	
+
 	<!-- Custom -->
 	<script type="text/javascript"  src="../js/login.js"> </script>
 	<script type="text/javascript"  src="../js/registration.js"> </script>

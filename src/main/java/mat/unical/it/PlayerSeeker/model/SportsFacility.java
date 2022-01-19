@@ -10,18 +10,10 @@ public class SportsFacility implements java.io.Serializable {
     private String name = null;
     private Address address = null;
     private String phone = null;
-    private List<Playground> playgrounds = null;
-    private List<SportEvent> events = null;
     private String webSiteUrl = null;
     private List<OpeningHours> openingHours = null;
-
-    public List<OpeningHours> getOpeningHours() {
-        return openingHours;
-    }
-
-    public void setOpeningHours(List<OpeningHours> openingHours) {
-        this.openingHours = openingHours;
-    }
+    private List<Playground> playgrounds = null;
+    private List<SportEvent> events = null;
 
     public String getName() {
         return name;
@@ -94,5 +86,13 @@ public class SportsFacility implements java.io.Serializable {
 
 	public void setEvents(List<SportEvent> events) {
 		this.events = events;
+	}
+
+	public List<OpeningHours> getOpeningHours() {
+		return openingHours;
+	}
+
+	public void setOpeningHours(List<OpeningHours> openingHours) {
+		this.openingHours = openingHours;
 	}
 }
