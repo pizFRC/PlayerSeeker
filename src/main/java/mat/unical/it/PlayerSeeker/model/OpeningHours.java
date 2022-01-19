@@ -4,7 +4,9 @@ import java.time.LocalTime;
 
 public class OpeningHours implements java.io.Serializable {
 
-    private Long id = null;
+	private static final long serialVersionUID = -7381277137796892500L;
+	
+	private Long id = null;
     private int day = 0;
     private LocalTime openTime = null;
     private LocalTime closeTime = null;

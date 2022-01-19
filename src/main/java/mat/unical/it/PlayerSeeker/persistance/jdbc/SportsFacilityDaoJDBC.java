@@ -1,15 +1,12 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import mat.unical.it.PlayerSeeker.model.Address;
-import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.SportsFacilityDao;
 
@@ -19,16 +16,6 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 	
 	public SportsFacilityDaoJDBC(Connection connection) {
 		this.connection = connection;
-	}
-
-	private boolean checkConnection() {
-		try {
-			if(connection == null || connection.isClosed())
-				return false;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return true;
 	}
 
 	@Override
@@ -84,7 +71,6 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
 
 	@Override

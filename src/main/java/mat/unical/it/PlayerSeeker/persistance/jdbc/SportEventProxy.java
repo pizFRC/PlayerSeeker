@@ -14,7 +14,8 @@ import java.util.List;
 
 public class SportEventProxy extends SportEvent {
 
-    Connection connection = DatabaseJDBC.getInstance().getConnection();
+	private static final long serialVersionUID = 2724986691524647771L;
+	Connection connection = DatabaseJDBC.getInstance().getConnection();
 
     public SportEventProxy() {}
 
