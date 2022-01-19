@@ -73,7 +73,7 @@
 					</button>
 				</div>
 				
-		<form class=" needs-validation container w-75  h-100 p-3 " id="form_evento" >
+		<form class=" needs-validation container w-75  h-100 p-3 "  method="post"  name="form_evento" id="form_evento" >
 		  
 	
           <div class="row mx-auto h-75 "  id="row">
@@ -129,13 +129,14 @@
 				<!-- Carousel -->
 				
 				
-			<div  class="col-12 d-y h-75 mx-auto " style="height: 500px" id="first_step">
+			<div  class="col-12 d-y h-75 mx-auto  " style="height: 500px" id="first_step">
 			
 				<hr class="my-4">
 				<h6>Seleziona uno sport</h6>
 				<hr class="my-4">
-				<div class="carousel d-flex m-4 mt-3 h-75">
+				<div class="carousel  m-4 mt-3 h-75">
 				</div>
+				<div id="error_msg" class="d-flex justify-content-center"> </div>
 				
 				
 			</div>
@@ -151,7 +152,7 @@
 						<div class="col-sm-10">
 							<label for="data_input" class="form-label">Data</label> 
 							<input type="date" class="form-control" id="data_input"
-								name="data_input" placeholder="" value="" required="">
+								name="data_input" placeholder="" value="" required min="">
 							<div class="invalid-feedback">Valid first name is required.
 							</div>
 						</div>
@@ -187,13 +188,13 @@
 			<h5 class="fs-5 text-primary">Seleziona una struttura nella tua città o	cercane una</h5>
 			<hr class="my-4">
 			<div style="position:relative; width: 100%; height: 100%;">
-			 <div id="map" class="border border-2 h-100 w-100" style="position:absolute;z-index: 90;">
+			 <div id="map" name="map" value="prova" class="border border-2 h-100 w-100" style="position:absolute;z-index: 90;">
 			    	
 			 
 			 </div>
 			 
 			 <div class="border border-2 text-dark  glass "   id="info_struttura_selezionata">
-													
+								
 								<address class="fs-4">
 
 									Città attuale: <br> <i class="fas fa-map-marker-alt"
@@ -205,7 +206,10 @@
 								
 
 
-							
+							 <div class="input-group mx-auto ">
+								
+									<input class="form-control" aria-label="With textarea" name="indirizzo_struttura" placeholder="Struttura attualmente selezionata" disabled>
+								</div>
 							</div>
 					
                   </div>
@@ -297,7 +301,10 @@
 	<!-- end FORM -->
 
 
-
+<c:if test="${user != null}">
+			<div class="border border-2 border-primary">  </div>
+			<a href="loginAction" class="btn btn-light">Login</a>  
+		</c:if>
 		
 
 	
@@ -307,17 +314,14 @@
 
 	
 	<!-- Bootstrap -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-		
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	
 	<!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
-	
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 		
 	<!--Slick -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>

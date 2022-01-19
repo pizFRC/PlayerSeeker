@@ -61,6 +61,10 @@ const geojson = {
 	   
      
 	   }*/
+
+if(validateForm()){
+	alert("dati corretti")
+}else{ alert("validato false"); return;}
 //if($("#contenitore").find(".point").last().hasClass("active"))
  if($(".point:last").hasClass("active"))
 return;
@@ -102,23 +106,7 @@ $("span.border-primary:last").addClass("active");
 
 ///////////////TIME PICKER////////////
 
-function creaTimePicker(){
-	const popup = new dhx.Popup({
-    css: "dhx_widget--bordered"
-});
 
-const timepicker = new dhx.Timepicker();
-const result = document.getElementById("result");
-timepicker.events.on("change", function (res) {
-    result.value = res;
-});
-
-popup.attach(timepicker);
-
-document.querySelector("#show").addEventListener("click", function () {
-    popup.show("show");
-});
-}
 
 ///////////////TIME PICKER CONFIG////////////
 
@@ -126,9 +114,7 @@ document.querySelector("#show").addEventListener("click", function () {
 $(document).ready(function(){
 	
 	
-
-
-
+ 
 
 $('#ora_inizio').timepicker({
     timeFormat: 'HH:mm ',
@@ -139,8 +125,11 @@ $('#ora_inizio').timepicker({
     startTime: '08:00',
     dynamic: false,
     dropdown: true,
-    scrollbar: true
+    scrollbar: true,
+  
 });
+
+
 
 $('#ora_fine').timepicker({
    timeFormat: 'HH:mm ',
@@ -148,15 +137,19 @@ $('#ora_fine').timepicker({
     minTime: '09:00',
     maxTime: '23:00',
     defaultTime: '09',
-    startTime: '09:00',
-    dynamic: false,
+    startTime:  '09:00',
+    dynamic: true,
     dropdown: true,
     scrollbar: true
-});
-
+});    
+ /*   $('input.change-format').click(function() {
+        var input = $(this),
+            timepicker = input.closest('div').find('.timepicker'),
+            instance = timepicker.timepicker();
+        instance.option('timeFormat', $(this).data('format'));
+    });
  
- 
-
+*/
 
 });
 
@@ -197,6 +190,25 @@ $('#ora_fine').timepicker({
 
 	$(document).ready(function() {
 		
+  $("#form_evento").submit(function (event) {
+	alert("submitted");
+    var formData = {
+   form:  $("#form_evento").serialize(),
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "nuovoEvento/create",
+      data: formData,
+      dataType: "json",
+      encode: true,
+    }).done(function (data) {
+      console.log(data);
+    });
+
+    event.preventDefault();
+  });
+
 	
 		 $('#privacy').prop('checked', false);
 	   addAddressInput();
@@ -204,6 +216,7 @@ $('#ora_fine').timepicker({
     var sports;
 
 	sportsContainer = document.querySelector(".carousel");
+	
 	console.log("pre");
 	
     	loadSportType(sportsContainer);
@@ -496,6 +509,103 @@ console.log("fine fetch");
 	xhttp.send();
 
 }
+
+
+
+function validateForm() {
+	console.log("validate");
+	
+	var validator = $("#form_evento").validate({
+		rules: {
+			data_input: {
+				required: true,
+				
+			},sport: {
+				required: true,
+			
+			},ora_inizio : {
+				required:true,
+				ora_inizio_consentita:true,
+
+				
+			},
+			ora_fine : {
+				required:true,
+				ora_fine_consentita:true,
+			},
+		},
+		messages: {
+			data_input: {
+				required: "Inserisci la data corretta",
+				
+			},
+			sport: {
+				required: "Seleziona uno sport per poter proseguire",
+			
+			},ora_inizio : {
+				required:"inserire ora inizio",
+				ora_inizio_consentita:"L'ora di inizio deve essere precedente a quella di fine",   
+			},
+			ora_fine : {
+				required:"camprichiesto",
+			    ora_fine_consentita:"la partita deve durare almeno un'ora'"
+				
+			},
+		},   errorPlacement: function(error, element) {
+            //Custom position: first name
+            if (element.attr("name") == "sport" ) {
+                $("#error_msg").html(error);
+            }else{
+               error.insertAfter(element);
+                
+
+
+             }
+           }
+	});
+	
+
+		$.validator.addMethod('ora_inizio_consentita',function(value, element) {
+			
+			
+			var minuti_inizio=getMinutes(value );
+			 var minuti_fine=getMinutes($("#ora_fine").val());
+		console.log(minuti_inizio +" "+minuti_fine );
+        return minuti_inizio<=minuti_fine-6000; 
+	});
+	$.validator.addMethod('ora_fine_consentita',function(value, element) {
+			
+			
+			var minuti_fine=getMinutes(value );
+			 var minuti_inizio=getMinutes($("#ora_inizio").val());
+		console.log(minuti_inizio +" "+minuti_fine );
+        return minuti_fine>=minuti_inizio+6000 ; 
+	});
+		
+	return validator.form();
+		
+}
+
+function getMinutes(time)
+{
+    var timeParts = time.split(":");
+
+    var timeInMinutes = (timeParts[0] * 60) + timeParts[1];
+
+    return timeInMinutes;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 		//$(document).ready(function() {
 	
 ////////////////////////////
@@ -535,19 +645,42 @@ function validatePlayerForm(){
 */
 
 function creaItemCaroseul(sport){
-	var div = document.createElement("div");
-				div.className = "container w-100 h-100 d-flex ";
-			   
-				var input = document.createElement("button");
+	            var div = document.createElement("div");
+				div.className = "container form-check  form-check-inline h-100 border border-primary position-relative ";
+			    var input = document.createElement("input");
 				input.type = "radio";
-				input.className = "btn btn-outline-primary rounded w-100 sport_item align-self-center";
-				input.id = sport.type;
-				$(document).on('click','#'+sport.type,function(e){
+				input.className = "form-check-input btn-check w-100 h-100 position-absolute ";
+				input.id = sport.type+"_radio";
+				input.autocomplete="off";
+				input.value=sport.type;
+				input.required="true";
+				input.name="sport";
+				//input.form="form_evento";
+			
+				input.setAttribute("Form",'form_evento');
+				$('#'+sport.type+"_radio").change(function () {   
+				console.log($(this));
+				/*		//modifico il numero di giocatori richiesti
+				document.getElementById("num_giocatori").value=sport.requiredPlayers; 
+    alert('hi');
+$("#set_giocatori").empty();
 				
+				$(this).val(sport.type);*/
+			    
+});
+
+				$(document).on('click','#'+sport.type+"_radio",function(e){
+				console.log(	$(".carousel").find("input"));
+				//console.log($(this));
+			/*	alert("prova")
 				//modifico il numero di giocatori richiesti
 				document.getElementById("num_giocatori").value=sport.requiredPlayers; 
 			
+			//eliminio eventuali giocatori aggiunti
 				$("#set_giocatori").empty();
+				
+				$(this).val(sport.type);
+			    
 				//devo anche rivedere le strutture che praticano quello sport
 			
 			   //Se clicco su uno sport type del carousel non vado avanti ma ritorno alla scelta della fascia oraria
@@ -555,21 +688,24 @@ function creaItemCaroseul(sport){
 			             return;		
 		              
                  next();
-	
+	*/
 				       });
+				var icon=document.createElement("span");
 				
-				var span=document.createElement("span");
-				span.class="text-primary";
-				span.innerHTML=sport.type;
-				
-				var i=document.createElement("i");
-				
-				
-				i.className="fas fa-soccer-ball-o";
+		
+				icon.className="fas fa-soccer-ball-o  ";
 			   
-				input.append(i,span);
 				
-				div.append(input);
+				var label = document.createElement("label");
+				label.className = "btn btn-outline-primary w-100 h-100 ";
+				label.htmlFor = sport.type+"_radio";
+				label.innerHTML=sport.type;
+				label.id = sport.type+ "_label";
+				
+			label.append(icon);
+			
+				div.append(input,label);
+				
 					
 			
 			

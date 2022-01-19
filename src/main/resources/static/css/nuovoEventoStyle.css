@@ -165,10 +165,14 @@ span.point{
 	border:1px solid red;
 	 overflow-x: hidden;
      overflow-y: auto;
-                text-align:justify;
+     text-align:justify;
 }
 
-.point { transition: all .2s ease-in-out; }
+.point { 
+	transition: all .2s ease-in-out;
+ }
+ 
+
 .active{
 	transform: scale(1.3);
 }
@@ -177,10 +181,25 @@ transition: all .2s ease-in-out;
 align-content: center;
 vertical-align: center;
 }
-.sport_item i{
-	display:block;
-}
 
+input.error{
+	border-bottom: 4px solid #E52948;
+	color:red;
+	
+}
+#sport-error{
+	text-align: center;
+	justify-content: center;
+	border:1px solid red;
+	
+}
+#error_msg{
+	
+}
+label.error {
+	color: red;
+	font-weight: normal;
+}
 .sport_item:hover {
 	transform: scale(1.3);
 

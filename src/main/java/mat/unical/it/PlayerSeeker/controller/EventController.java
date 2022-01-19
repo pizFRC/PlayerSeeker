@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import mat.unical.it.PlayerSeeker.model.EventList;
@@ -41,4 +43,11 @@ public class EventController {
 		eventi.add(tmpS6);
 		return eventi;	
 	}*/
+	
+	@PostMapping("/nuovoEvento/create")
+	public String createEvent(@RequestBody String str) {
+		System.out.println(str);
+		return str;
+		
+	}
 }
