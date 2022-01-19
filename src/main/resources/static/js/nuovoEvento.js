@@ -272,8 +272,12 @@ function addAddressInput(){
 			         
                     map.resize() 
                 });
-
-
+  map.on('zoomstart', () => {
+	
+	console.log(map.getBounds());
+	
+                });
+   
 			 map.addControl(
                  new MapboxGeocoder({
 	   			       placeholder: 'Cerca qui la tua città',
@@ -294,8 +298,8 @@ function addAddressInput(){
 			// Center the map on the coordinates of any clicked circle from the 'circle' layer.
 // Example of a MapMouseEvent of type "click"
 map.on('click', (e) => {
+	//const description =
 console.log(e.lngLat.lat + "lng " +e.lngLat.lng );
-console.log(e);
 
 map.flyTo({
 	center: [e.lngLat.lng ,e.lngLat.lat],
@@ -356,9 +360,15 @@ el.style.height = `30px`;
 el.style.backgroundSize = '100%';
  
 el.addEventListener('click', () => {
+ marker.properties.message="MESSAGGIO STRUTTURA";
 	var label=document.createElement("label");
 	label.innerHTML="Struttura selezionata x";
+	console.log(marker);
+console.log(marker.properties.message);
     $("#info_struttura_selezionata").append(label);
+console.log("cord "+marker.geometry.coordinates[0],marker.geometry.coordinates[1]);
+    
+
 });
  
 // Add markers to the map.
@@ -369,12 +379,8 @@ new mapboxgl.Marker(el)
 
 }
 }
+
 //FINE FUNZIONI MAPPA
-	
-	
-	
-	
-	
 
 
 
@@ -514,85 +520,84 @@ console.log("fine fetch");
 
 function validateForm() {
 	console.log("validate");
-	
+
 	var validator = $("#form_evento").validate({
 		rules: {
 			data_input: {
 				required: true,
-				
-			},sport: {
-				required: true,
-			
-			},ora_inizio : {
-				required:true,
-				ora_inizio_consentita:true,
 
-				
+			}, sport: {
+				required: true,
+
+			}, ora_inizio: {
+				required: true,
+				ora_inizio_consentita: true,
+
+
 			},
-			ora_fine : {
-				required:true,
-				ora_fine_consentita:true,
+			ora_fine: {
+				required: true,
+				ora_fine_consentita: true,
 			},
 		},
 		messages: {
 			data_input: {
 				required: "Inserisci la data corretta",
-				
+
 			},
 			sport: {
 				required: "Seleziona uno sport per poter proseguire",
-			
-			},ora_inizio : {
-				required:"inserire ora inizio",
-				ora_inizio_consentita:"L'ora di inizio deve essere precedente a quella di fine",   
+
+			}, ora_inizio: {
+				required: "inserire ora inizio",
+				ora_inizio_consentita: "L'ora di inizio deve essere precedente a quella di fine",
 			},
-			ora_fine : {
-				required:"camprichiesto",
-			    ora_fine_consentita:"la partita deve durare almeno un'ora'"
-				
+			ora_fine: {
+				required: "camprichiesto",
+				ora_fine_consentita: "la partita deve durare almeno un'ora'"
+
 			},
-		},   errorPlacement: function(error, element) {
-            //Custom position: first name
-            if (element.attr("name") == "sport" ) {
-                $("#error_msg").html(error);
-            }else{
-               error.insertAfter(element);
-                
+		}, errorPlacement: function(error, element) {
+			//Custom position: first name
+			if (element.attr("name") == "sport") {
+				$("#error_msg").html(error);
+			} else {
+				error.insertAfter(element);
 
 
-             }
-           }
+
+			}
+		}
 	});
 	
 
-		$.validator.addMethod('ora_inizio_consentita',function(value, element) {
-			
-			
-			var minuti_inizio=getMinutes(value );
-			 var minuti_fine=getMinutes($("#ora_fine").val());
-		console.log(minuti_inizio +" "+minuti_fine );
-        return minuti_inizio<=minuti_fine-6000; 
+	$.validator.addMethod('ora_inizio_consentita', function(value, element) {
+
+
+		var minuti_inizio = getMinutes(value);
+		var minuti_fine = getMinutes($("#ora_fine").val());
+		console.log(minuti_inizio + " " + minuti_fine);
+		return minuti_inizio <= minuti_fine - 6000;
 	});
-	$.validator.addMethod('ora_fine_consentita',function(value, element) {
-			
-			
-			var minuti_fine=getMinutes(value );
-			 var minuti_inizio=getMinutes($("#ora_inizio").val());
-		console.log(minuti_inizio +" "+minuti_fine );
-        return minuti_fine>=minuti_inizio+6000 ; 
+	$.validator.addMethod('ora_fine_consentita', function(value, element) {
+
+
+		var minuti_fine = getMinutes(value);
+		var minuti_inizio = getMinutes($("#ora_inizio").val());
+		console.log(minuti_inizio + " " + minuti_fine);
+		return minuti_fine >= minuti_inizio + 6000;
 	});
-		
+
 	return validator.form();
-		
+
 }
 
-function getMinutes(time)
-{
-    var timeParts = time.split(":");
+function getMinutes(time) {
+	var timeParts = time.split(":");
 
-    var timeInMinutes = (timeParts[0] * 60) + timeParts[1];
+	var timeInMinutes = (timeParts[0] * 60) + timeParts[1];
 
-    return timeInMinutes;
+	return timeInMinutes;
 }
 
 
