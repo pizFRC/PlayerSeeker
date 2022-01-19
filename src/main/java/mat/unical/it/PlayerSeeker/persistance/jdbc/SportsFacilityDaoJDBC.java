@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import mat.unical.it.PlayerSeeker.model.Address;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.SportsFacilityDao;
 
@@ -131,19 +132,15 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 	public List<SportsFacility> doRetrieveByBBox(Address southWest, Address northEast) {
 		List<SportsFacility> facilityList = new ArrayList<SportsFacility>();
 		PreparedStatement query;
-
 		SportsFacility sportsFacility;
 		ResultSet result = null;
-
 		try{
 			query = connection.prepareStatement("SELECT * FROM sport_facility INNER JOIN ON address a WHERE a.longitude >= ? AND a.longitude <= ? AND a.latitude >= ? AND a.latitude <= ?;");
 			query.setFloat(1,southWest.getLongitude());
 			query.setFloat(2,northEast.getLongitude());
 			query.setFloat(3,southWest.getLatitude());
 			query.setFloat(4,northEast.getLatitude());
-
 			result = query.executeQuery();
-
 			while(result.next()) {
 				sportsFacility = DatabaseJDBC.getInstance().getSportsFacilityProxy();
 				sportsFacility.setId(result.getLong("id"));
@@ -151,7 +148,6 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 				sportsFacility.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
 				sportsFacility.setPhone(result.getString("phone"));
 				sportsFacility.setWebSiteUrl(result.getString("web_site_url"));
-
 				facilityList.add(sportsFacility);
 			}
 			query.close();
@@ -159,7 +155,6 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 			e.printStackTrace();
 			return null;
 		}
-
-		return facilityList;	}
-
+		return facilityList;	
+	}
 }
