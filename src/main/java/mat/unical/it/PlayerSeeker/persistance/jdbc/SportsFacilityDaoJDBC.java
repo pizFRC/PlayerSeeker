@@ -23,21 +23,22 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 		List<SportsFacility> facilityList = new ArrayList<SportsFacility>();
 		PreparedStatement query;
 
-		SportsFacility tmp;
+		SportsFacility sportsFacility;
 		ResultSet result = null;
 
 		try{
-			query = connection.prepareStatement("SELECT * FROM sportsfacility;");
+			query = connection.prepareStatement("SELECT * FROM sport_facility;");
 			result = query.executeQuery();
 
 			while(result.next()) {
-				tmp = new SportsFacility();
-				tmp.setId(result.getLong("id"));
-				tmp.setNome(result.getString("nome"));
-				//tmp.setAddress(result.getObject(3, Class< Address > type));
-				tmp.setPhone(result.getString("phone"));
+				sportsFacility = DatabaseJDBC.getInstance().getSportsFacilityProxy();
+				sportsFacility.setId(result.getLong("id"));
+				sportsFacility.setName(result.getString("name"));
+				sportsFacility.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
+				sportsFacility.setPhone(result.getString("phone"));
+				sportsFacility.setWebSiteUrl(result.getString("web_site_url"));
 
-				facilityList.add(tmp);
+				facilityList.add(sportsFacility);
 			}
 			query.close();
 		} catch(SQLException e) {
@@ -125,5 +126,40 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 
 		return true;
 	}
+
+	@Override
+	public List<SportsFacility> doRetrieveByBBox(Address southWest, Address northEast) {
+		List<SportsFacility> facilityList = new ArrayList<SportsFacility>();
+		PreparedStatement query;
+
+		SportsFacility sportsFacility;
+		ResultSet result = null;
+
+		try{
+			query = connection.prepareStatement("SELECT * FROM sport_facility INNER JOIN ON address a WHERE a.longitude >= ? AND a.longitude <= ? AND a.latitude >= ? AND a.latitude <= ?;");
+			query.setFloat(1,southWest.getLongitude());
+			query.setFloat(2,northEast.getLongitude());
+			query.setFloat(3,southWest.getLatitude());
+			query.setFloat(4,northEast.getLatitude());
+
+			result = query.executeQuery();
+
+			while(result.next()) {
+				sportsFacility = DatabaseJDBC.getInstance().getSportsFacilityProxy();
+				sportsFacility.setId(result.getLong("id"));
+				sportsFacility.setName(result.getString("name"));
+				sportsFacility.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
+				sportsFacility.setPhone(result.getString("phone"));
+				sportsFacility.setWebSiteUrl(result.getString("web_site_url"));
+
+				facilityList.add(sportsFacility);
+			}
+			query.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return facilityList;	}
 
 }
