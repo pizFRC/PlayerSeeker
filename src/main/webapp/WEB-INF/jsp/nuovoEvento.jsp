@@ -256,21 +256,43 @@
 
 
                <!-- CONDIZIONI PRIVACY CHECKBOX AND CONFERMA CREAZIONE BUTTON-->
-               
-               
-               
-               <div class="form-check col-12 d-n " id="last_step">
-               <div>
-            <input type="checkbox" class="form-check-input" id="privacy">
-            <label class="form-check-label" for="same-address" >Shipping address is the same as my billing address</label>
-            </div>
-           <div class="d-flex ">
-				 <button class="btn btn-light mx-auto" disabled   id="confirm_btn" type="submit">Fine </button>
-				
-				</div>
-          </div>
-          
-            <!-- TASTI AVANTI E INDIETRO -->
+
+
+
+					<div class="form-check col-12 d-n " id="last_step">
+						<h1 class=fn-2">Resoconto creazione evento</h1>
+
+						<div class="row rounded border border-2">
+
+							<div class="col-12  ">
+
+
+								<label class="form-check-label fn-4 text-primary">Nome creatore evento</label>
+								<p class=" border border-2 rounder ">Francesco de
+									fazio</p>
+								<hr class="my-4">
+							</div>
+							<div class="col-12  ">
+
+								
+								<label class="form-check-label fn-4 text-primary">Struttura ospitante</label>
+                                 <p class="bg-light border border-2 rounder ">Struttura fitclub</p>
+
+							</div>
+
+							<div class="col-6 border border-2">
+								<input type="checkbox" class="form-check-input" id="privacy">
+								<label class="form-check-label" for="same-address">Shipping
+									address is the same as my billing address</label>
+							</div>
+							<div class="col-12 ">
+								<button class="btn btn-light mx-auto" disabled id="confirm_btn"
+									type="submit">Fine</button>
+
+							</div>
+						</div>
+					</div>
+					<!-- TASTI AVANTI E INDIETRO -->
           
 			
 			<!-- END ROW -->

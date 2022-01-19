@@ -274,7 +274,7 @@ function addAddressInput(){
                 });
   map.on('zoomstart', () => {
 	
-	console.log(map.getBounds());
+	console.log(map.getBounds()._ne);
 	
                 });
    
@@ -664,18 +664,22 @@ function creaItemCaroseul(sport){
 			
 				input.setAttribute("Form",'form_evento');
 				$('#'+sport.type+"_radio").change(function () {   
-				console.log($(this));
-				/*		//modifico il numero di giocatori richiesti
-				document.getElementById("num_giocatori").value=sport.requiredPlayers; 
-    alert('hi');
-$("#set_giocatori").empty();
 				
+				/*		//modifico il numero di giocatori richiesti
+				d
+    alert('hi');
+
 				$(this).val(sport.type);*/
 			    
 });
 
 				$(document).on('click','#'+sport.type+"_radio",function(e){
-				console.log(	$(".carousel").find("input"));
+				
+				document.getElementById("num_giocatori").value=sport.requiredPlayers; 
+					$("#set_giocatori").empty();
+			 if(($("#second_step").hasClass("d-y")))
+			             return;		
+			next();
 				//console.log($(this));
 			/*	alert("prova")
 				//modifico il numero di giocatori richiesti
@@ -689,10 +693,9 @@ $("#set_giocatori").empty();
 				//devo anche rivedere le strutture che praticano quello sport
 			
 			   //Se clicco su uno sport type del carousel non vado avanti ma ritorno alla scelta della fascia oraria
-			       if(($("#second_step").hasClass("d-y")))
-			             return;		
+			      	
 		              
-                 next();
+                 
 	*/
 				       });
 				var icon=document.createElement("span");
