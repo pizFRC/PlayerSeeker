@@ -1,14 +1,12 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.SportEvent;
-import mat.unical.it.PlayerSeeker.model.Sport;
-import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.SportEventDao;
 
 public class SportEventDaoJDBC implements SportEventDao {

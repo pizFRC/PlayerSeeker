@@ -234,7 +234,6 @@ function showPlayerForm() {
 	sportsContainer.className = "carousel d-flex m-4 mt-3";
 	sportsContainer.id = "sportsContainer";
 
-	
 	$.ajax({
 		type: "POST",
 		url: "/getSportList",

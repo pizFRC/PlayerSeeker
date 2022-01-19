@@ -14,8 +14,8 @@ public class SportEvent implements java.io.Serializable {
 	private LocalDate start = null;
     private Sport sport = null;
     private Playground playground = null;
-    private Player organizzatore = null;
     private String description = null;
+    private Player organizzatore = null;
     private List<Player> players = new ArrayList<Player>();
 
 	@Override

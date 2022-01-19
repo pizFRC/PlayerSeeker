@@ -12,7 +12,6 @@ import mat.unical.it.PlayerSeeker.model.Address;
 import mat.unical.it.PlayerSeeker.model.OpeningHours;
 import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.Playground;
-import mat.unical.it.PlayerSeeker.model.Sport;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.model.User;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
@@ -86,6 +85,10 @@ public class RegistrationController {
 	
 	@PostMapping("/registerSportFacility")
 	public int registerSportFacility(HttpServletResponse res, @RequestBody SportsFacility sportFacility) {
+		if(DatabaseJDBC.getInstance().checkConnection() == false) {
+			res.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+			return HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+		}
 		Address address = DatabaseJDBC.getInstance().getAddressDao().doRetrieveByPosition(sportFacility.getAddress().getLatitude(), sportFacility.getAddress().getLongitude());
 		if(address != null) {
 			sportFacility.getAddress().setId(address.getID());

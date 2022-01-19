@@ -1,11 +1,11 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import mat.unical.it.PlayerSeeker.model.OpeningHours;
+
 import mat.unical.it.PlayerSeeker.persistance.OpeningHoursDao;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OpeningHoursDaoJDBC implements OpeningHoursDao {
@@ -39,7 +39,7 @@ public class OpeningHoursDaoJDBC implements OpeningHoursDao {
 
                 while(result.next()) {
                     tmp = new OpeningHours();
-                    tmp.setId(result.getLong("sport_facility_id"));
+                    tmp.setId(result.getLong("id"));
                     tmp.setDay(result.getInt("day"));
                     tmp.setOpenTime(result.getTime("open_time").toLocalTime());
                     tmp.setCloseTime(result.getTime("close_time").toLocalTime());
