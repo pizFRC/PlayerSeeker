@@ -1,0 +1,220 @@
+@charset "UTF-8";
+
+
+
+
+
+body {
+	padding-top: 100px;
+
+}
+#form_creazione_evento {
+	width:90%;
+	min-width: 90%;
+    min-height: 60%;
+ 
+	
+}
+#info_struttura_selezionata{
+	   width:35%;
+	   height:95%;
+	 overflow-x: hidden;
+     overflow-y: auto;
+    position:absolute;
+    z-index: 999;
+    margin-left:10px;
+    margin-top:10px;
+}
+.glass{
+background: rgba( 255, 255, 255, 0.9 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 1.5px );
+-webkit-backdrop-filter: blur( 1.5px );
+border-radius: 3px;
+}
+.geocoder {
+	border: 1px solid #ced4da;
+	z-index: 1;
+	margin: 20px;
+}
+
+
+
+
+.mapboxgl-ctrl-geocoder {
+
+	box-shadow: none;
+	border: none;
+	   margin:auto;
+    max-width: 360px;
+
+	}
+	.mapboxgl-ctrl-geocoder--input {
+	border: 1px solid #ced4da;
+	border-radius: 5px;
+	
+	
+}
+
+	  .progress{
+	  height:5px !important;
+	  }
+
+
+
+.slick-prev:before {
+	color: black;
+}
+.slick-next:before {
+	color: black;
+}
+
+
+.slick-slide {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+
+.d-n{
+	display: none;
+}
+.d-y{
+	 display:inline-block;
+}
+#step,#progress{
+	width:100%;
+	height:100%;
+	position:absolute;
+	z-index:2;
+	 top: 0;
+     left: 0;
+          
+         
+  
+}
+
+
+.point{
+	 
+	 font-size: 18px;
+	  display: inline-flex;
+     justify-content:center;
+     align-items: center;
+	 border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	padding:16px;
+	margin-right:-2px;
+	margin-top: -5px;
+	padding-left: 19px;
+	padding-right: 19px;
+	
+	}
+span.point{
+     position:absolute;
+     
+
+}
+.lbl_progress{
+	position:absolute;
+	
+	bottom:-8px;
+	padding:  right;
+	
+	/*vertical-align:"bottom"*/
+}
+
+.point:active{
+	background-color: blue;
+}
+.point i{
+	
+    padding:0px 15px;
+     margin:10px 10px;
+   display: flex;
+      
+   
+
+	
+}
+#progress{
+	margin-top: 10px;
+	
+	margin-bottom: 10px;
+
+	
+}
+@media screen and (max-width:410px){
+	
+	.point{display: none;}
+	
+}
+
+#map{
+	 max-width: 100%;
+        min-width: 100%  
+     
+	
+}
+#set_giocatori{
+	
+    min-height:50%;
+    height:200px;
+    max-height:75%;
+	border:1px solid red;
+	 overflow-x: hidden;
+     overflow-y: auto;
+                text-align:justify;
+}
+
+.point { transition: all .2s ease-in-out; }
+.active{
+	transform: scale(1.3);
+}
+.sport_item {
+transition: all .2s ease-in-out;
+align-content: center;
+vertical-align: center;
+}
+.sport_item i{
+	display:block;
+}
+
+.sport_item:hover {
+	transform: scale(1.3);
+
+}
+
+@media screen and (max-width:600px){
+#form_creazione_evento{
+	margin-top:30%;
+margin-bottom:20%;
+}
+
+
+.lbl_progress{
+	display:none;
+	
+	/*vertical-align:"bottom"*/
+}
+}
+
+  
+@media screen and (max-width:768px){
+#form_creazione_evento{
+	margin-top:20%;
+margin-bottom:20%;
+
+}
+
+
+
+.lbl_progress{
+	font-size: 14px;
+	bottom:0px;
+	
+	/*vertical-align:"bottom"*/
+}
+
+}

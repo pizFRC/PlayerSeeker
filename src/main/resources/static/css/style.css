@@ -9,8 +9,18 @@
 
 body {
 	padding-top: 100px;
-}
 
+}
+#form_creazione_evento {
+	width:90%;
+	min-width: 90%;
+    min-height: 60%;
+	
+}
+#map{
+	
+   
+}
 #login_body  {
 	background-image: url('../img/bg.jpg');
 	background-repeat: no-repeat;
@@ -35,14 +45,23 @@ label.error {
 
 .mapboxgl-ctrl-geocoder {
 	min-width: 100%;
+	width: 300px !important;
 	box-shadow: none;
 	border: none;
+	   margin:auto;
+    max-width: 360px;
+
+	
 }
 
 .mapboxgl-ctrl-geocoder--input {
 	border: 1px solid #ced4da;
 	border-radius: 5px;
+		min-width: 100%;
+		width: 300px !important;
 }
+
+	  
 
 .slick-prev:before {
 	color: black;
@@ -50,6 +69,7 @@ label.error {
 .slick-next:before {
 	color: black;
 }
+
 
 .sport_selector:hover {
 	background-color: #e7e7e7 !important;
@@ -63,11 +83,10 @@ label.error {
 p {
     margin: 0;
     padding: 0;
+
 }
 
-.prova {
-	padding: 10px;
-}
+
 
 .step {
   display: block;
@@ -83,8 +102,10 @@ p {
   	color: #0d6efd !important;
 }
 
+
 .delete-playground {
 	background-color: transparent !important;
 	border: none !important;
 	color: #dc3545 !important;
 }
+

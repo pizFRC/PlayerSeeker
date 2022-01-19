@@ -233,6 +233,7 @@ function showPlayerForm() {
 	var sportsContainer = document.createElement("div");
 	sportsContainer.className = "carousel d-flex m-4 mt-3";
 	sportsContainer.id = "sportsContainer";
+
 	
 	$.ajax({
 		type: "POST",
@@ -286,11 +287,12 @@ function showPlayerForm() {
     		
 		}
 	});
+
 	sportsDiv.append(sportsContainer);
 	step.append(name, surname, dateLabel, birthday, addressLabel, address, sportLabel, sportsDiv);
 
 	$("#login_form").find("#navigation_bar").before(step);
-	
+
 	$(".carousel").slick({
     	infinite: false,
   		speed: 300,
