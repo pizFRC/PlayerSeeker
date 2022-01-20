@@ -48,6 +48,5 @@ public class EventController {
 	public String createEvent(@RequestBody String str) {
 		System.out.println(str);
 		return str;
-		
 	}
 }
