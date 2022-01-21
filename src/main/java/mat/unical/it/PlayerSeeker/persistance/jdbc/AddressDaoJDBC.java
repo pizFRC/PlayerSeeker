@@ -27,7 +27,7 @@ public class AddressDaoJDBC implements AddressDao {
 			query = connection.prepareStatement("SELECT * FROM address WHERE id=?");
 			query.setLong(1,id);
 			result = query.executeQuery();
-			
+
 
 			while(result.next()) {
 				tmp = new Address();

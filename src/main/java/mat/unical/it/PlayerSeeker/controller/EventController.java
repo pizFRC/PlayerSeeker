@@ -35,7 +35,11 @@ public class EventController {
 		 res.setStatus(400);
 		
 		return str;
-		
+	}
+	
+	@PostMapping("/event")
+	public String viewEvent() {
+		return "visualizzaEventi";
 	}
 	
 	

@@ -25,6 +25,13 @@ public class LoginController {
 		return "login";
 	}
 	
+	@GetMapping("/logout")
+	public void logout(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		HttpSession session = req.getSession();
+		session.invalidate();
+		res.sendRedirect("/");
+	}
+	
 	@GetMapping("/eventi")
 	public String events() {
 		return "eventi";
@@ -37,6 +44,10 @@ public class LoginController {
 	@GetMapping("/visualizzaStruttura")
 	public String visualizzaStruttura() {
 		return "visualizzaStruttura";
+	}
+	@GetMapping("/visualizzaEventi")
+	public String visualizzaEventi() {
+		return "visualizzaEventi";
 	}
 	
 	

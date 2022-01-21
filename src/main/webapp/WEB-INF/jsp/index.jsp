@@ -15,7 +15,7 @@
 	<jsp:include page="header.jsp" />
 
 	<!-- JUMBOTRON -->
-	<div id="jumbotron" class="p-5 mb-4 rounded-3 bg-light">
+	<div style="background-color: #eaf4f4;"id="jumbotron" class="p-5 mb-4 rounded-3 bg-light">
 		<div class="container">
 			<h1 class="display-5 fw-bold">Player Seeker</h1>
 			<p class="col-md-8 fs-4">

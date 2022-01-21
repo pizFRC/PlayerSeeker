@@ -803,7 +803,7 @@ function registerSportFacility() {
 				success: function() {
 					registrationSuccessfulMessage();
 					//INVIO EMAIL
-					emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
+					/*emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
 					var templateParams = {
 						to_name: $("#name").val(),
 						to_email: $("#email").val(),
@@ -836,7 +836,7 @@ function registerSportFacility() {
 							$(message).text("A causa di un problema temporaneo non è stato possibile inviare l'email di conferma'")
 							messageContainer.append(icon, message);
 							$("#login_form").find("#navigation_bar").before(messageContainer);
-						});
+						});*/
 				},
 				error: function(textStatus) {
 					console.log(textStatus);
