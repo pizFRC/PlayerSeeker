@@ -72,8 +72,9 @@ public class SportDaoJDBC implements SportDao{
 
 		try {
 			PreparedStatement query = connection.prepareStatement("SELECT * FROM sport WHERE id=?;");
-			ResultSet result = query.executeQuery();
 			query.setLong(1,id);
+			ResultSet result = query.executeQuery();
+			
 
 			while(result.next()) {
 				tmp.setId(result.getLong("id"));

@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AccountManagementController {
 	
 	@GetMapping("/accountManagementPlayer")
-	public String loginPage() {
+	public String accountManagementPlayer() {
 		return "gestioneAccountPlayer";
 	}
 	
-	
-
+	@GetMapping("/accountManagementSportFacility")
+	public String accountManagementSportFacility() {
+		return "gestioneAccountSportFacility";
+	}
 }

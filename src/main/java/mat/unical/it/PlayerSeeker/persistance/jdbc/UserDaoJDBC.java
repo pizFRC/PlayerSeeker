@@ -102,17 +102,19 @@ public class UserDaoJDBC implements UserDao {
 
 	@Override
 	public boolean saveOrUpdate(User user) {
+		String query;
+		PreparedStatement statement;
 		try {
-			String query = "SELECT id FROM user_types WHERE type = ?";
-			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, user.getUserType());
-			ResultSet result = statement.executeQuery(); 
-			if(!result.next())
-				return false;
-			Long user_type_id = result.getLong("id");
 			if(doRetrieveByKey(user.getUsername()) == null) {
-				//INSERT
+				query = "SELECT id FROM user_types WHERE type = ?";
+				statement = connection.prepareStatement(query);
+				statement.setString(1, user.getUserType());
+				ResultSet result = statement.executeQuery(); 
+				if(!result.next())
+					return false;
+				Long user_type_id = result.getLong("id");
 				statement.close();
+				//INSERT
 				query = "INSERT INTO users values(?,?,?,?,?)";
 				statement = connection.prepareStatement(query);
 				statement.setLong(1, user.getId());
@@ -124,17 +126,25 @@ public class UserDaoJDBC implements UserDao {
 				statement.close();
 			}
 			else {
-				//UPDATE
-				statement.close();
-				query = "UPDATE users SET username = ?, password = ?, user_type_id = ? WHERE id = ?";
-				statement = connection.prepareStatement(query);
-				statement.setString(1, user.getUsername());
-				statement.setString(2, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
-				statement.setLong(3, user_type_id);	
-				statement.setLong(4, user.getId());
-				statement.setString(5, user.getEmail());
-				statement.executeUpdate();
-				statement.close();
+				//UPDATE ONLY PASSWORD
+				if(user.getUsername() == null) {
+					query = "UPDATE users SET password = ? WHERE id = ?";
+					statement = connection.prepareStatement(query);
+					statement.setString(1, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+					statement.setLong(2, user.getId());
+					statement.executeUpdate();
+					statement.close();
+				}
+				//UPDATE USERNAME AND EMAIL
+				else if(user.getPassword() == null) {
+					query = "UPDATE users SET username = ?, email = ? WHERE id = ?";
+					statement = connection.prepareStatement(query);
+					statement.setString(1, user.getUsername());
+					statement.setString(2, user.getEmail());
+					statement.setLong(3, user.getId());
+					statement.executeUpdate();
+					statement.close();
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
