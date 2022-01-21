@@ -63,190 +63,198 @@
             </div>
 	<!-- FORM -->
 <div class="container shadow-sm   bg-body  pb-2 border border-2 rounded-2 h-75" id="form_creazione_evento">
-        
-    <div class="d-flex justify-content-between h-100">
-				<div class="align-self-center"  >
-					<button class="btn btn-outline-primary float-start "
-						type="button" onclick="prev()" id="btn_prev">
-						<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
-							class="sr-only">Previous</span>
-					</button>
-				</div>
-				
-		<form class=" needs-validation container w-75  h-100 p-3 "  method="post"  name="form_evento" id="form_evento" >
-		  
-	
-          <div class="row mx-auto h-75 "  id="row">
 
-
-
-
-				<div id="contenitore" class="col-12 mb-3" style="position:relative; height:50px;">
-
-					<div id="step" class="d-flex justify-content-between w-100 " style="z-index: 9;">
-
-						<div   >
-							<span class=" badge border border-primary point bg-light active " ><i
-								class="fas fa-volleyball-ball text-primary"> </i> </span>
-								 <label
-								class="lbl_progress " > Sport</label>
-						</div>
-						
-						<div>
-							<span class="badge point border bg-light" >
-							     <i class="far fa-calendar-alt "></i> 
-							</span> 
-								<label class="lbl_progress" >Data e ora</label>
-						</div>
-						<div>
-							<span class="badge  point border bg-light"><i
-								class="fas fa-map-marked-alt"></i> </span> <label class="lbl_progress">Struttura</label>
-						</div>
-						<div>
-							<span class="badge point border bg-light"> <i
-								class="fas fa-users-cog"></i>
-							</span>
-							 <label class="lbl_progress">Partecipanti</label>
-						</div>
-						<div>
-							<span class="badge point border bg-light"> <i
-								class="fas fa-check-circle"></i>
-							</span> <label class="lbl_progress">Privacy</label>
-						</div>
-					</div>
-
-					<div id="progress" class="progress "
-						style="height: 1px; z-index: 6;">
-
-						<div id="progress_bar" class="progress-bar bg-primary "
-							role="progressbar" style="width: 0%;" aria-valuenow="0"
-							aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-
-
-				</div>
-
-				<!-- Carousel -->
-				
-				
-			<div  class="col-12 d-y h-75 mx-auto  " style="height: 500px" id="first_step">
-			
-				<hr class="my-4">
-				<h6>Seleziona uno sport</h6>
-				<hr class="my-4">
-				<div class="carousel  m-4 mt-3 h-75">
-				</div>
-				<div id="error_msg" class="d-flex justify-content-center"> </div>
-				
-				
+		<div class="d-flex justify-content-between h-100">
+			<div class="align-self-center">
+				<button class="btn btn-outline-primary float-start " type="button"
+					onclick="prev()" id="btn_prev">
+					<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
+						class="sr-only">Previous</span>
+				</button>
 			</div>
-               
-            <!-- TIME PICKER -->
-				<div class="col-12 mb-3 d-n h-75" id="second_step" name="second_step">
-                   
-                   <hr class="my-4">
-				<h6 class="text-center fs-3 text-decoration link-primary" >Seleziona la data e l'ora che preferisci troveremo le strutture disponili</h6>
-				<hr class="my-4">
-					<div class="row">
 
-						<div class="col-sm-10">
-							<label for="data_input" class="form-label">Data</label> 
-							<input type="date" class="form-control" id="data_input"
-								name="data_input" placeholder="" value="" required min="">
-							<div class="invalid-feedback">Valid first name is required.
+			<form class=" needs-validation container w-75  h-100 p-3 "
+				method="post" name="form_evento" id="form_evento">
+
+
+				<div class="row mx-auto h-75 " id="row">
+
+
+
+
+					<div id="contenitore" class="col-12 mb-3"
+						style="position: relative; height: 50px;">
+
+						<div id="step" class="d-flex justify-content-between w-100 "
+							style="z-index: 9;">
+
+							<div>
+								<span
+									class=" badge border border-primary point bg-light active "><i
+									class="fas fa-volleyball-ball text-primary"> </i> </span> <label
+									class="lbl_progress "> Sport</label>
+							</div>
+
+							<div>
+								<span class="badge point border bg-light"> <i
+									class="far fa-calendar-alt "></i>
+								</span> <label class="lbl_progress">Data e ora</label>
+							</div>
+							<div>
+								<span class="badge  point border bg-light"><i
+									class="fas fa-map-marked-alt"></i> </span> <label class="lbl_progress">Struttura</label>
+							</div>
+							<div>
+								<span class="badge point border bg-light"> <i
+									class="fas fa-users-cog"></i>
+								</span> <label class="lbl_progress">Partecipanti</label>
+							</div>
+							<div>
+								<span class="badge point border bg-light"> <i
+									class="fas fa-check-circle"></i>
+								</span> <label class="lbl_progress">Privacy</label>
 							</div>
 						</div>
 
-						<div class="col-sm-6">
-							<label for="ora_inizio" class="form-label">Ora inizio</label> 
-							<input   class="timepicker form-control" id="ora_inizio"
-								name="ora_inizio" required="" >
-							<div class="invalid-feedback">Valid first name is required.
-							</div>
+						<div id="progress" class="progress "
+							style="height: 1px; z-index: 6;">
+
+							<div id="progress_bar" class="progress-bar bg-primary "
+								role="progressbar" style="width: 0%;" aria-valuenow="0"
+								aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
-
-						<div class="col-sm-6">
-							<label for="ora_fine" class="form-label">Ora Fine</label> <input
-								 class="timepicker form-control" id="ora_fine"
-								name="ora_fine" required="">
-							<div class="invalid-feedback">Valid first name is required.
-							</div>
-						</div>
-
-
-
 
 
 					</div>
 
-				</div>
+					<!-- Carousel -->
 
 
-				<!-- MAP -->
-			<div class="col-12 d-n h-100 " id="third_step">
-				
-			<h5 class="fs-5 text-primary">Seleziona una struttura nella tua città o	cercane una</h5>
-			<hr class="my-4">
-			<div style="position:relative; width: 100%; height: 100%;">
-			 <div id="map" name="map" value="prova" class="border border-2 h-100 w-100" style="position:absolute;z-index: 90;">
-			    	
-			 
-			 </div>
-			 
-			 <div class="border border-2 text-dark  glass "   id="info_struttura_selezionata">
+					<div class="col-12 d-y h-75 mx-auto  " style="height: 500px"
+						id="first_step">
+
+						<hr class="my-4">
+						<h6>Seleziona uno sport</h6>
+						<div id="error_msg" class="d-flex justify-content-center"></div>
+						<hr class="my-4">
+						<div class="carousel  m-4 mt-3 h-75"></div>
+						
+
+
+					</div>
+
+					<!-- TIME PICKER -->
+					<div class="col-12 mb-3 d-n h-75" id="second_step"
+						name="second_step">
+
+						<hr class="my-4">
+						<h6 class="text-center fs-3 text-decoration link-primary">Seleziona
+							la data e l'ora che preferisci troveremo le strutture disponili</h6>
+						<hr class="my-4">
+						<div class="row">
+
+							<div class="col-sm-10">
+								<label for="data_input" class="form-label">Data</label> <input
+									type="date" class="form-control" id="data_input"
+									name="data_input" placeholder="" value="" required min="">
+								<div class="invalid-feedback">Valid first name is
+									required.</div>
+							</div>
+
+							<div class="col-sm-6">
+								<label for="ora_inizio" class="form-label">Ora inizio</label> <input
+									class="timepicker form-control" id="ora_inizio"
+									name="ora_inizio" required="">
+								<div class="invalid-feedback">Valid first name is
+									required.</div>
+							</div>
+
+							<div class="col-sm-6">
+								<label for="ora_fine" class="form-label">Ora Fine</label> <input
+									class="timepicker form-control" id="ora_fine" name="ora_fine"
+									required="">
+								<div class="invalid-feedback">Valid first name is
+									required.</div>
+							</div>
+
+
+
+
+
+						</div>
+
+					</div>
+
+
+					<!-- MAP -->
+					<div class="col-12 d-n h-100 " id="third_step">
+
+						<h5 class="fs-5 text-primary">Seleziona una struttura nella
+							tua città o cercane una</h5>
+						<hr class="my-4">
+						<div style="position: relative; width: 100%; height: 100%;">
+							<div id="map" name="map" value="prova"
+								class="border border-2 h-100 w-100"
+								style="position: absolute; z-index: 90;"></div>
+
+							<div class="border border-2 text-dark glass row "
+								id="info_struttura_selezionata">
 								
-								<address class="fs-4">
+								<div class="col-12  ">
 
-									Città attuale: <br> <i class="fas fa-map-marker-alt"
-										aria-hidden="true"></i>Cosenza,Italia
-								</address>
+									<label class="form-check-label fn-4 text-primary">Struttura	Selezionata</label>
+									<p class="bg-lbody border-bottom border-2 rounder "id="struttura_selezionata"></p>
 
-								<hr class="my-4">
-								
-								
+								</div>
+
+								<div class="col-12  ">
 
 
-							 <div class="input-group mx-auto ">
-								
-									<input class="form-control" aria-label="With textarea" name="indirizzo_struttura" placeholder="Struttura attualmente selezionata" disabled>
+									<label class="form-check-label fn-4 text-primary">Data scelta</label>
+									<p class="bg-lbody border-bottom border-2 rounder "	id="data_scelta"></p>
+
+								</div>
+
+								<div class="col-12  ">
+
+
+									<label class="form-check-label fn-4 text-primary">Fascia oraria</label>
+									<p class="bg-lbody border-bottom border-2 rounder " id="fascia_scelta"></p>
+
+
+
+
+
 								</div>
 							</div>
-					
-                  </div>
+						</div>
 					</div>
 
-		
+					<!-- SET NUMERO GIOCATORI -->
+					<div class="col-12 mb-3 d-n " id="four_step">
+						<div class="">
 
-           <!-- SET NUMERO GIOCATORI -->
-			<div class="col-12 mb-3 d-n " id="four_step">
-			<div class="" >
-			
-             <hr class="my-4">
-				<h6>Aggiungi qui i giocatori </h6>
-				<hr class="my-4">
-				<label class="form-label" for="num_giocatori">Numero
-					giocatori mancati</label>
+							<hr class="my-4">
+							<h6>Aggiungi qui i giocatori</h6>
+							<hr class="my-4">
+							<label class="form-label" for="num_giocatori">Numero
+								giocatori mancati</label>
+						</div>
+
+						<div class="input-group mb-3 ">
+							<input type="text" class="form-control" id="num_giocatori"
+								placeholder="" aria-label="" aria-describedby="button-addon2"
+								disabled pattern="[0-9]+">
+							<button class="btn btn-outline-secondary" type="button"
+								onclick="addInputNameGiocatore()" id="button-addon2">
+								<span><i class="fa fa-plus" aria-hidden="true"></i></span> <span
+									class="sr-only">Previous</span>
+							</button>
+
+						</div>
+
+						<div id="set_giocatori" class="container "></div>
 					</div>
-					
-				<div class="input-group mb-3 " >
-					<input type="text" class="form-control" id="num_giocatori"
-						placeholder="" aria-label="" aria-describedby="button-addon2"
-						disabled pattern="[0-9]+">
-					<button class="btn btn-outline-secondary" type="button"
-						onclick="addInputNameGiocatore()" id="button-addon2">
-						<span><i class="fa fa-plus" aria-hidden="true"></i></span> <span
-							class="sr-only">Previous</span>
-					</button>
-
-				</div>
-
-				<div id="set_giocatori" class="container " ></div>
-			</div>
-
-
-
- 
-			
 
 
 
@@ -255,50 +263,97 @@
 
 
 
-               <!-- CONDIZIONI PRIVACY CHECKBOX AND CONFERMA CREAZIONE BUTTON-->
+
+
+
+
+
+					<!-- CONDIZIONI PRIVACY CHECKBOX AND CONFERMA CREAZIONE BUTTON-->
 
 
 
 					<div class="form-check col-12 d-n " id="last_step">
-						<h1 class=fn-2">Resoconto creazione evento</h1>
+						<h1 class="fn-2 text-center">Resoconto creazione evento</h1>
 
-						<div class="row rounded border border-2">
+						<div class="row " id="resoconto">
 
 							<div class="col-12  ">
 
 
-								<label class="form-check-label fn-4 text-primary">Nome creatore evento</label>
-								<p class=" border border-2 rounder ">Francesco de
-									fazio</p>
-								<hr class="my-4">
-							</div>
-							<div class="col-12  ">
-
+								<label class="form-check-label fn-4 text-primary">Nome
+									creatore evento</label>
+								<p class=" border-bottom border-2 rounder ">Francesco de fazio</p>
 								
-								<label class="form-check-label fn-4 text-primary">Struttura ospitante</label>
-                                 <p class="bg-light border border-2 rounder ">Struttura fitclub</p>
+							</div>
+							<div class="col-12  ">
+
+
+								<label class="form-check-label fn-4 text-primary">Struttura
+									ospitante</label>
+								<p class="bg-lbody border-bottom border-2 rounder " id="struttura_resoconto"></p>
 
 							</div>
+							<div class="col-12  ">
 
-							<div class="col-6 border border-2">
-								<input type="checkbox" class="form-check-input" id="privacy">
-								<label class="form-check-label" for="same-address">Shipping
-									address is the same as my billing address</label>
-							</div>
-							<div class="col-12 ">
-								<button class="btn btn-light mx-auto" disabled id="confirm_btn"
-									type="submit">Fine</button>
+
+								<label class="form-check-label fn-4 text-primary">Sport selezionato</label>
+								<p class="bg-lbody border-bottom border-2 rounder " id="sport_selezionato_resoconto"></p>
 
 							</div>
+                              <div class="col-12  ">
+
+
+								<label class="form-check-label fn-4 text-primary">Data </label>
+								<p class="bg-lbody border-bottom border-2 rounder " id="data_resoconto"> </p>
+
+							</div>
+							
+							<div class="col-12  ">
+
+
+								<label class="form-check-label fn-4 text-primary">Fascia oraria</label>
+								<p class="bg-lbody border-bottom border-2 rounder " id="ora_resoconto"> </p>
+
+							</div>
+							
 						</div>
+						<div class=" row  ">
+						<div  class="col-12 d-flex justify-content-center">
+								<input type="checkbox" class="form-check-input text-center" id="privacy" name="privacy_cornfirm">
+								<label class="form-check-label text-center" for="same-address">Accetta le normative della privacy per confermare la creazione</label>
+							</div>
+							<div  class="col-12 d-flex justify-content-center">
+						<button class="btn btn-success mx-auto" disabled id="confirm_btn"
+									type="submit">Fine</button>
+									</div>
+									</div>
+									
 					</div>
 					<!-- TASTI AVANTI E INDIETRO -->
-          
+
+
+					<!-- END ROW -->
+
+				</div>
+				
+				<c:if test="${user != null}">
+					
+	<c:if test="${user.userType=='player'}">
+     
+		<input type="hidden" id="longitude" value="${profile.address.latitude}"> 
+		<input type="hidden" id="latitude" value="${profile.address.longitude}">
+		</c:if>
+		
+		
+
+
+
+
+		</c:if>
+		<c:if test="${user == null}">
+			<div class="border border-2 border-primary bg-warning "> niente</div>
 			
-			<!-- END ROW -->
-			
-          </div>
-          
+		</c:if>
           
           
           	
@@ -323,10 +378,7 @@
 	<!-- end FORM -->
 
 
-<c:if test="${user != null}">
-			<div class="border border-2 border-primary">  </div>
-			<a href="loginAction" class="btn btn-light">Login</a>  
-		</c:if>
+
 		
 
 	

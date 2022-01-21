@@ -167,7 +167,10 @@ span.point{
      overflow-y: auto;
      text-align:justify;
 }
-
+#resoconto{
+ overflow-x: hidden;
+     overflow-y: auto;
+     }
 .point { 
 	transition: all .2s ease-in-out;
  }
@@ -224,6 +227,7 @@ margin-bottom:20%;
 #form_creazione_evento{
 	margin-top:20%;
 margin-bottom:20%;
+height:100% !important;
 
 }
 
