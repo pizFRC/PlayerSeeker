@@ -122,8 +122,8 @@
 	</div>
 
 	<div class= "row h-100 p-5">
-		<div class="col-3 p-3">
-			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow-sm p-3 mb-5 bg-body rounded" style="min-height: 550px">
+		<div class="col-md-3 p-3">
+			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow-sm p-3 bg-body rounded" style="min-height: 550px">
 				<div class = "d-flex justify-content-center mb-2">
 					<i class="bi bi-building" style = "font-size: 5rem;"></i>
 				</div>
@@ -140,7 +140,7 @@
 			</div>
 		</div>
     	
-    	<div class="col-9 p-3">
+    	<div class="col-md-9 p-3">
     		<!-- ACCOUNT SETTINGS -->
     		<div id = "accountDiv" class="p-5 shadow-sm p-3 mb-5 bg-body rounded section active">
     			<p class="fs-2 d-block">Impostazioni account</p>

@@ -2,24 +2,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<header class="shadow p-3 mb-5 bg-body rounded fixed-top navbar-light bg-light text-center">
-	<div class="d-flex justify-content-between row">
-		<a href="/"
-			class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-			<img rel="icon" width="150" height="50" src="img/logo.png"
-			type="image/x-icon" />
-		</a>
-
-		<ul class="nav col-sm-12 col-md-7 mb-2 justify-content-center mb-md-0"
-			id="menu_items">
-			<li class="raleway_font"><a href="/"
-				class="nav-link px-2 link-secondary ">Home</a></li>
-			<li><a href="/eventi" class="nav-link px-2 link-dark">Eventi</a></li>
-			<li><a href="/strutture" class="nav-link px-2 link-dark">Strutture</a></li>
-			<li><a href="#" class="nav-link px-2 link-dark">Contattaci</a></li>
-		</ul>
-		<div class="col-md-2 text-end  " id="login_div">
-		<c:if test="${user == null}">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light shadow-lg p-3 mb-5 bg-body">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+    	<img width="150" height="50" src="img/logo.png"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/eventi">Eventi</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/strutture">Strutture</a>
+        </li>
+      </ul>
+        <c:if test="${user == null}">
 			<a type="button" class="btn btn-outline-primary me-2" href="login">Accedi</a>
 		</c:if>
 		<c:if test="${user != null}">
@@ -30,6 +33,6 @@
 				<a type="button" class="btn btn-outline-primary me-2" href="accountManagementSportFacility"> <i class="bi bi-person me-2"></i> ${ profile.name }</a>
 			</c:if>
 		</c:if>
-		</div>
-	</div>
-</header>
+    </div>
+  </div>
+</nav>
