@@ -2,7 +2,7 @@
 
 var lat=document.getElementById("lat").value;
 var long=document.getElementById("long").value;
-var i=document.getElementById("icon");
+//var i=document.getElementById("icon");
 var indirizzo=document.getElementById("indirizzo");
 
 console.log(indirizzo);
@@ -14,7 +14,7 @@ $.ajax({
         beforeSend: function(xhr) {
              xhr.setRequestHeader("Authorization", "Bearer 6QXNMEMFHNY4FJ5ELNFMP5KRW52WFXN5")
         }, success: function(data){
-			indirizzo.innerHTML=i.outerHTML+data.features[0].place_name;
+		indirizzo.innerHTML=i.outerHTML+data.features[0].place_name;
 			//			//indirizzo.text=data.features[0].place_name;
 
             //alert(data.features[0].place_name);

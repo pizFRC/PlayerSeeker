@@ -45,6 +45,10 @@ public class LoginController {
 	public String visualizzaStruttura() {
 		return "visualizzaStruttura";
 	}
+	@GetMapping("/visualizzaEventi")
+	public String visualizzaEventi() {
+		return "visualizzaEventi";
+	}
 	
 	
 	@PostMapping("/checkUser")
