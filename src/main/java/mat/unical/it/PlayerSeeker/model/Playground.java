@@ -1,10 +1,13 @@
 package mat.unical.it.PlayerSeeker.model;
 
+import java.util.List;
+
 public class Playground {
 	
 	private Long id;
 	private String description;
 	private Sport sport;
+	 private List<SportEvent> events = null;
 	
 	public Long getId() {
 		return id;
@@ -23,6 +26,12 @@ public class Playground {
 	}
 	public void setSport(Sport sport) {
 		this.sport = sport;
+	}
+	public List<SportEvent> getEvents() {
+		return events;
+	}
+	public void setEvents(List<SportEvent> events) {
+		this.events = events;
 	}
 
 }

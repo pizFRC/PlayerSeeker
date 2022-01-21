@@ -49,4 +49,9 @@ public class EventController {
 		System.out.println(str);
 		return str;
 	}
+	
+	@PostMapping("/event")
+	public String viewEvent() {
+		return "visualizzaEventi";
+	}
 }

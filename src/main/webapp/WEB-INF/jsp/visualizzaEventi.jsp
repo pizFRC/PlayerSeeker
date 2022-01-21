@@ -17,29 +17,21 @@ body {
 	background-color: #eaf4f4;
 }
 
-.menu-item {
-	display: inline-flex;
-	align-items: center;
-	background-color: transparent;
-	border: none;
-	font-size: small;
+.info-element {
+	height: 150px;
+	box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	border-bottom-style: solid;
+	border-bottom-width: medium;
 }
 
-.menu-item.selected {
-	font-weight: bold;
-	color: #00a896;
-}
-
-.menu-icon {
+.icon {
 	font-size: 2rem;
 }
 
-.section {
-	display: none;
-}
-
-.section.active {
-	display: block;
+.bg-success {
+	background-color: #4960c5 !important;
 }
 </style>
 </head>
@@ -47,62 +39,64 @@ body {
 <body style="padding-top: 80px;">
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
-
-	<div class="row h-100 p-5">
-		<div class="col-3 p-3" id="map"></div>
-		<%double lat=16.248828;
-			double longi=39.3301343;//da sostituire con nome struttura
-			String organizzatore="GIOVANNI BERALDI";
-			String orario="17.00 - 19.00";%>
-		<input type="number" hidden value="<%=lat=16.248828%>" id="lat">
-		<input type="number" hidden value="<%=lat=39.3301343%>" id="long">
-		<div class="col-9 p-3">
-			<!-- ACCOUNT SETTINGS -->
-			<div class="p-5 shadow-sm p-3 mb-5 bg-body rounded section active">
-				<p class="fs-2 d-block">Visualizzazione Evento</p>
-				<div class="row">
-					<div class="col">
-						<div class="row">
-							<div class="col">
-								<i class="bi bi-cursor-fill" style="font-size: 3.5rem;"
-									id="icon"></i>
+	<div class="m-5 p-5">
+		<div class="row">
+			<div class="col-lg-8 p-0">
+				<div class="h-100 p-5 pb-2 shadow p-3 mb-5 bg-body rounded">
+					<p class="fs-2 mb-1">Dettagli Evento</p>
+					<p class="fs-6 mb-3"> <i class="bi bi-pencil-fill me-2"></i> 
+						Organizzatore: <a id="manager" href="#" class="link-primary">Nome Cognome</a>
+					</p>
+					<p id="description" class="fs-6 mb-3">Lorem ipsum dolor sit amet, consectetur
+						adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+						dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+						exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate
+						velit esse cillum dolore eu fugiat nulla pariatur.</p>
+					<div class="row mb-4">
+						<div class="col-md-3 p-4">
+							<div class="text-center p-4 info-element"
+								style="border-bottom-color: #e59558;">
+								<i class="icon bi bi-geo-alt-fill" style="color: #e59558;"></i>
+								<p id="sport_facility" class="fs-6 mt-3">Nome della struttura</p>
 							</div>
-							
-							<div class="col" id="indirizzo">
-							
+						</div>
+						<div class="col-md-3 p-4">
+							<div class="text-center p-4 info-element"
+								style="border-bottom-color: #e5c45d;">
+								<i class="icon bi bi-pin-angle-fill" style="color: #e5c45d;"></i>
+								<p id="sport" class="fs-6 mt-3">Sport</p>
+							</div>
+						</div>
+						<div class="col-md-3 p-4">
+							<div class="text-center p-4 info-element"
+								style="border-bottom-color: #bbe39d;">
+								<i class="icon bi bi-calendar-x-fill" style="color: #bbe39d;"></i>
+								<p id="date" class="fs-6 mt-3">Data</p>
+							</div>
+						</div>
+						<div class="col-md-3 p-4">
+							<div class="text-center p-4 info-element"
+								style="border-bottom-color: #8aceec;">
+								<i class="icon bi bi-clock-fill" style="color: #8aceec;"></i>
+								<p id="start" class="fs-6 mt-3">Ora inizio</p>
+								<p id="finish" class="fs-6">Ora fine</p>
+							</div>
+						</div>
 					</div>
-					<div class="col">
-						<a id=><i class="bi bi-person-fill" style="font-size: 3.5rem;"></i><%=organizzatore%></a>
+					<p id="participants" class="fs-6 mb-3">Partecipanti: 4 su 10</p>
+					<div class="progress mb-5" style="height: 10px;">
+						<div id="progress_bar" class="progress-bar bg-success" role="progressbar"
+							style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+							aria-valuemax="100"></div>
 					</div>
-					<div class="col">
-					<a id=><i class="bi bi-stopwatch-fill" style="font-size: 3.5rem;"></i><%=orario%></a></div>
-					<%String telefono="+39 347 8742 173";%>
-					<div class="col">
-						<a id=><i class="bi bi-telephone-fill"
-							style="font-size: 3.5rem;"></i><%=telefono%></a>
+					<div class="text-center"> 
+						<button type="button" class="btn btn-outline-primary">Partecipa all'evento</button>
 					</div>
-				</div>
-				<br>
-				<br>
-				<div class="row">
-				<div class="col">
-					<div class="progress">
-						<div class="progress-bar bg-success" role="progressbar"
-							style="width: 50%" aria-valuenow="25" aria-valuemin="0"
-							aria-valuemax="100">Partecipanti</div>
-					</div>
-					</div>
-				</div>
-				<br>
-				<div class="row">
-					<button type="button" class="btn btn-primary">Iscriviti all'evento</button>
-				</div>
-				<div class="row">
-					<jsp:include page="footer.jsp" />
 				</div>
 			</div>
+			<div class="col-lg-4" id="map"></div>
 		</div>
-
 	</div>
 
 	<!-- Bootstrap -->
@@ -128,5 +122,4 @@ body {
 
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/visualizzaEventi.js"> </script>
-
 </body>
