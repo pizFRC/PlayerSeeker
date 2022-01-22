@@ -83,7 +83,7 @@ public class LoginController {
 			SportsFacility sportFacility = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(user.getId());
 			session.setAttribute("profile", sportFacility);
 			try {
-				res.sendRedirect("/");
+				res.sendRedirect("/accountManagementSportFacility");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
