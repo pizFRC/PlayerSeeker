@@ -39,7 +39,7 @@ body {
 <body style="padding-top: 80px;">
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
-	<div class="m-5 p-5">
+	<div class="m-0 m-sm-5 p-0 p-sm-5">
 		<div class="row">
 			<div class="col-lg-8 p-0">
 				<div class="h-100 p-5 pb-2 shadow p-3 mb-5 bg-body rounded">

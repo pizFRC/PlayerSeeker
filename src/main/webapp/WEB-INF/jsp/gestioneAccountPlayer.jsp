@@ -75,7 +75,7 @@
 		</div>
 	</div>
 
-	<div class= "row h-100 p-5">
+	<div class= "row h-100 p-0 p-sm-5">
 		<div class="col-md-3 p-3">
 			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow-sm p-3 bg-body rounded" style="min-height: 550px">
 				<div class = "d-flex justify-content-center mb-2">
