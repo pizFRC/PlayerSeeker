@@ -36,13 +36,13 @@ body {
 </style>
 </head>
 
-<body style="padding-top: 80px;">
+<body>
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
 	<div class="m-0 m-sm-5 p-0 p-sm-5">
 		<div class="row">
 			<div class="col-lg-8 p-0">
-				<div class="h-100 p-5 pb-2 shadow p-3 mb-5 bg-body rounded">
+				<div class="h-100 p-5 pb-2 shadow mb-5 bg-body rounded">
 					<p class="fs-2 mb-1">Dettagli Evento</p>
 					<p class="fs-6 mb-3"> <i class="bi bi-pencil-fill me-2"></i> 
 						Organizzatore: <a id="manager" href="#" class="link-primary">Nome Cognome</a>
@@ -98,6 +98,9 @@ body {
 			<div class="col-lg-4" id="map"></div>
 		</div>
 	</div>
+	
+	<!-- FOOTER -->
+	<jsp:include page="footer.jsp" />
 
 	<!-- Bootstrap -->
 	<script
@@ -115,10 +118,6 @@ body {
 	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
 	<script
 		src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-
-	<!-- EmailJS -->
-	<script type="text/javascript"
-		src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/visualizzaEventi.js"> </script>

@@ -33,7 +33,7 @@
 
 	<!-- Events Carousel-->
 	<div class="container">
-		<p class="col-md-8 fs-4">Migliori eventi</p>
+		<p class="col-md-8 fs-4 mb-4">Migliori eventi</p>
 	</div>
 	<div id="carousel_eventi" class="carousel slide row"
 		data-bs-ride="carousel">
@@ -184,7 +184,7 @@
 
 	<!-- Structures Carousel-->
 	<div class="container mt-5">
-		<p class="col-md-8 fs-4">Migliori strutture</p>
+		<p class="col-md-8 fs-4 mb-4">Migliori strutture</p>
 	</div>
 
 	<div id="carousel_strutture" class="carousel slide row"

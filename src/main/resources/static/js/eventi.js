@@ -38,13 +38,15 @@ $(document).ready(function(){
 	window.addEventListener("resize", function() {
 		var larghezza = $(window).width();
 		if (larghezza <= 991) {
-			$(".tasti_da_nascondere").hide(1000);
+			$(".tasti_da_nascondere").hide(500);
 			document.querySelectorAll(".item").forEach(element => element.className = "item col-sm-12 col-md-12 col-lg-12 col-xl-12  mx-auto m-1 pb-1");
 			lastViewPressed = "list";
-
+			$("#rangeDiv").removeClass("w-50");
+			$("#rangeDiv").addClass("w-100");
 		} else {
-			$(".tasti_da_nascondere").show(1000);
-
+			$(".tasti_da_nascondere").show(500);
+			$("#rangeDiv").removeClass("w-100");
+			$("#rangeDiv").addClass("w-50");
 			if ((larghezza > 991 && larghezza <= 1199) && lastViewPressed === "grid") {
 
 				//$(".tasti_da_nascondere").show(1000);

@@ -18,8 +18,8 @@
 	<jsp:include page="header.jsp" />
 	<div class="m-5">
 		<p class="fs-1">Visualizza gli eventi</p>
-		<p class="fs-6 mb-3">Qui puoi scoprire gli eventi vicino alla tua posizione o della tua città preferita</p>
-		<div class="shadow p-3 mb-5 bg-body rounded p-4">
+		<p class="fs-6 mb-4">Qui puoi scoprire gli eventi vicino alla tua posizione o della tua città preferita</p>
+		<div style="border-bottom-color: #e59558" class="info-element p-4">
 			<div class="row">
 				<div class="col-md-6 mb-3">
 					<label for="browser" class="form-label">Inserisci una città</label>
@@ -47,23 +47,28 @@
 	<div class="m-5">
 		<div class="row">
 			<div class="col-lg-12  col-xxl-12 col-xl-12 col-sm-12">
-				<div class="mb-3 tasti_da_nascondere mx-auto ">
-					<button id="btn_list" class="me-2 btn btn-primary btn-rounded btn-block" type="submit" value="Search">
-						<i class="bi bi-list"></i> Lista
-					</button>
-
-					<button id="btn_grid" class="btn btn-primary btn-rounded btn-block" type="submit" value="Search"> 
-						<i class="bi bi-grid-fill"></i> Griglia
-					</button>
-
+				<div class="d-flex justify-content-between align-items-center mb-3">
+					<div class="tasti_da_nascondere">
+						<button id="btn_list" class="me-2 btn btn-primary btn-rounded btn-block" type="submit" value="Search">
+							<i class="bi bi-list"></i> Lista
+						</button>
+						<button id="btn_grid" class="btn btn-primary btn-rounded btn-block" type="submit" value="Search"> 
+							<i class="bi bi-grid-fill"></i> Griglia
+						</button>
+					</div>
+					<div id="rangeDiv" class="w-50">
+						<label for="range" class="form-label">Distanza dalla tua posizione: 15 km</label>
+						<input type="range" class="form-range" min="5" max="25" step="5" id="range">
+					</div>
 				</div>
+				
 				<div class="row" id="card_container">
 					<div
 						class="item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12 mx-auto m-1 pb-1">
 						<div class="card mb-3">
 							<div class="card-body">
 								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text">With supporting text below as a natural
+								<p class="card-text mb-3">With supporting text below as a natural
 									lead-in to additional content.</p>
 								<a href="#" class="btn btn-primary">Go somewhere</a>
 							</div>
@@ -75,7 +80,7 @@
 						<div class="card mb-3">
 							<div class="card-body">
 								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text">With supporting text below as a natural
+								<p class="card-text mb-3">With supporting text below as a natural
 									lead-in to additional content.</p>
 								<a href="#" class="btn btn-primary">Go somewhere</a>
 							</div>
@@ -87,7 +92,7 @@
 						<div class="card mb-3">
 							<div class="card-body">
 								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text">With supporting text below as a natural
+								<p class="card-text mb-3">With supporting text below as a natural
 									lead-in to additional content.</p>
 								<a href="#" class="btn btn-primary">Go somewhere</a>
 							</div>

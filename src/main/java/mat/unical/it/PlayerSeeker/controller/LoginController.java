@@ -45,6 +45,10 @@ public class LoginController {
 	public String visualizzaStruttura() {
 		return "visualizzaStruttura";
 	}
+	@GetMapping("/sportFacilityDetails")
+	public String sportFacilityDetails() {
+		return "sportFacilityDetails";
+	}
 	@GetMapping("/visualizzaEventi")
 	public String visualizzaEventi() {
 		return "visualizzaEventi";
