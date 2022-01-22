@@ -206,4 +206,4 @@ function loadJSONEventsFromRestController(){
 	xhttp.open("GET",fileName,true);
 	xhttp.send();
 	
-	}+/
+	}*/

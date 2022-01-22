@@ -67,6 +67,7 @@ public class LoginController {
 		session.setAttribute("user", user);
 		if(user.getUserType().compareTo("player") == 0) {
 			Player player = DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(user.getId());
+			System.out.println("latitudine"+player.getAddress().getLatitude()+"long "+player.getAddress().getLongitude());
 			session.setAttribute("profile", player);
 			try {
 				res.sendRedirect("/");
