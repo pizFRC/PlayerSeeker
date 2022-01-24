@@ -1,9 +1,18 @@
-.raleway_font{
-	font-family: 'Raleway', sans-serif;
+::-webkit-scrollbar {
+  width: 7px;
 }
 
-.open_sans_font{
-	    font-family: 'Open Sans', sans-serif;
+::-webkit-scrollbar-track {
+  background: #f1f1f1; ;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #8e99a4; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 
 body {
@@ -16,9 +25,16 @@ body {
     min-height: 60%;
 	
 }
-#map{
-	
+
+.info-element {
+	box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	border-bottom-style: solid;
+	border-bottom-width: medium;
 }
+
+
 #login_body  {
 	background-image: url('../img/bg.jpg');
 	background-repeat: no-repeat;
@@ -79,10 +95,7 @@ label.error {
 p {
     margin: 0;
     padding: 0;
-
 }
-
-
 
 .step {
   display: block;
@@ -97,7 +110,6 @@ p {
 	border: none !important;
   	color: #0d6efd !important;
 }
-
 
 .delete-playground {
 	background-color: transparent !important;

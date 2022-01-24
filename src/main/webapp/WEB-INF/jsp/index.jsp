@@ -8,6 +8,19 @@
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 	<title>Player Seeker</title>
+	
+	<style>
+	.event-card{
+		border-bottom-style: solid;
+		border-bottom-width: 3px;
+		border-bottom-color: #e59558;
+	}
+	.sportFacility-card {
+		border-bottom-style: solid;
+		border-bottom-width: 3px;
+		border-bottom-color: #4960c5;
+	}
+	</style>
 </head>
 
 <body>
@@ -15,40 +28,44 @@
 	<jsp:include page="header.jsp" />
 
 	<!-- JUMBOTRON -->
-	<div style="background-color: #eaf4f4;"id="jumbotron" class="p-5 mb-4 rounded-3 bg-light">
+	<div id="jumbotron" class="p-5 mb-4 rounded-3 bg-light">
 		<div class="container">
 			<h1 class="display-5 fw-bold">Player Seeker</h1>
 			<p class="col-md-8 fs-4">
 				Scopri gli eventi sportivi e le migliori strutture vicino a te. </br>Dimenticati
 				dello stress e pensa solo a divertirti!
 			</p>
-
 			<!-- Search -->
+			<div class="mt-4 row">
+				<div class="col-md-10 pt-2 pb-2 ">
+					<div id="address"></div>
+				</div>
+				<div class ="col-md-2 pt-2 pb-2">
+					<button type="button" class="w-100 btn btn-primary">Cerca</button>
+				</div>
+			</div>
 			<form class="form-inline" id="posizione">
-
 			</form>
 		</div>
 	</div>
 	<!-- END JUMBOTRON -->
 
-	<!-- Events Carousel-->
-	<div class="container">
-		<p class="col-md-8 fs-4">Migliori eventi</p>
+	<!-- Best Events Carousel-->
+	<div class="row mt-5 mb-4">
+		<p style="color: #e59558" class="fs-4 fw-bold text-center col-12 d-flex justify-content-center"> Migliori eventi </p>
+		<p class="pe-5 ps-5 fs-6 col-12 text-center d-flex justify-content-center"> Ecco i migliori eventi, selezionati con cura soltanto per te!</p>
 	</div>
-	<div id="carousel_eventi" class="carousel slide row"
-		data-bs-ride="carousel">
-
+	<div id="carousel_eventi" class="carousel slide row" data-bs-ride="carousel">
 		<!-- The slideshow/carousel -->
-		<div class="carousel-inner col-md-6 col-sm-10">
+		<div class="carousel-inner ">
 			<div class="carousel-item active">
 				<div class="container">
-					<div class="row">
+					<div class="row ps-5 pe-5">
 						<div class="col-12 col-md-4">
-
-							<div class="card">
+							<div class="card event-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
@@ -56,62 +73,21 @@
 						</div>
 
 						<div class="col-12 col-md-4">
-
-							<div class="card">
+							<div class="card event-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
 							</div>
 						</div>
-
-
+						
 						<div class="col-12 col-md-4">
-
-							<div class="card">
+							<div class="card event-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<div class="carousel-item">
-				<div class="container">
-					<div class="row">
-						<div class="col-12 col-md-4">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-4">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-12 col-md-4">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
@@ -122,33 +98,32 @@
 			</div>
 			<div class="carousel-item">
 				<div class="container">
-					<div class="row">
+					<div class="row ps-5 pe-5">
 						<div class="col-12 col-md-4">
-							<div class="card">
+							<div class="card event-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
 							</div>
 						</div>
 						<div class="col-12 col-md-4">
-							<div class="card">
+							<div class="card event-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
 							</div>
 						</div>
-
 						<div class="col-12 col-md-4">
-							<div class="card">
+							<div class="card event-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
@@ -157,13 +132,11 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 
+		<!-- Left and right controls/icons -->
 		<div class="col-md-6 col-sm-1">
-			<!-- Left and right controls/icons -->
-
-			<div class="">
+			<div>
 				<button class="carousel-control-prev btn_colorato" type="button"
 					style="color: black; font-size: 40px;"
 					data-bs-target="#carousel_eventi" data-bs-slide="prev">
@@ -180,27 +153,24 @@
 			</div>
 		</div>
 	</div>
-	<!-- END Events Carousel  -->
+	<!-- END Best Events Carousel  -->
 
-	<!-- Structures Carousel-->
-	<div class="container mt-5">
-		<p class="col-md-8 fs-4">Migliori strutture</p>
+	<!-- Best Sport Facility Carousel-->
+	<div class="row mt-5 mb-4">
+		<p style="color: #4960c5" class="fs-4 fw-bold text-center col-12 d-flex justify-content-center"> Migliori strutture </p>
+		<p class="pe-5 ps-5 fs-6 col-12 text-center d-flex justify-content-center"> Ed ecco anche le migliori srutture dove organizzare i tuoi eventi!</p>
 	</div>
-
-	<div id="carousel_strutture" class="carousel slide row"
-		data-bs-ride="carousel">
-
+	<div id="carousel_strutture" class="carousel slide row" data-bs-ride="carousel">
 		<!-- The slideshow/carousel -->
-		<div class="carousel-inner col-md-6 col-sm-10">
+		<div class="carousel-inner ">
 			<div class="carousel-item active">
 				<div class="container">
-					<div class="row">
+					<div class="row ps-5 pe-5">
 						<div class="col-12 col-md-4">
-
-							<div class="card">
+							<div class="card sportFacility-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
@@ -208,61 +178,21 @@
 						</div>
 
 						<div class="col-12 col-md-4">
-
-							<div class="card">
+							<div class="card sportFacility-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
 							</div>
 						</div>
-
-
+						
 						<div class="col-12 col-md-4">
-
-							<div class="card">
+							<div class="card sportFacility-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container">
-					<div class="row">
-						<div class="col-12 col-md-4">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-4">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-12 col-md-4">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
@@ -273,33 +203,32 @@
 			</div>
 			<div class="carousel-item">
 				<div class="container">
-					<div class="row">
+					<div class="row ps-5 pe-5">
 						<div class="col-12 col-md-4">
-							<div class="card">
+							<div class="card sportFacility-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
 							</div>
 						</div>
 						<div class="col-12 col-md-4">
-							<div class="card">
+							<div class="card sportFacility-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
 							</div>
 						</div>
-
 						<div class="col-12 col-md-4">
-							<div class="card">
+							<div class="card sportFacility-card mb-3">
 								<div class="card-body">
 									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text">With supporting text below as a
+									<p class="card-text pb-3">With supporting text below as a
 										natural lead-in to additional content.</p>
 									<a href="#" class="btn btn-primary">Go somewhere</a>
 								</div>
@@ -308,13 +237,11 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 
+		<!-- Left and right controls/icons -->
 		<div class="col-md-6 col-sm-1">
-			<!-- Left and right controls/icons -->
-
-			<div class="">
+			<div>
 				<button class="carousel-control-prev btn_colorato" type="button"
 					style="color: black; font-size: 40px;"
 					data-bs-target="#carousel_strutture" data-bs-slide="prev">
@@ -331,7 +258,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- END CAROUSEL -->
+	<!-- END Best Sport Facility Carousel  -->
 
 	<!-- FOOTER -->
 	<jsp:include page="footer.jsp" />

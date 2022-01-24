@@ -52,7 +52,7 @@
 	</style>
 </head>
 
-<body style = "padding-top: 80px;">
+<body>
 	<!-- HEADER --->
 	<jsp:include page="header.jsp"/>
 	<div id="modal" class="modal" tabindex="-1">
@@ -121,7 +121,7 @@
 		</div>
 	</div>
 
-	<div class= "row h-100 p-5">
+	<div class= "row p-0 p-sm-5">
 		<div class="col-md-3 p-3">
 			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow-sm p-3 bg-body rounded" style="min-height: 550px">
 				<div class = "d-flex justify-content-center mb-2">
@@ -292,6 +292,9 @@
     		
 		</div>
 	</div>
+	
+	<!-- FOOTER -->
+	<jsp:include page="footer.jsp" />
 	
 	<!-- Bootstrap -->
 	<script
