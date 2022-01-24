@@ -58,7 +58,7 @@
  	
  	 <div class="container-fluid" id="title">
             
-            <h1 class="h1" align="center">Crea il tuo evento </h1>
+            <h1 class="h1" align="center" style="color: #e59558">Crea il tuo evento </h1>
             
             </div>
 	<!-- FORM -->
@@ -203,23 +203,25 @@
 								<div class="col-12  ">
 
 									<label class="form-check-label fn-4 text-primary">Struttura	Selezionata</label>
-									<p class="bg-lbody border-bottom border-2 rounder "id="struttura_selezionata"></p>
+									<p class="bg-lbody border-bottom border-2 rounder mb-2 "id="struttura_selezionata"></p>
 
 							
 
 
 									<label class="form-check-label fn-4 text-primary">Data scelta</label>
-									<p class="bg-lbody border-bottom border-2 rounder "	id="data_scelta"></p>
+									<p class="bg-lbody border-bottom border-2 rounder mb-2"	id="data_scelta"></p>
 
 								
 
 
 									<label class="form-check-label fn-4 text-primary">Fascia oraria</label>
-									<p class="bg-lbody border-bottom border-2 rounder " id="fascia_scelta"></p>
+									<p class="bg-lbody border-bottom border-2 rounder mb-2 " id="fascia_scelta"></p>
 
 
 
-
+									<label class="form-check-label fn-4 text-primary">Campo selezionato</label>
+									<select class="form-select mb-2" aria-label="Default select example" id="campo_selezionato" name="campo_selezionato" form="form_evento">
+									</select>
 
 								</div>
 							</div>

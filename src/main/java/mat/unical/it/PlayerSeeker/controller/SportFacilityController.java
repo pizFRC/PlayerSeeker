@@ -53,4 +53,20 @@ public class SportFacilityController {
 		//f.add(secondo);
 		return sfl;	
 	}
+	@PostMapping("/listaCampiSportivi")
+	public SportFacilityList getCampiStruttua(HttpServletRequest req, HttpServletResponse res,@RequestBody String mes) {
+	
+		SportsFacility sf=new SportsFacility();
+		
+		
+		SportFacilityList sfl=new SportFacilityList();
+		ArrayList<SportsFacility>al=new ArrayList<SportsFacility>(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveAll());
+		 sfl.setListaStrutture(al);
+		
+		
+		System.out.println(mes);
+		res.setStatus(200);
+		//f.add(secondo);
+		return sfl;	
+	}
 }

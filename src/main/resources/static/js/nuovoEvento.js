@@ -20,9 +20,10 @@ function next() {
 	if ($(".point:last").hasClass("active"))
 		return;
 
-	if ($(".d-y:first").attr("id") == "second_step")
+	if ($(".d-y:first").attr("id") == "second_step"){
 		set_datetime_resoconto();
-
+addAddressInput();
+}
 	updateProgress(true);
 	
 	//qui gestisco le icone sulla progress bar
@@ -179,6 +180,7 @@ $(document).ready(function() {
 			sport:$('input[name="sport"].checked').val(),
 		struttura:$('input[name="struttura_selezionata"].checked').val(),
 		data:document.getElementById("data_input").value,
+		campo:document.getElementById("campo_selezionato").value,
 		ora_inizio: document.getElementById("ora_inizio").value,
 		ora_fine: document.getElementById("ora_fine").value,
 		privacy:$('input[name="privacy_cornfirm"].checked').val(),
@@ -239,7 +241,7 @@ $(document).ready(function() {
 	
 	
 	//AGGIUNGE LA MAPPA
-	addAddressInput();
+//	addAddressInput();
 	
 
 
@@ -373,20 +375,20 @@ function rimuoviMarker() {
 
 }
 //FUNZIONE PER CREARE I MARKER
-function creaMarkerIniziali(mapboxgl, map, coordinate) {
+function creaMarkerIniziali(mapboxgl, map, strutture) {
 
 
-	for (var i = 0; i < coordinate.length; i++) {
+	for (var i = 0; i < strutture.length; i++) {
 	
 		const el = document.createElement('div');
 		const width = 60;
 		const height = 60;
-		el.id = coordinate[i].name;
+		el.id = strutture[i].name;
 		const infoStruttura = document.createElement("input");
 		infoStruttura.disabled;
 		infoStruttura.type = "radio";
 		infoStruttura.name = "struttura_selezionata";
-		infoStruttura.value = coordinate[i].name;
+		infoStruttura.value = strutture[i].id;
 		infoStruttura.style = "z-index:999; width:100%;height:100% display:none;margin-top:5px;";
 		el.append(infoStruttura);
 		el.className = 'marker';
@@ -399,20 +401,46 @@ function creaMarkerIniziali(mapboxgl, map, coordinate) {
 		el.addEventListener('click', () => {
 
 
-			el.children.item(0).checked = true
-
-
+			el.children.item(0).checked = true;
+             $('#campo_selezionato').empty();
+     
 			document.getElementById("struttura_selezionata").innerHTML = el.id;
 			document.getElementById("struttura_resoconto").innerHTML = el.id;
+			var stru=JSON.parse(localStorage.getItem("strutture"));
+			console.log(stru);
+			for(var i=0;i<stru.length;i++){
+				
+			      if(stru[i].name==el.id &&  el.children.item(0).value ==stru[i].id){
+                     
+				   for(var j=0;j<stru[i].campiSportivi.length;j++){
+				 
+     			var sport_selez=	 document.querySelector('input[name="sport"]:checked').value
+					if(stru[i].campiSportivi[j].sport.type==sport_selez ){
+					var option=document.createElement("option");
+					option.value=stru[i].campiSportivi[j].id;
+					
+					option.innerHTML=stru[i].campiSportivi[j].description;
+					
+					document.getElementById("campo_selezionato").append(option);
+				
+					}
+				  }
+				}
+			}
+			if($("#campo_selezionato").children().length <= 0){
+				
+			}
+			
+			//ajax call per prendere i capi e aggiungerli al select
 
 		});
 		var popup = new mapboxgl.Popup()
-			.setText(coordinate[i].name)
+			.setText(strutture[i].name)
 			.addTo(map);
 
 		// Add markers to the map.
 		new mapboxgl.Marker(el)
-			.setLngLat(coordinate[i].coordinates).setPopup(popup).addTo(map);
+			.setLngLat(strutture[i].coordinates).setPopup(popup).addTo(map);
 
 
 	}
@@ -605,6 +633,8 @@ function validateForm() {
 				required: true,
 			}, Nome: {
 				required: true,
+			},campo_selezionato:{
+				required: true,
 			}
 		},
 		messages: {
@@ -627,7 +657,9 @@ function validateForm() {
 				required: "seleziona una struttura per continuare",
 			}, Nome: {
 				required: "Compilare correttamente i campi nome ,cognome",
-			},
+			},campo_selezionato:{
+				required: "Scegli un campo per poter proseguire",
+			}
 		}, errorPlacement: function(error, element) {
 			//Custom position: first name
 		
@@ -789,6 +821,7 @@ function getStruttureBB(ne_, sw_) {
 	    data:document.getElementById("data_input").value,
 		ora_inizio: document.getElementById("ora_inizio").value,
 		ora_fine: document.getElementById("ora_fine").value,
+		sport:document.querySelector('input[name="sport"]:checked').value,
 	}
 	$.ajax({
 		type: "POST",
@@ -800,14 +833,18 @@ function getStruttureBB(ne_, sw_) {
 		success: function(response) {
 			for (var i = 0; i < response.listaStrutture.length; i++) {
 				var struttura = response.listaStrutture[i];
-
+          
 				const item = {
 					'name': struttura.name,
+					'id':struttura.id,
+					'campiSportivi':struttura.playgrounds,
 					'coordinates': [struttura.address.longitude, struttura.address.latitude],
 
 				}
-				
+				   console.log(struttura.playgrounds);
+	console.log(item);
 				strutture.push(item)
+				localStorage.setItem("strutture",JSON.stringify(strutture));
 			}
 
 
@@ -819,3 +856,4 @@ function getStruttureBB(ne_, sw_) {
 
 	return strutture;
 }
+
