@@ -135,7 +135,7 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 		SportsFacility sportsFacility;
 		ResultSet result = null;
 		try{
-			query = connection.prepareStatement("SELECT * FROM sport_facility INNER JOIN ON address a WHERE a.longitude >= ? AND a.longitude <= ? AND a.latitude >= ? AND a.latitude <= ?;");
+			query = connection.prepareStatement("SELECT * FROM sport_facility s INNER JOIN address a ON a.id =s.address_id WHERE a.longitude >= ? AND a.longitude <= ? AND a.latitude >= ? AND a.latitude <= ?;");
 			query.setFloat(1,southWest.getLongitude());
 			query.setFloat(2,northEast.getLongitude());
 			query.setFloat(3,southWest.getLatitude());

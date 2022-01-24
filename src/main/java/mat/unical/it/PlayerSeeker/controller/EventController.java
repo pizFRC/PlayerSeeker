@@ -42,14 +42,5 @@ public class EventController {
 		return "visualizzaEventi";
 	}
 	
-	
-	@GetMapping("/getStruttureVicine")
-	public String getStruttureVicine(@RequestBody String str){
-		
-	       
-	System.out.println(str);
-	return str;
 
-	
-	}
 }
