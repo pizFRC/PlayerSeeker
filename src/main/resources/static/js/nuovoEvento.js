@@ -7,80 +7,43 @@
    
   ]
 };
+*/
 
-const geojson = {
-'type': 'FeatureCollection',
-'features': [
-{
-'type': 'Feature',
-'properties': {
-'message': 'Foo',
-'iconSize': [60, 60]
-},
-'geometry': {
-'type': 'Point',
-'coordinates': [ 16.2007 ,39.2983]
-}
-},
-{
-'type': 'Feature',
-'properties': {
-'message': 'Bar',
-'iconSize': [50, 50]
-},
-'geometry': {
-'type': 'Point',
-'coordinates': [ 16.2111 ,39.2983]
-}
-},
-{
-'type': 'Feature',
-'properties': {
-'message': 'Baz',
-'iconSize': [40, 40]
-},
-'geometry': {
-'type': 'Point',
-'coordinates':  [ 16.2222 ,39.2900]
-}
-}
-]
-};*/
-
-
+///funzioe tasto avanti
 
 function next() {
 
 	if(validateForm()){
 		
-		alert("dati corretti")
-	}else{ alert("validato false"); return; }
+	}else{  return; }
 	//if($("#contenitore").find(".point").last().hasClass("active"))
 	if ($(".point:last").hasClass("active"))
 		return;
 
 	if ($(".d-y:first").attr("id") == "second_step")
 		set_datetime_resoconto();
-	//console.log("prova");
-	updateProgress(true);
-	$(".d-y:first").next().addClass('d-y');
 
-	$(".d-y:first").next().removeClass('d-n');
+	updateProgress(true);
+	
+	//qui gestisco le icone sulla progress bar
+	$(".d-y:first").next().addClass('d-y');
+    $(".d-y:first").next().removeClass('d-n');
 	$(".d-y:first").addClass('d-n').removeClass('d-y');
 	$("#contenitore").find(" span:not(.border-primary) > i").first().addClass("text-primary ");
 	$(".active:first").removeClass("active");
 	$("#contenitore").find(" span:not(.border-primary)").first().addClass("border-primary active");
 
 
-	// console.log();
 }
 
-
+///funzioe tasto avantis
 function prev() {
 	if ($(".d-y:first").attr('id') == "first_step")
 		return;
 
 	updateProgress(false);
+	
+	//qui gestisco le icone sulla progress bar
 	$(".d-y:last").prev().addClass('d-y');
 	$(".d-y:first").removeClass('d-n');
 	$(".d-y:last").addClass('d-n').removeClass('d-y');
@@ -89,17 +52,11 @@ function prev() {
 
 	$("span.border-primary:last").removeClass("border-primary active");
 	$("span.border-primary:last").addClass("active");
-	/*   $(".d-y:first").next().addClass('d-y');
-		   $(".d-y:first").next().removeClass('d-n');
-	  $(".d-y:first").addClass('d-n').removeClass('d-y');
-			 // $(".d-y:first").removeClass('d-y').addClass('d-n');
-			*/
+	
 }
 
 
 
-
-///////////////TIME PICKER////////////
 
 
 
@@ -137,14 +94,6 @@ $(document).ready(function() {
 		dropdown: true,
 		scrollbar: true
 	});
-	/*   $('input.change-format').click(function() {
-		   var input = $(this),
-			   timepicker = input.closest('div').find('.timepicker'),
-			   instance = timepicker.timepicker();
-		   instance.option('timeFormat', $(this).data('format'));
-	   });
-    
-   */
 
 });
 
@@ -154,16 +103,13 @@ $(document).ready(function() {
 
 
 function updateProgress(add) {
-	//	<div class="progress-bar bg-dark" role="progressbar" style="width: 25%;"
-	//	aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-
 	let el = document.getElementById('progress_bar');
 	if (add) {
 		var aria_val_now = (parseInt(el.getAttribute("aria-valuenow")) + 25);
 		var width = (parseInt(el.style.width) + 25);
 	} else {
 		if (el.style.width <= 0) {
-			alert("0");
+		
 			return;
 		}
 		var aria_val_now = (parseInt(el.getAttribute("aria-valuenow")) - 25);
@@ -176,8 +122,11 @@ function updateProgress(add) {
 
 }
 
-///////////////////
+///////////////////CREAZIONE DIV RISPOSTA CREAZIONE EVENTO 
 function addResultDiv(error) {
+	
+	$("#div_btn_prev").hide(1000);
+		$("#div_btn_next").hide(1000);
 	$("#last_step").removeClass("d-y").addClass("d-n");
 	
 	var div=document.createElement("div");
@@ -201,25 +150,31 @@ function addResultDiv(error) {
 		
 		
 	}
+	
 	container.append(title,icon)
+	var btn_div=document.createElement("div");
+	btn_div.className="container d-flex justify-content-center";
 	
-	
-	
-	div.append(container);
+	var a =document.createElement("a");
+	a.className="btn btn-outline-secondary";
+	a.innerHTML="Torna alla home";
+	a.href="/";
+	btn_div.append(a);
+	div.append(container,btn_div);
 	document.getElementById("last_step").after(div);
 }
 
 
 
-///////////////CARICA I TIPI DI SPORT E LI AGGIUNGE AL CAROUSEL////////////
 
 $(document).ready(function() {
+///////////////RIDEFINISCO IL SUBMIT DEL FORM////////////
 
 	$("#form_evento").submit(function(event) {
 		
 		var data = 	$("#form_evento").serialize(); 
 
-  console.log( data );
+  
 		const datiToServer = {
 			sport:$('input[name="sport"].checked').val(),
 		struttura:$('input[name="struttura_selezionata"].checked').val(),
@@ -246,10 +201,10 @@ $(document).ready(function() {
             }
         },
         success: function() {
-            console.log("success");
+         
         },
         error: function(e) {
-            alert(e);
+            alert("errore post submit form");
         }
 		});
 
@@ -258,13 +213,8 @@ $(document).ready(function() {
 
 
 	$('#privacy').prop('checked', false);
-
-
-	var sports;
-
 	sportsContainer = document.querySelector(".carousel");
 
-	console.log("pre");
 
 	loadSportType(sportsContainer);
 	const data_now = new Date();
@@ -273,9 +223,9 @@ $(document).ready(function() {
 	$("#data_input").attr("min", data_now.toISOString().split('T')[0]);
 
 	document.getElementById("data_input").value = data_now.toISOString().split('T')[0];
+    
 
-
-	//tasto confirm attivato solo se le privacy sono confermate
+	//qui gestisco il tasto confirm
 	$('#privacy').click(function() {
 		if ($('#privacy').is(':checked')) {
 			$("#confirm_btn").prop("disabled", false);
@@ -286,22 +236,26 @@ $(document).ready(function() {
 
 		}
 	})
+	
+	
+	//AGGIUNGE LA MAPPA
 	addAddressInput();
-	getStruttureVicine();
+	
+
 
 });
 
-///////////////AGGIUNGO LA MAPPA///////////
+///////////////FUNZIONE PER AGGIUNGERE LA MAPPA///////////
 function addAddressInput() {
 
 
 	var latitude = parseFloat($("#longitude").val());
 	var longitude = parseFloat($("#latitude").val());
 	if (isNaN(latitude) || isNaN(longitude)) {
-		alert("nan");
+		alert("la sessione è scaduta ");
 		return;
 	}
-	alert("lat" + latitude + " long" + longitude)
+	
 	mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q';
 	const map = new mapboxgl.Map({
 		container: 'map',
@@ -344,45 +298,31 @@ function addAddressInput() {
 		map.resize()
 	});
 
-	map.on('boxzoomstart', () => {
-		alert("boxzoom");
-	});
-
+	
 	map.on('zoomstart', () => {
 		lista_strutture = getStruttureBB(map.getBounds()._ne, map.getBounds()._sw);
-		console.log("lista struttue da bb");
-		//console.log(lista_strutture);
-		console.log("zoomstart");
+		
 		rimuoviMarker();
 	});
 
 	map.on('zoomend', () => {
-		console.log();
-		console.log("ne");
-		console.log(map.getBounds()._ne)
-		console.log("sw");
-		console.log(map.getBounds()._sw);
+	
 		creaMarkerIniziali(mapboxgl, map, lista_strutture);
-		console.log("zoomend");
+	
 
 	});
 
 	map.on('dragstart', () => {
 		lista_strutture = getStruttureBB(map.getBounds()._ne, map.getBounds()._sw);
-		console.log("lista struttue da bb");
-		console.log(lista_strutture);
+		
 
 		rimuoviMarker();
 	});
 	map.on('dragend', () => {
 
-		console.log();
-		console.log("ne");
-		console.log(map.getBounds()._ne)
-		console.log("sw");
-		console.log(map.getBounds()._sw);
+	
 		creaMarkerIniziali(mapboxgl, map, lista_strutture);
-		//aggiungiMarker();
+		
 	});
 
 
@@ -393,11 +333,7 @@ function addAddressInput() {
 			accessToken: mapboxgl.accessToken,
 			mapboxgl: mapboxgl,
 		}).on('result', function(e) {
-			alert(e.result.geometry);
-
-			//devo anche passare la città(lat,lang)del giocatore e una lista di strutture
-
-
+			
 		}).on('results', function(e) {
 			rimuoviMarker();
 		})
@@ -405,12 +341,6 @@ function addAddressInput() {
 
 
 	map.getCanvas().style.cursor = 'pointer';
-
-	map.on('click', (e) => {
-		
-		console.log(e.lngLat.lat + "lng " + e.lngLat.lng);
-	
-	});
 
 
 	/*OBSERVER SI ACCORGE DEL CAMBIAMENTO DELLA CLASSE E RICHIAMA IL MAP RESIZE		
@@ -436,19 +366,18 @@ function addAddressInput() {
 
 }
 
-
+//FUNZIONE PER RIMUOVERE I MARKER
 
 function rimuoviMarker() {
 	$(".marker").remove();
 
 }
-
+//FUNZIONE PER CREARE I MARKER
 function creaMarkerIniziali(mapboxgl, map, coordinate) {
 
 
 	for (var i = 0; i < coordinate.length; i++) {
-		console.log("creati marker");
-		console.log(coordinate[i].name);
+	
 		const el = document.createElement('div');
 		const width = 60;
 		const height = 60;
@@ -490,6 +419,8 @@ function creaMarkerIniziali(mapboxgl, map, coordinate) {
 }
 //FINE FUNZIONI MAPPA
 
+
+
 //aggiunge le informazioni relative a data e ora nel form creazione evento
 function set_datetime_resoconto() {
 	let data = document.getElementById("data_input").value;
@@ -506,15 +437,17 @@ function set_datetime_resoconto() {
 
 ///////////////FUNZIONI PER AGGIUNGERE INPUT NUOVO GIOCATORE ->NOME  COGNOME  ///////////
 function creaInput(placeHolder) {
+	var div = document.createElement("div");
+	div.className = "col-5";
 	var input = document.createElement("input");
 	input.className = "form-control";
 	input.name = placeHolder;
 	input.type = "text";
 	input.required = "true";
-	input.setAttribute("data-required-message", "helloButton");
-	input.placeholder = placeHolder;
 
-	return input;
+	input.placeholder = placeHolder;
+     div.append(input);
+	return div;
 }
 
 function addInputNameGiocatore() {
@@ -562,17 +495,13 @@ function addInputNameGiocatore() {
 
 
 	var num_input = document.getElementById("set_giocatori").children.length;
-	var div_nome = document.createElement("div");
-	div_nome.className = "col-5";
-	var div_cognome = document.createElement("div");
-	div_cognome.className = "col-5";
+
+
 	var div_btn = document.createElement("div");
 	div_btn.className = "col-2";
-	div_nome.append(creaInput("Nome" + num_input));
-	div_cognome.append(creaInput("Cognome" + num_input));
 	div_btn.append(btnMeno);
 
-	divContenitore.append(div_nome, div_cognome, div_btn);
+	divContenitore.append(creaInput("Nome" + num_input),creaInput("Cognome" + num_input), div_btn);
 
 	document.getElementById("set_giocatori").append(divContenitore);
 
@@ -583,7 +512,6 @@ function addInputNameGiocatore() {
 
 function loadSportType(sportsContainer) {
 
-	console.log("prova");
 	var fileName = "/getSportList";
 	var xhttp = new XMLHttpRequest();
 
@@ -591,10 +519,9 @@ function loadSportType(sportsContainer) {
 		if (this.readyState == 4 && this.status == 200) {
 			var jsonObj = JSON.parse(xhttp.response);
 
-			console.log("pre entries");
+			
 			Object.entries(jsonObj).forEach((entry) => {
 				const [key, value] = entry;
-				console.log(value);
 				var div = creaItemCaroseul(value);
 				sportsContainer.append(div);
 			});
@@ -604,7 +531,8 @@ function loadSportType(sportsContainer) {
 			document.querySelector("#first_step").append(sportsContainer);
 
 			///////////////CONFIGURO IL CAROUSEL//////////////////
-			$('.carousel').slick({
+	         	
+	$('.carousel').slick({
 				dots: false,
 				infinite: false,
 				speed: 300,
@@ -638,14 +566,14 @@ function loadSportType(sportsContainer) {
 				]
 			});
 		} else if(this.status == 503 || this.status == 400){
-			alert("	503 O 400")
+			alert("	errore nel reperire la lista degli sport")
 
 		}
 
 
 
 	}
-	console.log("fine fetch");
+
 	xhttp.open("POST", fileName, true);
 	xhttp.send();
 
@@ -654,7 +582,7 @@ function loadSportType(sportsContainer) {
 
 
 function validateForm() {
-	console.log("validate");
+	
 
 	var validator = $("#form_evento").validate({
 		rules: {
@@ -702,7 +630,7 @@ function validateForm() {
 			},
 		}, errorPlacement: function(error, element) {
 			//Custom position: first name
-			console.log(element);
+		
 			if (element.attr("name") == "sport") {
 
 				$("#error_msg").html(error);
@@ -724,7 +652,7 @@ function validateForm() {
 
 		var minuti_inizio = getMinutes(value);
 		var minuti_fine = getMinutes($("#ora_fine").val());
-		console.log(minuti_inizio + " " + minuti_fine);
+	
 		return minuti_inizio <= minuti_fine - 6000;
 	});
 	$.validator.addMethod('ora_fine_consentita', function(value, element) {
@@ -732,7 +660,7 @@ function validateForm() {
 
 		var minuti_fine = getMinutes(value);
 		var minuti_inizio = getMinutes($("#ora_inizio").val());
-		console.log(minuti_inizio + " " + minuti_fine);
+	
 		return minuti_fine >= minuti_inizio + 6000;
 	});
 
@@ -747,6 +675,13 @@ function getMinutes(time) {
 
 	return timeInMinutes;
 }
+
+
+$(document).ready(function() {
+		
+
+});
+
 
 
 
@@ -781,30 +716,18 @@ function creaItemCaroseul(sport) {
 		next();
 
 
-
-
-
-		//devo anche rivedere le strutture che praticano quello sport
-
-		//Se clicco su uno sport type del carousel non vado avanti ma ritorno alla scelta della fascia oraria
-
-
-
-
 	});
-	var icon = document.createElement("span");
-
-
-	icon.className = "fas fa-soccer-ball-o  ";
+	
 
 
 	var label = document.createElement("label");
-	label.className = "btn btn-outline-light text-dark w-100 h-100   border border-2";
+	label.className = "btn btn-outline-light text-dark w-100 h-100  border border-2";
 	label.htmlFor = sport.type + "_radio";
 	label.innerHTML = sport.type;
 	label.id = sport.type + "_label";
 
-	label.append(icon);
+
+
 
 	div.append(input, label);
 
@@ -821,13 +744,7 @@ function getStruttureVicine() {
 		data: document.getElementById("data_input").value,
 		ora_inizio: document.getElementById("ora_inizio").value,
 		ora_fine: document.getElementById("ora_fine").value,
-	}
-	alert("ora" + document.getElementById("ora_inizio").value + " " + document.getElementById("ora_fine").value + " " + document.getElementById("data_input").value);
-	/*	 if (isNaN(latitude) || isNaN(longitude)) {
-			alert("nan");
-		return ;
-	  }*/
-
+	}	
 	const strutture = new Array();
 
 	$.ajax({
@@ -846,7 +763,7 @@ function getStruttureVicine() {
 					'coordinates': [struttura.address.longitude, struttura.address.latitude],
 
 				}
-				console.log(item);
+			
 				strutture.push(item)
 			}
 
@@ -854,12 +771,10 @@ function getStruttureVicine() {
 		}
 		,
 		error: function(response) {
-			console.log("errore");
+			alert("errore nel reperire le strutture vicine");
 		},
 	});
 
-
-	console.log(strutture);
 	return strutture;
 }
 function getStruttureBB(ne_, sw_) {
@@ -898,7 +813,7 @@ function getStruttureBB(ne_, sw_) {
 
 		},
 		error: function(response) {
-			console.log("errore");
+			alert("errore nel reperire le strutture");
 		},
 	});
 

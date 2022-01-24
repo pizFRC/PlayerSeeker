@@ -163,6 +163,7 @@
     			<div class="d-flex justify-content-between m-4 ps-5 pe-5">
 					<button id="organized_button" onclick="showOrganized()" class="button raleway_font text-start menu-item selected"> <i class="bi bi-pencil-fill me-3" style="font-size: 1rem;"></i> Organizzati da te </button>
   					<button id="participate_button" onclick="showParticipate()" class="button raleway_font text-start menu-item"> <i class="bi bi-calendar2-check me-3" style="font-size: 1rem;"></i> A cui partecipi</button>
+  					<a id="new_event_button"  href="/nuovoEvento"class="button raleway_font text-start menu-item"> <i class="bi bi-plus me-3" style="font-size: 1rem;"></i> Nuovo Evento</a>
 				</div>
 				<div id="organized" class = "section active">
 					<div class="card mb-3">

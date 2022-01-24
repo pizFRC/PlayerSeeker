@@ -65,7 +65,7 @@
 <div class="container shadow-sm   bg-body  pb-2 border border-2 rounded-2 h-75" id="form_creazione_evento">
 
 		<div class="d-flex justify-content-between h-100">
-			<div class="align-self-center">
+			<div class="align-self-center" id="div_btn_prev">
 				<button class="btn btn-outline-primary float-start " type="button"
 					onclick="prev()" id="btn_prev">
 					<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
@@ -205,17 +205,13 @@
 									<label class="form-check-label fn-4 text-primary">Struttura	Selezionata</label>
 									<p class="bg-lbody border-bottom border-2 rounder "id="struttura_selezionata"></p>
 
-								</div>
-
-								<div class="col-12  ">
+							
 
 
 									<label class="form-check-label fn-4 text-primary">Data scelta</label>
 									<p class="bg-lbody border-bottom border-2 rounder "	id="data_scelta"></p>
 
-								</div>
-
-								<div class="col-12  ">
+								
 
 
 									<label class="form-check-label fn-4 text-primary">Fascia oraria</label>
@@ -363,7 +359,7 @@
 
 
 
-		<div class="align-self-center " >
+		<div class="align-self-center "  id="div_btn_next">
 			<button class="btn btn-outline-primary  " type="button"
 				onclick="next()" id="btn_next">
 				<span><i class="fa fa-angle-right" aria-hidden="true"></i></span> <span
