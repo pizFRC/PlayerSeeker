@@ -1,11 +1,15 @@
 package mat.unical.it.PlayerSeeker.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Address implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1818521083889150483L;
 	
 	private Long id;
+	 
 	private float longitude;
+	   
     private float latitude;
     
 
