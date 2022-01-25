@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import mat.unical.it.PlayerSeeker.model.Playground;
@@ -36,6 +37,7 @@ public class PlaygroundDaoJDBC implements PlaygroundDao{
 				playground.setId(id);
 				playground.setDescription(result.getString("description"));
 				playground.setSport(DatabaseJDBC.getInstance().getSportDao().doRetrieveById(result.getLong("sport_id")));
+				playground.setSportFacilityId(result.getLong("sport_facility_id"));
 				return playground;
 			}
 			else 
@@ -84,6 +86,33 @@ public class PlaygroundDaoJDBC implements PlaygroundDao{
 	public boolean delete(Playground playground) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public  List<Playground>  doRetrieveBySportFacilityKey(Long id) {
+		Playground playground;
+		String query = "SELECT * FROM playground WHERE sport_facility_id = ?";
+		try {
+			 List<Playground> list=new  ArrayList<Playground>();
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setLong(1, id);
+			ResultSet result = statement.executeQuery(); 
+			while(result.next()) {
+				playground = new Playground();
+				playground.setId(id);
+				playground.setDescription(result.getString("description"));
+				playground.setSport(DatabaseJDBC.getInstance().getSportDao().doRetrieveById(result.getLong("sport_id")));
+				playground.setSportFacilityId(result.getLong("sport_facility_id"));
+                list.add(playground);
+				
+			}
+			
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
