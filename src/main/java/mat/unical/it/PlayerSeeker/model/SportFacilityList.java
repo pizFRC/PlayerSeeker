@@ -25,5 +25,23 @@ public class SportFacilityList {
 	public void remove(SportsFacility struttura) {
 		listaStrutture.remove(struttura);
 	}
+	public void setBySport(ArrayList<SportsFacility> strutture,Sport sport) {
+		listaStrutture.clear();
+	
+		for(int i=0;i<strutture.size();i++) {
+			
+			for(int j=0;j<strutture.get(i).getPlaygrounds().size();j++ ) {
+				boolean checkSport=strutture.get(i).getPlaygrounds().get(j).getSport().getType().equals(sport.getType());
+				boolean orario=true;
+				if(checkSport && orario) {
+					
+					listaStrutture.add(strutture.get(i));
+					break;
+				}
+			}
+			
+		}
+
+	}
 }
 

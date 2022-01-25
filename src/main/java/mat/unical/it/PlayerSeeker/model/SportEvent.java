@@ -128,7 +128,7 @@ public class SportEvent implements java.io.Serializable {
     }
 
     public void setIdStruttura(Long id) {
-        this.id = id;
+        this.idStruttura = id;
     }
 
 	public LocalTime getBeginHour() {

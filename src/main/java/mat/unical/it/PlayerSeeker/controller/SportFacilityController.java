@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import mat.unical.it.PlayerSeeker.model.Address;
 import mat.unical.it.PlayerSeeker.model.Player;
+import mat.unical.it.PlayerSeeker.model.Sport;
 import mat.unical.it.PlayerSeeker.model.SportFacilityList;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.model.User;
@@ -37,7 +38,7 @@ public class SportFacilityController {
 		JacksonJsonParser ja = new JacksonJsonParser();
 
 		Map<String, Object> mappa = ja.parseMap(mes);
-
+        System.out.println("richiesta strutture:"+mappa);
 		ObjectMapper mapper = new ObjectMapper();
 		SportsFacility sf = new SportsFacility();
 		SportFacilityList sfl = new SportFacilityList();
@@ -58,13 +59,16 @@ public class SportFacilityController {
 			tmpSW.setLatitude(sw_lat.floatValue());
 			tmpSW.setLongitude(sw_lng.floatValue());
 
-			ArrayList<SportsFacility> struttureBBOX = new ArrayList<SportsFacility>(
-			DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(tmpSW, tmpNE));
-			sfl.setListaStrutture(struttureBBOX);
-            System.out.println(struttureBBOX);
+			ArrayList<SportsFacility> struttureBBOX = new ArrayList<SportsFacility>(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(tmpSW, tmpNE));
+			Sport s=DatabaseJDBC.getInstance().getSportDao().doRetrieveByKey((String)mappa.get("sport"));
+			
+			
+			sfl.setBySport(struttureBBOX,s);
+           
 			res.setStatus(200);
 
 		} catch (JsonProcessingException e) {
+			res.setStatus(400);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
