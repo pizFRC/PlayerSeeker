@@ -121,6 +121,7 @@ public class PlayerDaoJDBC implements PlayerDao{
 		try{
 			query = connection.prepareStatement("DELETE players WHERE id=?;");
 			query.setLong(1,player.getId());
+			this.deleteInterested(player);
 			query.executeQuery();
 			query.close();
 		} catch(SQLException e) {
@@ -165,4 +166,19 @@ public class PlayerDaoJDBC implements PlayerDao{
 		return true;
 	}
 
+	private boolean deleteInterested(Player player) {
+		try {
+			for(Sport sport : player.getSports()) {
+				String query = "DELETE interested WHERE player_id=?";
+				PreparedStatement statement = connection.prepareStatement(query);
+				statement.setLong(1,player.getId());
+				statement.execute();
+				statement.close();
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

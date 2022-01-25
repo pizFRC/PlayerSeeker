@@ -1,10 +1,9 @@
 package mat.unical.it.PlayerSeeker.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.google.gson.Gson;
 
@@ -111,5 +110,37 @@ public class RegistrationController {
 		
 		res.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
 		return HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+	}
+
+	@DeleteMapping("/deletePlayer/{id}")
+	public int deletePlayer(HttpServletResponse res, @PathVariable Long id) {
+		if(DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(id) == null) {
+			res.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+			return HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+		}
+		else {
+			Player tmpPlayer = DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(id);
+			DatabaseJDBC.getInstance().getPlayerDao().delete(tmpPlayer);
+			User tmpUser = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(tmpPlayer.getName());
+			DatabaseJDBC.getInstance().getUserDao().delete(tmpUser);
+		}
+		res.setStatus(HttpServletResponse.SC_OK);
+		return HttpServletResponse.SC_OK;
+	}
+
+	@DeleteMapping("/deleteFacility/{id}")
+	public int deleteFacility(HttpServletResponse res, @PathVariable Long id) {
+		if(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(id) == null) {
+			res.setStatus(HttpServletResponse.SC_SERVICE_UNAVAILABLE);
+			return HttpServletResponse.SC_SERVICE_UNAVAILABLE;
+		}
+		else {
+			SportsFacility tmpFacility = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(id);
+			DatabaseJDBC.getInstance().getSportsFacilityDao().delete(tmpFacility);
+			User tmpUser = DatabaseJDBC.getInstance().getUserDao().doRetrieveByKey(tmpFacility.getName());
+			DatabaseJDBC.getInstance().getUserDao().delete(tmpUser);
+		}
+		res.setStatus(HttpServletResponse.SC_OK);
+		return HttpServletResponse.SC_OK;
 	}
 }

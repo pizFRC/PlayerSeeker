@@ -1,7 +1,7 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.*;
-
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,6 +65,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 		try {
 			if(checkConnection()) {
 				query = connection.prepareStatement("SELECT * FROM event WHERE id=?;");
+				query.setLong(1, ID);
 				ResultSet result = query.executeQuery();
 
 				if(result.next()) {
@@ -90,9 +91,10 @@ public class SportEventDaoJDBC implements SportEventDao {
 
 			if(doRetrieveByKey(sportEvent.getId()) == null) {
 				query = "INSERT INTO event values(?,?,?,?,?,?);";
+				System.out.println();
 				statement = connection.prepareStatement(query);
 				statement.setLong(1,sportEvent.getId());
-				statement.setDate(2, Date.valueOf(sportEvent.getStart()));
+				statement.setDate(2, Date.valueOf(sportEvent.getStart().toString()));
 				statement.setLong(3,sportEvent.getSport().getId());
 				statement.setLong(4,sportEvent.getPlayground().getId());
 				statement.setString(5,sportEvent.getDescription());

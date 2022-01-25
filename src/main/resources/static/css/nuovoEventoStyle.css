@@ -162,7 +162,7 @@ span.point{
     min-height:50%;
     height:200px;
     max-height:75%;
-	border:1px solid red;
+
 	 overflow-x: hidden;
      overflow-y: auto;
      text-align:justify;

@@ -1,7 +1,7 @@
 package mat.unical.it.PlayerSeeker.model;
 
 import java.time.LocalDate;
-
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,8 +11,11 @@ public class SportEvent implements java.io.Serializable {
 	private static final long serialVersionUID = -1807415135910177674L;
 	
 	private Long id;
+	private Long idStruttura=null;
 	private LocalDate start = null;
-    private Sport sport = null;
+	private LocalTime beginHour=null;
+	private LocalTime endHour=null;
+   	private Sport sport = null;
     private Playground playground = null;
     private String description = null;
     private Player organizzatore = null;
@@ -64,7 +67,6 @@ public class SportEvent implements java.io.Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
     public LocalDate getData() {
         return start;
     }
@@ -119,5 +121,29 @@ public class SportEvent implements java.io.Serializable {
 
 	public void setStart(LocalDate start) {
 		this.start = start;
+	}
+
+    public Long getIdStruttura() {
+        return idStruttura;
+    }
+
+    public void setIdStruttura(Long id) {
+        this.idStruttura = id;
+    }
+
+	public LocalTime getBeginHour() {
+		return beginHour;
+	}
+
+	public void setBeginHour(LocalTime beginHour) {
+		this.beginHour = beginHour;
+	}
+
+	public LocalTime getEndHour() {
+		return endHour;
+	}
+
+	public void setEndHour(LocalTime endHour) {
+		this.endHour = endHour;
 	}
 }
