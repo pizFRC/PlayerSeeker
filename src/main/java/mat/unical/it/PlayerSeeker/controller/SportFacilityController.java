@@ -8,14 +8,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.google.gson.Gson;
 
+import mat.unical.it.PlayerSeeker.model.Address;
 import mat.unical.it.PlayerSeeker.model.SportFacilityList;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
+import mat.unical.it.PlayerSeeker.model.User;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
 @RestController
@@ -52,5 +56,15 @@ public class SportFacilityController {
 		res.setStatus(200);
 		//f.add(secondo);
 		return sfl;	
+	}
+	
+	@PostMapping("/getSportFacilityByBBox")
+	public List<SportsFacility> getSportFacilityByBBox(HttpServletResponse res, @RequestBody List<Address> bbox) {
+		Address southWest = bbox.get(0);
+		Address northEast = bbox.get(1);
+		List<SportsFacility> result = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(southWest, northEast);
+		
+		res.setStatus(HttpServletResponse.SC_OK);
+		return result;
 	}
 }

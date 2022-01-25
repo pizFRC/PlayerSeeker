@@ -77,7 +77,7 @@
 
 	<div class= "row p-0 p-sm-5">
 		<div class="col-md-3 p-3">
-			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow-sm p-3 bg-body rounded" style="min-height: 550px">
+			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow p-3 mb-5 bg-body rounded" style="min-height: 550px">
 				<div class = "d-flex justify-content-center mb-2">
 					<i class="bi bi-person-circle" style = "font-size: 5rem;"></i>
 				</div>
@@ -95,7 +95,7 @@
     	
     	<div class="col-md-9 p-3">
     		<!-- ACCOUNT SETTINGS -->
-    		<div id = "accountDiv" class="p-5 shadow-sm p-3 mb-5 bg-body rounded section active">
+    		<div id = "accountDiv" class="p-5 shadow p-3 mb-5 bg-body rounded section active">
     			<p class="fs-2 d-block">Impostazioni account</p>
     			<p class="fs-6 d-block">Aggiorna i dati del tuo account</p>
     			<div class="row">
@@ -124,8 +124,11 @@
 							<label for="address" class="form-label">Indirizzo</label>
 							<div id ="addressDiv"></div>
 						</div>
-						<div class="col-md-12 mt-4">
-							<button type="submit" onclick="updateAccount(${ user.id })" class="btn btn-primary">Aggiorna profilo</button>
+						<div class="col-md-12 mt-5">
+							<div class="d-flex justify-content-between">
+								<button type="submit" onclick="updateAccount(${ user.id })" class="btn btn-primary">Aggiorna account</button>
+								<button type="submit" onclick="deleteAccount(${ user.id })" class="btn btn-danger">Elimina account</button>
+							</div>
 						</div>
 					</form>
 				</div>

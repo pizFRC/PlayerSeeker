@@ -19,11 +19,6 @@ import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
 @Controller
 public class LoginController {
-
-	@GetMapping("/login")
-	public String loginPage() {
-		return "login";
-	}
 	
 	@GetMapping("/logout")
 	public void logout(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -31,29 +26,6 @@ public class LoginController {
 		session.invalidate();
 		res.sendRedirect("/");
 	}
-	
-	@GetMapping("/eventi")
-	public String events() {
-		return "eventi";
-	}
-	
-	@GetMapping("/strutture")
-	public String structures() {
-		return "strutture";
-	}
-	@GetMapping("/visualizzaStruttura")
-	public String visualizzaStruttura() {
-		return "visualizzaStruttura";
-	}
-	@GetMapping("/sportFacilityDetails")
-	public String sportFacilityDetails() {
-		return "sportFacilityDetails";
-	}
-	@GetMapping("/visualizzaEventi")
-	public String visualizzaEventi() {
-		return "visualizzaEventi";
-	}
-	
 	
 	@PostMapping("/checkUser")
 	public String loginCheck(HttpServletRequest req, HttpServletResponse res, @RequestParam("username") String username, @RequestParam("password") String password) {	 
@@ -89,11 +61,5 @@ public class LoginController {
 			}
 		}
 		return "login";
-	}
-	
-	
-	@GetMapping("/nuovoEvento")
-	public String nuovoEvento() {
-		return "nuovoEvento";
 	}
 }

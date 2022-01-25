@@ -468,14 +468,14 @@ function showSportFacilityForm() {
 
 function createDayRow(dayName, id) {
 	var dayRow = document.createElement("div");
-	dayRow.className = "row row-cols-4 d-flex align-items-center mb-3";
+	dayRow.className = "row d-flex align-items-center mb-3";
 	
 	var day = document.createElement("div");
-	day.className = "col-2";
+	day.className = "col-md-2 col-6";
 	day.innerText = dayName;
 	
 	var toggle = document.createElement("div");
-	toggle.className = "col-2";
+	toggle.className = "col-md-2 col-6";
 
 	var form = document.createElement("div");
 	form.className = "form-check form-switch";
@@ -508,7 +508,7 @@ function createDayRow(dayName, id) {
 	toggle.append(form);
 
 	var open_hour_div = document.createElement("div");
-	open_hour_div.className = "d-flex justify-content-center col-4";	
+	open_hour_div.className = "d-flex justify-content-center col-md-4 col-6";	
 	var open_hour_label = document.createElement("label");
 	open_hour_label.className = "me-2";
 	open_hour_label.innerText = "Apre alle:"
@@ -519,7 +519,7 @@ function createDayRow(dayName, id) {
 	open_hour_div.append(open_hour_label, open_hour);
 	
 	var close_hour_div = document.createElement("div");
-	close_hour_div.className = "d-flex justify-content-center col-4";	
+	close_hour_div.className = "d-flex justify-content-center col-md-4 col-6";	
 	var close_hour_label = document.createElement("label");
 	close_hour_label.className = "me-2";
 	close_hour_label.innerText = "Chiude alle:"

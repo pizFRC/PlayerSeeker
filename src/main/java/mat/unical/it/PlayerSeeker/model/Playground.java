@@ -7,7 +7,7 @@ public class Playground {
 	private Long id;
 	private String description;
 	private Sport sport;
-	 private List<SportEvent> events = null;
+	private List<SportEvent> events = null;
 	
 	public Long getId() {
 		return id;

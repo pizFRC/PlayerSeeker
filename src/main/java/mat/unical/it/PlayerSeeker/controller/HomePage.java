@@ -10,8 +10,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomePage {
 	
-	@GetMapping("/")
-	public String homePage(HttpServletRequest req, HttpServletResponse resp) {
-		return "index";
-	}
+
 }
