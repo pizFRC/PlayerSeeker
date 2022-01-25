@@ -106,5 +106,8 @@ public class DatabaseJDBC implements Database{
 	public OpeningHoursDao getoOpeningHoursDao() {
 		return new OpeningHoursDaoJDBC(connection);
 	}
-
+	@Override
+	public SportEventIdBroker getSportEventIdBroker() {
+		return new SportEventIdBroker(connection);
+	}
 }

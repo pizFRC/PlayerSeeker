@@ -59,9 +59,9 @@ public class SportFacilityController {
 			tmpSW.setLongitude(sw_lng.floatValue());
 
 			ArrayList<SportsFacility> struttureBBOX = new ArrayList<SportsFacility>(
-					DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(tmpSW, tmpNE));
+			DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(tmpSW, tmpNE));
 			sfl.setListaStrutture(struttureBBOX);
-
+            System.out.println(struttureBBOX);
 			res.setStatus(200);
 
 		} catch (JsonProcessingException e) {

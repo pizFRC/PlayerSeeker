@@ -70,7 +70,7 @@ $(document).ready(function() {
 
 
 	$('#ora_inizio').timepicker({
-		timeFormat: 'HH:mm ',
+		timeFormat: 'HH:mm',
 		interval: 60,
 		minTime: '08:00',
 		maxTime: '23:00',
@@ -85,7 +85,7 @@ $(document).ready(function() {
 
 
 	$('#ora_fine').timepicker({
-		timeFormat: 'HH:mm ',
+		timeFormat: 'HH:mm',
 		interval: 60,
 		minTime: '09:00',
 		maxTime: '23:00',
@@ -169,51 +169,9 @@ function addResultDiv(error) {
 
 
 $(document).ready(function() {
-///////////////RIDEFINISCO IL SUBMIT DEL FORM////////////
-
-	$("#form_evento").submit(function(event) {
-		
-		var data = 	$("#form_evento").serialize(); 
-
-  
-		const datiToServer = {
-			sport:$('input[name="sport"].checked').val(),
-		struttura:$('input[name="struttura_selezionata"].checked').val(),
-		data:document.getElementById("data_input").value,
-		campo:document.getElementById("campo_selezionato").value,
-		ora_inizio: document.getElementById("ora_inizio").value,
-		ora_fine: document.getElementById("ora_fine").value,
-		privacy:$('input[name="privacy_cornfirm"].checked').val(),
-	}
-		
-
-		$.ajax({
-			type: "POST",
-			url: "nuovoEvento/create",
-		     async: true,
-			contentType: "application/json",		
-			data: data,
-			dataType: "json",
-			statusCode: {
-            400: function() {
-               addResultDiv(true);
-            },
-            200: function() {
-              addResultDiv(false);
-            }
-        },
-        success: function() {
-         
-        },
-        error: function(e) {
-            alert("errore post submit form");
-        }
-		});
-
-		event.preventDefault();
-	});
 
 
+	
 	$('#privacy').prop('checked', false);
 	sportsContainer = document.querySelector(".carousel");
 
@@ -635,6 +593,8 @@ function validateForm() {
 				required: true,
 			},campo_selezionato:{
 				required: true,
+			},privacy_cornfirm:{
+				required:true,
 			}
 		},
 		messages: {
@@ -659,6 +619,8 @@ function validateForm() {
 				required: "Compilare correttamente i campi nome ,cognome",
 			},campo_selezionato:{
 				required: "Scegli un campo per poter proseguire",
+			},privacy_cornfirm:{
+				required:"confermare per proseguire",
 			}
 		}, errorPlacement: function(error, element) {
 			//Custom position: first name
@@ -674,8 +636,60 @@ function validateForm() {
 
 
 			}
+		}, submitHandler: function(form) {
+			if(validator.form())
+			{
+		
+		var data = 	$("#form_evento").serialize(); 
+       
+  
+		const datiToServer = {
+			sport:document.querySelector('input[name="sport"]:checked').value,
+		struttura:document.querySelector('input[name="struttura_selezionata"]:checked').value,
+		data:document.getElementById("data_input").value,
+		campo:document.getElementById("campo_selezionato").value,
+		ora_inizio: document.getElementById("ora_inizio").value,
+		ora_fine: document.getElementById("ora_fine").value,
+		privacy:document.querySelector('input[name="privacy_cornfirm"]:checked').value,
+		players:[]
+		
+	}
+	 
+     	
+	var giocatori=document.getElementById("set_giocatori");
+	for(var i=0;i<giocatori.children.length;i++){
+		var div_nome=giocatori.children.item(i).children.item(0);
+		var div_cognome=giocatori.children.item(i).children.item(1);
+		
+		datiToServer.players.push({ nome: div_nome.firstChild.value ,cognome: div_cognome.firstChild.value})
+	}
+	console.log(datiToServer)
+		$.ajax({
+			type: "POST",
+			url: "nuovoEvento/create",
+		     async: true,
+			contentType: "application/json",		
+			data: JSON.stringify(datiToServer),
+			dataType: "json",
+			statusCode: {
+            400: function() {
+               addResultDiv(true);
+            },
+            200: function() {
+              addResultDiv(false);
+            }
+           }
+		});
+
+	
+
+		}else{
+			alert("manca qualche dato");
 		}
+	
+}	
 	});
+	
 	$.validator.messages.required = "Compila questo campo";
 
 
@@ -698,7 +712,7 @@ function validateForm() {
 
 	return validator.form();
 
-}
+};
 
 function getMinutes(time) {
 	var timeParts = time.split(":");

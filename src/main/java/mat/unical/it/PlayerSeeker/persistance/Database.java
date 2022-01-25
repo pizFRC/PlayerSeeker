@@ -2,6 +2,7 @@ package mat.unical.it.PlayerSeeker.persistance;
 
 import mat.unical.it.PlayerSeeker.persistance.jdbc.AddressIdBroker;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.PlaygroundIdBroker;
+import mat.unical.it.PlayerSeeker.persistance.jdbc.SportEventIdBroker;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.SportEventProxy;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.SportsFacilityProxy;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.UserIdBroker;
@@ -21,5 +22,6 @@ public interface Database {
 	public PlaygroundDao getPlaygroundDao();
 	public SportsFacilityProxy getSportsFacilityProxy();
 	public OpeningHoursDao getoOpeningHoursDao();
+	public SportEventIdBroker getSportEventIdBroker();
 
 }
