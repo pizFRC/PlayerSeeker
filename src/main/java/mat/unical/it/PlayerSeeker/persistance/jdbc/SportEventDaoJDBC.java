@@ -194,5 +194,31 @@ public class SportEventDaoJDBC implements SportEventDao {
 
 		return true;
 	}
+	@Override
+	public List<SportEvent> doRetrieveAllByPlaygroundsKey(Long ID) {
+		PreparedStatement query = null;
+		SportEvent tmp = null;
+		List<SportEvent> tmpList=new ArrayList<SportEvent>();
+
+		try {
+			if(checkConnection()) {
+				query = connection.prepareStatement("SELECT * FROM event WHERE id=?;");
+				query.setLong(1, ID);
+				ResultSet result = query.executeQuery();
+
+				if(result.next()) {
+					tmp = new SportEventProxy();
+					tmp.setId(result.getLong("id"));
+					tmp.setData(result.getDate("date").toLocalDate());
+					tmp.setDescription(result.getString("descripiton"));
+				}
+			}
+			query.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return tmpList;
+	}
 
 }

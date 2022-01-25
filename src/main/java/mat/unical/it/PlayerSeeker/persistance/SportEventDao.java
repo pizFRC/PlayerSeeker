@@ -12,4 +12,5 @@ public interface SportEventDao {
 	public boolean updateParticipate(SportEvent sportEvent);
 	public boolean saveParticipate(SportEvent sportEvent);
 	public boolean deleteParticipate(SportEvent sportEvent);
+	public List<SportEvent> doRetrieveAllByPlaygroundsKey(Long ID);
 }

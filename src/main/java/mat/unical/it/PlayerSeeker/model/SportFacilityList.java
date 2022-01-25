@@ -1,6 +1,9 @@
 package mat.unical.it.PlayerSeeker.model;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
 public class SportFacilityList {
 
@@ -32,6 +35,7 @@ public class SportFacilityList {
 			
 			for(int j=0;j<strutture.get(i).getPlaygrounds().size();j++ ) {
 				boolean checkSport=strutture.get(i).getPlaygrounds().get(j).getSport().getType().equals(sport.getType());
+				List<SportEvent>eventi=DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAll();
 				boolean orario=true;
 				if(checkSport && orario) {
 					
