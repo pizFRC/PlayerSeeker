@@ -19,6 +19,15 @@ body {
 	padding-top: 90px;
 
 }
+
+@media screen and (max-width: 576px) {
+  #login_form {
+    width: 100%;
+    height: 100%;
+    max-width: none !important;
+  }
+}
+
 #form_creazione_evento {
 	width:90%;
 	min-width: 90%;

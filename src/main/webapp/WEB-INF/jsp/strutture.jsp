@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,26 +22,25 @@
 		<p class="fs-1">Visualizza le strutture</p>
 		<p class="fs-6 mb-4">Qui puoi scoprire le strutture vicine alla tua posizione o alla tua città preferita</p>
 		<div style="border-bottom-color: #4960c5" class="info-element p-4">
-			<div class="row">
-				<div class="col-md-6 mb-3">
-					<label for="browser" class="form-label">Inserisci una città</label>
-					<div id="address"></div>
+			<form id ="search_form">
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="browser" class="form-label">Inserisci una città</label>
+						<div id="addressDiv"></div>
+					</div>
+					<div class="col-md-4  mb-3">
+						<label for="browser" class="form-label">Scegli uno sport</label> 
+						<select id ="sport_select" class="form-select">
+							<option id = "all" selected>Tutti gli sport</option>
+						</select>
+					</div>
+					<div class="col-md-2 mb-3 d-flex align-items-end">
+						<button id="search" class="w-100 bottom-0 btn btn-outline-primary" type="submit">
+							<i class="fa fa-search" aria-hidden="true"></i> Cerca
+						</button>
+					</div>
 				</div>
-				<div class="col-md-4  mb-3">
-					<label for="browser" class="form-label">Scegli uno sport</label> 
-					<select class="form-select">
-						<option selected>Tutti gli sport</option>
-						<option>Calcio</option>
-						<option value="fa-apple">fa-apple</option>
-						<option>4</option>
-					</select>
-				</div>
-				<div class="col-md-2 mb-3 d-flex align-items-end">
-					<button class="w-100 bottom-0 btn btn-outline-primary" type="submit">
-						<i class="fa fa-search" aria-hidden="true"></i> Cerca
-					</button>
-				</div>
-			</div>
+			</form>
 		</div>
 	</div>
 
@@ -58,46 +59,21 @@
 					</button>
 				</div>
 				<div id="rangeDiv" class="w-50">
-						<label for="range" class="form-label">Distanza dalla tua posizione: 15 km</label>
+					<div class ="d-flex">
+						<label for="range" class="form-label">Distanza dalla tua posizione: &nbsp</label> 
+						<p id = "distance"> 15 km</p>
+					</div>
 						<input type="range" class="form-range" min="5" max="25" step="5" id="range">
 				</div>
 			</div>
-				<div class="row" id="card_container">
-					<div
-						class="item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12 mx-auto m-1 pb-1">
-						<div class="card mb-3">
-							<div class="card-body">
-								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text mb-3">With supporting text below as a natural
-									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</div>
+			
+				<div class="row" id="sport_facility_container">
+					<c:if test="${user == null}">
+						<div class="alert alert-primary d-flex align-items-center" role="alert">
+							<i class="bi bi-info-circle-fill me-2"></i>
+							<div>Effettua l'accesso o cerca una città per visualizzare le strutture!</div>
 						</div>
-
-					</div>
-					<div
-						class="item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12 mx-auto m-1 pb-1">
-						<div class="card mb-3">
-							<div class="card-body">
-								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text mb-3">With supporting text below as a natural
-									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</div>
-						</div>
-
-					</div>
-					<div
-						class="item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12  mx-auto m-1 pb-1">
-						<div class="card mb-3">
-							<div class="card-body">
-								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text mb-3">With supporting text below as a natural
-									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</div>
-						</div>
-					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -112,9 +88,17 @@
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/strutture.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+	<script type="text/javascript" src="../js/strutture.js" crossorigin="anonymous"></script>
+	<c:if test="${user != null}">
+	<script type="text/javascript">
+		changeCurrentPosition(${profile.address.longitude}, ${profile.address.latitude})
+		showNearbySportFacility();
+	</script>
+	</c:if>
 
 </body>
 </html>

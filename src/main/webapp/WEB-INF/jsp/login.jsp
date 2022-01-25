@@ -25,9 +25,9 @@
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
 
-	<div class="m-5 align-items-center justify-content-center">
+	<div class="d-flex align-items-center justify-content-center h-100 w-100">
 		<form class="shadow-lg bg-body rounded p-5" method="post"
-			id="login_form" action="checkUser" style="max-width: 450px; margin: auto">
+			id="login_form" action="checkUser" style="max-width: 450px;">
 			<div class="text-center">
 				<img class="m-3 text-center" rel="icon" width="200" height="65"
 					 src="img/logo.png" type="image/x-icon">
@@ -54,14 +54,9 @@
 				</div>
 				<a href="#" id="btn_registrati" onclick="switchToRegistration()"
 					class="link-primary">Non hai ancora un account? Registrati!</a>
-				<div class="row m-4 d-flex align-items-center">
-					<hr class="col-sm-4">
-					<p class="col-sm-4 open_sans_font" align="center">oppure</p>
-					<hr class="col-sm-4">
-				</div>
-				<h3 class="fs-6 fw-bold mb-3" style="text-align: center;">Puoi
+				<h3 class="fs-6 fw-bold mt-5 mb-3" style="text-align: center;">Puoi
 					anche accedere con</h3>
-				<div class="g-signin2 row justify-content-md-center"
+				<div class="g-signin2 row justify-content-center"
 					data-onsuccess="onSignIn"></div>
 			</div>
 		</form>

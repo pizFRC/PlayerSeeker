@@ -2,16 +2,14 @@ package mat.unical.it.PlayerSeeker.controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.boot.json.JacksonJsonParser;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -42,6 +40,7 @@ public class EventController {
 		return eventi;	
 	}
 	*/
+
 	@PostMapping("/nuovoEvento/create")
 	public String createEvent(HttpServletRequest req, HttpServletResponse res,@RequestBody String str) {
 	
@@ -85,7 +84,12 @@ public class EventController {
 	}
 	
 	@PostMapping("/event")
-	public String viewEvent() {
+	public String viewEvent(HttpServletRequest req, HttpServletResponse res, @RequestParam("id") Long id) {
+		SportEvent sportEvent = DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveByKey(id);
+		if(sportEvent == null) {
+			req.setAttribute("errorMessage","L'evento non esiste");
+			return "visualizzaEventi";
+		}
 		return "visualizzaEventi";
 	}
 	

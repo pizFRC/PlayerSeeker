@@ -6,10 +6,10 @@
 	</p>
 	<div class="col-md-4 d-flex justify-content-center align-items-center mb-2 mt-2">
 		<div>
-			<p class="fs-6 mb-1">Giovanni Beraldi</p>
-			<p class="fs-6 mb-1">Francesco De Fazio</p>
-			<p class="fs-6 mb-1">Gabriele Tassone</p>
-			<p class="fs-6 mb-1">Daniele Giovane</p>
+			<p class="fs-6 text-center mb-1">Giovanni Beraldi</p>
+			<p class="fs-6 text-center mb-1">Francesco De Fazio</p>
+			<p class="fs-6 text-center mb-1">Gabriele Tassone</p>
+			<p class="fs-6 text-center mb-1">Daniele Giovane</p>
 		</div>
 	</div>
 </footer>
