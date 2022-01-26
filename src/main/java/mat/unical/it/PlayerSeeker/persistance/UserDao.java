@@ -11,5 +11,6 @@ public interface UserDao {
 	public User doRetrieveByMail(String mail);
 	public boolean saveOrUpdate(User player);
 	public boolean delete(User player);
+	User doRetrieveById(Long id);
 
 }

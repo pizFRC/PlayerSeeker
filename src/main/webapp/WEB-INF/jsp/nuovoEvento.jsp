@@ -5,49 +5,22 @@
 <html lang="it">
 <head>
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
 	<!-- Slick CSS-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
 	
-	<jsp:include page="head.jsp"/>
-	<!-- Custom CSS -->
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-
-<script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
-
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js" crossorigin="anonymous"></script>
-<style>
-
-
-.marker{
-
-}
-</style>
-
-	
-		
-<script  crossorigin="anonymous" src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
-
-
-
-
-
-
-
-
-
-	
-	
-	
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
 	
+	
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+
+	<jsp:include page="head.jsp"/>
 	<title>Player Seeker</title>
 </head>
 
@@ -56,6 +29,52 @@
 <!-- HEADER --->
  	<jsp:include page="header.jsp" />
  	
+ 	<c:if test="${user == null }">
+		<div class ="h-100 w-100 position-relative">
+			<div class="card position-absolute top-50 start-50 translate-middle shadow mb-5 rounded">
+				<h5 class="card-header pt-3 pb-3">Ops, c'è un problema!</h5>
+				<div class="card-body">
+					<div class="alert alert-danger d-flex align-items-center"
+						role="alert">
+						<i class="bi bi-exclamation-circle-fill me-2"></i>
+						<div>
+							<p class="fs-6">Effettua il login come giocatore per
+								effettuare la creazione di un nuovo evento!</p>
+						</div>
+					</div>
+					<div class="d-flex justify-content-end">
+						<a href="/" class="btn btn-outline-secondary me-3">Torna alla home</a>
+						<a href="/login" class="btn btn-primary">Effettua il login</a>
+					</div>
+				</div>
+			</div>
+		</div>
+ 	</c:if>
+ 	
+ 	<c:if test="${user != null && user.userType == 'sport_facility'}">
+ 		<div class ="h-100 w-100 position-relative">
+			<div class="card position-absolute top-50 start-50 translate-middle shadow mb-5 rounded">
+				<h5 class="card-header pt-3 pb-3">Ops, c'è un problema!</h5>
+				<div class="card-body">
+					<div class="alert alert-danger d-flex align-items-center"
+						role="alert">
+						<i class="bi bi-exclamation-circle-fill me-2"></i>
+						<div>
+							<p class="fs-6">Una struttura sportiva non è autorizzata alla creazione di un evento.
+							Effettua il login come giocatore per effettuare la creazione di un nuovo evento!
+							</p>
+						</div>
+					</div>
+					<div class="d-flex justify-content-end">
+						<a href="/" class="btn btn-outline-secondary me-3">Torna alla home</a>
+						<a href="/login" class="btn btn-primary">Effettua il login</a>
+					</div>
+				</div>
+			</div>
+		</div>
+ 	</c:if>
+ 	
+ 	<c:if test="${user != null && user.userType == 'player'}">
  	 <div class="container-fluid" id="title">
             
             <h1 class="h1" align="center" style="color: #e59558">Crea il tuo evento </h1>
@@ -256,16 +275,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 					<!-- CONDIZIONI PRIVACY CHECKBOX AND CONFERMA CREAZIONE BUTTON-->
 
 
@@ -308,7 +317,6 @@
 							
 							<div class="col-12  ">
 
-
 								<label class="form-check-label fn-4 text-primary">Fascia oraria</label>
 								<p class="bg-lbody border-bottom border-2 rounder " id="ora_resoconto"> </p>
 
@@ -334,27 +342,10 @@
 
 				</div>
 				
-				<c:if test="${user != null}">
-					
-	<c:if test="${user.userType=='player'}">
-     
+		<c:if test="${user != null && user.userType=='player'}">
 		<input type="hidden" id="longitude" value="${profile.address.latitude}"> 
 		<input type="hidden" id="latitude" value="${profile.address.longitude}">
 		</c:if>
-		
-		
-
-
-
-
-		</c:if>
-		<c:if test="${user == null}">
-			<div class="border border-2 border-primary bg-warning "> niente</div>
-			
-		</c:if>
-          
-          
-          	
 		</form>
 
 
@@ -372,6 +363,7 @@
 		
 		</div>
 	</div>
+	</c:if>
 	
 	<!-- end FORM -->
 
@@ -398,7 +390,9 @@
 	<!--Slick -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 	
-	
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js" crossorigin="anonymous"></script>
+	<script  crossorigin="anonymous" src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+	<script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
 	
 		<script type="text/javascript" src="../js/nuovoEvento.js"
 		crossorigin="anonymous">

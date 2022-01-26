@@ -119,6 +119,8 @@ function changeCurrentPosition(longitude, latitude){
 }
 
 function showNearbySportFacility(){
+	if(position.longitude == null || position.latitude == null)
+		return;
 	$("#sport_facility_container").children().remove();
 	var distance = $("#range").val();
 	var point = turf.point([position.longitude, position.latitude]);
@@ -143,12 +145,11 @@ function showNearbySportFacility(){
 			$.each(list, function(index, sportFacility) {
 				if($('#sport_select').find(":selected").attr('id') === 'all'){
 					$("#sport_facility_container").append(createCard(sportFacility));
-					console.log(sportFacility);
 				}
 				else {
 					$.each(sportFacility.playgrounds, function(index, playground){
 						if(playground.sport.type === $('#sport_select').find(":selected").text()){
-							console.log(playground);
+							$("#sport_facility_container").append(createCard(sportFacility));
 						}
 					});
 				}
@@ -208,6 +209,7 @@ function createCard(sportFacility) {
 	btnCard.className = "btn btn-primary";
 	btnCard.innerHTML = "Visualizza dettagli";
 	$(btnCard).attr("href", "sportFacilityDetails/" + sportFacility.id);
+	$(btnCard).attr("target", "_blank");
 
 	divBodyCard.append(titleCard, contentCard, btnCard);
 	divCard.append(divBodyCard);

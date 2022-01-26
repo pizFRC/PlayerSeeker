@@ -134,13 +134,15 @@ public class PlayerDaoJDBC implements PlayerDao{
 	
 	private boolean saveInterested(Player player) {
 		try{
-			for(Sport sport: player.getSports()) {
-				String query = "INSERT INTO interested (player_id, sport_id) VALUES(?,?)";
-				PreparedStatement statement = connection.prepareStatement(query);
-				statement.setLong(1, player.getId());
-				statement.setLong(2, sport.getId());
-				statement.execute();
-				statement.close();
+			if(player.getSports() != null) {
+				for(Sport sport: player.getSports()) {
+					String query = "INSERT INTO interested (player_id, sport_id) VALUES(?,?)";
+					PreparedStatement statement = connection.prepareStatement(query);
+					statement.setLong(1, player.getId());
+					statement.setLong(2, sport.getId());
+					statement.execute();
+					statement.close();
+				}
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -151,13 +153,15 @@ public class PlayerDaoJDBC implements PlayerDao{
 	
 	private boolean updateInterested(Player player) {
 		try{
-			for(Sport sport: player.getSports()) {
-				String query = "UPDATE interested SET sport_id = ? WHERE player_id = ?";
-				PreparedStatement statement = connection.prepareStatement(query);	
-				statement.setLong(1, sport.getId());
-				statement.setLong(2, player.getId());
-				statement.execute();
-				statement.close();
+			if(player.getSports() != null) {
+				for(Sport sport: player.getSports()) {
+					String query = "UPDATE interested SET sport_id = ? WHERE player_id = ?";
+					PreparedStatement statement = connection.prepareStatement(query);	
+					statement.setLong(1, sport.getId());
+					statement.setLong(2, player.getId());
+					statement.execute();
+					statement.close();
+				}
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();

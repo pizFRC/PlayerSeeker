@@ -22,21 +22,11 @@ import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.model.User;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
-
-
-
 @RestController
 public class EventController {
 
 	/*@GetMapping("/listaEventi")
 	public EventList getEvents() {
-		
-		
-		
-		
-	
-		
-		
 		return eventi;	
 	}
 	*/

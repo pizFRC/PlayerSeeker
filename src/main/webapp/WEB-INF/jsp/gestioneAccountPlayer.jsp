@@ -29,7 +29,12 @@
 
 	.menu-item.selected {
 		font-weight: bold;
-		color: #00a896;
+		color: #e59558;
+		padding: 10px;
+		border-radius: 5px;
+		box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+		-webkit-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+		-moz-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
 	}
 	
 	.menu-icon {
@@ -74,6 +79,46 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id = "success_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Operazione effettuata</h5>
+					<button type="button" onclick="location.reload();" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-success" role="alert">
+						<h4 class="alert-heading">Ben fatto!</h4>
+						<p>Le informazioni del tuo account sono state modificate con successo! E stata inviata un'email di conferma.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="location.reload();" class="btn btn-primary" onclick="location.href='/logout';">Capito</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id = "error_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Operazione non effettuata</h5>
+					<button type="button" onclick="location.reload();" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger" role="alert">
+						<h4 class="alert-heading">Ops!</h4>
+						<p>Si è verificato un problema temporaneo. Ti invitiamo a riprovare!</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="location.reload();" class="btn btn-primary" onclick="location.href='/logout';">Riprova</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class= "row p-0 p-sm-5">
 		<div class="col-md-3 p-3">
@@ -98,27 +143,36 @@
     		<div id = "accountDiv" class="p-5 shadow p-3 mb-5 bg-body rounded section active">
     			<p class="fs-2 d-block">Impostazioni account</p>
     			<p class="fs-6 d-block">Aggiorna i dati del tuo account</p>
-    			<div class="row">
-					<form class="row g-3">
+    			
+				<div id="account_error" style = "display:none !important"class="alert alert-danger d-flex align-items-center mt-3 mb-0"
+					role="alert">
+					<i class="bi bi-exclamation-circle-fill me-2"></i>
+					<div>
+						<p class="fs-6"></p>
+					</div>
+				</div>
+				
+				<div class="row">
+					<form id = "account_form" class="row g-3">
 						<div class="col-md-6">
 							<label for="name" class="form-label">Nome</label> 
-							<input type="text" class="form-control" id="name" value = ${ profile.name } >
+							<input type="text" class="form-control" id="name" name="name" value = ${ profile.name } >
 						</div>
 						<div class="col-md-6">
 							<label for="surname" class="form-label">Cognome</label> 
-							<input type="text" class="form-control" id="surname" value = ${ profile.surname }>
+							<input type="text" class="form-control" id="surname" name="surname" value = ${ profile.surname }>
 						</div>
 						<div class="col-md-6">
 							<label for="username" class="form-label">Username</label> 
-							<input type="text" class="form-control" id="username" value = ${ user.username }>
+							<input type="text" class="form-control" id="username" name="username" value = ${ user.username }>
 						</div>
 						<div class="col-md-6">
 							<label for="email" class="form-label">Email</label> 
-							<input type="email" class="form-control" id="email" value = ${ user.email }>
+							<input type="email" class="form-control" id="email" name="email" value = ${ user.email }>
 						</div>
 						<div class="col-md-6">
 							<label for="birthday" class="form-label">Data di nascita</label> 
-							<input type="date" class="form-control" id="birthday" value = ${ profile.birthday }>
+							<input type="date" class="form-control" id="birthday" name="birthday" value = ${ profile.birthday }>
 						</div>
 						<div class="col-md-6">
 							<label for="address" class="form-label">Indirizzo</label>
@@ -126,8 +180,8 @@
 						</div>
 						<div class="col-md-12 mt-5">
 							<div class="d-flex justify-content-between">
-								<button type="submit" onclick="updateAccount(${ user.id })" class="btn btn-primary">Aggiorna account</button>
-								<button type="submit" onclick="deleteAccount(${ user.id })" class="btn btn-danger">Elimina account</button>
+								<button id="update_button" type="submit" onclick="updateAccount(event, '${ user.id }', '${ user.username }', '${ user.email }')" class="btn btn-primary">Aggiorna account</button>
+								<button type="submit" onclick="deleteAccount(event, ${ user.id })" class="btn btn-danger">Elimina account</button>
 							</div>
 						</div>
 					</form>
@@ -138,22 +192,31 @@
     		<div id = "passwordDiv" class="p-5 shadow-sm p-3 mb-5 bg-body rounded section">
     			<p class="fs-2 d-block">Impostazioni account</p>
     			<p class="fs-6 d-block">Aggiorna la tua password</p>
+    			
+    			<div id="password_error" style = "display:none !important"class="alert alert-danger d-flex align-items-center mt-3 mb-0"
+					role="alert">
+					<i class="bi bi-exclamation-circle-fill me-2"></i>
+					<div>
+						<p class="fs-6"></p>
+					</div>
+				</div>
+				
     			<div class="row">
-					<form class="row g-3">
+					<form id="password_form" class="row g-3">
 						<div class="col-md-12">
 							<label for="current_password" class="form-label">Password attuale</label> 
-							<input type="password" class="form-control" id="current_password">
+							<input type="password" class="form-control" id="current_password" name="current_password">
 						</div>
 						<div class="col-md-12">
 							<label for="password" class="form-label">Nuova password</label> 
-							<input type="password" class="form-control" id="password">
+							<input type="password" class="form-control" id="password" name="password">
 						</div>
 						<div class="col-md-12">
 							<label for="confirm_password" class="form-label">Conferma password</label> 
-							<input type="password" class="form-control" id="confirm_password">
+							<input type="password" class="form-control" id="confirm_password" name="confirm_password">
 						</div>
 						<div class="col-md-12 mt-4">
-							<button type="submit" class="btn btn-primary">Aggiorna password</button>
+							<button type="submit" class="btn btn-primary" onclick="updatePassword(event, '${ user.id }')">Aggiorna password</button>
 						</div>
 					</form>
 				</div>
