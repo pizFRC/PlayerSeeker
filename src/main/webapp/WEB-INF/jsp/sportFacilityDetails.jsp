@@ -153,12 +153,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-4">
-					<p id="description" class="fs-6 mb-3">Lorem ipsum dolor sit amet, consectetur
-						adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-						dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate
-						velit esse cillum dolore eu fugiat nulla pariatur.</p>
+					<p id="description" class="fs-6 mb-3"></p>
 				</div>
 			</div>
 		</div>
@@ -228,6 +223,11 @@
 					</p>
 				</div>
 			</div>
+		</div>
+		
+		<div class="position-absolute top-0 end-0 p-0 p-5 mb-5" style="z-index: 2;">
+			<button type="button" class="rounded-pill btn btn-primary shadow-lg p-3 mb-5 rounded d-flex align-items-center"> 
+			<i style="font-size: 1.5rem"class="bi bi-plus-lg me-2"></i>Crea nuovo evento</button>
 		</div>
 	</div>
 	

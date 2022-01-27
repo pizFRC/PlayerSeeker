@@ -51,4 +51,14 @@ public class NavigationController {
 		req.setAttribute("sportFacility", DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.parseLong(id)));
 		return "sportFacilityDetails";
 	}
+	
+	@GetMapping("/accountManagementPlayer")
+	public String accountManagementPlayer() {
+		return "gestioneAccountPlayer";
+	}
+	
+	@GetMapping("/accountManagementSportFacility")
+	public String accountManagementSportFacility() {
+		return "gestioneAccountSportFacility";
+	}
 }
