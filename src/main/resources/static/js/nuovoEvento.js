@@ -170,22 +170,18 @@ function addResultDiv(error) {
 
 $(document).ready(function() {
 
-
 	
-	$('#privacy').prop('checked', false);
-	sportsContainer = document.querySelector(".carousel");
-
-
-	loadSportType(sportsContainer);
+	loadSportType();
 	const data_now = new Date();
-
 	data_now.setDate(data_now.getDate() + 1);
 	$("#data_input").attr("min", data_now.toISOString().split('T')[0]);
-
 	document.getElementById("data_input").value = data_now.toISOString().split('T')[0];
     
 
 	//qui gestisco il tasto confirm
+	
+	
+	$('#privacy').prop('checked', false);
 	$('#privacy').click(function() {
 		if ($('#privacy').is(':checked')) {
 			$("#confirm_btn").prop("disabled", false);
@@ -196,12 +192,6 @@ $(document).ready(function() {
 
 		}
 	})
-	
-	
-	//AGGIUNGE LA MAPPA
-//	addAddressInput();
-	
-
 
 });
 
@@ -212,7 +202,7 @@ function addAddressInput() {
 	var latitude = parseFloat($("#longitude").val());
 	var longitude = parseFloat($("#latitude").val());
 	if (isNaN(latitude) || isNaN(longitude)) {
-		alert("la sessione è scaduta ");
+		alert("Non hai i permessi per creare un nuovo evento");
 		return;
 	}
 	
@@ -365,32 +355,26 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 			document.getElementById("struttura_selezionata").innerHTML = el.id;
 			document.getElementById("struttura_resoconto").innerHTML = el.id;
 			var stru=JSON.parse(localStorage.getItem("strutture"));
-			console.log(stru);
+			
 			for(var i=0;i<stru.length;i++){
 				
 			      if(stru[i].name==el.id &&  el.children.item(0).value ==stru[i].id){
                      
 				   for(var j=0;j<stru[i].campiSportivi.length;j++){
 				 
-     			var sport_selez=	 document.querySelector('input[name="sport"]:checked').value
+     			    var sport_selez= document.querySelector('#sport_select').value
 					if(stru[i].campiSportivi[j].sport.type==sport_selez ){
 					var option=document.createElement("option");
 					option.value=stru[i].campiSportivi[j].id;
-					
-					option.innerHTML=stru[i].campiSportivi[j].description;
-					
+					option.innerHTML="Campo di "+stru[i].campiSportivi[j].sport.type;
 					document.getElementById("campo_selezionato").append(option);
 				
 					}
 				  }
 				}
 			}
-			if($("#campo_selezionato").children().length <= 0){
-				
-			}
 			
-			//ajax call per prendere i capi e aggiungerli al select
-
+			
 		});
 		var popup = new mapboxgl.Popup()
 			.setText(strutture[i].name)
@@ -496,7 +480,7 @@ function addInputNameGiocatore() {
 }
 
 
-function loadSportType(sportsContainer) {
+function loadSportType() {
 
 	var fileName = "/getSportList";
 	var xhttp = new XMLHttpRequest();
@@ -504,53 +488,25 @@ function loadSportType(sportsContainer) {
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var jsonObj = JSON.parse(xhttp.response);
-
+           var select=document.getElementById("sport_select");
 			
 			Object.entries(jsonObj).forEach((entry) => {
 				const [key, value] = entry;
-				var div = creaItemCaroseul(value);
-				sportsContainer.append(div);
+				var option=document.createElement("option");
+				option.innerHTML=value.type;
+				option.value=value.type;
+				option.onclick=function() {
+	            document.getElementById("num_giocatori").value = value.requiredPlayers-1;
+	         	$("#set_giocatori").empty();
+	        	document.getElementById("sport_selezionato_resoconto").innerHTML = value.type;
+
+
+           };
+				select.append(option);
+				
+				
 			});
-
-
-			//aggiungo al carousel 
-			document.querySelector("#first_step").append(sportsContainer);
-
-			///////////////CONFIGURO IL CAROUSEL//////////////////
-	         	
-	$('.carousel').slick({
-				dots: false,
-				infinite: false,
-				speed: 300,
-				slidesToShow: 3,
-				slidesToScroll: 3,
-				responsive: [
-					{
-						breakpoint: 1024,
-						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 2,
-							infinite: false,
-							dots: true
-						}
-					},
-					{
-						breakpoint: 800,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1
-						}
-					},
-					{
-						breakpoint: 480,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1
-						}
-					}
-
-				]
-			});
+   
 		} else if(this.status == 503 || this.status == 400){
 			alert("	errore nel reperire la lista degli sport")
 
@@ -575,7 +531,7 @@ function validateForm() {
 			data_input: {
 				required: true,
 
-			}, sport: {
+			}, sport_select: {
 				required: true,
 
 			}, ora_inizio: {
@@ -602,7 +558,7 @@ function validateForm() {
 				required: "Inserisci la data corretta",
 
 			},
-			sport: {
+			sport_select: {
 				required: "Seleziona uno sport per poter proseguire",
 
 			}, ora_inizio: {
@@ -625,10 +581,7 @@ function validateForm() {
 		}, errorPlacement: function(error, element) {
 			//Custom position: first name
 		
-			if (element.attr("name") == "sport") {
-
-				$("#error_msg").html(error);
-			} else if (element.attr("name") == "struttura_selezionata") {
+			if (element.attr("name") == "struttura_selezionata") {
 				$("#struttura_selezionata").html(error);
 			} else {
 				error.insertAfter(element);
@@ -644,7 +597,7 @@ function validateForm() {
        
   
 		const datiToServer = {
-			sport:document.querySelector('input[name="sport"]:checked').value,
+			sport:document.querySelector('#sport_select').value,
 		struttura:document.querySelector('input[name="struttura_selezionata"]:checked').value,
 		data:document.getElementById("data_input").value,
 		campo:document.getElementById("campo_selezionato").value,
@@ -728,101 +681,6 @@ $(document).ready(function() {
 
 });
 
-
-
-
-function creaItemCaroseul(sport) {
-	var div = document.createElement("div");
-	div.className = "container form-check  form-check-inline h-100   position-relative ";
-	var input = document.createElement("input");
-	input.type = "radio";
-	input.className = "form-check-input btn-check w-100 h-100 position-absolute ";
-	input.id = sport.type + "_radio";
-	input.autocomplete = "off";
-	input.value = sport.type;
-	input.required = "true";
-	input.name = "sport";
-
-
-	input.setAttribute("Form", 'form_evento');
-	$('#' + sport.type + "_radio").change(function() {
-
-
-
-	});
-
-	$(document).on('click', '#' + sport.type + "_radio", function(e) {
-
-		document.getElementById("num_giocatori").value = sport.requiredPlayers;
-		$("#set_giocatori").empty();
-		document.getElementById("sport_selezionato_resoconto").innerHTML = sport.type;
-
-		if (($("#second_step").hasClass("d-y")))
-			return;
-		next();
-
-
-	});
-	
-
-
-	var label = document.createElement("label");
-	label.className = "btn btn-outline-light text-dark w-100 h-100  border border-2";
-	label.htmlFor = sport.type + "_radio";
-	label.innerHTML = sport.type;
-	label.id = sport.type + "_label";
-
-
-
-
-	div.append(input, label);
-
-
-
-
-
-	return div
-}
-function getStruttureVicine() {
-	const datiToServer = {
-
-		'coordinates': [parseFloat($("#latitude").val()), parseFloat($("#longitude").val())],
-		data: document.getElementById("data_input").value,
-		ora_inizio: document.getElementById("ora_inizio").value,
-		ora_fine: document.getElementById("ora_fine").value,
-	}	
-	const strutture = new Array();
-
-	$.ajax({
-		type: "POST",
-		url: "/listaStruttureVicine",
-		contentType: "application/json",
-		dataType: 'json',
-		async: true,
-		data: JSON.stringify(datiToServer),
-		success: function(response) {
-			for (var i = 0; i < response.listaStrutture.length; i++) {
-				var struttura = response.listaStrutture[i];
-
-				const item = {
-					'name': struttura.name,
-					'coordinates': [struttura.address.longitude, struttura.address.latitude],
-
-				}
-			
-				strutture.push(item)
-			}
-
-
-		}
-		,
-		error: function(response) {
-			alert("errore nel reperire le strutture vicine");
-		},
-	});
-
-	return strutture;
-}
 function getStruttureBB(ne_, sw_) {
 
 
@@ -835,7 +693,7 @@ function getStruttureBB(ne_, sw_) {
 	    data:document.getElementById("data_input").value,
 		ora_inizio: document.getElementById("ora_inizio").value,
 		ora_fine: document.getElementById("ora_fine").value,
-		sport:document.querySelector('input[name="sport"]:checked').value,
+		sport:document.querySelector('#sport_select').value,
 	}
 	$.ajax({
 		type: "POST",

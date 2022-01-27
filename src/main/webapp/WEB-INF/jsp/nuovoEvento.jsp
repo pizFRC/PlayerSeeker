@@ -152,10 +152,15 @@
 					<div class="col-12 d-y h-75 mx-auto  " style="height: 500px"
 						id="first_step">
 
-						<hr class="my-4">
-						<h6>Seleziona uno sport</h6>
-						<div id="error_msg" class="d-flex justify-content-center"></div>
-						<hr class="my-4">
+						<h4>Scegli uno sport fra quelli presenti</h4>
+						
+						
+						<div id="error_msg" class="d-flex justify-content-center"> </div>
+						<div>
+						<select class="form-select mb-2" aria-label="Default select example" id="sport_select" name="sport_select" required form="form_evento">
+						<option value="">Seleziona uno sport </option>
+						</select>
+						</div>
 						<div class="carousel  m-4 mt-3 h-75"></div>
 						
 
