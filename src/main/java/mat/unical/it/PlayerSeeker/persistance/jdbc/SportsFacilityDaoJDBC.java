@@ -1,13 +1,17 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
 import mat.unical.it.PlayerSeeker.model.Address;
+import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.SportsFacilityDao;
 
@@ -17,6 +21,15 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 	
 	public SportsFacilityDaoJDBC(Connection connection) {
 		this.connection = connection;
+	}
+	private boolean checkConnection() {
+		try {
+			if(connection == null || connection.isClosed())
+				return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 	@Override
@@ -156,5 +169,45 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 			return null;
 		}
 		return facilityList;	
+	}
+	@Override
+	public ArrayList<Long> doRetrieveAllByDateAndSport(Long ID,LocalDate start,LocalTime begin,LocalTime end) {
+		PreparedStatement query = null;
+		SportEvent tmp = null;
+		 ArrayList<Long>  tmpList=new  ArrayList<Long>();
+
+	
+			try {
+				if(checkConnection()) {
+				String sql=	"SELECT distinct playground.sport_facility_id FROM playground,sport_facility,event where playground.sport_facility_id =sport_facility.id "+
+				     "and event.playground_id=playground.id and event.sport_id=? and event.start=? "+
+							"and not (event.begin_hour>=? and event.end_hour<=?);";
+
+					String sqlQuery="SELECT distinct playground.sport_facility_id   FROM playground,sport_facility,event "+
+			                  "where playground.sport_facility_id =sport_facility.id and event.playground_id=playground.id and event.sport_id=? and "+
+					          "event.id not in(SELECT event.id FROM event where event.sport_id=? and (begin_hour=? and start=? ) );";
+					query = connection.prepareStatement(sql);
+					query.setLong(1, ID);
+					query.setDate(2,Date.valueOf(start)) ;
+					query.setTime(4,Time.valueOf(end));
+					query.setTime(3,Time.valueOf(begin));
+					
+					ResultSet result = query.executeQuery();
+
+					while(result.next()) {
+						
+						
+						tmpList.add(result.getLong("sport_facility_id"));
+					}
+				}
+				query.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+					
+		
+		return tmpList;
 	}
 }

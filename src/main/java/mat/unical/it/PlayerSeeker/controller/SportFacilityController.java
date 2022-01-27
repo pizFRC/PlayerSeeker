@@ -1,5 +1,7 @@
 package mat.unical.it.PlayerSeeker.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,9 +71,13 @@ public class SportFacilityController {
 
 			ArrayList<SportsFacility> struttureBBOX = new ArrayList<SportsFacility>(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(tmpSW, tmpNE));
 			Sport s=DatabaseJDBC.getInstance().getSportDao().doRetrieveByKey((String)mappa.get("sport"));
-			
-			
-			sfl.setBySport(struttureBBOX,s);
+			//data=2022-01-28, ora_inizio=08:00
+			String dataStr =(String)mappa.get("data");
+			String oraInizioStr = (String)mappa.get("ora_inizio") ;
+			String oraFineStr = (String)mappa.get("ora_fine") ;
+			oraInizioStr+=":00";
+			oraFineStr+=":00";
+			sfl.setBySport(struttureBBOX,s,dataStr,oraInizioStr,oraFineStr);
            
 			res.setStatus(200);
 
