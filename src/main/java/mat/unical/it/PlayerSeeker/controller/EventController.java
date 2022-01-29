@@ -63,7 +63,8 @@ public class EventController {
 		se.setBeginHour(beginHour);
 		se.setEndHour(endHour);
 		se.setDescription("descrizione di prova");
-	   
+		se.getPlayers().add(p);
+	   System.out.println("creazione evento:"+str);
 		if (DatabaseJDBC.getInstance().getSportsEventDao().saveOrUpdate(se))
 			res.setStatus(200);
 		else

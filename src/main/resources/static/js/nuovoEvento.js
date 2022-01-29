@@ -247,7 +247,7 @@ function addAddressInput() {
 	});
 
 	map.on('load', function() {
-
+    
 		map.resize();
 	});
 
@@ -259,25 +259,27 @@ function addAddressInput() {
 	
 	map.on('zoomstart', () => {
 		lista_strutture = getStruttureBB(map.getBounds()._ne, map.getBounds()._sw);
-		
+		  alertEmptyStrut(localStorage.length);
 		rimuoviMarker();
 	});
 
 	map.on('zoomend', () => {
 	
 		creaMarkerIniziali(mapboxgl, map, lista_strutture);
-	
+	  alertEmptyStrut(lista_strutture);
 
 	});
 
 	map.on('dragstart', () => {
 		lista_strutture = getStruttureBB(map.getBounds()._ne, map.getBounds()._sw);
 		
-
+ 
 		rimuoviMarker();
 	});
+	
+	
 	map.on('dragend', () => {
-
+  alertEmptyStrut(lista_strutture);
 	
 		creaMarkerIniziali(mapboxgl, map, lista_strutture);
 		
@@ -452,7 +454,6 @@ function addInputNameGiocatore() {
 	var iconMeno = document.createElement("i"); iconMeno.className = "fa fa-minus text-danger";
 	spanMeno.append(iconMeno);
 	btnMeno.append(spanMeno);
-
 
 
 	$(document).on('click', '#btnMeno_' + id, function(e) {
@@ -688,7 +689,23 @@ $(document).ready(function() {
 		
 
 });
-
+function alertEmptyStrut(length){
+	
+	if(length<=0){
+				if($("#alert_strutture").hasClass("d-none"));{
+				$("#alert_strutture").removeClass("d-none");
+				}
+				
+			
+			
+			}else{
+				if(!$("#alert_strutture").hasClass("d-none"));{
+				$("#alert_strutture").addClass("d-none");
+				}
+				
+			
+				}
+}
 function getStruttureBB(ne_, sw_) {
 
 
@@ -711,6 +728,10 @@ function getStruttureBB(ne_, sw_) {
 		async: true,
 		data: JSON.stringify(datiToServer),
 		success: function(response) {
+			console.log(response);
+			                    
+
+			   localStorage.clear();
 			for (var i = 0; i < response.listaStrutture.length; i++) {
 				var struttura = response.listaStrutture[i];
           
@@ -727,8 +748,7 @@ function getStruttureBB(ne_, sw_) {
 			
 				localStorage.setItem("strutture",JSON.stringify(strutture));
 			}
-
-
+                       
 		},
 		error: function(response) {
 			alert("errore nel reperire le strutture");
@@ -767,4 +787,14 @@ function check_impegni_player(){
 	});
 	return reqSuccess;
 }
+$(document).ready(function() {
+$(document).on('click', '#btn_close_alert' , function(e) {
+		e.preventDefault();
+		e.stopPropagation();
 
+ 
+	alert("ok");
+	
+	$("#alert_strutture").addClass("d-none")
+});
+});

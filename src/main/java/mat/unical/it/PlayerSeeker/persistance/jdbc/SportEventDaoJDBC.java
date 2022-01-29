@@ -168,7 +168,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 	public boolean saveParticipate(SportEvent sportEvent) {
 		try{
 			for(Player p : sportEvent.getPlayers()) {
-				PreparedStatement query = connection.prepareStatement("INSERT INTO participate values(nextval('id'),?,?)");
+				PreparedStatement query = connection.prepareStatement("INSERT INTO participate values(nextval('participate_id_seq'),?,?)");
 				query.setLong(1,p.getId());
 				query.setLong(2,sportEvent.getId());
 				query.execute();

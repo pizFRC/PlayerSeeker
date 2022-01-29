@@ -216,7 +216,10 @@
 						<h5 class="fs-5 text-primary">Seleziona una struttura nella
 							tua città o cercane una</h5>
 						<hr class="my-4">
-						<div style="position: relative; width: 100%; height: 100%;">
+							
+							
+							
+							<div style="position: relative; width: 100%; height: 100%;">
 							<div id="map" name="map" value="prova"
 								class="border border-2 h-100 w-100"
 								style="position: absolute; z-index: 90;"></div>
@@ -249,6 +252,15 @@
 
 								</div>
 							</div>
+							<div class="alert alert-warning alert-dismissible  d-flex align-items-center d-none "role="alert" id="alert_strutture">
+								
+								<div><i class="bi bi-exclamation-triangle"  width="24" height="24";></i> Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br> 
+								       prova a cambiare fascia oraria o a spostarti sulla mappa </div>
+								        <button type="button" class="btn-close" id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
+							</div>
+							
+							
+							
 						</div>
 					</div>
 
