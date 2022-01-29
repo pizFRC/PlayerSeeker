@@ -802,6 +802,7 @@ function signOut() {
     	});
 		auth2.currentUser.listen(function(user){
 			user.disconnect();
+			sessionStorage.setItem("user", false);
 			window.location.replace("/logout");
 		});
 	});

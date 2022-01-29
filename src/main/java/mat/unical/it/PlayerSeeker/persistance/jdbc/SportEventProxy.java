@@ -27,7 +27,7 @@ public class SportEventProxy extends SportEvent {
 
         try{
             PreparedStatement statement;
-            String query = "SELECT * FROM players INNER JOIN event ON players.id=event.organizer_id WHERE event.id=?";
+            String query = "SELECT * FROM player INNER JOIN event ON player.id=event.organizer_id WHERE event.id=?";
 
             statement = connection.prepareStatement(query);
             statement.setLong(1,super.getId());
@@ -35,7 +35,7 @@ public class SportEventProxy extends SportEvent {
 
             while(result.next()) {
                 player.setId(result.getLong("id"));
-                player.setName(result.getString("username"));
+                player.setName(result.getString("name"));
                 player.setSurname(result.getString("surname"));
                 player.setBirthday(result.getDate("birthday").toLocalDate());
                 player.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
@@ -55,7 +55,7 @@ public class SportEventProxy extends SportEvent {
 
         try{
             PreparedStatement statement;
-            String query = "SELECT * FROM players INNER JOIN participate ON players.id=participate.player_id WHERE participate.event_id=?";
+            String query = "SELECT * FROM player INNER JOIN participate ON player.id=participate.player_id WHERE participate.event_id=?";
 
             statement = connection.prepareStatement(query);
             statement.setLong(1,super.getId());
@@ -64,7 +64,7 @@ public class SportEventProxy extends SportEvent {
             while(result.next()) {
                 Player player = new Player();
                 player.setId(result.getLong("id"));
-                player.setName(result.getString("username"));
+                player.setName(result.getString("name"));
                 player.setSurname(result.getString("surname"));
                 player.setBirthday(result.getDate("birthday").toLocalDate());
                 player.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));

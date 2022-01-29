@@ -12,7 +12,6 @@ public class SportEvent implements java.io.Serializable {
 	
 	private Long id;
 	private SportsFacility sportFacility=null;
-
 	private LocalDate start = null;
 	private LocalTime beginHour=null;
 	private LocalTime endHour=null;
