@@ -115,8 +115,11 @@ System.out.println(mes);
 		Map<String, Object> mappa = ja.parseMap(mes);
 	
 		String dataStr =(String)mappa.get("data");
-		String oraInizioStr = (String)mappa.get("ora_inizio") +":00" ;
-		String oraFineStr = (String)mappa.get("ora_fine") +":00" ;
+		String oraInizioStr = (String)mappa.get("ora_inizio") ;
+		oraInizioStr+=":00" ;
+		
+		String oraFineStr = (String)mappa.get("ora_fine");
+		oraFineStr+=":00" ;
 		if(DatabaseJDBC.getInstance().getPlayerDao().checkImpegni(u,LocalDate.parse(dataStr),LocalTime.parse(oraInizioStr),LocalTime.parse(oraFineStr)))
 		{
 			res.setStatus(200);

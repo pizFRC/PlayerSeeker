@@ -194,35 +194,24 @@ public class PlayerDaoJDBC implements PlayerDao{
 		try{
 			
 			if(user != null) {
-				
-					String query = "SELECT participate.*,event.start,event.begin_hour,event.end_hour "+
-					                   "from participate,event where participate.player_id=?  and participate.event_id =event.id and event.start=?"
-							             +"and(( begin_hour < ? and end_hour>=? )  or"+
-					                   "( ((end_hour > ? and end_hour<=? ) and begin_hour <=? )   or"+
-							            " ((begin_hour >= ? and begin_hour<? ) and end_hour > ? )  or"
-					                  +"  ((begin_hour >= ? and begin_hour<? ) and end_hour <= ? ))  );";
+				System.out.println(begin);
+				System.out.println(end);
+					String query = "SELECT participate.id from participate,event where participate.player_id=? "
+							+ " and participate.event_id =event.id and start=? and not"
+							+ " ( event.end_hour <= ? or event.begin_hour >= ?);";
 					PreparedStatement statement = connection.prepareStatement(query);	
 					statement.setLong(1, user.getId());
 					statement.setDate(2,Date.valueOf(start));
 					
 					statement.setTime(3,Time.valueOf(begin));
 					statement.setTime(4,Time.valueOf(end));
-					
-					statement.setTime(5,Time.valueOf(begin));
-					statement.setTime(6,Time.valueOf(end));
-					statement.setTime(7,Time.valueOf(begin));
-					
-					statement.setTime(8,Time.valueOf(begin));
-					statement.setTime(9,Time.valueOf(end));
-					statement.setTime(10,Time.valueOf(end));
-					
-					statement.setTime(11,Time.valueOf(begin));
-					statement.setTime(12,Time.valueOf(end));
-					statement.setTime(13,Time.valueOf(end));
 				
 					ResultSet result = statement.executeQuery(); 
-					
-			            almenoUno=result.next();
+					while(result.next()) {
+						almenoUno=true;
+						System.out.println(result.getLong(1));
+					}
+			           
 					statement.close();
 					
 				

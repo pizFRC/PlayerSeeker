@@ -179,23 +179,37 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 		
 		Map<Long,Long>mappa=new HashMap<Long,Long>();
 
-	String sqlQuery="SELECT playground.id,sport_facility_id from playground  WHERE  playground.sport_id=? and playground.id not in"+
-	                "(SELECT  playground.id FROM playground,sport_facility,event where playground.sport_facility_id =sport_facility.id"+
-			            " and event.playground_id=playground.id and event.sport_id=? and event.start=? and "+
-	                "( (event.begin_hour<= ? and (event.end_hour >= ? ) ) or " 
-			            +" (event.begin_hour<? and (event.end_hour >= ?)) ) );";
+	String sqlQuery="select p.id, p.sport_facility_id from playground p where p.sport_id = ? and p.id not in" +
+	   " (select p.id from playground p inner join event e on e.playground_id = p.id where p.sport_id = ?" +
+			 " and e.start = ? and not (e.end_hour <= ? or e.begin_hour >= ?))";
 			try {
 				if(checkConnection()) {
 			
 					query = connection.prepareStatement(sqlQuery);
 					query.setLong(1, ID);
-					query.setLong(2, ID);
 					query.setDate(3,Date.valueOf(start)) ;
+					query.setLong(2, ID);
 					query.setTime(4,Time.valueOf(begin));
 					query.setTime(5,Time.valueOf(end));
-					query.setTime(6,Time.valueOf(end));
-					query.setTime(7,Time.valueOf(end));
 					
+					/*	query.setDate(3,Date.valueOf(start)) ;
+					
+					query.setTime(4,Time.valueOf(begin));
+					query.setTime(5,Time.valueOf(end));
+					
+					query.setTime(6,Time.valueOf(begin));
+					query.setTime(7,Time.valueOf(end));
+					query.setTime(8,Time.valueOf(begin));
+					
+					
+					query.setTime(9,Time.valueOf(begin));
+					query.setTime(10,Time.valueOf(end));
+					query.setTime(11,Time.valueOf(end));
+					
+					query.setTime(12,Time.valueOf(begin));
+					query.setTime(13,Time.valueOf(end));
+					query.setTime(14,Time.valueOf(end));
+					*/
 					ResultSet result = query.executeQuery();
 
 					while(result.next()) {
