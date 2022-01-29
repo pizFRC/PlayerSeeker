@@ -55,7 +55,7 @@ public class EventController {
 		 
 		SportEvent se=new SportEvent();
 		se.setId(DatabaseJDBC.getInstance().getSportEventIdBroker().getId());
-		se.setIdStruttura(idStruttura);
+		se.setSportFacility(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(idStruttura));
 		se.setOrganizzatore(p);
 		se.setPlayground(pg);
 		se.setStart(start);

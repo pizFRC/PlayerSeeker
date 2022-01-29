@@ -11,7 +11,8 @@ public class SportEvent implements java.io.Serializable {
 	private static final long serialVersionUID = -1807415135910177674L;
 	
 	private Long id;
-	private Long idStruttura=null;
+	private SportsFacility sportFacility=null;
+
 	private LocalDate start = null;
 	private LocalTime beginHour=null;
 	private LocalTime endHour=null;
@@ -123,12 +124,12 @@ public class SportEvent implements java.io.Serializable {
 		this.start = start;
 	}
 
-    public Long getIdStruttura() {
-        return idStruttura;
+    public SportsFacility getSportFacility() {
+        return sportFacility;
     }
 
-    public void setIdStruttura(Long id) {
-        this.idStruttura = id;
+    public void setSportFacility(SportsFacility sportFacility) {
+        this.sportFacility = sportFacility;
     }
 
 	public LocalTime getBeginHour() {

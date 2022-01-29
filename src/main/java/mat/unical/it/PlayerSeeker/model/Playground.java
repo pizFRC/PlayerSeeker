@@ -5,7 +5,7 @@ import java.util.List;
 public class Playground {
 	
 	private Long id;
-	private Long sportFacilityId;
+	private SportsFacility sportFacility;
 	private String description;
 	private Sport sport;
 	private List<SportEvent> events = null;
@@ -34,12 +34,12 @@ public class Playground {
 	public void setEvents(List<SportEvent> events) {
 		this.events = events;
 	}
-	public void setSportFacilityId(Long sportFacilityId) {
-		this.sportFacilityId=sportFacilityId;
+	public void setSportFacility(SportsFacility sportFacility) {
+		this.sportFacility=sportFacility;
 		
 	}
-	public Long getSportFacilityId() {
-	return sportFacilityId;
+	public SportsFacility getSportFacility() {
+	return sportFacility;
 		
 	}
 

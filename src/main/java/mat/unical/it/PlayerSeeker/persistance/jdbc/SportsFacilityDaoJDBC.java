@@ -183,7 +183,7 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 	                "(SELECT  playground.id FROM playground,sport_facility,event where playground.sport_facility_id =sport_facility.id"+
 			            " and event.playground_id=playground.id and event.sport_id=? and event.start=? and "+
 	                "( (event.begin_hour<= ? and (event.end_hour >= ? ) ) or " 
-			            +" (event.begin_hour<=? and (event.end_hour >= ?)) ) );";
+			            +" (event.begin_hour<? and (event.end_hour >= ?)) ) );";
 			try {
 				if(checkConnection()) {
 			

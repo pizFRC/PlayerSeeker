@@ -37,7 +37,7 @@ public class PlaygroundDaoJDBC implements PlaygroundDao{
 				playground.setId(id);
 				playground.setDescription(result.getString("description"));
 				playground.setSport(DatabaseJDBC.getInstance().getSportDao().doRetrieveById(result.getLong("sport_id")));
-				playground.setSportFacilityId(result.getLong("sport_facility_id"));
+				playground.setSportFacility(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey( result.getLong("sport_facility_id")));
 				return playground;
 			}
 			else 
@@ -102,7 +102,7 @@ public class PlaygroundDaoJDBC implements PlaygroundDao{
 				playground.setId(id);
 				playground.setDescription(result.getString("description"));
 				playground.setSport(DatabaseJDBC.getInstance().getSportDao().doRetrieveById(result.getLong("sport_id")));
-				playground.setSportFacilityId(result.getLong("sport_facility_id"));
+				playground.setSportFacility(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey( result.getLong("sport_facility_id")));
                 list.add(playground);
 				
 			}
