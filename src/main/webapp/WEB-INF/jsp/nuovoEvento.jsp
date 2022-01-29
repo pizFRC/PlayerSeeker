@@ -153,10 +153,15 @@
 					<div class="col-12 d-y h-75 mx-auto  " style="height: 500px"
 						id="first_step">
 
-						<hr class="my-4">
-						<h6>Seleziona uno sport</h6>
-						<div id="error_msg" class="d-flex justify-content-center"></div>
-						<hr class="my-4">
+						<h4>Scegli uno sport fra quelli presenti</h4>
+						
+						
+						<div id="error_msg" class="d-flex justify-content-center"> </div>
+						<div>
+						<select class="form-select mb-2" aria-label="Default select example" id="sport_select" name="sport_select" required form="form_evento">
+						<option value="">Seleziona uno sport </option>
+						</select>
+						</div>
 						<div class="carousel  m-4 mt-3 h-75"></div>
 						
 
@@ -212,7 +217,10 @@
 						<h5 class="fs-5 text-primary">Seleziona una struttura nella
 							tua città o cercane una</h5>
 						<hr class="my-4">
-						<div style="position: relative; width: 100%; height: 100%;">
+							
+							
+							
+							<div style="position: relative; width: 100%; height: 100%;">
 							<div id="map" name="map" value="prova"
 								class="border border-2 h-100 w-100"
 								style="position: absolute; z-index: 90;"></div>
@@ -245,6 +253,15 @@
 
 								</div>
 							</div>
+							<div class="alert alert-warning alert-dismissible  d-flex align-items-center d-none "role="alert" id="alert_strutture">
+								
+								<div><i class="bi bi-exclamation-triangle"  width="24" height="24";></i> <p>Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br> 
+								       prova a cambiare fascia oraria o a spostarti sulla mappa<p> </div>
+								        <button type="button" class="btn-close" id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
+							</div>
+							
+							
+							
 						</div>
 					</div>
 

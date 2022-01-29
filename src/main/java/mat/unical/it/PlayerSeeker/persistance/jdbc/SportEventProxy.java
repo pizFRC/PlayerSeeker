@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
+
 public class SportEventProxy extends SportEvent {
 
 	private static final long serialVersionUID = 2724986691524647771L;
@@ -90,8 +92,9 @@ public class SportEventProxy extends SportEvent {
 
             while(result.next()) {
                 tmpPlayground.setId(result.getLong("id"));
-                tmpPlayground.setDescription(result.getString("desscription"));
+                tmpPlayground.setDescription(result.getString("description"));
                 tmpPlayground.setSport(this.getSport());
+                tmpPlayground.setSportFacilityId(result.getLong("sport_facility_id"));
             }
             statement.close();
         } catch(SQLException e) {
@@ -126,5 +129,30 @@ public class SportEventProxy extends SportEvent {
 
         this.setSport(tmpSport);
         return super.getSport();
+    }
+    public Long getIdStruttura() {
+    	 try {
+    		 if(this.getPlayground()!=null)
+    			 return this.getPlayground().getSportFacilityId();
+             PreparedStatement statement;
+             String query = "SELECT sport_facility_id FROM playground INNER JOIN event ON playground.id=event.playground_id WHERE event.id=?;";
+             statement = connection.prepareStatement(query);
+             statement.setLong(1,super.getId());
+             ResultSet result = statement.executeQuery();
+
+             if(result.next()) {
+                 this.setIdStruttura(result.getLong(1));
+                 
+             }
+             statement.close();
+         } catch(SQLException e) {
+             e.printStackTrace();
+             return null;
+         }
+    	
+    	
+    	
+		return null;
+    	
     }
 }

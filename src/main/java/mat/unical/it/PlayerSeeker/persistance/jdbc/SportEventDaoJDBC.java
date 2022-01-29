@@ -1,7 +1,6 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.*;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,8 +70,8 @@ public class SportEventDaoJDBC implements SportEventDao {
 				if(result.next()) {
 					tmp = new SportEventProxy();
 					tmp.setId(result.getLong("id"));
-					tmp.setData(result.getDate("date").toLocalDate());
-					tmp.setDescription(result.getString("descripiton"));
+					tmp.setData(result.getDate("start").toLocalDate());
+					tmp.setDescription(result.getString("description"));
 				}
 			}
 			query.close();
@@ -90,7 +89,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 			PreparedStatement statement;
 
 			if(doRetrieveByKey(sportEvent.getId()) == null) {
-				query = "INSERT INTO event values(?,?,?,?,?,?);";
+				query = "INSERT INTO event values(?,?,?,?,?,?,?,?);";
 				System.out.println();
 				statement = connection.prepareStatement(query);
 				statement.setLong(1,sportEvent.getId());
@@ -99,11 +98,13 @@ public class SportEventDaoJDBC implements SportEventDao {
 				statement.setLong(4,sportEvent.getPlayground().getId());
 				statement.setString(5,sportEvent.getDescription());
 				statement.setLong(6,sportEvent.getOrganizzatore().getId());
+				statement.setTime(7, Time.valueOf(sportEvent.getBeginHour()));
+				statement.setTime(8,Time.valueOf(sportEvent.getEndHour()));
 				this.saveParticipate(sportEvent);
 				statement.execute();
 				statement.close();
 			} else {
-				query = "UPDATE event SET id=?, start=?, sport_id=?, playground_id=?, description=?, organizer_id=? WHERE id=?;";
+				query = "UPDATE event SET id=?, start=?, sport_id=?, playground_id=?, description=?, organizer_id=?,begin_hour=?,end_hour=? WHERE id=?;";
 				statement = connection.prepareStatement(query);
 				statement.setLong(1,sportEvent.getId());
 				statement.setDate(2, Date.valueOf(sportEvent.getStart()));
@@ -111,7 +112,9 @@ public class SportEventDaoJDBC implements SportEventDao {
 				statement.setLong(4,sportEvent.getPlayground().getId());
 				statement.setString(5,sportEvent.getDescription());
 				statement.setLong(6,sportEvent.getOrganizzatore().getId());
-				statement.setLong(7,sportEvent.getId());
+				statement.setTime(7,Time.valueOf(sportEvent.getBeginHour()));
+				statement.setTime(8,Time.valueOf(sportEvent.getEndHour()));
+				statement.setLong(9,sportEvent.getId());
 				this.updateParticipate(sportEvent);
 				statement.executeUpdate();
 				statement.close();
@@ -165,7 +168,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 	public boolean saveParticipate(SportEvent sportEvent) {
 		try{
 			for(Player p : sportEvent.getPlayers()) {
-				PreparedStatement query = connection.prepareStatement("INSERT INTO participate values(nextval('id'),?,?)");
+				PreparedStatement query = connection.prepareStatement("INSERT INTO participate values(nextval('participate_id_seq'),?,?)");
 				query.setLong(1,p.getId());
 				query.setLong(2,sportEvent.getId());
 				query.execute();
@@ -194,5 +197,76 @@ public class SportEventDaoJDBC implements SportEventDao {
 
 		return true;
 	}
+	@Override
+	public List<SportEvent> doRetrieveAllByPlaygroundsKey(Long ID) {
+		PreparedStatement query = null;
+		SportEvent tmp = null;
+		List<SportEvent> tmpList=new ArrayList<SportEvent>();
+
+	
+			try {
+				if(checkConnection()) {
+					query = connection.prepareStatement("SELECT * FROM event WHERE playground_id=? and start >= current_date;");
+					query.setLong(1, ID);
+					ResultSet result = query.executeQuery();
+
+					while(result.next()) {
+						tmp = new SportEventProxy();
+						tmp.setId(result.getLong("id"));
+						tmp.setData(result.getDate("start").toLocalDate());
+						tmp.setDescription(result.getString("description"));
+						tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
+						tmp.setEndHour(result.getTime("end_hour").toLocalTime());
+						tmpList.add(tmp);
+					}
+				}
+				query.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+		
+		return tmpList;
+	}
+	@Override
+	public List<SportEvent> doRetrieveAllBySportFacilityKey(Long ID) {
+		PreparedStatement query = null;
+		SportEvent tmp = null;
+		List<SportEvent> tmpList=new ArrayList<SportEvent>();
+
+	
+			try {
+				if(checkConnection()) {
+					
+					String sqlQuery="SELECT  playground.sport_facility_id ,event.* FROM playground,sport_facility,event" +
+					                 " where playground.sport_facility_id =sport_facility.id and event.playground_id=playground.id"+
+							           " and event.start >current_date and playground.sport_facility_id=?;";
+					query = connection.prepareStatement(sqlQuery);
+					query.setLong(1, ID);
+					ResultSet result = query.executeQuery();
+
+					while(result.next()) {
+						tmp = new SportEventProxy();
+						tmp.setId(result.getLong("id"));
+						tmp.setData(result.getDate("start").toLocalDate());
+						tmp.setDescription(result.getString("description"));
+						tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
+						tmp.setEndHour(result.getTime("end_hour").toLocalTime());
+						
+						tmpList.add(tmp);
+					}
+				}
+				query.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+			;
+					
+		
+		return tmpList;
+	}
+	
 
 }

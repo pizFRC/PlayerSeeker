@@ -1,13 +1,20 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import java.util.Map.Entry;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import mat.unical.it.PlayerSeeker.model.Address;
+import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.SportsFacilityDao;
 
@@ -17,6 +24,15 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 	
 	public SportsFacilityDaoJDBC(Connection connection) {
 		this.connection = connection;
+	}
+	private boolean checkConnection() {
+		try {
+			if(connection == null || connection.isClosed())
+				return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 	@Override
@@ -156,5 +172,46 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 			return null;
 		}
 		return facilityList;	
+	}
+	@Override
+	public Map<Long,Long> doRetrieveAllByDateAndSport(Long ID,LocalDate start,LocalTime begin,LocalTime end) {
+		PreparedStatement query = null;
+		
+		Map<Long,Long>mappa=new HashMap<Long,Long>();
+
+	String sqlQuery="SELECT playground.id,sport_facility_id from playground  WHERE  playground.sport_id=? and playground.id not in"+
+	                "(SELECT  playground.id FROM playground,sport_facility,event where playground.sport_facility_id =sport_facility.id"+
+			            " and event.playground_id=playground.id and event.sport_id=? and event.start=? and "+
+	                "( (event.begin_hour<= ? and (event.end_hour >= ? ) ) or " 
+			            +" (event.begin_hour<=? and (event.end_hour >= ?)) ) );";
+			try {
+				if(checkConnection()) {
+			
+					query = connection.prepareStatement(sqlQuery);
+					query.setLong(1, ID);
+					query.setLong(2, ID);
+					query.setDate(3,Date.valueOf(start)) ;
+					query.setTime(4,Time.valueOf(begin));
+					query.setTime(5,Time.valueOf(end));
+					query.setTime(6,Time.valueOf(end));
+					query.setTime(7,Time.valueOf(end));
+					
+					ResultSet result = query.executeQuery();
+
+					while(result.next()) {
+						
+						mappa.put(result.getLong("id"),result.getLong("sport_facility_id"));
+						
+					}
+				}
+				query.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+					
+		
+		return mappa;
 	}
 }

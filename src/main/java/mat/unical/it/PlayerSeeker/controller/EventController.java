@@ -2,6 +2,7 @@ package mat.unical.it.PlayerSeeker.controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,13 +63,13 @@ public class EventController {
 		se.setBeginHour(beginHour);
 		se.setEndHour(endHour);
 		se.setDescription("descrizione di prova");
-	
+		se.getPlayers().add(p);
+	   System.out.println("creazione evento:"+str);
 		if (DatabaseJDBC.getInstance().getSportsEventDao().saveOrUpdate(se))
 			res.setStatus(200);
 		else
 			res.setStatus(400);
-      	
-	
+      
 	
 		return str;
 	}

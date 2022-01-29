@@ -38,7 +38,7 @@ public class Playground {
 		this.sportFacilityId=sportFacilityId;
 		
 	}
-	public Long getSportFacilityId(Long sportFacilityId) {
+	public Long getSportFacilityId() {
 	return sportFacilityId;
 		
 	}
