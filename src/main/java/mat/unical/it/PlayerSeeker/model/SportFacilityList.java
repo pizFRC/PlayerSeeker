@@ -3,7 +3,9 @@ package mat.unical.it.PlayerSeeker.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
@@ -33,26 +35,40 @@ public class SportFacilityList {
 	public void setBySport(ArrayList<SportsFacility> strutture,Sport sport,String data,String oraInizio,String oraFine) {
 		listaStrutture.clear();
 	
-		ArrayList<Long>index=DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveAllByDateAndSport(sport.getId(),LocalDate.parse(data),LocalTime.parse(oraInizio),LocalTime.parse(oraFine));
-	 for(Long i:index)
-		 System.out.println(i);
+		Map<Long,Long>index=DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveAllByDateAndSport(sport.getId(),LocalDate.parse(data),LocalTime.parse(oraInizio),LocalTime.parse(oraFine));
+	 for(Long i:index.keySet())
+		 System.out.println("index:"+i+" : stru id "+index.get(i));
+	
+	
+	 System.out.println(strutture.size());
 		for(int i=0;i<strutture.size();i++) {
+		//	boolean orario=!index.contains(strutture.get(i).getId());
 			
-			for(int j=0;j<strutture.get(i).getPlaygrounds().size();j++ ) {
-				boolean checkSport=strutture.get(i).getPlaygrounds().get(j).getSport().getType().equals(sport.getType());
-				List<SportEvent>eventi=DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAll();
-				boolean orario=index.contains(strutture.get(i).getId());
-				if(orario)
-					System.out.println("libera"+strutture.get(i).getId());
-				if(checkSport && orario) {
-					
+
+			
+				
+				 Iterator<Playground> iterator = strutture.get(i).getPlaygrounds().iterator();
+			
+				 while (iterator.hasNext()) {
+					 Playground key = iterator.next();
+				   
+				     if (!index.containsKey(key.getId()) || !key.getSport().getType().equals(sport.getType()) ) {
+				        
+				    	 iterator.remove();
+				     }
+				 }
+							
+				
+				if(!strutture.get(i).getPlaygrounds().isEmpty()) {
+					System.out.println(strutture.get(i).getName());
 					listaStrutture.add(strutture.get(i));
-					break;
+				
 				}
+		
 			}
 			
 		}
 
-	}
+	
 }
 

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.boot.json.JacksonJsonParser;
@@ -38,6 +39,7 @@ import mat.unical.it.PlayerSeeker.model.Sport;
 import mat.unical.it.PlayerSeeker.persistance.Database;
 
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
+import mat.unical.it.PlayerSeeker.persistance.jdbc.PlayerDaoJDBC;
 
 @RestController
 public class SportFacilityController {
@@ -71,6 +73,8 @@ public class SportFacilityController {
 
 			ArrayList<SportsFacility> struttureBBOX = new ArrayList<SportsFacility>(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(tmpSW, tmpNE));
 			Sport s=DatabaseJDBC.getInstance().getSportDao().doRetrieveByKey((String)mappa.get("sport"));
+			for(SportsFacility str:struttureBBOX)
+				System.out.println("Stru:"+str.getName());
 			//data=2022-01-28, ora_inizio=08:00
 			String dataStr =(String)mappa.get("data");
 			String oraInizioStr = (String)mappa.get("ora_inizio") ;
@@ -99,5 +103,29 @@ public class SportFacilityController {
 		
 		res.setStatus(HttpServletResponse.SC_OK);
 		return result;
+	}
+	
+	
+	
+	@PostMapping("/checkImpegniPlayer")
+	public void getImpegniPlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
+		User u=(User)req.getSession().getAttribute("user");
+		JacksonJsonParser ja = new JacksonJsonParser();
+System.out.println(mes);
+		Map<String, Object> mappa = ja.parseMap(mes);
+	
+		String dataStr =(String)mappa.get("data");
+		String oraInizioStr = (String)mappa.get("ora_inizio") +":00" ;
+		String oraFineStr = (String)mappa.get("ora_fine") +":00" ;
+		if(DatabaseJDBC.getInstance().getPlayerDao().checkImpegni(u,LocalDate.parse(dataStr),LocalTime.parse(oraInizioStr),LocalTime.parse(oraFineStr)))
+		{
+			res.setStatus(200);
+			System.out.println("200");
+			
+		}else {
+			System.out.println("400");
+			res.setStatus(400);
+		}
+
 	}
 }

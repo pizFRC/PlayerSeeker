@@ -21,7 +21,15 @@ function next() {
 		return;
 
 	if ($(".d-y:first").attr("id") == "second_step"){
-		set_datetime_resoconto();
+		
+	
+if(check_impegni_player())
+     alert("prosegui");
+else{
+	alert("stop")
+	return;
+}
+	set_datetime_resoconto();
 addAddressInput();
 }
 	updateProgress(true);
@@ -570,7 +578,7 @@ function validateForm() {
 				ora_fine_consentita: "la partita deve durare almeno un'ora'"
 
 			}, struttura_selezionata: {
-				required: "seleziona una struttura per continuare",
+				required: "seleziona una struttura per continuare,se non vedi nessuna struttura prova a cambiare fascia oraria",
 			}, Nome: {
 				required: "Compilare correttamente i campi nome ,cognome",
 			},campo_selezionato:{
@@ -716,6 +724,7 @@ function getStruttureBB(ne_, sw_) {
 				   console.log(struttura.playgrounds);
 	console.log(item);
 				strutture.push(item)
+			
 				localStorage.setItem("strutture",JSON.stringify(strutture));
 			}
 
@@ -727,5 +736,35 @@ function getStruttureBB(ne_, sw_) {
 	});
 
 	return strutture;
+}
+
+function check_impegni_player(){
+	const datiToServer = {
+	    data:document.getElementById("data_input").value,
+		ora_inizio: document.getElementById("ora_inizio").value,
+		ora_fine: document.getElementById("ora_fine").value,
+	}
+	var reqSuccess=false;
+		$.ajax({
+		type: "POST",
+		url: "/checkImpegniPlayer",
+		contentType: "application/json",
+		dataType: 'json',
+		
+		data: JSON.stringify(datiToServer),
+		  async: false,
+         timeout: 30000,
+		statusCode: {
+            400: function() {
+             
+                 reqSuccess= false;
+            },
+            200: function() {
+             console.log("true");
+          reqSuccess= true;
+            }
+           },
+	});
+	return reqSuccess;
 }
 
