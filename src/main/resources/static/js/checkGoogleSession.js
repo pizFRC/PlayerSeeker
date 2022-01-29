@@ -1,5 +1,8 @@
 var auth2;
 function init() {
+	if(sessionStorage.getItem("user")){
+		return;
+	}
   	gapi.load('auth2', function() {
   		auth2 = gapi.auth2.init({
             client_id: '345576690488-5jgneq5npfclnad4b92mvflcuhsundgs.apps.googleusercontent.com'
@@ -17,15 +20,18 @@ function init() {
 					success: function(user) {
 						if(user.userType === "sport_facility"){
 							window.location.replace("/accountManagementSportFacility");
+							sessionStorage.setItem("user", true);
 						}
 						else{
 							window.location.reload();
+							sessionStorage.setItem("user", true);
 						}
 					},
 					error: function(){
 						if(window.location.pathname.split('/').pop() != "login"){
 							auth2.signOut();
 						}
+						sessionStorage.setItem("user", false);
 					}
 				});
 			}
