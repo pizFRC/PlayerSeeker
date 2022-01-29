@@ -262,9 +262,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 				e.printStackTrace();
 				return null;
 			}
-			String query2="SELECT distinct playground.sport_facility_id   FROM playground,sport_facility,event "+
-			                  "where playground.sport_facility_id =sport_facility.id and event.playground_id=playground.id and event.sport_id=? and "+
-					          "event.id not in(SELECT event.id FROM event where event.sport_id=? and (begin_hour<? and start=? ) );";
+			;
 					
 		
 		return tmpList;

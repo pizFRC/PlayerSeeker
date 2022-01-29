@@ -17,14 +17,41 @@ body {
 	
 }
 #alert_strutture{
-	width:40%;
-	height:20%;
+	width:10%;
+	height:10%;
+	border-radius:50%;
 	  position:absolute;
     z-index: 999;
     bottom:10;
     right:10;
-    overflow-x: hidden;
+  
+     overflow:hidden;
+     	transition: all .2s ease-in-out;
+}
+#alert_strutture{
+	width:10%;
+	height:10%;
+	border-radius:50%;
+	  position:absolute;
+    z-index: 999;
+    bottom:10;
+    right:10;
+  
+     overflow:hidden;
+     	transition: all .2s ease-in-out;
+}
+#alert_strutture > p{
+display:none;
+}
+#alert_strutture:hover > p{
+display:block;
+}
+#alert_strutture:hover{
+	width:30%;
+	height:20%;
+	overflow-x: hidden;
      overflow-y: auto;
+border-radius:0%;
 }
 #info_struttura_selezionata{
 	   width:35%;

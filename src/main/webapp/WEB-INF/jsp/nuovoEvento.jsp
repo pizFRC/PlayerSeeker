@@ -254,8 +254,8 @@
 							</div>
 							<div class="alert alert-warning alert-dismissible  d-flex align-items-center d-none "role="alert" id="alert_strutture">
 								
-								<div><i class="bi bi-exclamation-triangle"  width="24" height="24";></i> Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br> 
-								       prova a cambiare fascia oraria o a spostarti sulla mappa </div>
+								<div><i class="bi bi-exclamation-triangle"  width="24" height="24";></i> <p>Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br> 
+								       prova a cambiare fascia oraria o a spostarti sulla mappa<p> </div>
 								        <button type="button" class="btn-close" id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
 							</div>
 							
