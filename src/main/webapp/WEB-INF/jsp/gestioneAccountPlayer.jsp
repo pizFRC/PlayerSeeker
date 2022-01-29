@@ -30,11 +30,6 @@
 	.menu-item.selected {
 		font-weight: bold;
 		color: #e59558;
-		padding: 10px;
-		border-radius: 5px;
-		box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
-		-webkit-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
-		-moz-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
 	}
 	
 	.menu-icon {
@@ -74,7 +69,12 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Annulla</button>
-					<button type="button" class="btn btn-primary" onclick="location.href='/logout';">Effettua il logout</button>
+					<c:if test="${user.googleId == null }">
+						<button type="button" class="btn btn-primary" onclick="location.href='/logout'">Effettua il logout</button>
+					</c:if>
+					<c:if test="${user.googleId != null }">
+						<button type="button" class="btn btn-primary" onclick="signOut()">Effettua il logout</button>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -131,7 +131,9 @@
 				</div>
 				<div id = "menu" class = "d-grid gap-4 mt-4">
 					<button id="account_button" onclick="showAccountSettings()" class="button raleway_font text-start menu-item selected"> <i class="bi bi-person-fill menu-icon me-3"></i> Account</button>
-  					<button id="password_button" onclick="showPasswordSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-key menu-icon me-3"></i> Password</button>
+					<c:if test="${user.googleId == null }">
+  						<button id="password_button" onclick="showPasswordSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-key menu-icon me-3"></i> Password</button>
+  					</c:if>
   					<button id="event_button" onclick="showEventsSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-calendar2-event menu-icon me-3"></i> Eventi</button>
 				</div>
 				<button id="logout_button" onclick="$('#modal').modal('show');" class="button raleway_font text-start menu-item text-start" style="color:red"> <i class="bi bi-box-arrow-right menu-icon me-3"></i> Logout</button>
@@ -153,7 +155,8 @@
 				</div>
 				
 				<div class="row">
-					<form id = "account_form" class="row g-3">
+					<form id = "player_account_form" class="row g-3">
+					<c:if test="${user.googleId == null }">
 						<div class="col-md-6">
 							<label for="name" class="form-label">Nome</label> 
 							<input type="text" class="form-control" id="name" name="name" value = ${ profile.name } >
@@ -170,6 +173,7 @@
 							<label for="email" class="form-label">Email</label> 
 							<input type="email" class="form-control" id="email" name="email" value = ${ user.email }>
 						</div>
+					</c:if>
 						<div class="col-md-6">
 							<label for="birthday" class="form-label">Data di nascita</label> 
 							<input type="date" class="form-control" id="birthday" name="birthday" value = ${ profile.birthday }>
@@ -180,7 +184,12 @@
 						</div>
 						<div class="col-md-12 mt-5">
 							<div class="d-flex justify-content-between">
-								<button id="update_button" type="submit" onclick="updateAccount(event, '${ user.id }', '${ user.username }', '${ user.email }')" class="btn btn-primary">Aggiorna account</button>
+								<c:if test="${user.googleId == null }">
+									<button id="update_button" type="submit" onclick="updatePlayerAccount(event, '${ user.id }', '${ user.username }', '${ user.email }')" class="btn btn-primary">Aggiorna account</button>
+								</c:if>
+								<c:if test="${user.googleId != null }">
+									<button id="update_button" type="submit" onclick="updateGooglePlayerAccount(event, '${ user.id }', '${ user.email }', '${ profile.name }', '${ profile.surname }')" class="btn btn-primary">Aggiorna account</button>
+								</c:if>
 								<button type="submit" onclick="deleteAccount(event, ${ user.id })" class="btn btn-danger">Elimina account</button>
 							</div>
 						</div>
@@ -223,13 +232,12 @@
     		</div>
     		
     		<!-- EVENTS SETTINGS -->
-    		<div id = "eventsDiv" class="p-5 shadow-sm p-3 mb-5 bg-body rounded section">
+    		<div id = "eventsDiv" class="position-relative p-5 shadow-sm p-3 mb-5 bg-body rounded section">
     			<p class="fs-2 d-block">Impostazioni eventi</p>
     			<p class="fs-6 d-block">Visualizza e gestisci gli eventi a cui parteci e che hai organizzato</p>
-    			<div class="d-flex justify-content-between m-4 ps-5 pe-5">
+    			<div class="d-flex justify-content-between m-5 ps-5 pe-5">
 					<button id="organized_button" onclick="showOrganized()" class="button raleway_font text-start menu-item selected"> <i class="bi bi-pencil-fill me-3" style="font-size: 1rem;"></i> Organizzati da te </button>
   					<button id="participate_button" onclick="showParticipate()" class="button raleway_font text-start menu-item"> <i class="bi bi-calendar2-check me-3" style="font-size: 1rem;"></i> A cui partecipi</button>
-  					<a id="new_event_button"  href="/nuovoEvento"class="button raleway_font text-start menu-item"> <i class="bi bi-plus me-3" style="font-size: 1rem;"></i> Nuovo Evento</a>
 				</div>
 				<div id="organized" class = "section active">
 					<div class="card mb-3">
@@ -249,6 +257,11 @@
 				
 				<div id="patecipate" class = "section">
 					
+				</div>
+				<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
+					<a id="new_event" href="/nuovoEvento" class="new-event-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 rounded d-flex align-items-center">
+						<i style="font-size: 1.5rem"class="bi bi-plus-lg me-3"></i>Crea nuovo evento
+					</a>
 				</div>
 			</div>
     		
@@ -277,5 +290,9 @@
 	
 	<!-- Custom -->
 	<script type="text/javascript"  src="../js/accountManagement.js"> </script>
+	
+	<script type="text/javascript">
+		initializeAddress(${profile.address.longitude}, ${profile.address.latitude});
+	</script>
 	
 </body>

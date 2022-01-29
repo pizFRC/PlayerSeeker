@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,20 +51,27 @@
 			<div class="col-lg-12  col-xxl-12 col-xl-12 col-sm-12">
 				<div class="d-flex justify-content-between align-items-center mb-3">
 					<div class="tasti_da_nascondere">
-						<button id="btn_list" class="me-2 btn btn-primary btn-rounded btn-block" type="submit" value="Search">
+						<button id="btn_list" class="new-event-button btn btn-primary me-2" type="submit" value="Search">
 							<i class="bi bi-list"></i> Lista
 						</button>
-						<button id="btn_grid" class="btn btn-primary btn-rounded btn-block" type="submit" value="Search"> 
+						<button id="btn_grid" class="btn new-event-button btn btn-primary" type="submit" value="Search"> 
 							<i class="bi bi-grid-fill"></i> Griglia
 						</button>
 					</div>
 					<div id="rangeDiv" class="w-50">
 						<label for="range" class="form-label">Distanza dalla tua posizione: 15 km</label>
-						<input type="range" class="form-range" min="5" max="25" step="5" id="range">
+						<input type="range" class="custom-range-events form-range" min="5" max="25" step="5" id="range">
 					</div>
 				</div>
 				
 				<div class="row" id="card_container">
+				<c:if test="${user == null}">
+						<div class="alert alert-warning d-flex align-items-center" role="alert">
+							<i class="bi bi-info-circle-fill me-2"></i>
+							<div>Effettua l'accesso o cerca una città per visualizzare gli eventi!</div>
+						</div>
+				</c:if>
+				<c:if test="${user != null}">
 					<div
 						class="item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12 mx-auto m-1 pb-1">
 						<div class="card mb-3">
@@ -70,7 +79,7 @@
 								<h5 class="card-title">Special title treatment</h5>
 								<p class="card-text mb-3">With supporting text below as a natural
 									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<a href="#" class="btn btn-outline-primary">Go somewhere</a>
 							</div>
 						</div>
 
@@ -82,7 +91,7 @@
 								<h5 class="card-title">Special title treatment</h5>
 								<p class="card-text mb-3">With supporting text below as a natural
 									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<a href="#" class="btn btn-outline-primary">Go somewhere</a>
 							</div>
 						</div>
 
@@ -94,13 +103,37 @@
 								<h5 class="card-title">Special title treatment</h5>
 								<p class="card-text mb-3">With supporting text below as a natural
 									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<a href="#" class="btn btn-outline-primary">Go somewhere</a>
 							</div>
 						</div>
 					</div>
+				</c:if>
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
+	<c:if test="${user == null}">
+		<span id="popover-event" class="d-flex d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Effettua l'accesso per visualizzare gli eventi vicini a te">
+  			<button disabled id="my_position" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+				<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill me-3"></i>Vicini a te
+			</button>
+		</span>
+		<span id="popover-new-event" class="d-flex d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Effettua l'accesso per creare nuovi eventi">
+  			<button disabled id="new_event" class="new-event-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 rounded d-flex align-items-center">
+				<i style="font-size: 1.5rem"class="bi bi-plus-lg me-3"></i>Nuovo evento
+			</button>
+		</span>
+	</c:if>
+	<c:if test="${user != null}">
+		<button id="my_position" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+			<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill me-3"></i>Vicini a te
+		</button>
+		<a id="new_event" href="/nuovoEvento" class="new-event-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 rounded d-flex align-items-center">
+			<i style="font-size: 1.5rem"class="bi bi-plus-lg me-3"></i>Nuovo evento
+		</a>
+	</c:if>
 	</div>
 
 	<!-- FOOTER -->

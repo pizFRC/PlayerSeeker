@@ -110,4 +110,9 @@ public class DatabaseJDBC implements Database{
 	public SportEventIdBroker getSportEventIdBroker() {
 		return new SportEventIdBroker(connection);
 	}
+
+	@Override
+	public OpeningHoursIdBroker getOpeningHoursIdBroker() {
+		return new OpeningHoursIdBroker(connection);
+	}
 }

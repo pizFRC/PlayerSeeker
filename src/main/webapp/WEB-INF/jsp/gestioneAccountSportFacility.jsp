@@ -75,8 +75,52 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">Annulla</button>
-					<button type="button" class="btn btn-primary"
-						onclick="location.href='/logout';">Effettua il logout</button>
+					<c:if test="${user.googleId == null }">
+						<button type="button" class="btn btn-primary" onclick="location.href='/logout'">Effettua il logout</button>
+					</c:if>
+					<c:if test="${user.googleId != null }">
+						<button type="button" class="btn btn-primary" onclick="signOut()">Effettua il logout</button>
+					</c:if>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id = "success_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Operazione effettuata</h5>
+					<button type="button" onclick="location.reload();" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-success" role="alert">
+						<h4 class="alert-heading">Ben fatto!</h4>
+						<p>Le informazioni del tuo account sono state modificate con successo! E stata inviata un'email di conferma.</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="location.reload();" class="btn btn-primary" onclick="location.href='/logout';">Capito</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id = "error_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Operazione non effettuata</h5>
+					<button type="button" onclick="location.reload();" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger" role="alert">
+						<h4 class="alert-heading">Ops!</h4>
+						<p>Si è verificato un problema temporaneo. Ti invitiamo a riprovare!</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="location.reload();" class="btn btn-primary" onclick="location.href='/logout';">Riprova</button>
 				</div>
 			</div>
 		</div>
@@ -120,6 +164,34 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="playground_modal" class="modal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-floating">
+						<select class="form-select mb-3" id="sport">
+						</select> <label for="sport">Seleziona uno sport</label>
+					</div>
+					<div class="form-floating mb-3">
+						<textarea class="form-control" placeholder="Inserisci qui la descrizione del campo" id="description" style="height: 100px"></textarea>
+						<label for="description">Descrizione</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Annulla</button>
+					<button type="button" class="btn btn-primary"
+						onclick="modifyPlayground(event);">Effettua le modifiche</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class= "row p-0 p-sm-5">
 		<div class="col-md-3 p-3">
@@ -132,7 +204,9 @@
 				</div>
 				<div id = "menu" class = "d-grid gap-4 mt-4">
 					<button id="account_button" onclick="showAccountSettings()" class="button raleway_font text-start menu-item selected"> <i class="bi bi-person-fill menu-icon me-3"></i> Account</button>
-  					<button id="password_button" onclick="showPasswordSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-key menu-icon me-3"></i> Password</button>
+  					<c:if test="${user.googleId == null }">
+  						<button id="password_button" onclick="showPasswordSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-key menu-icon me-3"></i> Password</button>
+  					</c:if>
   					<button id="playground_button" onclick="showPlaygroudsSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-puzzle menu-icon me-3"></i> Campi da gioco </button>
   					<button id="event_button" onclick="showEventsSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-calendar2-event menu-icon me-3"></i> Eventi</button>
 				</div>
@@ -145,25 +219,40 @@
     		<div id = "accountDiv" class="p-5 shadow-sm p-3 mb-5 bg-body rounded section active">
     			<p class="fs-2 d-block">Impostazioni account</p>
     			<p class="fs-6 d-block">Aggiorna i dati del tuo account</p>
+    			
+    			<div id="account_error" style = "display:none !important"class="alert alert-danger d-flex align-items-center mt-3 mb-0"
+					role="alert">
+					<i class="bi bi-exclamation-circle-fill me-2"></i>
+					<div>
+						<p class="fs-6"></p>
+					</div>
+				</div>
+				
     			<div class="row">
-					<form class="row g-3">
+					<form id="sport_facility_account_form" class="row g-3">
 						<div class="col-md-6">
 							<label for="name" class="form-label">Nome struttura</label> 
-							<input type="text" class="form-control" id="name" value = ${ profile.name } >
+							<input type="text" class="form-control" id="name" name="name" value = ${ profile.name } >
 						</div>
+						<c:if test="${user.googleId == null }">
 						<div class="col-md-6">
 							<label for="name" class="form-label">Username</label> 
-							<input type="text" class="form-control" id="username" value = ${ user.username } >
+							<input type="text" class="form-control" id="username" name="username" value = ${ user.username } >
 						</div>
 						<div class="col-md-6">
+							<label for="email" class="form-label">Email</label> 
+							<input type="email" class="form-control" id="email" name="email" value = ${ user.email }>
+						</div>
+						</c:if>
+						<div class="col-md-6">
 							<label for="surname" class="form-label">Telefono</label> 
-							<input type="text" class="form-control" id="phone" value = ${ profile.phone }>
+							<input type="text" class="form-control" id="phone" name="phone" value = ${ profile.phone }>
 						</div>
 						<div class="col-md-6">
 							<label for="username" class="form-label">Sito web</label> 
-							<input type="text" class="form-control" id="web_site_url" value = ${ profile.webSiteUrl }>
+							<input type="text" class="form-control" id="web_site_url" name="web_site_url" value = ${ profile.webSiteUrl }>
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<label for="address" class="form-label">Indirizzo</label>
 							<div id ="addressDiv"></div>
 						</div>
@@ -179,7 +268,7 @@
 											<th scope="col"></th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id ="opening_hours">
 										<c:forEach var="i" begin="1" end="7" step="1">
 											<tr>
 											<c:choose>
@@ -214,9 +303,16 @@
 								</table>
 							</div>
 						</div>
-						
-						<div class="col-md-12 mt-4">
-							<button type="submit" onclick="updateAccount(${ user.id })" class="btn btn-primary">Aggiorna profilo</button>
+						<div class="col-md-12 mt-5">
+							<div class="d-flex justify-content-between">
+								<c:if test="${user.googleId == null }">
+									<button id="update_button" type="submit" onclick="updateSportFacilityAccount(event, '${ user.id }', '${ user.username }', '${ user.email }')" class="btn btn-primary">Aggiorna account</button>
+								</c:if>
+								<c:if test="${user.googleId != null }">
+									<button id="update_button" type="submit" onclick="updateGoogleSportFacilityAccount(event, '${ user.id }', '${ user.email }')" class="btn btn-primary">Aggiorna account</button>
+								</c:if>
+								<button type="submit" onclick="deleteAccount(event, ${ user.id })" class="btn btn-danger">Elimina account</button>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -226,22 +322,31 @@
     		<div id = "passwordDiv" class="p-5 shadow-sm p-3 mb-5 bg-body rounded section">
     			<p class="fs-2 d-block">Impostazioni account</p>
     			<p class="fs-6 d-block">Aggiorna la tua password</p>
+    			
+    			<div id="password_error" style = "display:none !important"class="alert alert-danger d-flex align-items-center mt-3 mb-0"
+					role="alert">
+					<i class="bi bi-exclamation-circle-fill me-2"></i>
+					<div>
+						<p class="fs-6"></p>
+					</div>
+				</div>
+				
     			<div class="row">
-					<form class="row g-3">
+					<form id="password_form" class="row g-3">
 						<div class="col-md-12">
 							<label for="current_password" class="form-label">Password attuale</label> 
-							<input type="password" class="form-control" id="current_password">
+							<input type="password" class="form-control" id="current_password" name="current_password">
 						</div>
 						<div class="col-md-12">
 							<label for="password" class="form-label">Nuova password</label> 
-							<input type="password" class="form-control" id="password">
+							<input type="password" class="form-control" id="password" name="password">
 						</div>
 						<div class="col-md-12">
 							<label for="confirm_password" class="form-label">Conferma password</label> 
-							<input type="password" class="form-control" id="confirm_password">
+							<input type="password" class="form-control" id="confirm_password" name="confirm_password">
 						</div>
 						<div class="col-md-12 mt-4">
-							<button type="submit" class="btn btn-primary">Aggiorna password</button>
+							<button type="submit" class="btn btn-primary" onclick="updatePassword(event, '${ user.id }')">Aggiorna password</button>
 						</div>
 					</form>
 				</div>
@@ -258,7 +363,12 @@
 								<h5 class="card-title">Campo da ${playground.sport.type}</h5>
 								<label>Descrizione:</label>
 								<p class="fs-6 d-block mb-3">${playground.description }</p>
-								<a href="#" class="btn btn-primary">Visualizza dettagli</a>
+								
+								<div class="d-flex justify-content-start">
+									<button onclick="showPlaygroundDetails(event, '${playground.id}', '${playground.sport.id}', '${playground.description }')" class="btn btn-primary me-3">Visualizza dettagli</button>
+									<button onclick="" class="btn btn-danger">Elimina campo</button>
+								</div>
+								
 							</div>
 						</div>
 					</c:forEach>
@@ -315,5 +425,9 @@
 	
 	<!-- Custom -->
 	<script type="text/javascript"  src="../js/accountManagement.js"> </script>
+	
+	<script type="text/javascript">
+		initializeAddress(${profile.address.longitude}, ${profile.address.latitude});
+	</script>
 	
 </body>

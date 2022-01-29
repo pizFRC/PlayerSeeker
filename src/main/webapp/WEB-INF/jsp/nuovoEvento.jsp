@@ -74,14 +74,15 @@
 		</div>
  	</c:if>
  	
- 	<c:if test="${user != null && user.userType == 'player'}">
+ <c:if test="${user != null && user.userType == 'player'}">
+ <div class ="m-5">
  	 <div class="container-fluid" id="title">
             
             <h1 class="h1" align="center" style="color: #e59558">Crea il tuo evento </h1>
             
             </div>
 	<!-- FORM -->
-<div class="container shadow-sm   bg-body  pb-2 border border-2 rounded-2 h-75" id="form_creazione_evento">
+<div class="container shadow-sm bg-body p-5 border border-2 rounded-2" id="form_creazione_evento">
 
 		<div class="d-flex justify-content-between h-100">
 			<div class="align-self-center" id="div_btn_prev">
@@ -363,6 +364,7 @@
 		
 		</div>
 	</div>
+</div>
 	</c:if>
 	
 	<!-- end FORM -->

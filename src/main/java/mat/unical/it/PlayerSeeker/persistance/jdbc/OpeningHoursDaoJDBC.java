@@ -82,45 +82,34 @@ public class OpeningHoursDaoJDBC implements OpeningHoursDao {
 
     @Override
     public boolean saveOrUpdate(OpeningHours hour, Long sportFacilityId) {
-        String query;
-        PreparedStatement statement;
-        try {
-            if(hour.getId() == null) {
-                query = "INSERT INTO facility_hours (sport_facility_id, day, open_time, close_time) VALUES (?, ?,?,?)";
-                statement = connection.prepareStatement(query);
-                statement.setLong(1, sportFacilityId);
-                statement.setInt(2,hour.getDay());
-                statement.setTime(3,Time.valueOf(hour.getOpenTime()));
-                statement.setTime(4,Time.valueOf(hour.getCloseTime()));
-                statement.execute();
-                statement.close();
-            } else {
-                query = "UPDATE facility_hours SET sport_facility_id = ?, day = ?, open_time = ?, close_time = ? WHERE id = ?";
-                statement = connection.prepareStatement(query);
-                statement.setLong(1, sportFacilityId);
-                statement.setInt(2,hour.getDay());
-                statement.setTime(3,Time.valueOf(hour.getOpenTime()));
-                statement.setTime(4,Time.valueOf(hour.getCloseTime()));
-                statement.setLong(5, hour.getId());
-                statement.executeUpdate();
-                statement.close();
-            }
-        } catch(SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    	String query;
+    	PreparedStatement statement;
+    	try {
+    		query = "INSERT INTO facility_hours VALUES (?,?,?,?,?)";
+    		statement = connection.prepareStatement(query);
+    		statement.setLong(1, hour.getId());
+    		statement.setLong(2, sportFacilityId);
+    		statement.setInt(3,hour.getDay());
+    		statement.setTime(4,Time.valueOf(hour.getOpenTime()));
+    		statement.setTime(5,Time.valueOf(hour.getCloseTime()));
+    		statement.execute();
+    		statement.close();
+    	} catch(SQLException e) {
+    		e.printStackTrace();
+    		return false;
+    	}
+    	return true;
     }
 
     @Override
     public boolean delete(OpeningHours hour) {
-        PreparedStatement query;
-
+    	String query = "DELETE FROM facility_hours WHERE id=?";
+        PreparedStatement statement;
         try {
-            query = connection.prepareStatement("DELETE facility_hours WHERE id=?");
-            query.setLong(1,hour.getId());
-            query.executeQuery();
-            query.close();
+        	statement = connection.prepareStatement(query);
+        	statement.setLong(1,hour.getId());
+        	statement.executeQuery();
+        	statement.close();
         } catch(SQLException e) {
             e.printStackTrace();
             return false;

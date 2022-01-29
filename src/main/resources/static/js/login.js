@@ -1,7 +1,23 @@
 function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+ 	var profile = googleUser.getBasicProfile();
+	var google_id = profile.getId();
+	$.ajax({
+		type: "POST",
+		url: "checkGoogleUser",
+		contentType: "application/json",
+		data: JSON.stringify(google_id),
+		async: false,
+		success: function(user) {
+			if (user.userType === "sport_facility") {
+				window.location.replace("/accountManagementSportFacility")
+			}
+			else {
+				window.location.replace("/");
+			}
+		},
+		error: function() {
+			switchToGoogleRegistration(profile.getId(), profile.getGivenName(), profile.getFamilyName(), profile.getEmail());
+		}
+	});
 }
+

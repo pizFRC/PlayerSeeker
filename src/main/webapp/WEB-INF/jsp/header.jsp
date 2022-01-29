@@ -21,13 +21,13 @@
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     <c:if test="${user == null || user.userType == 'player'}">
         <li class="nav-item">
-          	<a class="nav-link active" aria-current="page" href="/">Home</a>
+          	<a id="home" class="nav-link" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          	<a class="nav-link" href="/eventi">Eventi</a>
+          	<a id="events" class="nav-link" href="/eventi">Eventi</a>
        	 </li>
         <li class="nav-item">
-          	<a class="nav-link" href="/strutture">Strutture</a>
+          	<a id="sport_facility" class="nav-link" href="/strutture">Strutture</a>
         </li>
      </c:if>
      </ul>

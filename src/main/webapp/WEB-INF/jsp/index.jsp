@@ -55,9 +55,9 @@
 		<p style="color: #e59558" class="fs-4 fw-bold text-center col-12 d-flex justify-content-center"> Migliori eventi </p>
 		<p class="pe-5 ps-5 fs-6 col-12 text-center d-flex justify-content-center"> Ecco i migliori eventi, selezionati con cura soltanto per te!</p>
 	</div>
-	<div class="carousel slide row" data-bs-ride="carousel">
-		<!-- The slideshow/carousel -->
-		<div id="carousel_eventi" class="carousel-inner ">
+	<!-- The slideshow/carousel -->
+	<div id="carousel_eventi" class="carousel slide row" data-bs-ride="carousel">
+		<div class="carousel-inner ">
 			<div class="carousel-item active">
 				<div class="container">
 					<div class="row ps-5 pe-5">
@@ -159,9 +159,9 @@
 		<p style="color: #4960c5" class="fs-4 fw-bold text-center col-12 d-flex justify-content-center"> Migliori strutture </p>
 		<p class="pe-5 ps-5 fs-6 col-12 text-center d-flex justify-content-center"> Ed ecco anche le migliori srutture dove organizzare i tuoi eventi!</p>
 	</div>
-	<div class="carousel slide row" data-bs-ride="carousel">
-		<!-- The slideshow/carousel -->
-		<div id="carousel_strutture" class="carousel-inner ">
+	<!-- The slideshow/carousel -->
+	<div id="carousel_strutture" class="carousel slide row" data-bs-ride="carousel">
+		<div class="carousel-inner ">
 			<div class="carousel-item active">
 				<div class="container">
 					<div class="row ps-5 pe-5">

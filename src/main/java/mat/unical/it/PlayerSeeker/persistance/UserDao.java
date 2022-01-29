@@ -8,6 +8,7 @@ public interface UserDao {
 	
 	public List<User> doRetrieveAll() throws SQLException;
 	public User doRetrieveByKey(String username);
+	public User doRetrieveByGoogleId(String username);
 	public User doRetrieveByMail(String mail);
 	public boolean saveOrUpdate(User player);
 	public boolean delete(User player);

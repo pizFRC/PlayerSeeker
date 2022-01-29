@@ -1,15 +1,27 @@
-
+var lastScrollTop = 0;
+$(window).scroll(function(event){
+   var st = $(this).scrollTop();
+   if (st > lastScrollTop){
+       $("#new_event").html('<i style="font-size: 1.5rem"class="bi bi-plus-lg"></i>');
+	   $("#my_position").html('<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill"></i>');
+   } else {
+       $("#new_event").html('<i style="font-size: 1.5rem"class="bi bi-plus-lg me-3"></i>Nuovo evento');
+	   $("#my_position").html('<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill me-3"></i>Vicini a te');
+   }
+   lastScrollTop = st;
+});
 
 let lastViewPressed = "list";
-
-
 $(document).ready(function() {
-
-
+	$("nav").find("a").removeClass("active");
+	$("nav").find("#events").addClass("active");
+	$('#popover-event').popover();
+	$('#popover-new-event').popover();
 	mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q';
 	const addressGeocoder = new MapboxGeocoder({
 		accessToken: mapboxgl.accessToken,
-		placeholder: 'Città, Via, Numero Civico',
+		placeholder: 'Città',
+		types: 'place'
 	});
 
 	addressGeocoder.addTo("#address");

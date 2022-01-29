@@ -1,5 +1,20 @@
+var lastScrollTop = 0;
+$(window).scroll(function(event){
+   var st = $(this).scrollTop();
+   if (st > lastScrollTop){
+	   $("#my_position").html('<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill"></i>');
+   } else {
+	   $("#my_position").html('<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill me-3"></i>Vicine a te');
+   }
+   lastScrollTop = st;
+});
+
 var placeName = null;
 $(document).ready(function() {
+	$("nav").find("a").removeClass("active");
+	$("nav").find("#sport_facility").addClass("active");
+	$('#popover').popover();
+	
 	mapboxgl.accessToken = 'pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q';
 	const addressGeocoder = new MapboxGeocoder({
 		accessToken: mapboxgl.accessToken,
@@ -18,7 +33,9 @@ $(document).ready(function() {
 	$("#search").on("click", function(e){
 		e.preventDefault();
 		var validator = $("#search_form").validate();
-		$.validator.addMethod('isValid', function() {
+		$.validator.addMethod('isValid', function(value, element) {
+			if(this.optional(element))
+				return true;
 			if (placeName === $("#address").val())
 				return true;
 			else
@@ -26,7 +43,6 @@ $(document).ready(function() {
 		}, 'Inserire un indirizzo valido');
 
 		$("#address").rules("add", {
-			required: true,
 			isValid: true,
 			messages: {
 				required: "Inserisci il tuo indirizzo"
@@ -206,7 +222,7 @@ function createCard(sportFacility) {
 	contentCard.append(address, phoneDiv);
 
 	var btnCard = document.createElement("a");
-	btnCard.className = "btn btn-primary";
+	btnCard.className = "btn btn-outline-primary";
 	btnCard.innerHTML = "Visualizza dettagli";
 	$(btnCard).attr("href", "sportFacilityDetails/" + sportFacility.id);
 	$(btnCard).attr("target", "_blank");

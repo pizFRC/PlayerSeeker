@@ -5,6 +5,7 @@ public class User implements java.io.Serializable{
 	private static final long serialVersionUID = -6640442094222681788L;
 	
 	private Long id = null;
+	private String googleId = null;
 	private String username = null;
 	private String password = null;
 	private String userType = null;
@@ -18,6 +19,14 @@ public class User implements java.io.Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getGoogleId() {
+		return googleId;
+	}
+
+	public void setGoogleId(String googleId) {
+		this.googleId = googleId;
 	}
 	
 	public String getPassword() {

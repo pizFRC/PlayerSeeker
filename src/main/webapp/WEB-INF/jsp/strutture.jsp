@@ -50,11 +50,11 @@
 			<div class="col-lg-12  col-xxl-12 col-xl-12 col-sm-12">
 			<div class="d-flex justify-content-between align-items-center mb-3">
 				<div class="tasti_da_nascondere">
-					<button id="btn_list" class="me-2 btn btn-primary btn-rounded btn-block" type="submit" value="Search">
+					<button id="btn_list" class="near-position-button btn btn-primary me-2" type="submit" value="Search">
 						<i class="bi bi-list"></i> Lista
 					</button>
 
-					<button id="btn_grid" class="btn btn-primary btn-rounded btn-block" type="submit" value="Search"> 
+					<button id="btn_grid" class="near-position-button btn btn-primary" type="submit" value="Search"> 
 						<i class="bi bi-grid-fill"></i> Griglia
 					</button>
 				</div>
@@ -63,7 +63,7 @@
 						<label for="range" class="form-label">Distanza dalla tua posizione: &nbsp</label> 
 						<p id = "distance"> 15 km</p>
 					</div>
-						<input type="range" class="form-range" min="5" max="25" step="5" id="range">
+						<input type="range" class="custom-range-facility form-range" min="5" max="25" step="5" id="range">
 				</div>
 			</div>
 			
@@ -77,6 +77,22 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
+	<c:if test="${user == null}">
+		<span id="popover" class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Effettua l'accesso per visualizzare le strutture vicine a te">
+  			<button type="button" disabled id="my_position" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+				<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill me-3"></i>Vicine a te
+			</button>
+		</span>
+	</c:if>
+	<c:if test="${user != null}">
+		<button id="my_position" onclick="changeCurrentPosition(${profile.address.longitude}, ${profile.address.latitude}); showNearbySportFacility()" 
+				class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+			<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill me-3"></i>Vicine a te
+		</button>
+	</c:if>
+	
 	</div>
 
 	<!-- FOOTER -->
@@ -95,7 +111,7 @@
 	<script type="text/javascript" src="../js/strutture.js" crossorigin="anonymous"></script>
 	<c:if test="${user != null}">
 	<script type="text/javascript">
-		changeCurrentPosition(${profile.address.longitude}, ${profile.address.latitude})
+		changeCurrentPosition(${profile.address.longitude}, ${profile.address.latitude});
 		showNearbySportFacility();
 	</script>
 	</c:if>

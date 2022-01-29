@@ -102,6 +102,7 @@ public class RegistrationController {
 				DatabaseJDBC.getInstance().getPlaygroundDao().saveOrUpdate(playground, sportFacility.getId());
 			}
 			for(OpeningHours openingHours : sportFacility.getOpeningHours()) {
+				openingHours.setId(DatabaseJDBC.getInstance().getOpeningHoursIdBroker().getId());
 				DatabaseJDBC.getInstance().getoOpeningHoursDao().saveOrUpdate(openingHours, sportFacility.getId());
 			}
 			res.setStatus(HttpServletResponse.SC_OK);

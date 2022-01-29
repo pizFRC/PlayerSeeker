@@ -1,41 +1,26 @@
-function switchToRegistration(){
-	console.log("registrazione");
+var _googleId = null;
+var _name = null;
+var _surname = null;
+var _email = null;
+
+function switchToGoogleRegistration(id, n, s, e){
+	_googleId = id;
+	_name = n;
+	_surname = s;
+	_email = e;
 	$("#login_form").children().slice(1).remove();
-	addAccountSelector();
+	addGoogleAccountSelector();
 }
 
-function nextStep() {
-	$("#back_button").prop("disabled", false);
-	var index = $(".step.active").index(".step"),
-    	stepsCount = $(".step").length;
-	if (index < stepsCount - 1) {
-        index++;
-        $(".step").hide();
-		$(".step").removeClass("active")
-		$(".step").eq(index).addClass("active");
-		$(".step.active").show();
-    }
-}
-
-function prevStep() {
-	$("#next_button").text("Avanti");
-	var index = $(".step.active").index(".step");
-	if (index > 0) {
-        index--;
-		$(".step.active").remove();
-        $(".step").eq(index).addClass("active");
-		$(".step.active").show();
-    };
-	if (index === 0) {
-		$("#back_button").prop("disabled", true);
-	}
-}
-
-function userEventHandler() {
+function googleUserEventHandler() {
 	$("#next_button").unbind();
 	$("#next_button").on("click", function(event) {
 		event.preventDefault();
-		validateForm();
+		var accountType = $('#account_type').find(":selected").text();
+		if (accountType === $('#account_type').find("#player").text())
+			showGooglePlayerForm();
+		else
+			showGoogleSportFacilityForm();
 	});
 	$("#back_button").unbind();
 	$("#back_button").on("click", function(event) {
@@ -44,90 +29,65 @@ function userEventHandler() {
 	});
 }
 
-function playerEventHandler(){
+function googlePlayerEventHandler(){
 	$("#next_button").unbind();
 	$("#next_button").on("click", function(event) {
 		event.preventDefault();
-		validatePlayerForm();
+		validateGooglePlayerForm();
 	});
 	$("#back_button").unbind();
 	$("#back_button").on("click", function(event) {
 		event.preventDefault();
-		userEventHandler();
+		googleUserEventHandler();
 		prevStep();
 	});
 }
 
-function sportFacilityEventHandler() {
+function googleSportFacilityEventHandler() {
 	$("#next_button").unbind();
 	$("#next_button").on("click", function(event) {
 		event.preventDefault();
-		validateSportFacilityForm();
+		validateGoogleSportFacilityForm();
 	});
 	$("#back_button").unbind();
 	$("#back_button").on("click", function(event) {
 		event.preventDefault();
-		userEventHandler();
+		googleUserEventHandler();
 		prevStep();
 	});
 }
 
-function openHourEventHandler() {
+function googleOpenHourEventHandler() {
 	$("#next_button").unbind();
 	$("#next_button").on("click", function(event) {
 		event.preventDefault();
-		getOpeningHours();
+		getGoogleOpeningHours();
 	});
 	$("#back_button").unbind();
 	$("#back_button").on("click", function(event) {
 		event.preventDefault();
 		$("#login_form").css('min-width', '450px');
-		sportFacilityEventHandler();
+		googleSportFacilityEventHandler();
 		prevStep();
 	});
 }
 
-function playgroudEventHandler() {
+function googlePlaygroudEventHandler() {
 	$("#next_button").unbind();
 	$("#next_button").on("click", function(event) {
 		event.preventDefault();
-		getPlaygrounds();
+		getGooglePlaygrounds();
 	});
 	$("#back_button").unbind();
 	$("#back_button").on("click", function(event) {
 		event.preventDefault();
 		playgroundCount = 1;
-		openHourEventHandler();
+		googleOpenHourEventHandler();
 		prevStep();
 	});
 }
 
-function registrationSuccessfulMessageEventHandler() {
-	$("#next_button").unbind();
-	$("#next_button").on("click", function(event) {
-		event.preventDefault();
-		document.location.href = "/login";
-	});
-	$("#back_button").unbind();
-	$("#back_button").on("click", function(event) {
-		event.preventDefault();
-		document.location.href = "/";
-	});
-}
-
-function createInputField(type, id, placeholder){
-	var input = document.createElement("input");
-	input.type = type;
-	input.className = "form-control mt-3";
-	input.id = id;
-	input.name = id;
-	input.placeholder = placeholder;
-	input.required;
-	input.autofocus;
-	return input;
-}
-
-function addAccountSelector() {
+function addGoogleAccountSelector() {
 	var messageDiv = document.createElement("div");
 	messageDiv.id = "message_div";
 	var messageContainer = document.createElement("div");
@@ -154,12 +114,6 @@ function addAccountSelector() {
 	subTitle.className = "fs-6 mb-4";
 	subTitle.innerText = "Conosciamoci meglio, dicci qualcosa su di te!";
 	
-	var username = createInputField("username", "username", "Username");
-	var email = createInputField("email", "email", "Email");
-	email.title = "Inserire un'email valida";
-	var password = createInputField("password", "password", "Password");
-	var confirmPassword = createInputField("password", "confirm_password", "Conferma la password");
-	
 	var container = document.createElement("div");
 	
 	var label = document.createElement("label");
@@ -182,7 +136,7 @@ function addAccountSelector() {
 	container.append(label);
 	container.append(select);
 	
-	step.append(title, subTitle, username, email, password, confirmPassword, container);
+	step.append(title, subTitle, container);
 	
 	var navigationBar = document.createElement("div");
 	navigationBar.className = "d-flex justify-content-between mt-5";
@@ -204,14 +158,14 @@ function addAccountSelector() {
 	$("#back_button").prop("disabled", true);
 	
 	//CAMBIO EVENT HANDLER
-	userEventHandler();
+	googleUserEventHandler();
 	
 }
 
 var allSports = new Array();
 var sports = new Array();
 
-function showPlayerForm() {
+function showGooglePlayerForm() {
 	var step = document.createElement("div");
 	step.id = "step";
 	step.className = "step";
@@ -223,9 +177,6 @@ function showPlayerForm() {
 	var subTitle = document.createElement("p");
 	subTitle.className = "fs-6 mb-4";
 	subTitle.innerText = "Conosciamoci meglio, dicci qualcosa su di te!";
-	
-	var name = createInputField("text", "name", "Nome");
-	var surname = createInputField("text", "surname", "Cognome");
 	
 	var dateLabel = document.createElement("label");
 	dateLabel.innerText = "Inserisci la tua data di nascita";
@@ -305,7 +256,7 @@ function showPlayerForm() {
 	});
 
 	sportsDiv.append(sportsContainer);
-	step.append(title, subTitle, name, surname, dateLabel, birthday, addressLabel, address, sportLabel, sportsDiv);
+	step.append(title, subTitle, dateLabel, birthday, addressLabel, address, sportLabel, sportsDiv);
 
 	$("#login_form").find("#navigation_bar").before(step);
 
@@ -331,17 +282,16 @@ function showPlayerForm() {
 	
 	//CAMBIO EVENT HANDLER
 	$("#next_button").text("Registrati");
-	playerEventHandler();
-	
+	googlePlayerEventHandler();
+
 	nextStep();
 }
 
-function registerPlayer() {
+function registerGooglePlayer() {
 	const user = {
-		username: $("#username").val(),
-		password: $("#password").val(),
+		googleId: _googleId,
 		userType: "player",
-		email: $("#email").val()
+		email: _email
 	};
 	
 	$.ajax({
@@ -352,8 +302,8 @@ function registerPlayer() {
 		success: function(User) {
 			const player = {
 				id: User.id,
-				name: $("#name").val(),
-				surname: $("#surname").val(),
+				name: _name,
+				surname: _surname,
 				birthday: new Date($("#birthday").val()),
 				address: {
 					longitude: window.address.geometry.coordinates[0],
@@ -371,8 +321,8 @@ function registerPlayer() {
 					//INVIO EMAIL
 					emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
 					var templateParams = {
-						to_name: $("#name").val(),
-						to_email: $("#email").val(),
+						to_name: _name,
+						to_email: _email,
 						message: "Complimenti, la registrazione è avvenuta con successo."
 					};
 					emailjs.send('player_seeker_service', 'player_seeker_template', templateParams)
@@ -443,7 +393,7 @@ function registrationSuccessfulMessage() {
 	nextStep();
 }
 
-function showSportFacilityForm() {
+function showGoogleSportFacilityForm() {
 	var step = document.createElement("div");
 	step.id = "step";
 	step.className = "step";
@@ -487,78 +437,11 @@ function showSportFacilityForm() {
 	});
 	
 	//CAMBIO EVENT HANDLER
-	sportFacilityEventHandler();
+	googleSportFacilityEventHandler();
 	nextStep();
 }
 
-function createDayRow(dayName, id) {
-	var dayRow = document.createElement("div");
-	dayRow.className = "row d-flex align-items-center mb-4";
-	
-	var day = document.createElement("div");
-	day.className = "col-md-2 col-6";
-	day.innerText = dayName;
-	
-	var toggle = document.createElement("div");
-	toggle.className = "col-md-2 col-6";
-
-	var form = document.createElement("div");
-	form.className = "form-check form-switch";
-	
-	var input = document.createElement("input");
-	input.className = "form-check-input";
-	input.type = "checkbox";
-	$(input).attr("role", "switch");
-	input.id = id;
-	$(input).on("change", function() {
-		if($(this).is(':checked')) {
-			$("#" + this.id + "_label").text("Aperto");
-			$(open_hour).attr("disabled", false);
-			$(close_hour).attr("disabled", false);
-		}
-		else {
-			$("#" + this.id + "_label").text("Chiuso");
-			$(open_hour).attr("disabled", "disabled");
-			$(close_hour).attr("disabled", "disabled");
-		}
-	});
-	
-	var label = document.createElement("label");
-	label.className = "form-check-label";
-	label.id = id + "_label";
-	$(label).attr("for", id);
-	label.innerText = "Chiuso";
-	
-	form.append(input, label);
-	toggle.append(form);
-
-	var open_hour_div = document.createElement("div");
-	open_hour_div.className = "d-flex justify-content-center col-md-4 col-6";	
-	var open_hour_label = document.createElement("label");
-	open_hour_label.className = "me-2";
-	open_hour_label.innerText = "Apre alle:"
-	var open_hour = document.createElement("input");
-	open_hour.type = "time";
-	open_hour.id = id + "_oper_hour"
-	$(open_hour).attr("disabled", "disabled");
-	open_hour_div.append(open_hour_label, open_hour);
-	
-	var close_hour_div = document.createElement("div");
-	close_hour_div.className = "d-flex justify-content-center col-md-4 col-6";	
-	var close_hour_label = document.createElement("label");
-	close_hour_label.className = "me-2";
-	close_hour_label.innerText = "Chiude alle:"
-	var close_hour = document.createElement("input");
-	close_hour.type = "time";
-	close_hour.id = id + "_close_hour"
-	$(close_hour).attr("disabled", "disabled");
-	close_hour_div.append(close_hour_label, close_hour);
-	
-	dayRow.append(day, toggle, open_hour_div, close_hour_div);
-	return dayRow;
-}
-
-function showOpeningHours() {
+function showGoogleOpeningHours() {
 	$("#login_form").css('min-width', '700px');
 	
 	var step = document.createElement("div");
@@ -591,12 +474,12 @@ function showOpeningHours() {
 	$("#login_form").find("#navigation_bar").before(step);
 	
 	//CAMBIO EVENT HANDLER
-	openHourEventHandler();
+	googleOpenHourEventHandler();
 	nextStep();
 }
 
 var openingHours = new Array();
-function getOpeningHours() {
+function getGoogleOpeningHours() {
 	var count = 0;
 	var check = true;
 	$('#days input:checked').each(function() {
@@ -621,118 +504,11 @@ function getOpeningHours() {
 		return;
 	}
 	$("#message_div").hide();
-	showPlaygroundForm();
+	showGooglePlaygroundForm();
 }
 
-var playgroundCount = 1;
-function addPlaygrund(index) {
-	var container = document.createElement("div");
-	container.id = "parent_" + index;
-	container.className = "playground";
-	
-	var titleDiv = document.createElement("div");
-	titleDiv.className = "d-flex mt-4";
-	var title = document.createElement("p");
-	title.className = "fs-5 fw-bold me-3";
-	title.innerText = "Campo da gioco n. " + index;
-	if (index > 1) {
-		var deletePlaygroundButton = document.createElement("button");
-		deletePlaygroundButton.className = "delete-playground btn btn-outline-danger btn-sm";
-		deletePlaygroundButton.id = index;
-		deletePlaygroundButton.innerHTML = '<i class = "bi bi-dash" style = "color: #dc3545" ></i> Elimina campo';
-		$(deletePlaygroundButton).on("click", function(event) {
-			event.preventDefault();
-						console.log($("#parent_" + this.id));
-			$("#parent_" + this.id).remove();
-
-			playgroundCount--;
-		});
-		titleDiv.append(title, deletePlaygroundButton);
-	}
-	else {
-		titleDiv.append(title);
-	}
-	
-	var label = document.createElement("label");
-	label.className = "form-label mt-3";
-	label.htmlFor = "sport"
-	label.innerHTML = "Scegli lo sport praticabile nel campo";
-	
-	var select = document.createElement("select");
-	select.className = "form-select";
-	select.id = "sport";
-	
-	$.ajax({
-		type: "POST",
-		url: "/getSportList",
-		contentType: "application/json",
-		dataType: 'json',
-		async: false,
-		success: function (list) { 
-			$.each(list, function(index, sport) {
-				allSports.push(sport);
-				var option = document.createElement("option");
-				option.id = sport.type;
-				option.innerHTML = sport.type;
-				select.append(option);
-			});
-    	},
-	 	statusCode: {
-    		503: function() {
-    	  		 	alert( "Problema");
- 				 }
-		}
-	});
-	
-	var descriptionTitle = document.createElement("p");
-	descriptionTitle.className = "fs-6 mt-3";
-	descriptionTitle.innerText = "Aggiungi una descrizione";
-	
-	var description = document.createElement("div");
-	description.className = "input-group mt-2";
-	var textArea = document.createElement("textarea");
-	textArea.className = "form-control";
-	textArea.id = "description";
-	description.append(textArea);
-	
-	var photoTitle = document.createElement("p");
-	photoTitle.className = "fs-6 mt-3";
-	photoTitle.innerText = "Aggiungi le foto del campo";
-	
-	/*var photoDiv = document.createElement("div");
-	photoDiv.className = "d-flex mt-2 mb-2";
-	var addPhoto = document.createElement("button");
-	addPhoto.className = "btn btn-outline-primary text-center me-3";
-	addPhoto.id = "add_photo";
-	addPhoto.name = index;
-	$(addPhoto).css("min-height", "100px");
-	$(addPhoto).on("click", function(event) {
-		event.preventDefault();
-		$(this).siblings("#photos").trigger('click');
-	});
-	var div = document.createElement("div");
-	div.className = "row row-cols-1";
-	var img = document.createElement("i");
-	img.className = "col bi bi-camera";
-	var p = document.createElement("p");
-	p.className = "fs-6";
-	p.innerText = "Aggiungi foto";
-	div.append(img, p);
-	addPhoto.append(div);
-	var inputFile = document.createElement("input");
-	inputFile.id = "photos";
-	inputFile.type = "file";
-	$(inputFile).attr('multiple', true);
-	$(inputFile).hide();
-	
-	photoDiv.append(addPhoto, inputFile);*/
-
-	container.append(titleDiv, label, select, descriptionTitle, description);
-	return container;
-}
-
-function showPlaygroundForm() {
-	console.log("show playground 1");
+function showGooglePlaygroundForm() {
+	console.log("show playground 2");
 	$("#login_form").css('max-height', '750px');
 	$("#login_form").css('overflow-y', 'auto');
 	var step = document.createElement("div");
@@ -761,13 +537,13 @@ function showPlaygroundForm() {
 	
 	//CAMBIO EVENT HANDLER
 	$("#next_button").text("Registrati");
-	playgroudEventHandler();
+	googlePlaygroudEventHandler();
 	nextStep();
 }
 
 var playgrounds = new Array();
-function getPlaygrounds(){
-	console.log("playground 1");
+function getGooglePlaygrounds(){
+console.log("playground 2");
 	$('#playgrounds').children('.playground').each(function () {
 		var element = this;
 		var selectedSport = $(element).find('#sport').val();
@@ -792,16 +568,15 @@ function getPlaygrounds(){
 		});
 	});
 	
-	registerSportFacility();
+	registerGoogleSportFacility();
 }
 
-function registerSportFacility() {
-	console.log("registration 1");
+function registerGoogleSportFacility() {
+	console.log("google registration");
 	const user = {
-		username: $("#username").val(),
-		password: $("#password").val(),
+		googleId: _googleId,
 		userType: "sport_facility",
-		email: $("#email").val()
+		email: _email
 	};
 	
 	$.ajax({
@@ -833,7 +608,7 @@ function registerSportFacility() {
 					emailjs.init("user_BBCOuErVHBtOAapPkMCjn");
 					var templateParams = {
 						to_name: $("#name").val(),
-						to_email: $("#email").val(),
+						to_email: _email,
 						message: "Complimenti, la registrazione è avvenuta con successo."
 					};
 					emailjs.send('player_seeker_service', 'player_seeker_template', templateParams)

@@ -5,9 +5,6 @@
 <html lang="it">
 <head>
 
-	<meta name="google-signin-client_id" content="345576690488-5jgneq5npfclnad4b92mvflcuhsundgs.apps.googleusercontent.com">  
-	<!-- Google login -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<!-- Mapbox CSS-->
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
@@ -21,13 +18,13 @@
 	
 </head>
 
-<body id="login_body">
+<body class="d-flex align-items-center" id="login_body">
 	<!-- HEADER --->
 	<jsp:include page="header.jsp" />
 
-	<div class="d-flex align-items-center justify-content-center h-100 w-100">
-		<form class="shadow-lg bg-body rounded p-5" method="post"
-			id="login_form" action="checkUser" style="max-width: 450px;">
+	<div id="login_form_div" class="d-flex align-items-center justify-content-center p-0 p-sm-5 w-100">
+		<form class="shadow-lg bg-body rounded p-5 pt-4" method="post"
+			id="login_form" action="checkUser" style="min-width: 450px; max-width: 450px;">
 			<div class="text-center">
 				<img class="m-3 text-center" rel="icon" width="200" height="65"
 					 src="img/logo.png" type="image/x-icon">
@@ -56,8 +53,7 @@
 					class="link-primary">Non hai ancora un account? Registrati!</a>
 				<h3 class="fs-6 fw-bold mt-5 mb-3" style="text-align: center;">Puoi
 					anche accedere con</h3>
-				<div class="g-signin2 row justify-content-center"
-					data-onsuccess="onSignIn"></div>
+				<div class="g-signin2 row justify-content-center" data-onsuccess="onSignIn"></div>
 			</div>
 		</form>
 	</div>
@@ -87,8 +83,9 @@
 	<!-- Custom -->
 	<script type="text/javascript"  src="../js/login.js"> </script>
 	<script type="text/javascript"  src="../js/registration.js"> </script>
+	<script type="text/javascript"  src="../js/googleRegistration.js"> </script>
 	<script type="text/javascript"  src="../js/validators.js"> </script>
-	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript"  src="../js/googleValidators.js"> </script>
 </body>
 </html>
 

@@ -224,11 +224,6 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="position-absolute top-0 end-0 p-0 p-5 mb-5" style="z-index: 2;">
-			<button type="button" class="rounded-pill btn btn-primary shadow-lg p-3 mb-5 rounded d-flex align-items-center"> 
-			<i style="font-size: 1.5rem"class="bi bi-plus-lg me-2"></i>Crea nuovo evento</button>
-		</div>
 	</div>
 	
 
