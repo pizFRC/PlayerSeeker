@@ -490,9 +490,9 @@ function addInputNameGiocatore() {
 
 
 function loadSportType() {
-
 	var fileName = "/getSportList";
 	var xhttp = new XMLHttpRequest();
+
 
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -504,7 +504,8 @@ function loadSportType() {
 				var option=document.createElement("option");
 				option.innerHTML=value.type;
 				option.value=value.type;
-				option.onclick=function() {
+				$(option).onclick=function() {
+				console.log("select");
 	            document.getElementById("num_giocatori").value = value.requiredPlayers-1;
 	         	$("#set_giocatori").empty();
 	        	document.getElementById("sport_selezionato_resoconto").innerHTML = value.type;
