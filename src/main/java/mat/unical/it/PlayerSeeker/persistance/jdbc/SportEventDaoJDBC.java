@@ -71,6 +71,9 @@ public class SportEventDaoJDBC implements SportEventDao {
 					tmp = new SportEventProxy();
 					tmp.setId(result.getLong("id"));
 					tmp.setData(result.getDate("start").toLocalDate());
+					tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
+					tmp.setEndHour(result.getTime("end_hour").toLocalTime());
+					tmp.setPlayersNumber(result.getInt("players_number"));
 					tmp.setDescription(result.getString("description"));
 				}
 			}
@@ -231,42 +234,28 @@ public class SportEventDaoJDBC implements SportEventDao {
 	}
 	@Override
 	public List<SportEvent> doRetrieveAllBySportFacilityKey(Long ID) {
-		PreparedStatement query = null;
+		String sqlQuery="SELECT e.* FROM event e INNER JOIN playground p ON e.playground_id = p.id WHERE p.sport_facility_id = ? AND e.start > current_date;";
 		SportEvent tmp = null;
 		List<SportEvent> tmpList=new ArrayList<SportEvent>();
+		try {
+			PreparedStatement query = connection.prepareStatement(sqlQuery);
+			query.setLong(1, ID);
+			ResultSet result = query.executeQuery();
 
-	
-			try {
-				if(checkConnection()) {
-					
-					String sqlQuery="SELECT  playground.sport_facility_id ,event.* FROM playground,sport_facility,event" +
-					                 " where playground.sport_facility_id =sport_facility.id and event.playground_id=playground.id"+
-							           " and event.start >current_date and playground.sport_facility_id=?;";
-					query = connection.prepareStatement(sqlQuery);
-					query.setLong(1, ID);
-					ResultSet result = query.executeQuery();
-
-					while(result.next()) {
-						tmp = new SportEventProxy();
-						tmp.setId(result.getLong("id"));
-						tmp.setData(result.getDate("start").toLocalDate());
-						tmp.setDescription(result.getString("description"));
-						tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
-						tmp.setEndHour(result.getTime("end_hour").toLocalTime());
-						
-						tmpList.add(tmp);
-					}
-				}
-				query.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
-				return null;
+			while(result.next()) {
+				tmp = new SportEventProxy();
+				tmp.setId(result.getLong("id"));
+				tmp.setData(result.getDate("start").toLocalDate());
+				tmp.setDescription(result.getString("description"));
+				tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
+				tmp.setEndHour(result.getTime("end_hour").toLocalTime());
+				tmpList.add(tmp);
 			}
-			;
-					
-		
+			query.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 		return tmpList;
 	}
-	
-
 }

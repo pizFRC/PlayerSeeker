@@ -180,8 +180,8 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 		Map<Long,Long>mappa=new HashMap<Long,Long>();
 
 	String sqlQuery="select p.id, p.sport_facility_id from playground p where p.sport_id = ? and p.id not in" +
-	   " (select p.id from playground p inner join event e on e.playground_id = p.id where p.sport_id = ?" +
-			 " and e.start = ? and not (e.end_hour <= ? or e.begin_hour >= ?))";
+					"(select p.id from playground p inner join event e on e.playground_id = p.id where p.sport_id = ?" +
+					"and e.start = ? and not (e.end_hour <= ? or e.begin_hour >= ?))";
 			try {
 				if(checkConnection()) {
 			

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import mat.unical.it.PlayerSeeker.model.Address;
 import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.Playground;
 import mat.unical.it.PlayerSeeker.model.Sport;
@@ -37,7 +38,6 @@ public class EventController {
 	
 		JacksonJsonParser ja = new JacksonJsonParser();
 
-       
 		ObjectMapper mapper = new ObjectMapper();
 		String sportType=(String) ja.parseMap(str).get("sport");
 		Long id=Long.valueOf((String)ja.parseMap(str).get("campo"));
@@ -84,5 +84,16 @@ public class EventController {
 		return "visualizzaEventi";
 	}
 	
-
+	@PostMapping("/getEventByBBox")
+	public List<SportEvent> getEventByBBox(HttpServletRequest req, HttpServletResponse res, @RequestBody List<Address> bbox) {
+		Address southWest = bbox.get(0);
+		Address northEast = bbox.get(1);
+		List<SportsFacility> facility = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(southWest, northEast);
+		List<SportEvent> result = new ArrayList<SportEvent>();
+		for(SportsFacility f : facility) {
+			result.addAll(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(f.getId()));
+		}
+		res.setStatus(HttpServletResponse.SC_OK);
+		return result;
+	}
 }

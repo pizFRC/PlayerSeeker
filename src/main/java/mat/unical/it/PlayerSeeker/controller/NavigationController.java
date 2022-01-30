@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
 @Controller
@@ -36,20 +37,21 @@ public class NavigationController {
 		return "visualizzaStruttura";
 	}
 	
-	@GetMapping("/visualizzaEventi")
-	public String visualizzaEventi() {
-		return "visualizzaEventi";
-	}
-	
 	@GetMapping("/nuovoEvento")
 	public String nuovoEvento() {
 		return "nuovoEvento";
 	}
 	
 	@GetMapping("/sportFacilityDetails/{id}")
-	public String getAttr(HttpServletRequest req, HttpServletResponse res, @PathVariable(value="id") String id) {
+	public String sportFacilityDetails(HttpServletRequest req, HttpServletResponse res, @PathVariable(value="id") String id) {
 		req.setAttribute("sportFacility", DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.parseLong(id)));
 		return "sportFacilityDetails";
+	}
+	
+	@GetMapping("/eventDetails/{id}")
+	public String eventDetails(HttpServletRequest req, HttpServletResponse res, @PathVariable(value="id") String id) {
+		req.setAttribute("event", DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveByKey(Long.parseLong(id)));
+		return "eventDetails";
 	}
 	
 	@GetMapping("/accountManagementPlayer")
