@@ -244,10 +244,10 @@
 						<div class="card-body">
 							<h5 class="card-title">Evento di Calcetto</h5>
 							<div class="row row-cols-4 mb-3">
+								<div class="col"><i class="bi bi-geo-alt"></i> Struttura</div>
 								<div class="col"><i class="bi bi-calendar-event me-2"></i> Data evento </div>
 								<div class="col"><i class="bi bi-hourglass-top me-2"></i> Inizia alle: </div>
-								<div class="col"><i class="bi bi-hourglass-bottom"></i> Finisce alle: </div>
-								<div class="col"><i class="bi bi-geo-alt"></i> Struttura</div>
+								<div class="col"><i class="bi bi-hourglass-bottom"></i> Finisce alle: </div>							
 							</div>
 							<a href="#" class="btn btn-primary">Visualizza dettagli</a>
 						</div>

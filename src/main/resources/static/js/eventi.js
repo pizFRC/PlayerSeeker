@@ -83,6 +83,7 @@ $("#btn_list").on('click', function(e) {
 	if (lastViewPressed === "list")
 		return;
 	lastViewPressed = "list";
+	document.querySelectorAll(".info-container").forEach(element => $(element).addClass("col-md-3"));
 	document.querySelectorAll(".item").forEach(element => element.className = "item col-12 m-1 pb-1");
 });
 
@@ -91,15 +92,13 @@ $("#btn_grid").click(function() {
 	var larghezza = $(window).width();
 	if (larghezza <= 991) {
 		return;
-	} else {
-		if ((larghezza > 991 && larghezza <= 1199) && lastViewPressed === "grid") {
-			document.querySelectorAll(".item").forEach(element => element.className = "item  col-md-6 col-sm-12 col-lg-6  col-xl-4 col-xxl-4  mx-auto m-1 pb-1");
-		} else {
-			if (lastViewPressed === "list")
-				document.querySelectorAll(".item").forEach(element => element.className = "item col-4 col-md-6 col-lg-4  col-xl-4 col-xxl-4 mx-auto m-1 pb-1");
-		}
-		lastViewPressed = "grid";
 	}
+	else if (lastViewPressed === "list") {
+		document.querySelectorAll(".info-container").forEach(element => $(element).removeClass("col-md-3"));
+		document.querySelectorAll(".item").forEach(element => element.className = "item col-4");
+	}
+	lastViewPressed = "grid";
+
 });
 
 //Automatic list view
@@ -107,21 +106,17 @@ window.addEventListener("resize", function() {
 	var larghezza = $(window).width();
 	if (larghezza <= 991) {
 		$(".tasti_da_nascondere").hide(500);
-		document.querySelectorAll(".item").forEach(element => element.className = "item col-sm-12 col-md-12 col-lg-12 col-xl-12  mx-auto m-1 pb-1");
-		lastViewPressed = "list";
+		document.querySelectorAll(".item").forEach(element => element.className = "item col-12");
 		$("#rangeDiv").removeClass("w-50");
 		$("#rangeDiv").addClass("w-100");
 	} else {
 		$(".tasti_da_nascondere").show(500);
 		$("#rangeDiv").removeClass("w-100");
 		$("#rangeDiv").addClass("w-50");
-		if ((larghezza > 991 && larghezza <= 1199) && lastViewPressed === "grid") {
-			//$(".tasti_da_nascondere").show(1000);
-			document.querySelectorAll(".item").forEach(element => element.className = "item  col-md-6 col-sm-12 col-lg-6  col-xl-4 col-xxl-4  mx-auto m-1 pb-1");
-		} else {
-			// $(".tasti_da_nascondere").show(1000);
-			if (lastViewPressed === "grid")
-				document.querySelectorAll(".item").forEach(element => element.className = "item col-4 col-md-6 col-lg-4  col-xl-4 col-xxl-4 mx-auto m-1 pb-1");
+		console.log(lastViewPressed);
+		if (lastViewPressed === "grid") {
+			
+			document.querySelectorAll(".item").forEach(element => element.className = "item col-4");
 		}
 	}
 });
@@ -175,7 +170,7 @@ function showNearbyEvents(){
 function createCard(event) {
 
 	var divItem = document.createElement("div");
-	divItem.className = "item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12 mx-auto m-1 pb-1";
+	divItem.className = "item col-12";
 
 	var divCard = document.createElement("div");
 	divCard.className = "card mb-3";
@@ -191,9 +186,9 @@ function createCard(event) {
 	contentCard.className = "row card-text mb-3";
 	
 	var address = document.createElement("div");
-	address.className = "d-flex col-12 col-md-6 mb-2";
+	address.className = "info-container d-flex col-12 col-md-3 mb-2";
 	var addressIcon = document.createElement("i");
-	addressIcon.className = "bi bi-geo-alt-fill me-2";
+	addressIcon.className = "bi bi-geo-alt me-2";
 	var addressName = document.createElement("p");
 	addressName.className = "fs-6";
 	address.append(addressIcon, addressName);
@@ -207,21 +202,42 @@ function createCard(event) {
 		}
 	});
 	
-	var phoneDiv = document.createElement("div");
-	phoneDiv.className = "d-flex col-12 col-md-6 mb-2";
-	var phoneIcon = document.createElement("i");
-	phoneIcon.className = "bi bi-telephone-fill me-2";
-	var phone = document.createElement("p");
-	phone.className = "fs-6";
+	var dateDiv = document.createElement("div");
+	dateDiv.className = "info-container d-flex col-12 col-md-3 mb-2";
+	var dateIcon = document.createElement("i");
+	dateIcon.className = "bi bi-calendar-event me-2";
+	var date = document.createElement("p");
+	date.className = "fs-6"
+	$(date).text(event.start);
 	
-	phoneDiv.append(phoneIcon, phone);
+	dateDiv.append(dateIcon, date);
 	
-	contentCard.append(address, phoneDiv);
+	var beginDiv = document.createElement("div");
+	beginDiv.className = "info-container d-flex col-12 col-md-3 mb-2";
+	var beginIcon = document.createElement("i");
+	beginIcon.className = "bi bi-hourglass-top me-2";
+	var begin = document.createElement("p");
+	begin.className = "fs-6"
+	$(begin).text(event.beginHour);
+	
+	beginDiv.append(beginIcon, begin);
+	
+	var endDiv = document.createElement("div");
+	endDiv.className = "info-container d-flex col-12 col-md-3 mb-2";
+	var endIcon = document.createElement("i");
+	endIcon.className = "bi bi-hourglass-bottom me-2";
+	var end = document.createElement("p");
+	end.className = "fs-6"
+	$(end).text(event.endHour);
+	
+	endDiv.append(endIcon, end);
+	
+	contentCard.append(address, dateDiv, beginDiv, endDiv);
 
 	var btnCard = document.createElement("a");
 	btnCard.className = "btn btn-outline-primary";
 	btnCard.innerHTML = "Visualizza dettagli";
-	$(btnCard).attr("href", "sportFacilityDetails/" + event.id);
+	$(btnCard).attr("href", "eventDetails/" + event.id);
 	$(btnCard).attr("target", "_blank");
 
 	divBodyCard.append(titleCard, contentCard, btnCard);

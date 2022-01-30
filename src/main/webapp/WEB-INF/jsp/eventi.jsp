@@ -48,7 +48,7 @@
 	<div class="m-5">
 		<div class="row">
 			<div class="col-lg-12  col-xxl-12 col-xl-12 col-sm-12">
-				<div class="d-flex justify-content-between align-items-center mb-3">
+				<div class="d-flex justify-content-between align-items-center mb-5">
 					<div class="tasti_da_nascondere">
 						<button id="btn_list" class="new-event-button btn btn-primary me-2" type="submit" value="Search">
 							<i class="bi bi-list"></i> Lista
@@ -58,7 +58,10 @@
 						</button>
 					</div>
 					<div id="rangeDiv" class="w-50">
-						<label for="range" class="form-label">Distanza dalla tua posizione: 15 km</label>
+						<div class="d-flex">
+							<label for="range" class="form-label">Distanza dalla tua posizione: &nbsp</label>
+							<p id="distance">15 km</p>
+						</div>
 						<input type="range" class="custom-range-events form-range" min="5" max="25" step="5" id="range">
 					</div>
 				</div>
@@ -112,6 +115,11 @@
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
 	<script type="text/javascript" src="../js/eventi.js" crossorigin="anonymous"></script>
-	
+	<c:if test="${user != null}">
+	<script type="text/javascript">
+		changeCurrentPosition(${profile.address.longitude}, ${profile.address.latitude});
+		showNearbyEvents();
+	</script>
+	</c:if>
 </body>
 </html>

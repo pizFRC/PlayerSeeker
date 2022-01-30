@@ -71,6 +71,9 @@ public class SportEventDaoJDBC implements SportEventDao {
 					tmp = new SportEventProxy();
 					tmp.setId(result.getLong("id"));
 					tmp.setData(result.getDate("start").toLocalDate());
+					tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
+					tmp.setEndHour(result.getTime("end_hour").toLocalTime());
+					tmp.setPlayersNumber(result.getInt("players_number"));
 					tmp.setDescription(result.getString("description"));
 				}
 			}

@@ -19,6 +19,7 @@ public class SportEvent implements java.io.Serializable {
     private Playground playground = null;
     private String description = null;
     private Player organizzatore = null;
+    private int playersNumber = 0;
     private List<Player> players = new ArrayList<Player>();
 
 	@Override
@@ -145,5 +146,13 @@ public class SportEvent implements java.io.Serializable {
 
 	public void setEndHour(LocalTime endHour) {
 		this.endHour = endHour;
+	}
+
+	public int getPlayersNumber() {
+		return playersNumber;
+	}
+
+	public void setPlayersNumber(int playersNumber) {
+		this.playersNumber = playersNumber;
 	}
 }
