@@ -192,24 +192,7 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 					query.setTime(4,Time.valueOf(begin));
 					query.setTime(5,Time.valueOf(end));
 					
-					/*	query.setDate(3,Date.valueOf(start)) ;
 					
-					query.setTime(4,Time.valueOf(begin));
-					query.setTime(5,Time.valueOf(end));
-					
-					query.setTime(6,Time.valueOf(begin));
-					query.setTime(7,Time.valueOf(end));
-					query.setTime(8,Time.valueOf(begin));
-					
-					
-					query.setTime(9,Time.valueOf(begin));
-					query.setTime(10,Time.valueOf(end));
-					query.setTime(11,Time.valueOf(end));
-					
-					query.setTime(12,Time.valueOf(begin));
-					query.setTime(13,Time.valueOf(end));
-					query.setTime(14,Time.valueOf(end));
-					*/
 					ResultSet result = query.executeQuery();
 
 					while(result.next()) {

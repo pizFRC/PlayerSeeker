@@ -70,7 +70,7 @@ public class SportFacilityController {
 			Address tmpSW = new Address();
 			tmpSW.setLatitude(sw_lat.floatValue());
 			tmpSW.setLongitude(sw_lng.floatValue());
-
+            
 			ArrayList<SportsFacility> struttureBBOX = new ArrayList<SportsFacility>(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(tmpSW, tmpNE));
 			Sport s=DatabaseJDBC.getInstance().getSportDao().doRetrieveByKey((String)mappa.get("sport"));
 			for(SportsFacility str:struttureBBOX)
