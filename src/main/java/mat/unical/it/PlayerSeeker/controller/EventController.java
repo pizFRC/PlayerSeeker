@@ -45,14 +45,16 @@ public class EventController {
 		LocalDate start=LocalDate.parse((String)ja.parseMap(str).get("data"));
 		LocalTime beginHour=LocalTime.parse((String)ja.parseMap(str).get("ora_inizio"));
 		LocalTime endHour=LocalTime.parse((String)ja.parseMap(str).get("ora_fine"));
-	
+	    Integer missingPlayersNumber=Integer.valueOf((String) ja.parseMap(str).get("giocatori_mancanti"));
 		
+	    
 		//ciò che serve a creare l'evento
 		User user=(User)req.getSession().getAttribute("user");
       	Player p=DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(user.getId());
 		Sport sport=DatabaseJDBC.getInstance().getSportDao().doRetrieveByKey(sportType);
 		Playground pg=DatabaseJDBC.getInstance().getPlaygroundDao().doRetrieveByKey(id);
-		 
+		System.out.println("numero giocatori partecipanti");
+		 System.out.println( );
 		SportEvent se=new SportEvent();
 		se.setId(DatabaseJDBC.getInstance().getSportEventIdBroker().getId());
 		se.setSportFacility(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(idStruttura));
@@ -64,6 +66,7 @@ public class EventController {
 		se.setEndHour(endHour);
 		se.setDescription("descrizione di prova");
 		se.getPlayers().add(p);
+		se.setPlayersNumber(sport.getrequiredPlayers()-missingPlayersNumber);
 	   System.out.println("creazione evento:"+str);
 		if (DatabaseJDBC.getInstance().getSportsEventDao().saveOrUpdate(se))
 			res.setStatus(200);

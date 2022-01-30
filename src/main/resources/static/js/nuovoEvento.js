@@ -498,24 +498,36 @@ function loadSportType() {
 		if (this.readyState == 4 && this.status == 200) {
 			var jsonObj = JSON.parse(xhttp.response);
            var select=document.getElementById("sport_select");
-			
+			console.log(jsonObj);
 			Object.entries(jsonObj).forEach((entry) => {
 				const [key, value] = entry;
 				var option=document.createElement("option");
 				option.innerHTML=value.type;
 				option.value=value.type;
-				option.onclick=function() {
-	            document.getElementById("num_giocatori").value = value.requiredPlayers-1;
-	         	$("#set_giocatori").empty();
-	        	document.getElementById("sport_selezionato_resoconto").innerHTML = value.type;
-
-
-           };
 				select.append(option);
 				
 				
 			});
-   
+			select.addEventListener('click', function(e) {
+				e = e || window.event;
+				var target = e.target || e.srcElement,
+					text = target.textContent || target.innerText;
+				console.log(target.value);
+
+				if (target.value != "") {
+					var type = target.value;
+					Object.entries(jsonObj).forEach((entry) => {
+						console.log(entry[1].type);
+						if (entry[1].type == target.value) {
+							document.getElementById("num_giocatori").value = entry[1].requiredPlayers - 1;
+							$("#set_giocatori").empty();
+							document.getElementById("sport_selezionato_resoconto").innerHTML = entry[1].type;
+
+						}
+					});
+				}
+			}, false);
+     
 		} else if(this.status == 503 || this.status == 400){
 			alert("	errore nel reperire la lista degli sport")
 
@@ -613,6 +625,7 @@ function validateForm() {
 		ora_inizio: document.getElementById("ora_inizio").value,
 		ora_fine: document.getElementById("ora_fine").value,
 		privacy:document.querySelector('input[name="privacy_cornfirm"]:checked').value,
+		giocatori_mancanti:document.getElementById("num_giocatori").value ,
 		players:[]
 		
 	}
@@ -773,8 +786,8 @@ function check_impegni_player(){
 		
 		data: JSON.stringify(datiToServer),
 		  async: false,
-         timeout: 30000,
-		statusCode: {
+        timeout: 30000,
+	statusCode: {
             400: function() {
              
                  reqSuccess= false;
@@ -783,9 +796,9 @@ function check_impegni_player(){
              console.log("true");
           reqSuccess= true;
             }
-           },
+          },
 	});
-	return reqSuccess;
+		return reqSuccess;
 }
 $(document).ready(function() {
 $(document).on('click', '#btn_close_alert' , function(e) {
