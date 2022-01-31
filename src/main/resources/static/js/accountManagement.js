@@ -100,19 +100,199 @@ function showEventsSettings(){
 	$("#organized").addClass("active");
 }
 
+function createCard(event, userId, isOrganizer) {
 
-function showOrganized(){
+	var divItem = document.createElement("div");
+	divItem.className = "item col-12";
+
+	var divCard = document.createElement("div");
+	divCard.className = "card mb-3";
+
+	var divBodyCard = document.createElement("div");
+	divBodyCard.className = "card-body";
+
+	var titleCard = document.createElement("h5");
+	titleCard.className = "card-title"; 
+	$(titleCard).text("Evento di " + event.playground.sport.type);
+
+	var contentCard = document.createElement("p");
+	contentCard.className = "row card-text mb-3";
+	
+	var address = document.createElement("div");
+	address.className = "info-container d-flex col-12 col-md-3 mb-2";
+	var addressIcon = document.createElement("i");
+	addressIcon.className = "bi bi-geo-alt me-2";
+	var addressName = document.createElement("p");
+	addressName.className = "fs-6";
+	address.append(addressIcon, addressName);
+	contentCard.append(address);
+	
+	$.ajax({
+		type: "GET",
+		url: 'https://api.mapbox.com/geocoding/v5/mapbox.places/'+event.playground.sportFacility.address.longitude + ',' + event.playground.sportFacility.address.latitude + '.json?access_token=pk.eyJ1IjoiZ3ZuYmVyYWxkaSIsImEiOiJja3kwMTY1cjQydXVtMnZvMHI3N3B6Y2piIn0.BVrI0Ru6h55mmhivqa-39Q',
+		success: function(place) {
+			$(addressName).text(place.features[0].place_name);
+		}
+	});
+	
+	var dateDiv = document.createElement("div");
+	dateDiv.className = "info-container d-flex col-12 col-md-3 mb-2";
+	var dateIcon = document.createElement("i");
+	dateIcon.className = "bi bi-calendar-event me-2";
+	var date = document.createElement("p");
+	date.className = "fs-6"
+	$(date).text(event.start);
+	
+	dateDiv.append(dateIcon, date);
+	
+	var beginDiv = document.createElement("div");
+	beginDiv.className = "info-container d-flex col-12 col-md-3 mb-2";
+	var beginIcon = document.createElement("i");
+	beginIcon.className = "bi bi-hourglass-top me-2";
+	var begin = document.createElement("p");
+	begin.className = "fs-6"
+	$(begin).text(event.beginHour);
+	
+	beginDiv.append(beginIcon, begin);
+	
+	var endDiv = document.createElement("div");
+	endDiv.className = "info-container d-flex col-12 col-md-3 mb-2";
+	var endIcon = document.createElement("i");
+	endIcon.className = "bi bi-hourglass-bottom me-2";
+	var end = document.createElement("p");
+	end.className = "fs-6"
+	$(end).text(event.endHour);
+	
+	endDiv.append(endIcon, end);
+	
+	contentCard.append(address, dateDiv, beginDiv, endDiv);
+
+	var buttonDiv = document.createElement("div");
+	buttonDiv.className = "d-flex justify-content-end";
+	
+	var details = document.createElement("a");
+	details.className = "btn btn-outline-primary";
+	details.innerHTML = "Visualizza dettagli";
+	$(details).attr("href", "eventDetails/" + event.id);
+	$(details).attr("target", "_blank");
+	
+	var unsubscribe = document.createElement("button");
+	unsubscribe.className = "btn btn-outline-secondary ms-3";
+	unsubscribe.innerHTML = "Disiscriviti";
+	if(isOrganizer){
+		$(unsubscribe).click(function(){
+			
+		});
+	}
+	else{
+		$(unsubscribe).click(function() {
+			$('#event_modal').find("#event_message").text("Vuoi davvero disinscriverti dall'evento?");
+			$('#event_modal').find("#event_button").click(function() {
+				unsubscribeParticipantEvent(event.id, userId);
+			})
+			$('#event_modal').modal('show');
+		});
+	}	
+	
+	if (isOrganizer) {
+		var remove = document.createElement("button");
+		remove.className = "btn btn-outline-danger ms-3";
+		remove.innerHTML = "Elimina";
+		$(remove).click(function(){
+			$('#event_modal').find("#event_message").text("Vuoi davvero eliminare l'evento?");
+			$('#event_modal').find("#event_button").click(function(){
+				deleteEvent(event.id);
+			})
+			$('#event_modal').modal('show');
+		});
+		buttonDiv.append(details, unsubscribe, remove);
+	}
+	else{
+		buttonDiv.append(details, unsubscribe);
+	}
+	
+	divBodyCard.append(titleCard, contentCard, buttonDiv);
+	divCard.append(divBodyCard);
+	divItem.append(divCard);
+
+	return divItem;
+}
+
+function unsubscribeOrganizerEvent(id){
+	
+}
+
+function unsubscribeParticipantEvent(eventId, userId){
+	const id = [userId, eventId];
+	$.ajax({
+		type: "POST",
+		url: "/removeEventParticipants",
+		contentType: "application/json",
+		data: JSON.stringify(id),
+		async: false,
+		success: function() {
+			$('#success_modal').modal('show');
+		},
+		error: function() {
+			//$('#error_modal').find("#error_message").text("C'è stato un problema temporaneo. Ti invitiamo a riprovare!'");
+			$('#error_modal').modal('show');
+		}
+	});
+}
+
+function deleteEvent(id){
+	$.ajax({
+		type: "POST",
+		url: "/deleteEvent",
+		contentType: "application/json",
+		data: JSON.stringify(id),
+		success: function () { 
+			$('#success_modal').modal('show');  
+		},
+		error: function() {
+			$('#error_modal').modal('show');  
+		}
+	});
+}
+
+function showOrganized(userId){
 	$("#organized_button").addClass("selected");
 	$("#participate_button").removeClass("selected");
 	$("#organized").addClass("active");
 	$("#partecipate").removeClass("active");
+	$("#organized").children().remove();
+	
+	$.ajax({
+		type: "POST",
+		url: "/getEventByOrganizer",
+		contentType: "application/json",
+		data: JSON.stringify(userId),
+		success: function(list) {
+			$.each(list, function(index, event) {
+				$("#organized").append(createCard(event, userId, true));
+			});
+		}
+	});
 }
 
-function showParticipate(){
+function showParticipate(userId){
 	$("#organized_button").removeClass("selected");
 	$("#participate_button").addClass("selected");
 	$("#organized").removeClass("active");
 	$("#partecipate").addClass("active");
+	$("#partecipate").children().remove();
+	
+	$.ajax({
+		type: "POST",
+		url: "/getEventByParticipant",
+		contentType: "application/json",
+		data: JSON.stringify(userId),
+		success: function(list) {
+			$.each(list, function(index, event) {
+				$("#partecipate").append(createCard(event, userId, false));
+			});
+		}
+	});
 }
 
 function openOrClose(checkbox){

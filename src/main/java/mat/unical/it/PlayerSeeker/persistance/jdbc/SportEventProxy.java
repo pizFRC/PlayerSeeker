@@ -50,36 +50,6 @@ public class SportEventProxy extends SportEvent {
         return super.getOrganizzatore();
     }
 
-    public List<Player> getPlayers() {
-        List<Player> players = new ArrayList<Player>();
-
-        try{
-            PreparedStatement statement;
-            String query = "SELECT * FROM player INNER JOIN participate ON player.id=participate.player_id WHERE participate.event_id=?";
-
-            statement = connection.prepareStatement(query);
-            statement.setLong(1,super.getId());
-            ResultSet result = statement.executeQuery();
-
-            while(result.next()) {
-                Player player = new Player();
-                player.setId(result.getLong("id"));
-                player.setName(result.getString("name"));
-                player.setSurname(result.getString("surname"));
-                player.setBirthday(result.getDate("birthday").toLocalDate());
-                player.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
-                players.add(player);
-            }
-            statement.close();
-        } catch(SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        this.setPlayers(players);
-        return super.getPlayers();
-    }
-
     public Playground getPlayground() {
 
         Playground tmpPlayground = new Playground();

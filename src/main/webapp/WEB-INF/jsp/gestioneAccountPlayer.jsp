@@ -80,6 +80,26 @@
 		</div>
 	</div>
 	
+	<div id = "event_modal" class="modal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Conferma la tua scelta</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-warning d-flex align-items-center" role="alert">
+						<p id ="event_message"> <i class="bi bi-exclamation-triangle-fill me-2"></i></p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Annulla</button>
+					<button id="event_button" type="button" class="btn btn-primary">Conferma</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div id = "success_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -122,7 +142,7 @@
 
 	<div class= "row p-0 p-sm-5">
 		<div class="col-md-3 p-3">
-			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow p-3 mb-5 bg-body rounded" style="min-height: 550px">
+			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow-sm p-3 mb-5 bg-body rounded" style="min-height: 550px">
 				<div class = "d-flex justify-content-center mb-2">
 					<i class="bi bi-person-circle" style = "font-size: 5rem;"></i>
 				</div>
@@ -134,7 +154,7 @@
 					<c:if test="${user.googleId == null }">
   						<button id="password_button" onclick="showPasswordSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-key menu-icon me-3"></i> Password</button>
   					</c:if>
-  					<button id="event_button" onclick="showEventsSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-calendar2-event menu-icon me-3"></i> Eventi</button>
+  					<button id="event_button" onclick="showOrganized(${ user.id }); showEventsSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-calendar2-event menu-icon me-3"></i> Eventi</button>
 				</div>
 				<button id="logout_button" onclick="$('#modal').modal('show');" class="button raleway_font text-start menu-item text-start" style="color:red"> <i class="bi bi-box-arrow-right menu-icon me-3"></i> Logout</button>
 			</div>
@@ -142,7 +162,7 @@
     	
     	<div class="col-md-9 p-3">
     		<!-- ACCOUNT SETTINGS -->
-    		<div id = "accountDiv" class="p-5 shadow p-3 mb-5 bg-body rounded section active">
+    		<div id = "accountDiv" class="p-5 shadow-sm p-3 mb-5 bg-body rounded section active">
     			<p class="fs-2 d-block">Impostazioni account</p>
     			<p class="fs-6 d-block">Aggiorna i dati del tuo account</p>
     			
@@ -236,28 +256,13 @@
     			<p class="fs-2 d-block">Impostazioni eventi</p>
     			<p class="fs-6 d-block">Visualizza e gestisci gli eventi a cui parteci e che hai organizzato</p>
     			<div class="d-flex justify-content-between m-5 ps-5 pe-5">
-					<button id="organized_button" onclick="showOrganized()" class="button raleway_font text-start menu-item selected"> <i class="bi bi-pencil-fill me-3" style="font-size: 1rem;"></i> Organizzati da te </button>
-  					<button id="participate_button" onclick="showParticipate()" class="button raleway_font text-start menu-item"> <i class="bi bi-calendar2-check me-3" style="font-size: 1rem;"></i> A cui partecipi</button>
+					<button id="organized_button" onclick="showOrganized(${ user.id })" class="button raleway_font text-start menu-item selected"> <i class="bi bi-pencil-fill me-3" style="font-size: 1rem;"></i> Organizzati da te </button>
+  					<button id="participate_button" onclick="showParticipate(${ user.id })" class="button raleway_font text-start menu-item"> <i class="bi bi-calendar2-check me-3" style="font-size: 1rem;"></i> A cui partecipi</button>
 				</div>
-				<div id="organized" class = "section active">
-					<div class="card mb-3">
-						<div class="card-body">
-							<h5 class="card-title">Evento di Calcetto</h5>
-							<div class="row row-cols-4 mb-3">
-								<div class="col"><i class="bi bi-geo-alt"></i> Struttura</div>
-								<div class="col"><i class="bi bi-calendar-event me-2"></i> Data evento </div>
-								<div class="col"><i class="bi bi-hourglass-top me-2"></i> Inizia alle: </div>
-								<div class="col"><i class="bi bi-hourglass-bottom"></i> Finisce alle: </div>							
-							</div>
-							<a href="#" class="btn btn-primary">Visualizza dettagli</a>
-						</div>
-						<div class="card-footer text-muted">Fra 2 giorni</div>
-					</div>
-				</div>
+				<div id="organized" class = "section active"></div>
 				
-				<div id="patecipate" class = "section">
-					
-				</div>
+				<div id="partecipate" class = "section">	</div>
+				
 				<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
 					<a id="new_event" href="/nuovoEvento" class="new-event-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 rounded d-flex align-items-center">
 						<i style="font-size: 1.5rem"class="bi bi-plus-lg me-3"></i>Crea nuovo evento
