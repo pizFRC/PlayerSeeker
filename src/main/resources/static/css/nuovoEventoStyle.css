@@ -17,9 +17,9 @@ body {
 	
 }
 #alert_strutture{
-	width:10%;
+	width:5%;
 	height:10%;
-		  position:absolute;
+	  position:absolute;
     z-index: 999;
     bottom:10;
     right:10; 
@@ -28,9 +28,17 @@ body {
 }
 .text_alert {
 	display:none !important;
-	  height:10px;
+	
        
           
+}
+h1, h2, h3,
+h4, h5, h6 {
+	color: #e08138 !important;
+}
+
+.text-purple{
+	color: #4960c5 !important;
 }
 #btn_close_alert {
 	display:none !important;
@@ -40,7 +48,8 @@ body {
 #alert_strutture:hover{
 	width:30%;
 	height:20%;
-	overflow-x: hidden;
+	
+	overflow-x: auto;
      overflow-y: auto;
      border-radius:0% !important;
 }
@@ -49,11 +58,13 @@ body {
 }
 #alert_strutture:hover .text_alert {
 	display:inline-block !important;
-	
+	 padding-top:10px;
 
 }
 #alert_strutture:hover  #btn_close_alert {
 	display:block !important;
+	top:0;
+	right:0;
 }
 
 
@@ -167,9 +178,7 @@ span.point{
 	/*vertical-align:"bottom"*/
 }
 
-.point:active{
-	background-color: blue;
-}
+
 .point i{
 	
     padding:0px 15px;
@@ -218,7 +227,7 @@ span.point{
  }
  
 
-.active{
+.active_point{
 	transform: scale(1.3);
 }
 .sport_item {
@@ -238,9 +247,7 @@ input.error{
 	border:1px solid red;
 	
 }
-#error_msg{
-	
-}
+
 label.error {
 	color: red;
 	font-weight: normal;

@@ -146,8 +146,50 @@
 
 
 					</div>
+						<div id = "error_modal" class="modal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Ops, c'è un problema</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger d-flex align-items-center" role="alert">
+						<i class="bi bi-exclamation-circle-fill me-3"></i>
+						<div>
+							<p id="error_message" class="fs-6"></p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a type="button" onclick="$('#error_modal').modal('hide')"  id="error_button" class="btn btn-primary">Capito</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id = "success_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Successo</h5>
+					<button type="button" onclick="" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-success" role="alert">
+						<h4 class="alert-heading">Ben fatto!</h4>
+						<p>L'evento è stato creato con successo!.</p>
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<a type="button" href="/" class="btn btn-primary">Capito</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-					<!-- Carousel -->
+					<!-- lista sport -->
 
 
 					<div class="col-12 d-y h-75 mx-auto  " style="height: 500px"
@@ -172,34 +214,30 @@
 					<div class="col-12 mb-3 d-n h-75" id="second_step"
 						name="second_step">
 
-						<hr class="my-4">
 						<h6 class="text-center fs-3 text-decoration link-primary">Seleziona
 							la data e l'ora che preferisci troveremo le strutture disponili</h6>
-						<hr class="my-4">
+					
 						<div class="row">
 
 							<div class="col-sm-10">
 								<label for="data_input" class="form-label">Data</label> <input
 									type="date" class="form-control" id="data_input"
 									name="data_input" placeholder="" value="" required min="">
-								<div class="invalid-feedback">Valid first name is
-									required.</div>
+								
 							</div>
 
 							<div class="col-sm-6">
 								<label for="ora_inizio" class="form-label">Ora inizio</label> <input
 									class="timepicker form-control" id="ora_inizio"
 									name="ora_inizio" required="">
-								<div class="invalid-feedback">Valid first name is
-									required.</div>
+								
 							</div>
 
 							<div class="col-sm-6">
 								<label for="ora_fine" class="form-label">Ora Fine</label> <input
 									class="timepicker form-control" id="ora_fine" name="ora_fine"
 									required="">
-								<div class="invalid-feedback">Valid first name is
-									required.</div>
+								
 							</div>
 
 
@@ -214,14 +252,14 @@
 					<!-- MAP -->
 					<div class="col-12 d-n h-100 " id="third_step">
 
-						<h5 class="fs-5 text-primary">Seleziona una struttura nella
+						<h3 class="fs-4 " >Seleziona una struttura nella
 							tua città o cercane una</h5>
-						<hr class="my-4">
+						
 							
 							
 							
 							<div style="position: relative; width: 100%; height: 100%;">
-							<div id="map" name="map" value="prova"
+							<div id="map" name="map"
 								class="border border-2 h-100 w-100"
 								style="position: absolute; z-index: 90;"></div>
 
@@ -253,11 +291,14 @@
 
 								</div>
 							</div>
-							<div class="alert alert-warning alert-dismissible  rounded rounded-pill d-flex align-items-center d-none "role="alert" id="alert_strutture">
+							<div class="alert alert-warning alert-dismissible  rounded rounded-pill align-items-center d-none "role="alert" id="alert_strutture">
 								
-								<div class="alert_div"><i class="bi bi-exclamation-triangle icon_alert"  width="24" height="24" id="icon_alert"></i> <p class="text_alert">Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br> 
-								       prova a cambiare fascia oraria o a spostarti sulla mappa<p> </div>
-								        <button type="button" class="btn-close " id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
+								
+								<i class="bi bi-info-circle-fill"width="24" height="24" id="icon_alert"></i> 
+								<p class="text_alert align-middle">Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br>  prova a cambiare fascia oraria o a spostarti sulla mappa</p> 
+								<button type="button" class="btn-close " id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
+								
+								 
 							</div>
 							
 							
@@ -269,9 +310,9 @@
 					<div class="col-12 mb-3 d-n " id="four_step">
 						<div class="">
 
-							<hr class="my-4">
+							
 							<h6>Aggiungi qui i giocatori</h6>
-							<hr class="my-4">
+						
 							<label class="form-label" for="num_giocatori">Numero
 								giocatori mancati</label>
 						</div>

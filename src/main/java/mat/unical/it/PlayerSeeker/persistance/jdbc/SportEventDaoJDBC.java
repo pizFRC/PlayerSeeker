@@ -94,7 +94,6 @@ public class SportEventDaoJDBC implements SportEventDao {
 			PreparedStatement statement;
 			if(doRetrieveByKey(sportEvent.getId()) == null) {
 				query = "INSERT INTO event values(?,?,?,?,?,?,?,?,?);";
-				System.out.println();
 				statement = connection.prepareStatement(query);
 				statement.setLong(1,sportEvent.getId());
 				statement.setDate(2, Date.valueOf(sportEvent.getStart().toString()));
@@ -165,6 +164,27 @@ public class SportEventDaoJDBC implements SportEventDao {
 		return true;
 	}
 
+	@Override
+	public boolean updateOrganizer(SportEvent sportEvent,Player p) {
+		try{
+		
+				PreparedStatement query = connection.prepareStatement("UPDATE event SET organizer_id=?,players_number=?  WHERE id=?;");
+				System.out.println(sportEvent.getOrganizzatore().getId());
+				query.setLong(1,p.getId());
+				query.setInt(2, sportEvent.getPlayersNumber());
+				query.setLong(3,sportEvent.getId());
+
+              	this.deleteParticipate(sportEvent);
+				this.saveParticipate(sportEvent);
+				query.executeUpdate();
+				query.close();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	@Override
 	public boolean saveParticipate(SportEvent sportEvent) {
 		try{

@@ -192,7 +192,32 @@
 			</div>
 		</div>
 	</div>
-
+      
+      <div id = "event_modal" class="modal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Conferma la tua scelta</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-warning d-flex align-items-center" role="alert">
+						<p id ="event_message"> <i class="bi bi-exclamation-triangle-fill me-2"></i></p>
+					</div>
+					<form id="div_select" class="input-group">
+					
+					 
+					</form>
+					 <label id="error_label_oranizer"> </label>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Annulla</button>
+					<button id="event_button" type="button" class="btn btn-primary" data-bs-dismiss="modal">Conferma</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class= "row p-0 p-sm-5">
 		<div class="col-md-3 p-3">
 			<div class="relative pt-5 pb-5 ps-4 pe-4 shadow-sm p-3 bg-body rounded" style="min-height: 550px">
@@ -208,7 +233,7 @@
   						<button id="password_button" onclick="showPasswordSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-key menu-icon me-3"></i> Password</button>
   					</c:if>
   					<button id="playground_button" onclick="showPlaygroudsSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-puzzle menu-icon me-3"></i> Campi da gioco </button>
-  					<button id="event_button" onclick="showEventsSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-calendar2-event menu-icon me-3"></i> Eventi</button>
+  					<button id="event_button" onclick="showEventsSettings('${user.id}')" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-calendar2-event menu-icon me-3"></i> Eventi</button>
 				</div>
 				<button id="logout_button" onclick="$('#modal').modal('show');" class="button raleway_font text-start menu-item text-start" style="color:red"> <i class="bi bi-box-arrow-right menu-icon me-3"></i> Logout</button>
 			</div>
@@ -366,7 +391,7 @@
 								
 								<div class="d-flex justify-content-start">
 									<button onclick="showPlaygroundDetails(event, '${playground.id}', '${playground.sport.id}', '${playground.description }')" class="btn btn-primary me-3">Visualizza dettagli</button>
-									<button onclick="" class="btn btn-danger">Elimina campo</button>
+									<button onclick="deletePLayground(event,'${ playground.id }')" class="btn btn-danger">Elimina campo</button>
 								</div>
 								
 							</div>
@@ -380,19 +405,7 @@
     			<p class="fs-2 d-block">Impostazioni eventi</p>
     			<p class="fs-6 d-block">Visualizza e gestisci gli eventi della tua struttura</p>
 				<div id="organized" class = "section active mt-4">
-					<div class="card mb-3">
-						<div class="card-body">
-							<h5 class="card-title">Evento di Calcetto</h5>
-							<div class="row row-cols-4 mb-3">
-								<div class="col"><i class="bi bi-calendar-event me-2"></i> Data evento </div>
-								<div class="col"><i class="bi bi-hourglass-top me-2"></i> Inizia alle: </div>
-								<div class="col"><i class="bi bi-hourglass-bottom"></i> Finisce alle: </div>
-								<div class="col"><i class="bi bi-geo-alt"></i> Struttura</div>
-							</div>
-							<a href="#" class="btn btn-primary">Visualizza dettagli</a>
-						</div>
-						<div class="card-footer text-muted">Fra 2 giorni</div>
-					</div>
+					
 				</div>
 				
 				<div id="patecipate" class = "section">
