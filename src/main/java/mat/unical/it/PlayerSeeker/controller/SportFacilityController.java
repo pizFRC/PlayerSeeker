@@ -35,7 +35,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.Sport;
-
+import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.persistance.Database;
 
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
@@ -93,6 +93,27 @@ public class SportFacilityController {
 
 		return sfl;
 
+	}
+	
+	@PostMapping("/getBestSportFacility")
+	public List<SportsFacility> getBestSportFacility(HttpServletRequest req, HttpServletResponse res, @RequestBody List<Address> bbox) {
+		Address southWest = bbox.get(0);
+		Address northEast = bbox.get(1);
+		List<SportsFacility> result = new ArrayList<SportsFacility>();
+		if(southWest.getLongitude() == 0) {
+			result = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveAll();
+		}
+		else {
+			result = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(southWest, northEast);
+		}
+		for(SportsFacility s : result) {
+			s.setEvents(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(s.getId()));
+		}
+		result.sort((SportsFacility f1, SportsFacility f2) -> f1.getEvents().size() - f2.getEvents().size());
+		if(result.size()>6)
+			result = result.subList(0, 5);
+		res.setStatus(HttpServletResponse.SC_OK);
+		return result;
 	}
 	
 	@PostMapping("/getSportFacilityByBBox")

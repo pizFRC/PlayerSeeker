@@ -48,11 +48,6 @@ public class SportsFacilityProxy extends SportsFacility {
 	}
 	
 	@Override
-	public List<SportEvent> getEvents() {
-		return null;
-	}
-
-	@Override
 	public List<OpeningHours> getOpeningHours() {
 		if(super.getOpeningHours() != null)
 			return super.getOpeningHours();
