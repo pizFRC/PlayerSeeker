@@ -105,13 +105,10 @@ public class SportFacilityController {
 		return result;
 	}
 	
-	
-	
 	@PostMapping("/checkImpegniPlayer")
 	public void getImpegniPlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
 		User u=(User)req.getSession().getAttribute("user");
 		JacksonJsonParser ja = new JacksonJsonParser();
-System.out.println(mes);
 		Map<String, Object> mappa = ja.parseMap(mes);
 	
 		String dataStr =(String)mappa.get("data");
@@ -122,12 +119,12 @@ System.out.println(mes);
 		oraFineStr+=":00" ;
 		if(DatabaseJDBC.getInstance().getPlayerDao().checkImpegni(u,LocalDate.parse(dataStr),LocalTime.parse(oraInizioStr),LocalTime.parse(oraFineStr)))
 		{
-			res.setStatus(200);
-			System.out.println("200");
+			System.out.println("sono qui 400");
+			res.setStatus(400);
 			
 		}else {
-			System.out.println("400");
-			res.setStatus(400);
+			res.setStatus(200);
+			System.out.println("200");
 		}
 
 	}

@@ -490,9 +490,9 @@ function addInputNameGiocatore() {
 
 
 function loadSportType() {
-
 	var fileName = "/getSportList";
 	var xhttp = new XMLHttpRequest();
+
 
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -505,8 +505,6 @@ function loadSportType() {
 				option.innerHTML=value.type;
 				option.value=value.type;
 				select.append(option);
-				
-				
 			});
 			select.addEventListener('click', function(e) {
 				e = e || window.event;

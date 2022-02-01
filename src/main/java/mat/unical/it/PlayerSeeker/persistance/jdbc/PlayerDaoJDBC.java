@@ -189,39 +189,27 @@ public class PlayerDaoJDBC implements PlayerDao{
 		}
 		return true;
 	}
-	public boolean checkImpegni(User user,LocalDate start,LocalTime begin,LocalTime end) {
-		boolean almenoUno=false;
+	
+	public boolean checkImpegni(User user, LocalDate start, LocalTime begin, LocalTime end) {
+		boolean almenoUno = false;
+		String query = "SELECT p.id FROM participate p INNER JOIN event e ON e.id = p.event_id WHERE p.player_id = ? and e.start= ? and not (e.end_hour <= ? or e.begin_hour >= ?);";
 		try{
-			
 			if(user != null) {
-				System.out.println(begin);
-				System.out.println(end);
-					String query = "SELECT participate.id from participate,event where participate.player_id=? "
-							+ " and participate.event_id =event.id and start=? and not"
-							+ " ( event.end_hour <= ? or event.begin_hour >= ?);";
-					PreparedStatement statement = connection.prepareStatement(query);	
-					statement.setLong(1, user.getId());
-					statement.setDate(2,Date.valueOf(start));
-					
-					statement.setTime(3,Time.valueOf(begin));
-					statement.setTime(4,Time.valueOf(end));
-				
-					ResultSet result = statement.executeQuery(); 
-					while(result.next()) {
-						almenoUno=true;
-						System.out.println(result.getLong(1));
-					}
-			           
-					statement.close();
-					
-				
+				PreparedStatement statement = connection.prepareStatement(query);	
+				statement.setLong(1, user.getId());
+				statement.setDate(2,Date.valueOf(start));
+				statement.setTime(3,Time.valueOf(begin));
+				statement.setTime(4,Time.valueOf(end));
+				ResultSet result = statement.executeQuery(); 
+				if(result.next()) { 
+					almenoUno = true;
 				}
-			
+				statement.close();
+			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		System.out.println("almeno"+ almenoUno);
-		return !almenoUno;
+		return almenoUno;
 	}
 }

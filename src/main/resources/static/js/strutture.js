@@ -91,10 +91,10 @@ $("#btn_grid").click(function() {
 		return;
 	} else {
 		if ((larghezza > 991 && larghezza <= 1199) && lastViewPressed === "grid") {
-			document.querySelectorAll(".item").forEach(element => element.className = "item  col-md-6 col-sm-12 col-lg-6  col-xl-4 col-xxl-4  mx-auto m-1 pb-1");
+			document.querySelectorAll(".item").forEach(element => element.className = "item  col-md-6 col-sm-12 col-lg-6  col-xl-4 col-xxl-4 m-1 pb-1");
 		} else {
 			if (lastViewPressed === "list")
-				document.querySelectorAll(".item").forEach(element => element.className = "item col-4 col-md-6 col-lg-4  col-xl-4 col-xxl-4 mx-auto m-1 pb-1");
+				document.querySelectorAll(".item").forEach(element => element.className = "item col-4 col-md-6 col-lg-4  col-xl-4 col-xxl-4 m-1 pb-1");
 		}
 		lastViewPressed = "grid";
 	}
@@ -105,7 +105,7 @@ window.addEventListener("resize", function() {
 	var larghezza = $(window).width();
 	if (larghezza <= 991) {
 		$(".tasti_da_nascondere").hide(500);
-		document.querySelectorAll(".item").forEach(element => element.className = "item col-sm-12 col-md-12 col-lg-12 col-xl-12  mx-auto m-1 pb-1");
+		document.querySelectorAll(".item").forEach(element => element.className = "item col-sm-12 col-md-12 col-lg-12 col-xl-12  m-1 pb-1");
 		lastViewPressed = "list";
 		$("#rangeDiv").removeClass("w-50");
 		$("#rangeDiv").addClass("w-100");
@@ -115,11 +115,11 @@ window.addEventListener("resize", function() {
 		$("#rangeDiv").addClass("w-50");
 		if ((larghezza > 991 && larghezza <= 1199) && lastViewPressed === "grid") {
 			//$(".tasti_da_nascondere").show(1000);
-			document.querySelectorAll(".item").forEach(element => element.className = "item  col-md-6 col-sm-12 col-lg-6  col-xl-4 col-xxl-4  mx-auto m-1 pb-1");
+			document.querySelectorAll(".item").forEach(element => element.className = "item  col-md-6 col-sm-12 col-lg-6  col-xl-4 col-xxl-4 m-1 pb-1");
 		} else {
 			// $(".tasti_da_nascondere").show(1000);
 			if (lastViewPressed === "grid")
-				document.querySelectorAll(".item").forEach(element => element.className = "item col-4 col-md-6 col-lg-4  col-xl-4 col-xxl-4 mx-auto m-1 pb-1");
+				document.querySelectorAll(".item").forEach(element => element.className = "item col-4 col-md-6 col-lg-4  col-xl-4 col-xxl-4 m-1 pb-1");
 		}
 	}
 });
