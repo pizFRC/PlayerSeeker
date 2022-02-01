@@ -264,9 +264,9 @@
 					<button id="organized_button" onclick="showOrganized(${ user.id })" class="button raleway_font text-start menu-item selected"> <i class="bi bi-pencil-fill me-3" style="font-size: 1rem;"></i> Organizzati da te </button>
   					<button id="participate_button" onclick="showParticipate(${ user.id })" class="button raleway_font text-start menu-item"> <i class="bi bi-calendar2-check me-3" style="font-size: 1rem;"></i> A cui partecipi</button>
 				</div>
-				<div id="organized" class = "section active"></div>
+				<div id="organized" class = "section active overflow-auto pe-4 ps-4" style ="max-height: 600px"></div>
 				
-				<div id="partecipate" class = "section">	</div>
+				<div id="partecipate" class = "section overflow-auto pe-4 ps-4" style ="max-height: 600px"></div>
 				
 				<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
 					<a id="new_event" href="/nuovoEvento" class="new-event-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 rounded d-flex align-items-center">

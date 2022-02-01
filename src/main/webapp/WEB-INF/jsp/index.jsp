@@ -35,17 +35,6 @@
 				Scopri gli eventi sportivi e le migliori strutture vicino a te. </br>Dimenticati
 				dello stress e pensa solo a divertirti!
 			</p>
-			<!-- Search -->
-			<div class="mt-4 row">
-				<div class="col-md-10 pt-2 pb-2 ">
-					<div id="address"></div>
-				</div>
-				<div class ="col-md-2 pt-2 pb-2">
-					<button type="button" class="w-100 btn btn-primary">Cerca</button>
-				</div>
-			</div>
-			<form class="form-inline" id="posizione">
-			</form>
 		</div>
 	</div>
 	<!-- END JUMBOTRON -->
@@ -56,80 +45,13 @@
 		<p class="pe-5 ps-5 fs-6 col-12 text-center d-flex justify-content-center"> Ecco i migliori eventi, selezionati con cura soltanto per te!</p>
 	</div>
 	<!-- The slideshow/carousel -->
-	<div id="carousel_eventi" class="carousel slide row" data-bs-ride="carousel">
+	<div id="carousel_eventi" class="carousel slide row" data-bs-ride="carousel" data-bs-interval="false">
 		<div class="carousel-inner ">
-			<div class="carousel-item active">
-				<div class="container">
-					<div class="row ps-5 pe-5">
-						<div class="col-12 col-md-4">
-							<div class="card event-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-4">
-							<div class="card event-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-12 col-md-4">
-							<div class="card event-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div id = "first_event_container" class="carousel-item active">
+				
 			</div>
-			<div class="carousel-item">
-				<div class="container">
-					<div class="row ps-5 pe-5">
-						<div class="col-12 col-md-4">
-							<div class="card event-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-4">
-							<div class="card event-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-4">
-							<div class="card event-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div id = "second_event_container" class="carousel-item">
+	
 			</div>
 		</div>
 
@@ -160,95 +82,24 @@
 		<p class="pe-5 ps-5 fs-6 col-12 text-center d-flex justify-content-center"> Ed ecco anche le migliori srutture dove organizzare i tuoi eventi!</p>
 	</div>
 	<!-- The slideshow/carousel -->
-	<div id="carousel_strutture" class="carousel slide row" data-bs-ride="carousel">
+	<div id="carousel_strutture" class="carousel slide row" data-bs-ride="carousel" data-bs-interval="false">
 		<div class="carousel-inner ">
-			<div class="carousel-item active">
-				<div class="container">
-					<div class="row ps-5 pe-5">
-						<div class="col-12 col-md-4">
-							<div class="card sportFacility-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-12 col-md-4">
-							<div class="card sportFacility-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-12 col-md-4">
-							<div class="card sportFacility-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="container">
-					<div class="row ps-5 pe-5">
-						<div class="col-12 col-md-4">
-							<div class="card sportFacility-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-4">
-							<div class="card sportFacility-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-4">
-							<div class="card sportFacility-card mb-3">
-								<div class="card-body">
-									<h5 class="card-title">Special title treatment</h5>
-									<p class="card-text pb-3">With supporting text below as a
-										natural lead-in to additional content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div id = "first_facility_container" class="carousel-item active"></div>
+				
+			<div id = "second_facility_container" class="carousel-item"> </div>
 		</div>
 
 		<!-- Left and right controls/icons -->
 		<div class="col-md-6 col-sm-1">
 			<div>
-				<button class="carousel-control-prev btn_colorato" type="button"
+				<button id="facility_carousel_prev" class="carousel-control-prev btn_colorato" type="button"
 					style="color: black; font-size: 40px;"
 					data-bs-target="#carousel_strutture" data-bs-slide="prev">
 					<!--  <span class="carousel-control-prev-icon btn_colorato "></span> -->
 					<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
 						class="sr-only">Previous</span>
 				</button>
-				<button class="carousel-control-next" type="button"
+				<button id="facility_carousel_next" class="carousel-control-next" type="button"
 					style="color: black; font-size: 40px;"
 					data-bs-target="#carousel_strutture" data-bs-slide="next">
 					<span><i class="fa fa-angle-right" aria-hidden="true"></i></span> <span
@@ -269,13 +120,16 @@
 		crossorigin="anonymous"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/index.js"
-		crossorigin="anonymous">
-		
+	
+	<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+	
+	<script type="text/javascript" src="../js/index.js" crossorigin="anonymous"></script>
+	
+	<c:if test="${user != null}">
+	<script type="text/javascript">
+		changeCurrentPosition(${profile.address.longitude}, ${profile.address.latitude});
 	</script>
-	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
-	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
-
+	</c:if>
 </body>
 </html>
 

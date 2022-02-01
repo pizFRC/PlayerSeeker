@@ -20,4 +20,6 @@ public interface SportEventDao {
 	public List<SportEvent> doRetrieveByOrganizer(Long ID);
 	public List<SportEvent> doRetrieveByParticipant(Long ID);
 	public	boolean updateOrganizer(SportEvent sportEvent, Player p);
+	public List<SportEvent> doRetrieveBestEventBySportFacilityKey(Long ID);
+
 }

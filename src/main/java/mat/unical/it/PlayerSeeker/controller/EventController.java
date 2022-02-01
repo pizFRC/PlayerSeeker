@@ -76,6 +76,24 @@ public class EventController {
 		return "visualizzaEventi";
 	}
 	
+	@PostMapping("/getBestEvents")
+	public List<SportEvent> getBestEvents(HttpServletRequest req, HttpServletResponse res, @RequestBody List<Address> bbox) {
+		Address southWest = bbox.get(0);
+		Address northEast = bbox.get(1);
+		List<SportEvent> result = new ArrayList<SportEvent>();
+		if(southWest.getLongitude() == 0) {
+			result = DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveBestEventBySportFacilityKey(null);
+		}
+		else {
+			List<SportsFacility> facility = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(southWest, northEast);
+			for(SportsFacility f : facility) {
+				result.addAll(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveBestEventBySportFacilityKey(f.getId()));
+			}
+		}
+		res.setStatus(HttpServletResponse.SC_OK);
+		return result;
+	}
+	
 	@PostMapping("/getEventByBBox")
 	public List<SportEvent> getEventByBBox(HttpServletRequest req, HttpServletResponse res, @RequestBody List<Address> bbox) {
 		Address southWest = bbox.get(0);

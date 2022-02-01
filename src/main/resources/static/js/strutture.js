@@ -199,7 +199,6 @@ function createCard(sportFacility) {
 	var addressName = document.createElement("p");
 	addressName.className = "fs-6";
 	address.append(addressIcon, addressName);
-	contentCard.append(address);
 	
 	$.ajax({
 		type: "GET",

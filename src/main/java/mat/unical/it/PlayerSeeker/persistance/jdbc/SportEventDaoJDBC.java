@@ -222,14 +222,11 @@ public class SportEventDaoJDBC implements SportEventDao {
 		PreparedStatement query = null;
 		SportEvent tmp = null;
 		List<SportEvent> tmpList=new ArrayList<SportEvent>();
-
-	
 			try {
 				if(checkConnection()) {
 					query = connection.prepareStatement("SELECT * FROM event WHERE playground_id=? and start >= current_date;");
 					query.setLong(1, ID);
 					ResultSet result = query.executeQuery();
-
 					while(result.next()) {
 						tmp = new SportEventProxy();
 						tmp.setId(result.getLong("id"));
@@ -246,8 +243,6 @@ public class SportEventDaoJDBC implements SportEventDao {
 				e.printStackTrace();
 				return null;
 			}
-			
-		
 		return tmpList;
 	}
 	@Override
@@ -267,7 +262,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 				tmp.setDescription(result.getString("description"));
 				tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
 				tmp.setEndHour(result.getTime("end_hour").toLocalTime());
-				tmp.setPlayers(this.getParticipate(ID));
+				tmp.setPlayers(this.getParticipate(tmp.getId()));
 				tmpList.add(tmp);
 			}
 			query.close();
@@ -345,6 +340,38 @@ public class SportEventDaoJDBC implements SportEventDao {
 		}
 		return events;
 	}
-	
-	
+
+	@Override
+	public List<SportEvent> doRetrieveBestEventBySportFacilityKey(Long ID) {
+		String query;
+		if(ID != null)
+			query = "SELECT e.* FROM event e INNER JOIN playground p ON e.playground_id = p.id WHERE p.sport_facility_id = ? AND e.start >= current_date ORDER BY e.start, e.begin_hour LIMIT 6";
+		else
+			query = "SELECT e.* FROM event e WHERE e.start >= current_date ORDER BY e.start, e.begin_hour LIMIT 6";
+		
+		List<SportEvent> events = new ArrayList<SportEvent>();
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			if(ID != null)
+				statement.setLong(1, ID);
+			
+			ResultSet result = statement.executeQuery();
+			while(result.next()) {
+				SportEvent event = new SportEventProxy();
+				event.setId(result.getLong("id"));
+				event.setData(result.getDate("start").toLocalDate());
+				event.setDescription(result.getString("description"));
+				event.setBeginHour(result.getTime("begin_hour").toLocalTime());
+				event.setEndHour(result.getTime("end_hour").toLocalTime());
+				event.setPlayers(this.getParticipate(event.getId()));
+				events.add(event);
+			}
+			statement.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return events;
+	}
+
 }
