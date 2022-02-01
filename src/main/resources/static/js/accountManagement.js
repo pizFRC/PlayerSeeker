@@ -262,6 +262,8 @@ if(event.sportFacility.id!=userId)	{
 		remove.className = "btn btn-outline-danger ms-3";
 		remove.innerHTML = "Elimina";
 		$(remove).click(function(){
+		
+			$('#div_select').empty();
 			$('#event_modal').find("#event_message").text("Vuoi davvero eliminare l'evento?");
 			$('#event_modal').find("#event_button").click(function(){
 				deleteEvent(event.id);

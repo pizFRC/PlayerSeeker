@@ -385,7 +385,7 @@
 						<div class=" row  ">
 						<div  class="col-12 d-flex justify-content-center">
 								<input type="checkbox" class="form-check-input text-center" id="privacy" name="privacy_cornfirm">
-								<label class="form-check-label text-center" for="same-address">Accetta le normative della privacy per confermare la creazione</label>
+								<label class="form-check-label text-center m-3" for="same-address">Accetta per confermare la creazione</label>
 							</div>
 							<div  class="col-12 d-flex justify-content-center">
 						<button class="btn btn-success mx-auto" disabled id="confirm_btn"
