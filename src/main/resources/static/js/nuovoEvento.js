@@ -16,19 +16,20 @@ function next() {
 	if(validateForm()){
 		
 	}else{  return; }
-	//if($("#contenitore").find(".point").last().hasClass("active"))
-	if ($(".point:last").hasClass("active"))
+
+	if ($(".point:last").hasClass("active_point_point"))
 		return;
 
 	if ($(".d-y:first").attr("id") == "second_step"){
 		
 	
-if(check_impegni_player())
-     alert("prosegui");
-else{
-	alert("stop")
-	return;
-}
+if(!check_impegni_player()){
+     $('#error_modal').find("#error_message").text("Sembra che tu abbia già un impegno nella data e fascia oraria scelte");
+			
+			$('#error_modal').modal('show');
+			return;
+		}
+
 	set_datetime_resoconto();
 addAddressInput();
 }
@@ -39,8 +40,8 @@ addAddressInput();
     $(".d-y:first").next().removeClass('d-n');
 	$(".d-y:first").addClass('d-n').removeClass('d-y');
 	$("#contenitore").find(" span:not(.border-primary) > i").first().addClass("text-primary ");
-	$(".active:first").removeClass("active");
-	$("#contenitore").find(" span:not(.border-primary)").first().addClass("border-primary active");
+	$(".active_point_point:first").removeClass("active_point");
+	$("#contenitore").find(" span:not(.border-primary)").first().addClass("border-primary active_point");
 
 
 }
@@ -59,8 +60,8 @@ function prev() {
 
 	$("span.border-primary:last > i").first().removeClass("text-primary")
 
-	$("span.border-primary:last").removeClass("border-primary active");
-	$("span.border-primary:last").addClass("active");
+	$("span.border-primary:last").removeClass("border-primary active_point");
+	$("span.border-primary:last").addClass("active_point");
 	
 }
 
@@ -134,43 +135,21 @@ function updateProgress(add) {
 ///////////////////CREAZIONE DIV RISPOSTA CREAZIONE EVENTO 
 function addResultDiv(error) {
 	
-	$("#div_btn_prev").hide(1000);
-		$("#div_btn_next").hide(1000);
-	$("#last_step").removeClass("d-y").addClass("d-n");
 	
-	var div=document.createElement("div");
-	div.className="col-12 mb-3 d-y";
-	
-	
-
-
-	var icon = document.createElement("i");
-	 icon.className = "fa fa-check text-success fs-1";
-	var title=document.createElement("h2");
-	title.className="fs-2 text-dark";
-	title.innerHTML="Evento creato con successo"
-	var container=document.createElement("div");
-	container.className="container text-center";
-	container.style="display:inline-block; vertical-align:center;";
 	
 	if(error){
-		title.innerHTML="Errore l'evento non è stato creato'"
-		icon.className = "bi bi-x text-danger fs-1";
+		 $('#error_modal').find("#error_message").text("Qualcosa è andato storto,l'evento non è stato creato");
+			$("#error_button").attr("href","/");
+			$('#error_modal').modal('show');
 		
+	}else{
+		
+		
+			
+			$('#success_modal').modal('show');
 		
 	}
 	
-	container.append(title,icon)
-	var btn_div=document.createElement("div");
-	btn_div.className="container d-flex justify-content-center";
-	
-	var a =document.createElement("a");
-	a.className="btn btn-outline-secondary";
-	a.innerHTML="Torna alla home";
-	a.href="/";
-	btn_div.append(a);
-	div.append(container,btn_div);
-	document.getElementById("last_step").after(div);
 }
 
 
@@ -184,8 +163,6 @@ $(document).ready(function() {
 	data_now.setDate(data_now.getDate() + 1);
 	$("#data_input").attr("min", data_now.toISOString().split('T')[0]);
 	document.getElementById("data_input").value = data_now.toISOString().split('T')[0];
-    
-
 	//qui gestisco il tasto confirm
 	
 	
@@ -210,7 +187,9 @@ function addAddressInput() {
 	var latitude = parseFloat($("#longitude").val());
 	var longitude = parseFloat($("#latitude").val());
 	if (isNaN(latitude) || isNaN(longitude)) {
-		alert("Non hai i permessi per creare un nuovo evento");
+		 $('#error_modal').find("#error_message").text("Non hai i permessi per creare un nuovo evento");
+			$("#error_button").attr("href","/");
+			$('#error_modal').modal('show');
 		return;
 	}
 	
@@ -386,6 +365,7 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 			
 			
 		});
+		
 		var popup = new mapboxgl.Popup()
 			.setText(strutture[i].name)
 			.addTo(map);
@@ -432,7 +412,9 @@ function creaInput(placeHolder) {
 
 function addInputNameGiocatore() {
 	if (document.getElementById("num_giocatori").value == 0) {
-		alert("Il numero massimo di giocatori è stato raggiunto");
+		 $('#error_modal').find("#error_message").text("Il numero massimo di giocatori è stato raggiunto");
+	
+			$('#error_modal').modal('show');
 		return;
 	}
 	document.getElementById("num_giocatori").value -= 1;
@@ -527,7 +509,9 @@ function loadSportType() {
 			}, false);
      
 		} else if(this.status == 503 || this.status == 400){
-			alert("	errore nel reperire la lista degli sport")
+			 $('#error_modal').find("#error_message").text("Qualcosa è andato storto,la lista degli sport non è al momento disponibile. Riprova più tardi");
+			$("#error_button").attr("href","/");
+			$('#error_modal').modal('show');
 
 		}
 
@@ -657,7 +641,9 @@ function validateForm() {
 	
 
 		}else{
-			alert("manca qualche dato");
+			 $('#error_modal').find("#error_message").text("Controlla di aver inserito tutti i dati correttamente");
+			
+			$('#error_modal').modal('show');
 		}
 	
 }	
@@ -762,7 +748,9 @@ function getStruttureBB(ne_, sw_) {
                        
 		},
 		error: function(response) {
-			alert("errore nel reperire le strutture");
+			 $('#error_modal').find("#error_message").text("Qualcosa è andato storto,nessuna struttura al momento disponibile.Riprova più tardi");
+			$("#error_button").attr("href","/");
+			$('#error_modal').modal('show');
 		},
 	});
 
@@ -804,7 +792,7 @@ $(document).on('click', '#btn_close_alert' , function(e) {
 		e.stopPropagation();
 
  
-	alert("ok");
+	
 	
 	$("#alert_strutture").addClass("d-none")
 });

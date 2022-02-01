@@ -83,7 +83,7 @@ function showPlaygroudsSettings(){
 	$("#playgroundDiv").addClass("active");
 }
 
-function showEventsSettings(){
+function showEventsSettings(id){
 	$(".button").removeClass("selected");
 	$("#event_button").addClass("selected");
 	$("#account_button").find("i").removeClass("bi-person-fill");
@@ -98,9 +98,11 @@ function showEventsSettings(){
 	$(".section").removeClass("active");
 	$("#eventsDiv").addClass("active");
 	$("#organized").addClass("active");
+	showEventSportsFacility(id);
 }
 
 function createCard(event, userId, isOrganizer) {
+
 
 	var divItem = document.createElement("div");
 	divItem.className = "item col-12";
@@ -179,9 +181,69 @@ function createCard(event, userId, isOrganizer) {
 	var unsubscribe = document.createElement("button");
 	unsubscribe.className = "btn btn-outline-secondary ms-3";
 	unsubscribe.innerHTML = "Disiscriviti";
-	if(isOrganizer){
-		$(unsubscribe).click(function(){
-			
+if(event.sportFacility.id!=userId)	{
+	if (isOrganizer) {
+
+		$(unsubscribe).click(function() {
+			$('#div_select').empty();
+			console.log(event);
+
+			if (event.playersNumber == 1) {
+				$('#event_modal').find("#event_message").text("Solo tu partecipi all'evento,vuoi davvero disinscriverti?L'evento sarà eliminato");
+			} else {
+
+				$('#event_modal').find("#event_message").text("Devi nominare organizzatore un giocatore prima di poterti disiscrivere");
+				var select = document.createElement("select");
+				select.name = "select_organizer";
+				select.id = "select_organizer";
+				select.className = "form-control";
+				select.required = "true";
+
+				var select_first_option = document.createElement("option");
+				select_first_option.value = "";
+				select_first_option.innerHTML = "Seleziona un organizzatore";
+
+				select.append(select_first_option);
+				for (var i = 1; i < event.players.length; i++) {
+					var option = document.createElement("option");
+					option.value = event.players[i].id;
+					option.innerHTML = event.players[i].name + " " + event.players[i].surname;
+					select.append(option);
+				}
+				$('#div_select').append(select);
+
+			}
+			$('#event_modal').find("#event_button").click(function() {
+
+				if (event.playersNumber == 1) {
+					deleteEvent(event.id);
+					return;
+				}
+				var validator = $("#div_select").validate({
+					rules: {
+						select_organizer: {
+							required: true,
+
+						}
+					},
+					messages: {
+						select_organizer: {
+							required: "Seleziona un organizzatore",
+
+						}
+					}, errorPlacement: function(error, element) {
+
+						$("#error_label_oranizer").html(error);
+
+					},
+				});
+				if (validator.form()) {
+					var idNewOrganizer = document.getElementById("select_organizer").value;
+					unsubscribeOrganizerEvent(event.id, idNewOrganizer);
+				}
+
+			})
+			$('#event_modal').modal('show');
 		});
 	}
 	else{
@@ -192,7 +254,8 @@ function createCard(event, userId, isOrganizer) {
 			})
 			$('#event_modal').modal('show');
 		});
-	}	
+	}
+		
 	
 	if (isOrganizer) {
 		var remove = document.createElement("button");
@@ -210,7 +273,19 @@ function createCard(event, userId, isOrganizer) {
 	else{
 		buttonDiv.append(details, unsubscribe);
 	}
-	
+	}else{
+		var remove = document.createElement("button");
+		remove.className = "btn btn-outline-danger ms-3";
+		remove.innerHTML = "Elimina";
+		$(remove).click(function(){
+			$('#event_modal').find("#event_message").text("Vuoi davvero eliminare l'evento?");
+			$('#event_modal').find("#event_button").click(function(){
+				deleteEvent(event.id);
+			})
+			$('#event_modal').modal('show');
+		});
+		buttonDiv.append(details, remove);
+	}
 	divBodyCard.append(titleCard, contentCard, buttonDiv);
 	divCard.append(divBodyCard);
 	divItem.append(divCard);
@@ -218,8 +293,22 @@ function createCard(event, userId, isOrganizer) {
 	return divItem;
 }
 
-function unsubscribeOrganizerEvent(id){
-	
+function unsubscribeOrganizerEvent(eventId, userId){
+	const id = [userId, eventId];
+	$.ajax({
+		type: "POST",
+		url: "/updateEventOrganizer",
+		contentType: "application/json",
+		data: JSON.stringify(id),
+		async: false,
+		success: function() {
+			$('#success_modal').modal('show');
+		},
+		error: function() {
+			//$('#error_modal').find("#error_message").text("C'è stato un problema temporaneo. Ti invitiamo a riprovare!'");
+			$('#error_modal').modal('show');
+		}
+	});
 }
 
 function unsubscribeParticipantEvent(eventId, userId){
@@ -270,6 +359,23 @@ function showOrganized(userId){
 		success: function(list) {
 			$.each(list, function(index, event) {
 				$("#organized").append(createCard(event, userId, true));
+			});
+		}
+	});
+}
+function showEventSportsFacility(id){
+	console.log("id"+id);
+	$.ajax({
+		type: "POST",
+		url: "/getEventBySportsFacilityKey",
+		contentType: "application/json",
+		data: JSON.stringify(id),
+		success: function(list) {
+			$.each(list, function(index, event) {
+				var div =document.createElement("div");
+				div.innerHTML="<h1> ciao<h1>"
+				$("#organized").append(createCard(event,id,true));
+				
 			});
 		}
 	});

@@ -65,6 +65,8 @@ function showBestEvents(){
 			while (eventCount < 3) {
 				if (events.length > eventCount)
 					firstEventRow.append(createEventCard(events[eventCount]));
+					
+				console.log(events[eventCount]);
 				eventCount++;
 			}
 			firstContainer.append(firstEventRow);

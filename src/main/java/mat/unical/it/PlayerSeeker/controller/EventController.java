@@ -56,10 +56,13 @@ public class EventController {
 		se.setDescription("descrizione di prova");
 		se.getPlayers().add(p);
 		se.setPlayersNumber(sport.getrequiredPlayers()-missingPlayersNumber);
+		
 		if (DatabaseJDBC.getInstance().getSportsEventDao().saveOrUpdate(se))
 			res.setStatus(200);
 		else
 			res.setStatus(400);
+		
+		
 		return str;
 	}
 	
@@ -163,5 +166,28 @@ public class EventController {
 		DatabaseJDBC.getInstance().getSportsEventDao().deleteById(eventId);
 		res.setStatus(HttpServletResponse.SC_OK);
 		return HttpServletResponse.SC_OK;
+	}
+	@PostMapping("/updateEventOrganizer")
+	public int updateOrganizer(HttpServletRequest req, HttpServletResponse res,@RequestBody List<String> id) {
+		Player player = DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(Long.parseLong(id.get(0)));
+		SportEvent event = DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveByKey(Long.parseLong(id.get(1)));
+		
+		 event.getPlayers().removeIf(p -> (p.getId() == event.getOrganizzatore().getId()));
+		event.setPlayersNumber(event.getPlayersNumber()-1);
+	
+		if(DatabaseJDBC.getInstance().getSportsEventDao().updateOrganizer(event,player)) {
+			res.setStatus(HttpServletResponse.SC_OK);
+			return HttpServletResponse.SC_OK;
+		}
+		res.setStatus(HttpServletResponse.SC_CONFLICT);
+		return HttpServletResponse.SC_CONFLICT;
+	}
+	
+	@PostMapping("/getEventBySportsFacilityKey")
+	public List<SportEvent> getEventBySportsFacilityKey(HttpServletRequest req, HttpServletResponse res, @RequestBody Long id) {
+		List<SportEvent> result = DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(id);
+		System.out.println("rice"+id);
+		res.setStatus(HttpServletResponse.SC_OK);
+		return result;
 	}
 }

@@ -84,7 +84,6 @@ public class SportFacilityController {
 			sfl.setBySport(struttureBBOX,s,dataStr,oraInizioStr,oraFineStr);
            
 			res.setStatus(200);
-
 		} catch (JsonProcessingException e) {
 			res.setStatus(400);
 			// TODO Auto-generated catch block

@@ -89,6 +89,7 @@ public class SportEvent implements java.io.Serializable {
     }
 
     public void setOrganizzatore(Player organizzatore) {
+    
         this.organizzatore = organizzatore;
     }
 

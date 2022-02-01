@@ -91,6 +91,11 @@
 					<div class="alert alert-warning d-flex align-items-center" role="alert">
 						<p id ="event_message"> <i class="bi bi-exclamation-triangle-fill me-2"></i></p>
 					</div>
+					<form id="div_select" class="input-group">
+					
+					 
+					</form>
+					 <label id="error_label_oranizer"> </label>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Annulla</button>
