@@ -253,11 +253,11 @@
 
 								</div>
 							</div>
-							<div class="alert alert-warning alert-dismissible  d-flex align-items-center d-none "role="alert" id="alert_strutture">
+							<div class="alert alert-warning alert-dismissible  rounded rounded-pill d-flex align-items-center d-none "role="alert" id="alert_strutture">
 								
-								<div class="alert_div"><i class="bi bi-exclamation-triangle icon_alert"  width="24" height="24";></i> <p class="text_alert">Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br> 
+								<div class="alert_div"><i class="bi bi-exclamation-triangle icon_alert"  width="24" height="24" id="icon_alert"></i> <p class="text_alert">Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br> 
 								       prova a cambiare fascia oraria o a spostarti sulla mappa<p> </div>
-								        <button type="button" class="btn-close" id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
+								        <button type="button" class="btn-close " id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
 							</div>
 							
 							

@@ -19,18 +19,20 @@ body {
 #alert_strutture{
 	width:10%;
 	height:10%;
-	border-radius:50%;
-	  position:absolute;
+		  position:absolute;
     z-index: 999;
     bottom:10;
     right:10; 
      overflow:hidden;
      	transition: all .2s ease-in-out;
 }
-#alert_strutture .text_alert {
+.text_alert {
 	display:none !important;
+	  height:10px;
+       
+          
 }
-.btn_close_alert {
+#btn_close_alert {
 	display:none !important;
 }
 
@@ -40,14 +42,20 @@ body {
 	height:20%;
 	overflow-x: hidden;
      overflow-y: auto;
-     border-radius:0%;
+     border-radius:0% !important;
 }
-
+#alert_strutture:hover #icon_alert{
+	display:none !important;
+}
 #alert_strutture:hover .text_alert {
 	display:inline-block !important;
 	
 
 }
+#alert_strutture:hover  #btn_close_alert {
+	display:block !important;
+}
+
 
 #info_struttura_selezionata{
 	   width:35%;
