@@ -63,13 +63,15 @@ function showBestEvents(){
 			firstEventRow.className = "row ps-5 pe-5";
 			var eventCount = 0;
 			while (eventCount < 3) {
-				if (events.length >= eventCount)
+				if (events.length > eventCount)
 					firstEventRow.append(createEventCard(events[eventCount]));
+					
+				console.log(events[eventCount]);
 				eventCount++;
 			}
 			firstContainer.append(firstEventRow);
 			$("#first_event_container").append(firstContainer);
-			if (events.length >= eventCount) {
+			if (events.length > eventCount) {
 				var secondContainer = document.createElement("div");
 				secondContainer.className = "container";
 				var secondEventRow = document.createElement("div");
@@ -194,13 +196,13 @@ function showBestSportFacility(){
 			firstFacilityRow.className = "row ps-5 pe-5";
 			var facilityCount = 0;
 			while (facilityCount < 3) {
-				if (facilities.length >= facilityCount)
+				if (facilities.length > facilityCount)
 					firstFacilityRow.append(createSportFacilityCard(facilities[facilityCount]));
 				facilityCount++;
 			}
 			firstContainer.append(firstFacilityRow);
 			$("#first_facility_container").append(firstContainer);
-			if (facilities.length >= facilityCount) {
+			if (facilities.length > facilityCount) {
 				var secondContainer = document.createElement("div");
 				secondContainer.className = "container";
 				var secondFacilityRow = document.createElement("div");
