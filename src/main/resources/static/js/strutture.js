@@ -81,7 +81,7 @@ $("#btn_list").on('click', function(e) {
 	if (lastViewPressed === "list")
 		return;
 	lastViewPressed = "list";
-	document.querySelectorAll(".item").forEach(element => element.className = "item col-12 m-1 pb-1");
+	document.querySelectorAll(".item").forEach(element => element.className = "item col-12 mb-3");
 });
 
 //Grid view
@@ -89,15 +89,12 @@ $("#btn_grid").click(function() {
 	var larghezza = $(window).width();
 	if (larghezza <= 991) {
 		return;
-	} else {
-		if ((larghezza > 991 && larghezza <= 1199) && lastViewPressed === "grid") {
-			document.querySelectorAll(".item").forEach(element => element.className = "item  col-md-6 col-sm-12 col-lg-6  col-xl-4 col-xxl-4 m-1 pb-1");
-		} else {
-			if (lastViewPressed === "list")
-				document.querySelectorAll(".item").forEach(element => element.className = "item col-4 col-md-6 col-lg-4  col-xl-4 col-xxl-4 m-1 pb-1");
-		}
-		lastViewPressed = "grid";
+	} 
+	else if (lastViewPressed === "list") {
+		document.querySelectorAll(".info-container").forEach(element => $(element).removeClass("col-md-3 mb-3"));
+		document.querySelectorAll(".item").forEach(element => element.className = "item col-4 mb-3");
 	}
+	lastViewPressed = "grid";
 });
 
 //Automatic list view
@@ -105,21 +102,15 @@ window.addEventListener("resize", function() {
 	var larghezza = $(window).width();
 	if (larghezza <= 991) {
 		$(".tasti_da_nascondere").hide(500);
-		document.querySelectorAll(".item").forEach(element => element.className = "item col-sm-12 col-md-12 col-lg-12 col-xl-12  m-1 pb-1");
-		lastViewPressed = "list";
+		document.querySelectorAll(".item").forEach(element => element.className = "item col-12 mb-3");
 		$("#rangeDiv").removeClass("w-50");
 		$("#rangeDiv").addClass("w-100");
 	} else {
 		$(".tasti_da_nascondere").show(500);
 		$("#rangeDiv").removeClass("w-100");
 		$("#rangeDiv").addClass("w-50");
-		if ((larghezza > 991 && larghezza <= 1199) && lastViewPressed === "grid") {
-			//$(".tasti_da_nascondere").show(1000);
-			document.querySelectorAll(".item").forEach(element => element.className = "item  col-md-6 col-sm-12 col-lg-6  col-xl-4 col-xxl-4 m-1 pb-1");
-		} else {
-			// $(".tasti_da_nascondere").show(1000);
-			if (lastViewPressed === "grid")
-				document.querySelectorAll(".item").forEach(element => element.className = "item col-4 col-md-6 col-lg-4  col-xl-4 col-xxl-4 m-1 pb-1");
+		if (lastViewPressed === "grid") {
+			document.querySelectorAll(".item").forEach(element => element.className = "item col-4 mb-3");
 		}
 	}
 });
@@ -177,10 +168,10 @@ function showNearbySportFacility(){
 function createCard(sportFacility) {
 
 	var divItem = document.createElement("div");
-	divItem.className = "item col-md-12 col-sm-12 col-lg-12 col-xxl-12 col-xl-12 mx-auto m-1 pb-1";
+	divItem.className = "item col-12 mb-3";
 
 	var divCard = document.createElement("div");
-	divCard.className = "card mb-3";
+	divCard.className = "card h-100";
 
 	var divBodyCard = document.createElement("div");
 	divBodyCard.className = "card-body";

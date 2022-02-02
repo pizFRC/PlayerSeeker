@@ -54,7 +54,7 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 				sportsFacility.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
 				sportsFacility.setPhone(result.getString("phone"));
 				sportsFacility.setWebSiteUrl(result.getString("web_site_url"));
-
+				sportsFacility.setEvents(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(result.getLong("id")));
 				facilityList.add(sportsFacility);
 			}
 			query.close();
@@ -164,6 +164,7 @@ public class SportsFacilityDaoJDBC implements SportsFacilityDao {
 				sportsFacility.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
 				sportsFacility.setPhone(result.getString("phone"));
 				sportsFacility.setWebSiteUrl(result.getString("web_site_url"));
+				sportsFacility.setEvents(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(result.getLong("id")));
 				facilityList.add(sportsFacility);
 			}
 			query.close();

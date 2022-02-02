@@ -105,7 +105,7 @@ function createEventCard(event){
 	$(name).text("Evento di " + event.sport.type);
 	
 	var dateDiv = document.createElement("div");
-	dateDiv.className = "info-container d-flex col-12 mb-2";
+	dateDiv.className = "info-container d-flex align-items-center col-12 mb-2";
 	var dateIcon = document.createElement("i");
 	dateIcon.className = "bi bi-calendar-event me-2";
 	var date = document.createElement("p");
@@ -115,7 +115,7 @@ function createEventCard(event){
 	dateDiv.append(dateIcon, date);
 	
 	var beginDiv = document.createElement("div");
-	beginDiv.className = "info-container d-flex col-12 mb-2";
+	beginDiv.className = "info-container d-flex align-items-center col-12 mb-2";
 	var beginIcon = document.createElement("i");
 	beginIcon.className = "bi bi-hourglass-top me-2";
 	var begin = document.createElement("p");
@@ -125,7 +125,7 @@ function createEventCard(event){
 	beginDiv.append(beginIcon, begin);
 	
 	var endDiv = document.createElement("div");
-	endDiv.className = "info-container d-flex col-12 mb-2";
+	endDiv.className = "info-container d-flex align-items-center col-12 mb-2";
 	var endIcon = document.createElement("i");
 	endIcon.className = "bi bi-hourglass-bottom me-2";
 	var end = document.createElement("p");
@@ -230,13 +230,13 @@ function createSportFacilityCard(sportFacility){
 	
 	var name = document.createElement("h5");
 	name.className = "card-title";
-	$(name).text("Evento di " + sportFacility.name);
+	$(name).text(sportFacility.name);
 	
 	var contentCard = document.createElement("p");
 	contentCard.className = "row card-text mb-3";
 	
 	var address = document.createElement("div");
-	address.className = "d-flex col-12 mb-2";
+	address.className = "d-flex align-items-center col-12 mb-2";
 	var addressIcon = document.createElement("i");
 	addressIcon.className = "bi bi-geo-alt-fill me-2";
 	var addressName = document.createElement("p");
@@ -252,7 +252,7 @@ function createSportFacilityCard(sportFacility){
 	});
 	
 	var phoneDiv = document.createElement("div");
-	phoneDiv.className = "d-flex col-12 mb-2";
+	phoneDiv.className = "d-flex align-items-center col-12 mb-2";
 	var phoneIcon = document.createElement("i");
 	phoneIcon.className = "bi bi-telephone-fill me-2";
 	var phone = document.createElement("p");
@@ -261,9 +261,9 @@ function createSportFacilityCard(sportFacility){
 	phoneDiv.append(phoneIcon, phone);
 	
 	var siteDiv = document.createElement("div");
-	siteDiv.className = "d-flex col-12 mb-2";
+	siteDiv.className = "d-flex align-items-center col-12 mb-2";
 	var siteIcon = document.createElement("i");
-	siteIcon.className = "bi bi-telephone-fill me-2";
+	siteIcon.className = "bi bi bi-globe me-2";
 	var site = document.createElement("p");
 	site.className = "fs-6";
 	$(site).text(sportFacility.webSiteUrl);

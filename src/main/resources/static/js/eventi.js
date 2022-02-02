@@ -83,7 +83,6 @@ $("#btn_list").on('click', function(e) {
 	if (lastViewPressed === "list")
 		return;
 	lastViewPressed = "list";
-	document.querySelectorAll(".info-container").forEach(element => $(element).addClass("col-md-3"));
 	document.querySelectorAll(".item").forEach(element => element.className = "item col-12 m-1 pb-1");
 });
 
@@ -113,7 +112,6 @@ window.addEventListener("resize", function() {
 		$(".tasti_da_nascondere").show(500);
 		$("#rangeDiv").removeClass("w-100");
 		$("#rangeDiv").addClass("w-50");
-		console.log(lastViewPressed);
 		if (lastViewPressed === "grid") {
 			
 			document.querySelectorAll(".item").forEach(element => element.className = "item col-4");

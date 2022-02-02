@@ -214,13 +214,14 @@
 				
 				<div class="p-3 mb-5 info-element" style="border-bottom-color: #4960c5">
 					<p id="name" class="fs-5 mb-1"><strong>Eventi</strong></p>
-					<p id="name" class="fs-6 mb-3">La struttura ospiterà 2 eventi</p>
-					<p id="name" class="fs-6 mb-2"><strong>Evento n.1: </strong>Calcetto
-						<a href="/visualizzaEventi" class="link-primary">Mostra dettagli</a>
-					</p>
-					<p id="name" class="fs-6 mb-2"><strong>Evento n.2: </strong>Pallavolo
-						<a href="#" class="link-primary">Mostra dettagli</a>
-					</p>
+					<p id="name" class="fs-6 mb-3">La struttura ospiterà ${ sportFacility.events.size()} evento/i</p>
+					<c:set var="count" value="1"/>
+					<c:forEach var="event" items="${ sportFacility.events }">
+						<p class="fs-6 mb-2"><strong>Evento n. ${count}: </strong> ${event.sport.type}
+							<a type="button" href="//localhost:8080/eventDetails/${event.id}" class="link-primary">Mostra dettagli</a>
+						</p>
+						<c:set var="count" value="${count+1 }"/>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

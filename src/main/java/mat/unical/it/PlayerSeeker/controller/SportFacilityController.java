@@ -105,9 +105,6 @@ public class SportFacilityController {
 		else {
 			result = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(southWest, northEast);
 		}
-		for(SportsFacility s : result) {
-			s.setEvents(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(s.getId()));
-		}
 		result.sort((SportsFacility f1, SportsFacility f2) -> f1.getEvents().size() - f2.getEvents().size());
 		if(result.size()>6)
 			result = result.subList(0, 5);
