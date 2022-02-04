@@ -12,6 +12,7 @@ $(window).scroll(function(event) {
 });
 
 var placeName = null;
+
 $(document).ready(function() {
 	$("nav").find("a").removeClass("active");
 	$("nav").find("#event").addClass("active");

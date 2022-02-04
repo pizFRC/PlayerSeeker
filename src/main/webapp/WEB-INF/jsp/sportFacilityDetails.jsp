@@ -154,6 +154,18 @@
 				</div>
 				<div class="modal-body p-4">
 					<p id="description" class="fs-6 mb-3"></p>
+					<div id="image_carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<p class="fs-6 mb-2">Ecco qualche immagine:</p>
+  					<div class="carousel-inner"></div>
+  					<button class="carousel-control-prev" type="button" data-bs-target="#image_carousel" data-bs-slide="prev">
+    					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    					<span class="visually-hidden">Previous</span>
+  					</button>
+  					<button class="carousel-control-next" type="button" data-bs-target="#image_carousel" data-bs-slide="next">
+    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    					<span class="visually-hidden">Next</span>
+  					</button>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -206,7 +218,7 @@
 					<c:set var="count" value="1"/>
 					<c:forEach var="playground" items="${ sportFacility.playgrounds }">
 						<p class="fs-6 mb-2"><strong>Campo da gioco n. ${count}: </strong> ${playground.sport.type}
-							<a type="button" onclick="showPlaygroundDescription('${playground.description}')" href="#" class="link-primary">Mostra dettagli</a>
+							<a type="button" onclick="showPlaygroundDetails(${playground.id}, '${playground.description}')" href="#" class="link-primary">Mostra dettagli</a>
 						</p>
 						<c:set var="count" value="${count+1 }"/>
 					</c:forEach>

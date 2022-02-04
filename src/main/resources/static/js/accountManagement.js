@@ -36,6 +36,8 @@ $(document).ready(function(){
 	addressGeocoder.on('result', function(e) {
 		address = e.result;
 	});
+	cloudinary.setCloudName("player-seeker");
+	$('#disabled_add_photo_button').popover();
 });
 
 function showAccountSettings(){
@@ -451,11 +453,46 @@ function changeHours(event){
 	$('#hour_modal').modal('hide');
 }
 
+
+
 currentPlayground = null;
 var allSports = new Array();
-function showPlaygroundDetails(event, id, sportId, description){
-	event.preventDefault();
-	currentPlayground = id;
+var imagesToDelete = new Array();
+var newImage = new Array();
+var maxImageNumber = 0;
+
+function createUploadWidget(){
+	var uploadPhotoWidget = cloudinary.createUploadWidget({ 
+  		uploadPreset: 'uurvojju', folder: 'playground_' + currentPlayground.id, multiple: true, maxFiles: maxImageNumber, 
+		clientAllowedFormats: ['png', 'jpg'], showUploadMoreButton: true
+	}, (error, result) => {
+		console.log(result);
+		if (!error && result.event === "queues-end") {
+     		result.info.files.forEach((item) => {
+      			newImage.push(item.uploadInfo.public_id);
+    		});
+  		}
+		if(!error && result.event === "close") {
+			showPlaygroundDetails(currentPlayground.id);
+		}
+	});
+	return uploadPhotoWidget;
+}
+
+function showPlaygroundDetails(id){
+	var playground;
+	$.ajax({
+		type: "POST",
+		url: "/getPlayground",
+		contentType: "application/json",
+		data: JSON.stringify(id),
+		async: false,
+		success: function(result) {
+			playground = result;
+			currentPlayground = playground;
+		}
+	});
+	
 	$('#playground_modal').find("#sport").children().remove();
 	$.ajax({
 		type: "POST",
@@ -469,22 +506,100 @@ function showPlaygroundDetails(event, id, sportId, description){
 				var option = document.createElement("option");
 				$(option).text(sport.type);
 				$("#sport").append(option);
-				if(sport.id == sportId){
+				if(sport.id == playground.sport.id){
 					$(option).attr('selected', 'selected');
 					$('#playground_modal').find(".modal-title").text("Campo da " + sport.type);
 				}	
 			});
 		}
 	});
-	$('#playground_modal').find("#description").text(description);
+	
+	$('#playground_modal').find("#description").text(playground.description);
+	
+	$("#playground_modal").find("#photos").children().remove();
+	var folder = "playground_" + playground.id;
+	$.ajax({
+		type: "POST",
+		url: "/getPlaygroundImage",
+		contentType: "application/json",
+		data: JSON.stringify(folder),
+		async: false,
+		success: function(result) {
+			if(result.resources.length >= 5){
+				$("#disabled_add_photo_button").show();
+				$('#add_photo_button').attr('style', 'display: none !important');
+			}
+			else{
+				$('#disabled_add_photo_button').attr('style', 'display: none !important');
+				$("#add_photo_button").show();
+			}
+			maxImageNumber = 5 - result.resources.length;
+			$.each(result.resources, function(index, img) {
+				item = document.createElement("div");
+				item.className = "position-relative mb-3 me-2";
+				$(item).css("min-width", "250px");
+				var image = document.createElement("img");
+				image.className = "d-block w-100 rounded me-2";
+				$(image).attr("src", img.url);
+				$(image).height('200px');
+				var deleteButton = document.createElement("div");
+				deleteButton.id = img.public_id;
+				$(deleteButton).on("click", function(event) {
+					event.preventDefault();
+					imagesToDelete.push(this.id);
+					maxImageNumber++;
+					$(this).parent('div').remove();
+					$('#disabled_add_photo_button').attr('style', 'display: none !important');
+					$("#add_photo_button").show();
+				});
+				deleteButton.className = "btn btn-danger btn-sm position-absolute top-100 start-50 translate-middle shadow rounded";
+				$(deleteButton).text("Elimina");
+				item.append(image, deleteButton);
+				$("#playground_modal").find("#photos").append(item);
+			});
+		}
+	});
 	$('#playground_modal').modal('show');
+}
+
+function addPhoto(){
+	var uploadWidget = createUploadWidget();
+	uploadWidget.open();
+}
+
+function deleteNewPhoto(){
+	$.each(newImage, function(index, path) {
+		$.ajax({
+			type: "POST",
+			url: "/deleteImage",
+			contentType: "application/json",
+			data: JSON.stringify(path),
+			async: false,
+			success: function() {
+				console.log("image deleted");
+			}
+		});
+	});
+	$('#playground_modal').modal('hide');
 }
 
 function modifyPlayground(event){
 	event.preventDefault();
 	var newSport = allSports.find(function(element) { return element.type == $('#sport').find(":selected").text(); });
-	playground = {
-		id: currentPlayground,
+	//ELIMINARE FOTO
+	$.each(imagesToDelete, function(index, path) {
+		$.ajax({
+			type: "POST",
+			url: "/deleteImage",
+			contentType: "application/json",
+			data: JSON.stringify(path),
+			success: function() {
+				console.log("image deleted");
+			}
+		});
+	});
+	newPlayground = {
+		id: currentPlayground.id,
 		description: $('#playground_modal').find("#description").val(),
 		sport: newSport
 	}
@@ -494,14 +609,18 @@ function modifyPlayground(event){
 		url: "/updatePlayground",
 		contentType: "application/json",
 		dataType: 'json',
-		data: JSON.stringify(playground),
+		data: JSON.stringify(newPlayground),
 		success: function () { 
-			$('#success_modal').modal('show');  
+			$('#playground_success_modal').modal('show');  
 		},
 		error: function() {
 			$('#error_modal').modal('show');  
 		}
 	});
+}
+
+function deletePlayground(jsonObj){
+	console.log(jsonObj);
 }
 
 var validUsername = true;

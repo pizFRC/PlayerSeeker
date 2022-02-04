@@ -94,7 +94,7 @@ public class EventController {
 		return result;
 	}
 	
-	@PostMapping("/getEventByBBox")
+	/*@PostMapping("/getEventByBBox")
 	public List<SportEvent> getEventByBBox(HttpServletRequest req, HttpServletResponse res, @RequestBody List<Address> bbox) {
 		Address southWest = bbox.get(0);
 		Address northEast = bbox.get(1);
@@ -102,6 +102,28 @@ public class EventController {
 		List<SportEvent> result = new ArrayList<SportEvent>();
 		for(SportsFacility f : facility) {
 			result.addAll(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(f.getId()));
+		}
+		res.setStatus(HttpServletResponse.SC_OK);
+		return result;
+	}*/
+	
+	@PostMapping("/getEventByBBox")
+	public List<SportEvent> getEventBy2BBox(HttpServletRequest req, HttpServletResponse res, @RequestBody List<Address> bbox) {
+		Address southWest1 = bbox.get(0);
+		Address northEast1 = bbox.get(1);
+		List<SportsFacility> facility1 = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(southWest1, northEast1);
+		List<SportEvent> result = new ArrayList<SportEvent>();
+		for(SportsFacility f : facility1) {
+			result.addAll(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(f.getId()));
+		}
+		if(bbox.size() > 2) {
+			System.out.println("sono qui");
+			Address southWest2 = bbox.get(2);
+			Address northEast2 = bbox.get(3);
+			List<SportsFacility> facility2 = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(southWest2, northEast2);
+			for(SportsFacility f : facility2) {
+				result.addAll(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(f.getId()));
+			}
 		}
 		res.setStatus(HttpServletResponse.SC_OK);
 		return result;

@@ -100,7 +100,27 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" onclick="location.reload();" class="btn btn-primary" onclick="location.href='/logout';">Capito</button>
+					<button type="button" onclick="location.reload();" class="btn btn-primary">Capito</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id = "playground_success_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Operazione effettuata</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-success" role="alert">
+						<h4 class="alert-heading">Ben fatto!</h4>
+						<p>Le informazioni sul campo da gioco sono state aggiornate con successo!</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="$('#playground_success_modal').modal('hide');" class="btn btn-primary">Capito</button>
 				</div>
 			</div>
 		</div>
@@ -182,12 +202,22 @@
 						<textarea class="form-control" placeholder="Inserisci qui la descrizione del campo" id="description" style="height: 100px"></textarea>
 						<label for="description">Descrizione</label>
 					</div>
+					<p class="fs-6">Immagini aggiunte:</p>
+					<div id="photos" class = "d-flex pt-3 pb-3 mb-4" style="overflow-x: auto"></div>
+					<div class ="d-flex justify-content-center mb-3">
+						<span id="disabled_add_photo_button" style = "display: none !important" id="popover-event" class="d-flex d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Hai già aggiunto 5 foto">
+  							<button disabled id="my_position" class="btn btn-outline-primary d-flex align-items-center">
+								<i style="font-size: 1.5rem"class="bi bi-plus-lg me-2"></i>Aggiungi foto
+							</button>
+						</span>
+						<button onclick="addPhoto()" id="add_photo_button" style = "display: none !important" id="my_position" class="btn btn-outline-primary d-flex align-items-center">
+								<i style="font-size: 1.5rem"class="bi bi-plus-lg me-2"></i>Aggiungi foto
+						</button>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Annulla</button>
-					<button type="button" class="btn btn-primary"
-						onclick="modifyPlayground(event);">Effettua le modifiche</button>
+					<button type="button" class="btn btn-secondary" onclick="deleteNewPhoto();" data-bs-dismiss="modal">Annulla</button>
+					<button type="button" class="btn btn-primary" onclick="modifyPlayground(event);">Effettua le modifiche</button>
 				</div>
 			</div>
 		</div>
@@ -390,7 +420,7 @@
 								<p class="fs-6 d-block mb-3">${playground.description }</p>
 								
 								<div class="d-flex justify-content-start">
-									<button onclick="showPlaygroundDetails(event, '${playground.id}', '${playground.sport.id}', '${playground.description }')" class="btn btn-primary me-3">Visualizza dettagli</button>
+									<button onclick="showPlaygroundDetails('${playground.id}')" class="btn btn-primary me-3">Visualizza dettagli</button>
 									<button onclick="deletePLayground(event,'${ playground.id }')" class="btn btn-danger">Elimina campo</button>
 								</div>
 								
@@ -435,6 +465,9 @@
 	
 	<!-- EmailJS -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+	
+	<!-- Cloudinary -->
+	<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 	
 	<!-- Custom -->
 	<script type="text/javascript"  src="../js/accountManagement.js"> </script>
