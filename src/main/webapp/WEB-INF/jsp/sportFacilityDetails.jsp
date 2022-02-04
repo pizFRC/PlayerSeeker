@@ -223,6 +223,90 @@
 						<c:set var="count" value="${count+1 }"/>
 					</c:forEach>
 				</div>
+				
+				<!-- review -->
+				<div class="p-3 mb-5 info-element" style="border-bottom-color: #4960c5">
+					<p id="name" class="fs-5 mb-1"><strong>Recensioni</strong></p>
+                  <div class="d-flex justify-content-between">
+					<table class="table table-borderless ">
+					
+						<tbody >
+							<tr>
+								<th scope="row" >5</th>
+								<td>
+									<div id="5_stars"  class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+									style="width:${(review.votes[4] * 100)/review.totalVotes}%;" aria-valuenow="${review.votes[4]}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+							
+							</tr>
+							<tr>
+								 <th scope="row"  class="w-10">4</th>
+									<td>
+									<div id="4_stars"  class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+									style="width:${(review.votes[3] * 100)/review.totalVotes}%;" aria-valuenow="${review.votes[3]}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+								
+							</tr>
+							<tr>
+								<th scope="row"  class="w-10">3</th>
+									<td>
+									<div id="3_stars"  class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+											style="width:${(review.votes[2] * 100)/review.totalVotes}%;" aria-valuenow="${review.votes[2]}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"  class="w-10" >2</th>
+									<td>
+									<div id="2_stars"  class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+											style="width:${(review.votes[1] * 100)/review.totalVotes}%;" aria-valuenow="${review.votes[1]}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row" class="w-10" >1</th>
+									<td>
+									<div id="1_stars" class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+											style="width:${(review.votes[0] * 100)/review.totalVotes}%;" aria-valuenow="${(review.votes[0] * 100)/review.totalVotes}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+						<div id="voto "	class="position-relative voto my-auto">
+							<div class="position-aboslute text-center w-100  mw-100">
+								<h2 id="voto_value">${review.starsAverage}</h2>
+									
+								<div class="d-flex justify-content-center" id="stars">
+							
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star "></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								
+								</div>
+								
+								<input type="button" class="btn  btn-sm mx-auto" onclick="showReview()" value="${review.totalVotes} Recensioni"> 
+							</div>
+
+						</div>
+					</div>
+				</div>
+					<!--  -->
+				
 			</div>
 		</div>
 	</div>

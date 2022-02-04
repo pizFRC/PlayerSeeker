@@ -1,5 +1,8 @@
 package mat.unical.it.PlayerSeeker.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import mat.unical.it.PlayerSeeker.model.Review;
+import mat.unical.it.PlayerSeeker.model.ReviewSummary;
 import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
@@ -48,6 +53,22 @@ public class NavigationController {
 		SportsFacility sportsFacility = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.parseLong(id));
 		sportsFacility.setEvents(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(sportsFacility.getId()));
 		req.setAttribute("sportFacility", sportsFacility);
+		ReviewSummary rs=new ReviewSummary();
+		Review r=new Review();
+		Review r1=new Review();
+		Review r2=new Review();
+		Review r3=new Review();
+		Review r4=new Review();
+		r.setStars(5);
+		r1.setStars(5);
+		r2.setStars(5);
+		r3.setStars(3);
+		r4.setStars(2);
+		ArrayList<Review>lis=new ArrayList<Review>();
+		lis.add(r);lis.add(r1);lis.add(r2);lis.add(r3);lis.add(r4);
+		rs.setVotes(lis);
+		
+		req.setAttribute("review", rs);
 		return "sportFacilityDetails";
 	}
 	

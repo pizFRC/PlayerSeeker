@@ -40,3 +40,20 @@ function showPlaygroundDescription(description){
 	$("#playground_modal").find("#description").text(description);
 	$('#playground_modal').modal('show');
 }
+
+$(document).ready(function() {
+	
+	 var average=parseFloat(document.getElementById("voto_value").innerHTML);
+console.log(document.getElementById("stars").children.length);
+console.log(average)
+var size=document.getElementById("stars").children.length;
+for(var i=0;i<5;i++){
+	if(average-i>0.5)
+document.getElementById("stars").children.item(i).className="fa fa-star chosen";
+else
+document.getElementById("stars").children.item(i).className="fa fa-star"
+
+console.log(i);
+}
+console.log("media"+average);
+});
