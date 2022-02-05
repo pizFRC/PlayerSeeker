@@ -24,7 +24,11 @@ public void setStarsAverage() {
 	for(int i=0;i<votes.size();i++) {
 		this.starsAverage+=votes.get(i)*(i+1);
 	}
-	this.starsAverage/=votes.size();
+	int numeroVoti=0;
+	for(int i=0;i<votes.size();i++) {
+		numeroVoti+=votes.get(i);
+	}
+	this.starsAverage/=numeroVoti;
 	
 }
 public ArrayList<Integer> getVotes() {

@@ -108,85 +108,8 @@
 		</div>
  	</c:if>
  	
- <c:if test="${user != null && user.userType == 'player'}">
- 
- 	 <div class="container-fluid" id="title">
-            
-            <h1 class="h1" align="center" style="color: #e59558">Crea il tuo evento </h1>
-            
-            </div>
-	<!-- FORM -->
-<div class="container shadow-sm bg-body h-100 border border-2 rounded-2" id="form_creazione_evento">
-	<div>
-			
-					<div id="contenitore" class="col-10 my-3 mx-auto"
-						style="position: relative; height: 50px;">
-
-						<div id="step" class="d-flex justify-content-between w-100 "
-							style="z-index: 9;">
-
-							<div style="border:1px solid red;" class="position-relative">
-								<span
-									class=" badge border border-primary point bg-light active "><i
-									class="fas fa-volleyball-ball text-primary"> </i> </span> 
-									
-							</div>
-
-							<div style="border:1px solid red;" class="position-relative">
-								<span class="badge point border bg-light"> <i
-									class="far fa-calendar-alt "></i>
-								</span> 
-                               
-							</div>
-							<div  style="border:1px solid red;" class="position-relative">
-								<span class="badge  point border bg-light"><i
-									class="fas fa-map-marked-alt"></i> </span>
-									
-							</div>
-							<div style="border:1px solid red;" class="position-relative">
-								<span class="badge point border bg-light"> <i
-									class="fas fa-users-cog"></i>
-								</span> 
-							</div>
-							<div style="border:1px solid red;" class="position-relative">
-								<span class="badge point border bg-light"> <i
-									class="fas fa-check-circle"></i>
-								</span>
-							</div>
-						</div>
-
-						<div id="progress" class="progress "
-							style="height: 1px; z-index: 6;">
-
-							<div id="progress_bar" class="progress-bar bg-primary "
-								role="progressbar" style="width: 0%;" aria-valuenow="0"
-								aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-
-
-					</div>
-			</div>
-		<div class="d-flex justify-content-between h-75">
-			<div class="align-self-center" id="div_btn_prev">
-				<button class="btn btn-outline-primary float-start " type="button"
-					onclick="prev()" id="btn_prev">
-					<span><i class="fa fa-angle-left" aria-hidden="true"></i></span> <span
-						class="sr-only">Previous</span>
-				</button>
-			</div>
-			
-		
-
-			<form class=" needs-validation container w-100  h-100 p-3 "
-				method="post" name="form_evento" id="form_evento">
-
-
-				<div class="row mx-auto h-75 " id="row">
-
-
-
-
-		<div id = "error_modal" class="modal" tabindex="-1">
+ 	
+ 	<div id = "error_modal" class="modal" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -239,6 +162,11 @@
 										<div class="modal-body">
 
 			  <div class="info_orario">
+			  
+			  <label class="form-check-label fs-4 text-primary">Struttura</label>
+				<p class="bg-lbody border-bottom border-2 rounder mb-2"	id="struttura"></p>
+			  
+			  
               <label class="form-check-label fs-4 text-primary">Data scelta</label>
 				<p class="bg-lbody border-bottom border-2 rounder mb-2"	id="data_scelta"></p>
                     <label class="form-check-label fs-4 text-primary">Fascia oraria</label>
@@ -249,15 +177,15 @@
 
 											</div>
 											<div class="">
-												<label class="form-check-label fs-4 text-primary">Campo
-													selezionato</label> <select class="form-select mb-2"
+												<label class="form-check-label fs-4 text-primary">Campi
+													disponibili</label> <select class="form-select mb-2"
 													aria-label="Default select example" id="campo_selezionato"
 													name="campo_selezionato" form="form_evento">
 												</select>
 											</div>
 										</div>
 										<div class="modal-footer">
-											<a type="button" data-bs-dismiss="modal"
+											<a type="button" onclick="resetStruttura()" data-bs-dismiss="modal"
 												class="btn btn-danger">Annulla</a> <a type="button"
 												onclick="next()" data-bs-dismiss="modal"
 												class="btn btn-primary">Conferma</a>
@@ -266,11 +194,88 @@
 									</div>
 								</div>
 							</div>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ <c:if test="${user != null && user.userType == 'player'}">
+ 
+ 	
+	<!-- FORM -->
+    <div class="container shadow-sm bg-body  border border-2 rounded-2" id="form_creazione_evento">
+	
+						<div id="contenitore" class="col-10 my-5 mx-auto"
+						style="position: relative; height: 50px;">
+
+						<div id="step" class="d-flex justify-content-between w-100 "
+							style="z-index: 9;">
+
+							<div >
+								<span
+									class=" badge border border-primary point bg-light active "><i
+									class="fas fa-volleyball-ball text-primary"> </i> </span> 
+									
+							</div>
+
+							<div >
+								<span class="badge point border bg-light"> <i
+									class="far fa-calendar-alt "></i>
+								</span> 
+                               
+							</div>
+							<div >
+								<span class="badge  point border bg-light"><i
+									class="fas fa-map-marked-alt"></i> </span>
+									
+							</div>
+							<div >
+								<span class="badge point border bg-light"> <i
+									class="fas fa-users-cog"></i>
+								</span> 
+							</div>
+							<div >
+								<span class="badge point border bg-light"> <i
+									class="fas fa-check-circle"></i>
+								</span>
+							</div>
+						</div>
+
+						<div id="progress" class="progress "
+							style="height: 1px; z-index: 6;">
+
+							<div id="progress_bar" class="progress-bar bg-primary "
+								role="progressbar" style="width: 0%;" aria-valuenow="0"
+								aria-valuemin="0" aria-valuemax="100"></div>
+						</div>
+
+
+					</div>
+			
+			
+			<form class=" needs-validation container w-100 "
+				method="post" name="form_evento" id="form_evento">
+
+
+				<div class="row " id="row">
+
+
+ <div class="col-12" id="title">
+            
+            <h1 class="h1" align="center" style="color: #e59558">Crea il tuo evento </h1>
+            
+            </div>
+
+		
 
 							<!-- lista sport -->
 
 
-					<div class="col-12 d-y h-100 mx-auto  " style="height: 500px"
+					<div class="col-12 d-y h-100   " style="height: 500px"
 						id="first_step">
 
 						<h4>Scegli uno sport fra quelli presenti</h4>
@@ -282,7 +287,7 @@
 						<option value="">Seleziona uno sport </option>
 						</select>
 						</div>
-						<div class="carousel  m-4 mt-3 h-75"></div>
+						
 						
 
 
@@ -328,22 +333,23 @@
 
 
 					<!-- MAP -->
-					<div class="col-12 d-n h-100 " id="third_step">
+					<div class="col-12 d-n  position-static " style="height: 90%;z-index: 80"id="third_step">
 
 						<h3 class="fs-4 " >Seleziona una struttura nella
-							tua città o cercane una</h5>
+							tua città o cercane una</h3>
 						
 							
 							
 							
-							<div style="position: relative; width: 100%; height: 100%;">
+							
 							<div id="map" name="map"
-								class="border border-2 h-100 w-100"
-								style="position: absolute; z-index: 90;"></div>
+								class="border border-2 "
+								style="z-index: 90; ">
 
 							
 							
-							<div class="alert alert-warning alert-dismissible  rounded rounded-pill align-items-center d-none "role="alert" id="alert_strutture">
+						
+							<div class="alert alert-warning alert-dismissible  rounded rounded-pill align-items-center "role="alert" id="alert_strutture" style="z-index: 99">
 								
 								
 								<i class="bi bi-info-circle-fill"width="24" height="24" id="icon_alert"></i> 
@@ -352,10 +358,10 @@
 								
 								 
 							</div>
+							</div>
 							
 							
 							
-						</div>
 					</div>
 
 					<!-- SET NUMERO GIOCATORI -->
@@ -432,16 +438,12 @@
 
 							</div>
 							  
-							  <div class="col-12" >
-						<div  class="col-12 d-flex justify-content-center">
-								<input type="checkbox" class="form-check-input text-center" id="privacy" name="privacy_cornfirm">
-								<label class="form-check-label text-center m-3" for="same-address">Accetta per confermare la creazione</label>
-							</div>
-							<div  class="col-12 d-flex justify-content-center">
-						<button class="btn btn-success mx-auto" disabled id="confirm_btn"
-									type="submit">Fine</button>
+							  <div class="col-12 d-flex justify-content-center " >
+						
+						<button class="btn btn-outline-primary mx-auto "  id="confirm_btn"
+									type="submit">Conferma</button>
 									</div>
-						</div>
+						
 							  
 							  
 							  
@@ -453,8 +455,9 @@
 
 
 					<!-- END ROW -->
-
-				</div>
+					
+						
+					</div>
 				
 		<c:if test="${user != null && user.userType=='player'}">
 		<input type="hidden" id="longitude" value="${profile.address.latitude}"> 
@@ -465,17 +468,32 @@
 
 
 
+             <div class="row bg-body">
+             	<div class="col-6 my-3 py-2">
+							<button class="btn btn-outline-primary float-start "
+								type="button" onclick="prev()" id="btn_prev">
+								<span><i class="fa fa-angle-left" aria-hidden="true"></i></span>
+								<span class="sr-only">Previous</span>
+							</button>
+						</div>
+						<div class="col-6  my-3 py-2 ">
+							<button class="btn btn-outline-primary mx-auto float-end " type="button"
+								onclick="next()" id="btn_next">
+								<span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+								<span class="sr-only">Next</span>
+							</button>
 
-		<div class="align-self-center "  id="div_btn_next">
-			<button class="btn btn-outline-primary  " type="button"
-				onclick="next()" id="btn_next">
-				<span><i class="fa fa-angle-right" aria-hidden="true"></i></span> <span
-					class="sr-only">Next</span>
-			</button>
-		</div>
+
+						</div>
+             
+             
+             
+             
+             </div>
+	
 		
 		
-		</div>
+		
 	</div>
 
 	</c:if>
@@ -486,9 +504,6 @@
 
 		
 
-	
-<!-- FOOTER -->
-	<jsp:include page="footer.jsp" />
 
 
 	

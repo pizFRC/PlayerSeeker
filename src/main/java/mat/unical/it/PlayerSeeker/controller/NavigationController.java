@@ -52,23 +52,15 @@ public class NavigationController {
 	public String sportFacilityDetails(HttpServletRequest req, HttpServletResponse res, @PathVariable(value="id") String id) {
 		SportsFacility sportsFacility = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.parseLong(id));
 		sportsFacility.setEvents(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(sportsFacility.getId()));
-		req.setAttribute("sportFacility", sportsFacility);
 		ReviewSummary rs=new ReviewSummary();
-		Review r=new Review();
-		Review r1=new Review();
-		Review r2=new Review();
-		Review r3=new Review();
-		Review r4=new Review();
-		r.setStars(5);
-		r1.setStars(5);
-		r2.setStars(5);
-		r3.setStars(3);
-		r4.setStars(2);
-		ArrayList<Review>lis=new ArrayList<Review>();
-		lis.add(r);lis.add(r1);lis.add(r2);lis.add(r3);lis.add(r4);
-		rs.setVotes(lis);
-		
+		ArrayList<Review>reviews=new ArrayList<Review>();
+		reviews.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
+		rs.setVotes(reviews);
+		System.out.println(reviews);
+		req.setAttribute("sportFacility", sportsFacility);
 		req.setAttribute("review", rs);
+		
+	
 		return "sportFacilityDetails";
 	}
 	

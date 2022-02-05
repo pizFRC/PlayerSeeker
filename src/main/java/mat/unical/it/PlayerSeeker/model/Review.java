@@ -5,11 +5,14 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Review {
+	
 	private Long id;
 	private Player author;
+	private SportsFacility sportsFacility;
 	private String text;
 	private LocalDate  data;
 	private Integer stars;
+	
 public Review() {
 	
 }
@@ -46,6 +49,12 @@ public Long getId() {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+	public SportsFacility getSportsFacility() {
+		return sportsFacility;
+	}
+	public void setSportsFacility(SportsFacility sportsFacility) {
+		this.sportsFacility = sportsFacility;
 	}
 	@Override
 	public boolean equals(Object obj) {

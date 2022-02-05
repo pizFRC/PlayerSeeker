@@ -103,10 +103,12 @@ $("#review_stars").children().removeClass("chosen");
 
 function sendReview(id){
 	console.log("id "+$("#review_stars").find('.chosen').last().attr('id'));
-      
-	   
+    
+	console.log( );
+	console.log(sessionStorage.length);
 	const dati= {
 		userId:id,
+		id_struttura:  window.location.pathname.split("/").pop(),
 	  testo:document.getElementById("review_text").value,
        voto: $('#review_stars').find('.chosen:last').attr("id"),
 	};

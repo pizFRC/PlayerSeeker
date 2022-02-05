@@ -17,22 +17,21 @@ function next() {
 		
 	}else{  return; }
 
-	if ($(".point:last").hasClass("active_point_point"))
+	if ($(".point:last").hasClass("active_point") || $("#last_step").hasClass("d-y"))
 		return;
 
 	if ($(".d-y:first").attr("id") == "second_step"){
 		
 	
-if(!check_impegni_player()){
+     if(!check_impegni_player()){
      $('#error_modal').find("#error_message").text("Sembra che tu abbia già un impegno nella data e fascia oraria scelte");
-			
-			$('#error_modal').modal('show');
-			return;
-		}
+	 $('#error_modal').modal('show');
+	 return;
+	}
 
 	set_datetime_resoconto();
-addAddressInput();
-}
+    addAddressInput();
+     }
 	updateProgress(true);
 	
 	//qui gestisco le icone sulla progress bar
@@ -40,7 +39,7 @@ addAddressInput();
     $(".d-y:first").next().removeClass('d-n');
 	$(".d-y:first").addClass('d-n').removeClass('d-y');
 	$("#contenitore").find(" span:not(.border-primary) > i").first().addClass("text-primary ");
-	$(".active_point_point:first").removeClass("active_point");
+	$(".active_point:first").removeClass("active_point");
 	$("#contenitore").find(" span:not(.border-primary)").first().addClass("border-primary active_point");
 
 
@@ -166,17 +165,6 @@ $(document).ready(function() {
 	//qui gestisco il tasto confirm
 	
 	
-	$('#privacy').prop('checked', false);
-	$('#privacy').click(function() {
-		if ($('#privacy').is(':checked')) {
-			$("#confirm_btn").prop("disabled", false);
-
-		} else {
-			$("#confirm_btn").prop("disabled", true);
-
-
-		}
-	})
 
 });
 
@@ -357,7 +345,7 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 					
 					option.innerHTML=stru[i].name + "- campo di "+stru[i].campiSportivi[j].sport.type + ' n. '+stru[i].campiSportivi[j].id;
 					document.getElementById("campo_selezionato").append(option);
-				
+				     document.getElementById("struttura").innerHTML=stru[i].name;
 					}
 				  }
 				}
@@ -380,7 +368,11 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 }
 //FINE FUNZIONI MAPPA
 
-
+function resetStruttura(){
+	console.log("prova");
+     document.querySelector('input[name="struttura_selezionata"]:checked').checked = false;
+	
+}
 
 //aggiunge le informazioni relative a data e ora nel form creazione evento
 function set_datetime_resoconto() {
@@ -553,9 +545,7 @@ function validateForm() {
 				required: true,
 			},campo_selezionato:{
 				required: true,
-			},privacy_cornfirm:{
-				required:true,
-			}
+			},
 		},
 		messages: {
 			data_input: {
@@ -579,8 +569,6 @@ function validateForm() {
 				required: "Compilare correttamente i campi nome ,cognome",
 			},campo_selezionato:{
 				required: "Scegli un campo per poter proseguire",
-			},privacy_cornfirm:{
-				required:"confermare per proseguire",
 			}
 		}, errorPlacement: function(error, element) {
 			//Custom position: first name
@@ -616,7 +604,6 @@ function validateForm() {
 		campo:document.getElementById("campo_selezionato").value,
 		ora_inizio: document.getElementById("ora_inizio").value,
 		ora_fine: document.getElementById("ora_fine").value,
-		privacy:document.querySelector('input[name="privacy_cornfirm"]:checked').value,
 		giocatori_mancanti:document.getElementById("num_giocatori").value ,
 		players:[]
 		

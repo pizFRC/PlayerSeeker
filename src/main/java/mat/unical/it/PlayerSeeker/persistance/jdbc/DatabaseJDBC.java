@@ -115,4 +115,13 @@ public class DatabaseJDBC implements Database{
 	public OpeningHoursIdBroker getOpeningHoursIdBroker() {
 		return new OpeningHoursIdBroker(connection);
 	}
+	
+	@Override
+	public ReviewIdBroker getReviewIdBroker() {
+		return new ReviewIdBroker(connection);
+	}
+	@Override
+	public ReviewDaoJDBC getReviewDaoJDBC() {
+		return new ReviewDaoJDBC(connection);
+	}
 }

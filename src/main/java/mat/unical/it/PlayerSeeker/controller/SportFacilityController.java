@@ -148,42 +148,40 @@ public class SportFacilityController {
 
 	}
 	@PostMapping("/getReviewsSportsFacility")
-	public void getReviewsBySportFacilityKey(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
-		res.setStatus(200);
+	public void getReviewsBySportFacilityKey(HttpServletRequest req, HttpServletResponse res, @RequestBody String id) {
+		
+		
+	
 		Review r=new Review();
-		Review r1=new Review();
-		Review r2=new Review();
 		
-		r.setStars(3);
-		r1.setStars(5);
-		r2.setStars(5);
-		r.setText("messaggio");
-		r1.setText("prova");
-		LocalDate dt=LocalDate.now();
-		
-		r.setData(dt);
-		r1.setData(dt);
-		r2.setData(dt);
-		r2.setText("prova3");
-		r.setAuthor(new Player("fra","def",20,"fde@gmail.com"));
-		r1.setAuthor(new Player("marcio","fed",20,"fmar@gmail.com"));
-		r2.setAuthor(new Player("luca","sco",20,"flu@gmail.com"));
-		ArrayList<Review>lista=new ArrayList<Review>();
-		lista.add(r);lista.add(r1);lista.add(r2);
-		lista.add(r);lista.add(r1);lista.add(r2);
-		lista.add(r);lista.add(r1);lista.add(r2);
-		lista.add(r);lista.add(r1);lista.add(r2);
+		ArrayList<Review> lista = new ArrayList<Review>();
+		lista.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
 		req.getSession(true).setAttribute("reviews", lista);
-		System.out.println(lista);
-		System.out.println(mes);
+		
+		res.setStatus(200);
 	}
 	
 	
 	
 	@PostMapping("/addReview")
 	public void addReview(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
-		
+		JacksonJsonParser ja = new JacksonJsonParser();
+		Map<String, Object> mappa = ja.parseMap(mes);
+		Integer userId=	(Integer)mappa.get("userId");
+		String sportsFacilityId=	(String)mappa.get("id_struttura");
+	String testo=(String)mappa.get("testo");
+	String voto=(String)mappa.get("voto");
+	Review r=new Review();
+	r.setAuthor(DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(Long.valueOf(userId)));
+	r.setSportsFacility(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.valueOf(sportsFacilityId)));
+	r.setId(DatabaseJDBC.getInstance().getReviewIdBroker().getId());
+	r.setStars(Integer.parseInt(voto));
+	r.setData(LocalDate.now());
+	r.setText(testo);
+	if(DatabaseJDBC.getInstance().getReviewDaoJDBC().saveOrUpdate(r))
 		res.setStatus(200);
+	else
+		res.setStatus(400);
 		System.out.println(mes);
 		
 	}
