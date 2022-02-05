@@ -97,6 +97,105 @@
   </div>
 </nav>
 	
+		<div id = "review_modal" class="modal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Lascia la tua recensione</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="d-flex mb-3">
+							<span class="fa fa-user-circle  mx-2 my-1" class="fa fa-user"></span> 
+							<p> ${ profile.name } ${ profile.surname } </p>
+						</div>
+						
+						<div class="d-flex justify-content-start my-2 mx-2" id="review_stars">
+						
+						<span class="fa fa-star review_star chosen" id="1" ></span>
+						<span class="fa fa-star review_star" id="2"></span>
+						<span class="fa fa-star review_star" id="3" ></span>
+						<span class="fa fa-star review_star" id="4"></span>
+						<span class="fa fa-star review_star" id="5"></span>
+						</div>
+					<form  class="input-group">
+						<div class="input-group">
+						
+							<textarea class="form-control" aria-label="With textarea" id="review_text" style="border-bottom-color: #4960c5"></textarea>
+						</div>
+					</form>
+			
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Annulla</button>
+					<button id="confirm_review" onclick="sendReview(${ profile.id })" type="button" class="btn btn-primary">Conferma</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id = "review_list_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Recensioni</h5>
+					<button type="button" onclick="" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="overflow-y:auto !important;overflow-x:hidden !important;">
+					<div class=" " role="">
+						 <c:if test = "${ reviews != null }">
+						<c:forEach var="review" items="${ reviews }">
+							<div class="border ">
+								<div class="d-flex mb-3">
+									<span class="fa fa-user-circle  mx-2 my-1" class="fa fa-user"></span>
+									<p>${ review.author.name  } ${ review.author.surname }</p>
+								</div>
+
+								<div class="d-flex justify-content-start my-2 mx-2"
+									id="review_stars">
+                           
+                                     
+                                    <c:forEach var="i" begin="0" end="5" step="1" varStatus ="status">
+    
+
+                                           <c:if test = "${ review.stars > i }">
+                                       <span class="fa fa-star chosen" id=""></span> 
+                                     </c:if>
+                                      <c:if test = "${review.stars < i}">
+                                       <span class="fa fa-star" id=""></span> 
+                                     </c:if>
+                                          </c:forEach>
+                                     
+								
+								
+								</div>
+								<div class="d-flex justify-content-start my-2 mx-2">
+								
+								<section> 
+								<p>${ review.text  }  </p>
+									
+									<p>${ review.data  }  </p>
+								</section>
+								
+								</div>
+							</div>
+						</c:forEach>
+						</c:if>
+						<c:if test = "${ reviews == null }">
+						<p>Ops,sembra le recensioni non siano disponibili al momento riprova più tardi </p>
+						</c:if>
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<a type="button"  data-bs-dismiss="modal" class="btn btn-primary">Indietro</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 	<div id = "hour_modal" class="modal" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -299,11 +398,20 @@
 								
 								</div>
 								
-								<input type="button" class="btn  btn-sm mx-auto" onclick="showReview()" value="${review.totalVotes} Recensioni"> 
+								<input type="button" class="btn  btn-sm mx-auto" onclick="showReview(${sportFacility.id })" value="${review.totalVotes} Recensioni"> 
 							</div>
-
+               
 						</div>
+						
 					</div>
+					<div class="d-flex justify-content-center">
+					<c:if test="${user != null}">					
+		           <input type="button" onclick="showAddReview()"class="btn btn-outline-primary btn-sm mx-auto" value="Scrivi una recensione"> 
+		         </c:if>
+		         <c:if test="${user == null}">					
+		           <a href="/login" class="btn btn-outline-primary btn-sm mx-auto">Accedi per lasciare una recensione  </a>
+		         </c:if>
+		           </div>
 				</div>
 					<!--  -->
 				

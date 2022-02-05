@@ -199,6 +199,9 @@ th{
 #stars span{
 	color:#deddda ;
 }
+.chosen{
+	color:#f6d32d !important;
+}
 #stars span.chosen{
 	color:#f6d32d !important;
 }
@@ -209,4 +212,18 @@ th{
 .progress-bar{
 	background-color:#f5c211!important;
 }
+#review_text{
+	overflow-y:auto;
+	overflow-x:hidden;
+	 resize: none;
+	 height:100px;
+	 min-height: 100px;
+}
+.review_star{
+	margin-right:5px;
+}
+.review_star:hover{
+	color:#f6d32d !important;
+}
+
 

@@ -1,6 +1,7 @@
 package mat.unical.it.PlayerSeeker.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 
 
 import mat.unical.it.PlayerSeeker.model.Player;
+import mat.unical.it.PlayerSeeker.model.Review;
 import mat.unical.it.PlayerSeeker.model.Sport;
 import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.persistance.Database;
@@ -144,5 +146,45 @@ public class SportFacilityController {
 			System.out.println("200");
 		}
 
+	}
+	@PostMapping("/getReviewsSportsFacility")
+	public void getReviewsBySportFacilityKey(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
+		res.setStatus(200);
+		Review r=new Review();
+		Review r1=new Review();
+		Review r2=new Review();
+		
+		r.setStars(3);
+		r1.setStars(5);
+		r2.setStars(5);
+		r.setText("messaggio");
+		r1.setText("prova");
+		LocalDate dt=LocalDate.now();
+		
+		r.setData(dt);
+		r1.setData(dt);
+		r2.setData(dt);
+		r2.setText("prova3");
+		r.setAuthor(new Player("fra","def",20,"fde@gmail.com"));
+		r1.setAuthor(new Player("marcio","fed",20,"fmar@gmail.com"));
+		r2.setAuthor(new Player("luca","sco",20,"flu@gmail.com"));
+		ArrayList<Review>lista=new ArrayList<Review>();
+		lista.add(r);lista.add(r1);lista.add(r2);
+		lista.add(r);lista.add(r1);lista.add(r2);
+		lista.add(r);lista.add(r1);lista.add(r2);
+		lista.add(r);lista.add(r1);lista.add(r2);
+		req.getSession(true).setAttribute("reviews", lista);
+		System.out.println(lista);
+		System.out.println(mes);
+	}
+	
+	
+	
+	@PostMapping("/addReview")
+	public void addReview(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
+		
+		res.setStatus(200);
+		System.out.println(mes);
+		
 	}
 }

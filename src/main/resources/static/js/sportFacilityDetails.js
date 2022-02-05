@@ -41,6 +41,28 @@ function showPlaygroundDescription(description){
 	$('#playground_modal').modal('show');
 }
 
+function showAddReview(){
+	$('#review_modal').modal('show');
+}
+function showReview(id){
+	
+		console.log(id);
+	$.ajax({
+		type: "POST",
+		url: "/getReviewsSportsFacility",
+		contentType: "application/json",
+		data: JSON.stringify(id),
+		
+ 		success: function(response) {
+			$('#review_list_modal').modal('show');
+		},
+		error:function(response){
+			alert("400");
+		},
+	});
+}
+
+
 $(document).ready(function() {
 	
 	 var average=parseFloat(document.getElementById("voto_value").innerHTML);
@@ -56,4 +78,51 @@ document.getElementById("stars").children.item(i).className="fa fa-star"
 console.log(i);
 }
 console.log("media"+average);
+
+
+
+$(document).on('click', '.review_star' , function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+  var source = e.target || e.srcElement;
+
+var child =document.getElementById("review_stars").children;
+
+$("#review_stars").children().removeClass("chosen");
+	for(var i=0;i<source.id;i++){
+		
+		$('#'+child.item(i).id).addClass("chosen");
+	}
+
+	
+
 });
+});
+
+
+function sendReview(id){
+	console.log("id "+$("#review_stars").find('.chosen').last().attr('id'));
+      
+	   
+	const dati= {
+		userId:id,
+	  testo:document.getElementById("review_text").value,
+       voto: $('#review_stars').find('.chosen:last').attr("id"),
+	};
+	console.log(dati);
+	
+	$.ajax({
+		type: "POST",
+		url: "/addReview",
+		contentType: "application/json",
+		data: JSON.stringify(dati),
+		
+ 		success: function(response) {
+			alert("200");
+		},
+		error:function(response){
+			alert("400");
+		},
+	});
+}

@@ -1,5 +1,6 @@
 package mat.unical.it.PlayerSeeker.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ public class Review {
 	private Long id;
 	private Player author;
 	private String text;
-	private LocalDateTime dataOra;
+	private LocalDate  data;
 	private Integer stars;
 public Review() {
 	
@@ -24,11 +25,11 @@ public Long getId() {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public LocalDateTime getDataOra() {
-		return dataOra;
+	public LocalDate getData() {
+		return data;
 	}
-	public void setDataOra(LocalDateTime dataOra) {
-		this.dataOra = dataOra;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 	public Integer getStars() {
 		return stars;

@@ -341,7 +341,6 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 			el.children.item(0).checked = true;
              $('#campo_selezionato').empty();
      
-			document.getElementById("struttura_selezionata").innerHTML = el.id;
 			document.getElementById("struttura_resoconto").innerHTML = el.id;
 			var stru=JSON.parse(localStorage.getItem("strutture"));
 			
@@ -352,10 +351,11 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 				   for(var j=0;j<stru[i].campiSportivi.length;j++){
 				 
      			    var sport_selez= document.querySelector('#sport_select').value
-					if(stru[i].campiSportivi[j].sport.type==sport_selez ){
+					if(stru[i].campiSportivi[j].sport.type== sport_selez ){
 					var option=document.createElement("option");
 					option.value=stru[i].campiSportivi[j].id;
-					option.innerHTML="Campo di "+stru[i].campiSportivi[j].sport.type;
+					
+					option.innerHTML=stru[i].name + "- campo di "+stru[i].campiSportivi[j].sport.type + ' n. '+stru[i].campiSportivi[j].id;
 					document.getElementById("campo_selezionato").append(option);
 				
 					}
@@ -363,6 +363,7 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 				}
 			}
 			
+			$('#playground_modal').modal('show');
 			
 		});
 		
@@ -586,6 +587,15 @@ function validateForm() {
 		
 			if (element.attr("name") == "struttura_selezionata") {
 				$("#struttura_selezionata").html(error);
+				console.log(error);
+				 $('#error_modal').find("#error_message").html(error);
+			   	$('#error_modal').modal('show');
+				
+			}else if (element.attr("name") == "campo_selezionato") {
+				console.log(error);
+				 $('#error_modal').find("#error_message").html(error);
+			   	$('#error_modal').modal('show');
+				
 			} else {
 				error.insertAfter(element);
 
