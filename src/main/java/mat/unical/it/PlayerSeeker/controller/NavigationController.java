@@ -59,7 +59,15 @@ public class NavigationController {
 		System.out.println(reviews);
 		req.setAttribute("sportFacility", sportsFacility);
 		req.setAttribute("review", rs);
+          Review r=new Review();
 		
+		ArrayList<Review> lista = new ArrayList<Review>();
+		lista.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
+		if(lista.size()>0)
+		req.setAttribute("reviews", lista);
+		else
+			req.removeAttribute("reviews");
+		res.setStatus(200);
 	
 		return "sportFacilityDetails";
 	}

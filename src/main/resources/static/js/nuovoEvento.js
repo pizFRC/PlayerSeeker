@@ -13,10 +13,15 @@
 
 function next() {
 
-	if(validateForm()){
-		
-	}else{  return; }
-
+	if(!validateForm())
+	return; 
+    if($(".d-y:first").attr("id") == "third_step"){
+	if(localStorage.getItem("strutture")==null){
+		 $('#error_modal').find("#error_message").text("Nessuna struttura selezionata");
+	     $('#error_modal').modal('show');
+	return;
+	}
+  }
 	if ($(".point:last").hasClass("active_point") || $("#last_step").hasClass("d-y"))
 		return;
 

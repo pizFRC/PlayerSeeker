@@ -46,20 +46,9 @@ function showAddReview(){
 }
 function showReview(id){
 	
-		console.log(id);
-	$.ajax({
-		type: "POST",
-		url: "/getReviewsSportsFacility",
-		contentType: "application/json",
-		data: JSON.stringify(id),
-		
- 		success: function(response) {
+	
 			$('#review_list_modal').modal('show');
-		},
-		error:function(response){
-			alert("400");
-		},
-	});
+	
 }
 
 
@@ -102,17 +91,14 @@ $("#review_stars").children().removeClass("chosen");
 
 
 function sendReview(id){
-	console.log("id "+$("#review_stars").find('.chosen').last().attr('id'));
-    
-	console.log( );
-	console.log(sessionStorage.length);
+	
 	const dati= {
 		userId:id,
 		id_struttura:  window.location.pathname.split("/").pop(),
 	  testo:document.getElementById("review_text").value,
        voto: $('#review_stars').find('.chosen:last').attr("id"),
 	};
-	console.log(dati);
+	
 	
 	$.ajax({
 		type: "POST",
@@ -120,11 +106,44 @@ function sendReview(id){
 		contentType: "application/json",
 		data: JSON.stringify(dati),
 		
- 		success: function(response) {
-			alert("200");
+		success: function(response) {
+			var messageContainer = document.createElement("div");
+			messageContainer.id = "result_message";
+			messageContainer.className = "alert alert-success d-flex align-items-center mb-3";
+			$(messageContainer).attr("role", "alert");
+			var icon = document.createElement("i");
+			icon.className = "bi bi-check2-circle me-3";
+			$(icon).attr("role", "img");
+			$(icon).css("font-size", "2rem");
+			var message = document.createElement("div");
+			$(message).text("Recensione pubblicata con successo!")
+			messageContainer.append(icon, message);
+			$('#review_modal').find('.modal-body').children().first().removeClass("d-flex").addClass("d-none");
+			$('#review_modal').find('.modal-body').find('#review_stars').removeClass("d-flex").addClass("d-none");
+			$('#review_modal').find('.modal-body').children().hide();
+		    $('#review_modal').find('.modal-footer').hide();
+			$('#review_modal').find('.modal-body').append(messageContainer);
 		},
-		error:function(response){
-			alert("400");
+		error: function(response) {
+			var messageContainer = document.createElement("div");
+			messageContainer.id = "result_message";
+			messageContainer.className = "alert alert-warning d-flex align-items-center mb-3";
+			$(messageContainer).attr("role", "alert");
+			var icon = document.createElement("i");
+			icon.className = "bi bi-exclamation-triangle-fill me-3";
+			$(icon).attr("role", "img");
+			$(icon).css("font-size", "2rem");
+			var message = document.createElement("div");
+			$(message).text("A causa di un problema temporaneo non è stato possibile pubblicare la recensione'")
+			$('#review_modal').find('.modal-body').children().hide();
+			$('#review_modal').find('.modal-footer').hide();
+			$('#review_modal').find('.modal-body').append(messageContainer);
 		},
 	});
+}
+
+function closeReviewModal(){
+	$('#review_text').val("");
+
+	window.location.reload();
 }

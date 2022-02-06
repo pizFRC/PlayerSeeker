@@ -156,8 +156,10 @@ public class SportFacilityController {
 		
 		ArrayList<Review> lista = new ArrayList<Review>();
 		lista.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
-		req.getSession(true).setAttribute("reviews", lista);
-		
+		if(lista.size()>0)
+		req.setAttribute("reviews", lista);
+		else
+			req.removeAttribute("reviews");
 		res.setStatus(200);
 	}
 	

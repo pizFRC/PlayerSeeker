@@ -152,7 +152,7 @@
 		</div>
 	</div>
 
-	<div id="playground_modal" class="modal fade"data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+	<div id="playground_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">

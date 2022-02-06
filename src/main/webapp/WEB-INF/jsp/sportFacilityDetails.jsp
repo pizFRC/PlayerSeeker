@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <html lang="it">
 <head>
@@ -97,12 +99,12 @@
   </div>
 </nav>
 	
-		<div id = "review_modal" class="modal" tabindex="-1">
+		<div id = "review_modal" class="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Lascia la tua recensione</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close" onclick="closeReviewModal()"data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="d-flex mb-3">
@@ -386,7 +388,8 @@
 					</table>
 						<div id="voto "	class="position-relative voto my-auto">
 							<div class="position-aboslute text-center w-100  mw-100">
-								<h2 id="voto_value">${review.starsAverage}</h2>
+							
+								<h2 id="voto_value"><fmt:formatNumber type="number" maxFractionDigits="1" value=" ${review.starsAverage} "/></h2>
 									
 								<div class="d-flex justify-content-center" id="stars">
 							
@@ -402,6 +405,7 @@
 							</div>
                
 						</div>
+						
 						
 					</div>
 					<div class="d-flex justify-content-center">

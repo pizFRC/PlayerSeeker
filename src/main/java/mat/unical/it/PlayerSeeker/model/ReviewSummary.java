@@ -28,7 +28,10 @@ public void setStarsAverage() {
 	for(int i=0;i<votes.size();i++) {
 		numeroVoti+=votes.get(i);
 	}
+	if(numeroVoti>0)
 	this.starsAverage/=numeroVoti;
+	else
+		this.starsAverage=(float) 0;
 	
 }
 public ArrayList<Integer> getVotes() {
