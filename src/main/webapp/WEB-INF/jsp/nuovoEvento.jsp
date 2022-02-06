@@ -151,6 +151,35 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id = "playground_modal_img" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Campo da gioco</h5>
+					
+				</div>
+				<div class="modal-body p-4">
+					<p id="description" class="fs-6 mb-3"></p>
+					<div id="image_carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<p class="fs-6 mb-2">Ecco qualche immagine:</p>
+  					<div class="carousel-inner"></div>
+  					<button class="carousel-control-prev" type="button" data-bs-target="#image_carousel" data-bs-slide="prev">
+    					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    					<span class="visually-hidden">Previous</span>
+  					</button>
+  					<button class="carousel-control-next" type="button" data-bs-target="#image_carousel" data-bs-slide="next">
+    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    					<span class="visually-hidden">Next</span>
+  					</button>
+				</div>
+				</div>
+				 <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#playground_modal" data-bs-toggle="modal" data-bs-dismiss="modal">Indietro</button>
+      </div>
+			</div>
+		</div>
+	</div>
 
 	<div id="playground_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
 				<div class="modal-dialog modal-dialog-centered">
@@ -178,11 +207,15 @@
 											</div>
 											<div class="">
 												<label class="form-check-label fs-4 text-primary">Campi
-													disponibili</label> <select class="form-select mb-2"
-													aria-label="Default select example" id="campo_selezionato"
-													name="campo_selezionato" form="form_evento">
-												</select>
-											</div>
+													disponibili</label>
+													
+						 
+						<div class="list-group border-0" id="campo_radio_list">
+							
+						</div>
+
+
+					</div>
 										</div>
 										<div class="modal-footer">
 											<a type="button" onclick="resetStruttura()" data-bs-dismiss="modal"
