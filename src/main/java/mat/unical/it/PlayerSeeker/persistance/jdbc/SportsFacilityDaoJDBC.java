@@ -1,6 +1,7 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,11 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import mat.unical.it.PlayerSeeker.model.Address;
-import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.SportsFacilityDao;
 

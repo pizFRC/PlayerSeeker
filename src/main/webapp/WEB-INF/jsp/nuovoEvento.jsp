@@ -251,60 +251,34 @@
 
 					<!-- MAP -->
 					<div class="col-12 d-n h-100 " id="third_step">
-
-						<h3 class="fs-4 " >Seleziona una struttura nella
-							tua città o cercane una</h5>
-						
-							
-							
-							
-							<div style="position: relative; width: 100%; height: 100%;">
-							<div id="map" name="map"
-								class="border border-2 h-100 w-100"
-								style="position: absolute; z-index: 90;"></div>
-
-							<div class="border border-2 text-dark glass row "
-								id="info_struttura_selezionata">
-								
-								<div class="col-12  ">
-
+						<h3 class="fs-4 " >Seleziona una struttura nella tua città o cercane una</h3>
+						<div style="position: relative; width: 100%; height: 100%;">
+							<div id="map" name="map" class="border border-2 h-100 w-100" style="position: absolute; z-index: 90;"></div>
+							<div class="border border-2 text-dark glass row" id="info_struttura_selezionata">
+								<div class="col-12 ">
 									<label class="form-check-label fn-4 text-primary">Struttura	Selezionata</label>
 									<p class="bg-lbody border-bottom border-2 rounder mb-2 "id="struttura_selezionata"></p>
-
-							
-
 
 									<label class="form-check-label fn-4 text-primary">Data scelta</label>
 									<p class="bg-lbody border-bottom border-2 rounder mb-2"	id="data_scelta"></p>
 
-								
-
-
 									<label class="form-check-label fn-4 text-primary">Fascia oraria</label>
 									<p class="bg-lbody border-bottom border-2 rounder mb-2 " id="fascia_scelta"></p>
-
-
 
 									<label class="form-check-label fn-4 text-primary">Campo selezionato</label>
 									<select class="form-select mb-2" aria-label="Default select example" id="campo_selezionato" name="campo_selezionato" form="form_evento">
 									</select>
-
 								</div>
 							</div>
 							<div class="alert alert-warning alert-dismissible  rounded rounded-pill align-items-center d-none "role="alert" id="alert_strutture">
-								
-								
 								<i class="bi bi-info-circle-fill"width="24" height="24" id="icon_alert"></i> 
 								<p class="text_alert align-middle">Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br>  prova a cambiare fascia oraria o a spostarti sulla mappa</p> 
 								<button type="button" class="btn-close " id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
-								
-								 
 							</div>
-							
-							
-							
 						</div>
 					</div>
+					
+					
 
 					<!-- SET NUMERO GIOCATORI -->
 					<div class="col-12 mb-3 d-n " id="four_step">

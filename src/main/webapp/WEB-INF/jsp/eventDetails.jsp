@@ -167,9 +167,10 @@ body {
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-4">
+					<p id="description_label" class="fs-6 mb-1"><strong>Descrizione:</strong></p>
 					<p id="description" class="fs-6 mb-3"></p>
 					<div id="image_carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-					<p class="fs-6 mb-2">Ecco qualche immagine:</p>
+					<p class="fs-6 mb-2"><strong>Immagini:</strong></p>
   					<div class="carousel-inner"></div>
   					<button class="carousel-control-prev" type="button" data-bs-target="#image_carousel" data-bs-slide="prev">
     					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -249,23 +250,30 @@ body {
 									</span>
 								</c:if>
 								<c:if test="${user.id != event.organizzatore.id}">
-									<c:set var="alreadyParticipate" value="false"/>
-									<c:forEach var="player" items="${ event.players }">
-										<c:if test="${user.id == player.id}">
-											<c:set var="alreadyParticipate" value="true"/>
-											<span id="popover-already-participate" class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Partecipi già a questo evento">
-  												<button disabled type="button" class="btn btn-outline-primary">Partecipa all'evento</button>
-											</span>
-										</c:if>
-									</c:forEach>
-									<c:if test="${alreadyParticipate eq false}">
-										<c:if test="${event.playersNumber == event.sport.requiredPlayers}">
-											<span id="popover-max-player" class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Numero massimo di partecipanti raggiunto">
-  												<button disabled type="button" class="btn btn-outline-primary">Partecipa all'evento</button>
-											</span>
-										</c:if>
-										<c:if test="${event.playersNumber < event.sport.requiredPlayers}">
-											<button type="button" class="btn btn-outline-primary" onclick="attendTheEvent(event, ${user.id}, '${user.email}', '${profile.name}', ${event.id})">Partecipa all'evento</button>
+									<c:if test="${user.id == event.playground.sportFacility.id}">
+										<span id="popover-manager" class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Non sei autorizzato a partecipare ad un evento">
+  											<button disabled type="button" class="btn btn-outline-primary">Partecipa all'evento</button>
+										</span>
+									</c:if>
+									<c:if test="${user.id != event.playground.sportFacility.id}">
+										<c:set var="alreadyParticipate" value="false"/>
+										<c:forEach var="player" items="${ event.players }">
+											<c:if test="${user.id == player.id}">
+												<c:set var="alreadyParticipate" value="true"/>
+												<span id="popover-already-participate" class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Partecipi già a questo evento">
+  													<button disabled type="button" class="btn btn-outline-primary">Partecipa all'evento</button>
+												</span>
+											</c:if>
+										</c:forEach>
+										<c:if test="${alreadyParticipate eq false}">
+											<c:if test="${event.playersNumber == event.sport.requiredPlayers}">
+												<span id="popover-max-player" class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Numero massimo di partecipanti raggiunto">
+  													<button disabled type="button" class="btn btn-outline-primary">Partecipa all'evento</button>
+												</span>
+											</c:if>
+											<c:if test="${event.playersNumber < event.sport.requiredPlayers}">
+												<button type="button" class="btn btn-outline-primary" onclick="attendTheEvent(event, ${user.id}, '${user.email}', '${profile.name}', ${event.id})">Partecipa all'evento</button>
+											</c:if>
 										</c:if>
 									</c:if>
 								</c:if>
@@ -285,7 +293,7 @@ body {
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4" id="map"></div>
+			<div class="col-lg-4" id="map" style="min-height: 400px"></div>
 		</div>
 	</div>
 	

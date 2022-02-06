@@ -69,13 +69,10 @@ public class SportDaoJDBC implements SportDao{
 	@Override
 	public Sport doRetrieveById(Long id) {
 		Sport tmp = new Sport();
-
 		try {
 			PreparedStatement query = connection.prepareStatement("SELECT * FROM sport WHERE id=?;");
 			query.setLong(1,id);
 			ResultSet result = query.executeQuery();
-			
-
 			while(result.next()) {
 				tmp.setId(result.getLong("id"));
 				tmp.setType(result.getString("type"));
@@ -86,7 +83,6 @@ public class SportDaoJDBC implements SportDao{
 			e.printStackTrace();
 			return null;
 		}
-
 		return tmp;
 	}
 

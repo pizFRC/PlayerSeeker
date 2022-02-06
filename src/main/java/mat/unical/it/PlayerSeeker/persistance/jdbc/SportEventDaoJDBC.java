@@ -1,18 +1,18 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.SportEvent;
-import mat.unical.it.PlayerSeeker.model.User;
 import mat.unical.it.PlayerSeeker.persistance.SportEventDao;
 
 public class SportEventDaoJDBC implements SportEventDao {
-	
+
 	Connection connection;
-	
+
 	public SportEventDaoJDBC(Connection connection) {
 		this.connection = connection;
 	}
@@ -167,18 +167,18 @@ public class SportEventDaoJDBC implements SportEventDao {
 	@Override
 	public boolean updateOrganizer(SportEvent sportEvent,Player p) {
 		try{
-		
-				PreparedStatement query = connection.prepareStatement("UPDATE event SET organizer_id=?,players_number=?  WHERE id=?;");
-				System.out.println(sportEvent.getOrganizzatore().getId());
-				query.setLong(1,p.getId());
-				query.setInt(2, sportEvent.getPlayersNumber());
-				query.setLong(3,sportEvent.getId());
 
-              	this.deleteParticipate(sportEvent);
-				this.saveParticipate(sportEvent);
-				query.executeUpdate();
-				query.close();
-			
+			PreparedStatement query = connection.prepareStatement("UPDATE event SET organizer_id=?,players_number=?  WHERE id=?;");
+			System.out.println(sportEvent.getOrganizzatore().getId());
+			query.setLong(1,p.getId());
+			query.setInt(2, sportEvent.getPlayersNumber());
+			query.setLong(3,sportEvent.getId());
+
+			this.deleteParticipate(sportEvent);
+			this.saveParticipate(sportEvent);
+			query.executeUpdate();
+			query.close();
+
 		} catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -222,27 +222,27 @@ public class SportEventDaoJDBC implements SportEventDao {
 		PreparedStatement query = null;
 		SportEvent tmp = null;
 		List<SportEvent> tmpList=new ArrayList<SportEvent>();
-			try {
-				if(checkConnection()) {
-					query = connection.prepareStatement("SELECT * FROM event WHERE playground_id=? and start >= current_date;");
-					query.setLong(1, ID);
-					ResultSet result = query.executeQuery();
-					while(result.next()) {
-						tmp = new SportEventProxy();
-						tmp.setId(result.getLong("id"));
-						tmp.setData(result.getDate("start").toLocalDate());
-						tmp.setDescription(result.getString("description"));
-						tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
-						tmp.setEndHour(result.getTime("end_hour").toLocalTime());
-						tmp.setPlayers(this.getParticipate(ID));
-						tmpList.add(tmp);
-					}
+		try {
+			if(checkConnection()) {
+				query = connection.prepareStatement("SELECT * FROM event WHERE playground_id=? and start >= current_date;");
+				query.setLong(1, ID);
+				ResultSet result = query.executeQuery();
+				while(result.next()) {
+					tmp = new SportEventProxy();
+					tmp.setId(result.getLong("id"));
+					tmp.setData(result.getDate("start").toLocalDate());
+					tmp.setDescription(result.getString("description"));
+					tmp.setBeginHour(result.getTime("begin_hour").toLocalTime());
+					tmp.setEndHour(result.getTime("end_hour").toLocalTime());
+					tmp.setPlayers(this.getParticipate(ID));
+					tmpList.add(tmp);
 				}
-				query.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
-				return null;
 			}
+			query.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 		return tmpList;
 	}
 	@Override
@@ -276,28 +276,28 @@ public class SportEventDaoJDBC implements SportEventDao {
 	@Override
 	public List<Player> getParticipate(Long id) {
 		List<Player> players = new ArrayList<Player>();
-        try{
-            PreparedStatement statement;
-            String query = "SELECT * FROM player INNER JOIN participate ON player.id=participate.player_id WHERE participate.event_id=?";
-            statement = connection.prepareStatement(query);
-            statement.setLong(1, id);
-            ResultSet result = statement.executeQuery();
+		try{
+			PreparedStatement statement;
+			String query = "SELECT * FROM player INNER JOIN participate ON player.id=participate.player_id WHERE participate.event_id=?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, id);
+			ResultSet result = statement.executeQuery();
 
-            while(result.next()) {
-                Player player = new Player();
-                player.setId(result.getLong("id"));
-                player.setName(result.getString("name"));
-                player.setSurname(result.getString("surname"));
-                player.setBirthday(result.getDate("birthday").toLocalDate());
-                player.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
-                players.add(player);
-            }
-            statement.close();
-        } catch(SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return players;
+			while(result.next()) {
+				Player player = new Player();
+				player.setId(result.getLong("id"));
+				player.setName(result.getString("name"));
+				player.setSurname(result.getString("surname"));
+				player.setBirthday(result.getDate("birthday").toLocalDate());
+				player.setAddress(DatabaseJDBC.getInstance().getAddressDao().doRetrieveByID(result.getLong("address_id")));
+				players.add(player);
+			}
+			statement.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return players;
 	}
 
 	@Override
@@ -332,7 +332,7 @@ public class SportEventDaoJDBC implements SportEventDao {
 				if(event.getOrganizzatore().getId() != ID) {
 					events.add(event);
 				}
-					
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -348,13 +348,13 @@ public class SportEventDaoJDBC implements SportEventDao {
 			query = "SELECT e.* FROM event e INNER JOIN playground p ON e.playground_id = p.id WHERE p.sport_facility_id = ? AND e.start >= current_date ORDER BY e.start, e.begin_hour LIMIT 6";
 		else
 			query = "SELECT e.* FROM event e WHERE e.start >= current_date ORDER BY e.start, e.begin_hour LIMIT 6";
-		
+
 		List<SportEvent> events = new ArrayList<SportEvent>();
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
 			if(ID != null)
 				statement.setLong(1, ID);
-			
+
 			ResultSet result = statement.executeQuery();
 			while(result.next()) {
 				SportEvent event = new SportEventProxy();

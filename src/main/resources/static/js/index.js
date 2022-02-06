@@ -89,7 +89,7 @@ function showBestEvents(){
 
 function createEventCard(event){
 	var div = document.createElement("div");
-	div.className = "col-12 col-lg-4";
+	div.className = "col-12 col-lg-4 mb-3";
 	
 	var card = document.createElement("div");
 	card.className = "card event-card mb-3 h-100";
@@ -220,7 +220,7 @@ function showBestSportFacility(){
 
 function createSportFacilityCard(sportFacility){
 	var div = document.createElement("div");
-	div.className = "col-12 col-lg-4";
+	div.className = "col-12 col-lg-4 mb-3";
 	
 	var card = document.createElement("div");
 	card.className = "card sportFacility-card mb-3 h-100";

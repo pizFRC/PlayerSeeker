@@ -1,6 +1,7 @@
 package mat.unical.it.PlayerSeeker.persistance.jdbc;
 
 import mat.unical.it.PlayerSeeker.model.Player;
+
 import mat.unical.it.PlayerSeeker.model.Playground;
 import mat.unical.it.PlayerSeeker.model.Sport;
 import mat.unical.it.PlayerSeeker.model.SportEvent;
@@ -10,10 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 
 public class SportEventProxy extends SportEvent {
 

@@ -1,7 +1,6 @@
 package mat.unical.it.PlayerSeeker.persistance;
 
 import mat.unical.it.PlayerSeeker.model.OpeningHours;
-import mat.unical.it.PlayerSeeker.model.Player;
 
 import java.util.List;
 
