@@ -11,11 +11,11 @@ Player Seeker agisce quindi da intermediario tra la struttura e i giocatori, eli
 
 
 >-Account già creati per i test
- >- Account tipo player.
+>- Account tipo player.
  >- username: frcdef , password: 12345.
  >- username :gvnBeraldi , password: 12345
 
 
->-Account tipo player.
+>-Account tipo struttura.
  >- username: elite , password: 12345.
  >- username :legion , password: 12345
