@@ -123,7 +123,7 @@
 					<form  class="input-group">
 						<div class="input-group">
 						
-							<textarea class="form-control" aria-label="With textarea" id="review_text" style="border-bottom-color: #4960c5"></textarea>
+							<textarea class="form-control" aria-label="With textarea" id="review_text" style="border-bottom-color: #4960c5; border-bottom-width: 3px"></textarea>
 						</div>
 					</form>
 			
@@ -138,7 +138,7 @@
 	
 	
 	<div id = "review_list_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Recensioni</h5>
@@ -148,7 +148,7 @@
 					<div class=" " role="">
 						 <c:if test = "${ reviews != null }">
 						<c:forEach var="review" items="${ reviews }">
-							<div class="border ">
+							<div class="border mb-3 p-2">
 								<div class="d-flex mb-3">
 									<span class="fa fa-user-circle  mx-2 my-1" class="fa fa-user"></span>
 									<p>${ review.author.name  } ${ review.author.surname }</p>
@@ -165,7 +165,7 @@
                                        <span class="fa fa-star chosen" id=""></span> 
                                      </c:if>
                                       <c:if test = "${review.stars < i}">
-                                       <span class="fa fa-star" id=""></span> 
+                                       <span class="fa fa-star star-color" id=""></span> 
                                      </c:if>
                                           </c:forEach>
                                      
@@ -369,7 +369,7 @@
 
 				
 				<!-- review -->
-				<div class="p-3 mb-5 info-element" style="border-bottom-color: #4960c5">
+				<div class="p-3 mb-5 info-element" style="border-bottom-color: #bbe39d">
 					<p id="name" class="fs-5 mb-1"><strong>Recensioni</strong></p>
                   <div class="d-flex justify-content-between">
 					<table class="table table-borderless ">
@@ -444,7 +444,7 @@
 								
 								</div>
 								
-								<input type="button" class="btn  btn-sm mx-auto" onclick="showReview(${sportFacility.id })" value="${review.totalVotes} Recensioni"> 
+								<input type="button" class="btn link-primary btn-sm mx-auto" onclick="showReview(${sportFacility.id })" value="${review.totalVotes} Recensioni"> 
 							</div>
                
 						</div>
