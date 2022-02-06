@@ -1,0 +1,233 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; ;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #8e99a4; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+body {
+	padding-top: 90px !important;
+
+}
+
+@media screen and (max-width: 576px) {
+  #login_form {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 390px !important;
+    background-color: transparent;
+    -webkit-box-shadow: none !important;
+  	-moz-box-shadow: none !important;
+  	box-shadow: none !important;
+  }
+  
+  #login_form_div{
+  	width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    min-width: none !important;
+    background-color: white;
+  }
+}
+
+#form_creazione_evento {
+	width:90%;
+	min-width: 90%;
+    min-height: 60%;
+}
+
+.info-element {
+	box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
+	border-bottom-style: solid;
+	border-bottom-width: medium;
+}
+
+
+#login_body  {
+	background-image: url('../img/bg.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+label.error {
+	color: red;
+	font-weight: normal;
+}
+
+.btn-outline-light {
+	color: black;
+}
+
+.geocoder {
+	border: 1px solid #ced4da;
+	z-index: 1;
+	margin: 20px;
+}
+
+.mapboxgl-ctrl-geocoder {
+	min-width: 100%;
+	width: 100% !important;
+	max-width: none !important;
+	max-height: none !important;
+	box-shadow: none !important;
+	border: none !important;
+	margin: none;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+	border: 1px solid #ced4da !important;
+	border-radius: 5px !important;
+	width: 100% !important;
+	max-width: auto !important;
+	display: block;
+}
+
+.slick-prev:before {
+	color: black;
+}
+.slick-next:before {
+	color: black;
+}
+
+
+.sport_selector:hover {
+	background-color: #e7e7e7 !important;
+}
+
+.selected_sport {
+	background-color: #D0E4F5 !important;
+	color: #206bc0 !important;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.step {
+  display: block;
+}
+
+.step.active {
+  display: block;
+}
+
+.add-playground {
+	background-color: transparent !important;
+	border: none !important;
+  	color: #0d6efd !important;
+}
+
+.delete-playground {
+	background-color: transparent !important;
+	border: none !important;
+	color: #dc3545 !important;
+}
+
+.new-event-button {
+	background-color: #e59558 !important;
+	border-color: #e59558 !important;
+}
+
+.new-event-button:hover {
+  background: #e08138 !important;
+  border-color: #e08138 !important;
+}
+
+.near-position-button {
+	background-color: #4960c5 !important;
+	border-color: #4960c5 !important;
+}
+
+.near-position-button:hover {
+  background: #374dae !important;
+  border-color: #374dae !important;
+}
+
+.custom-range-events::-webkit-slider-thumb {
+  background: #e59558;
+}
+
+.custom-range-events::-moz-range-thumb {
+  background: #e59558;
+}
+
+.custom-range-events::-ms-thumb {
+  background: #e59558;
+}
+
+.custom-range-facility::-webkit-slider-thumb {
+  background: #4960c5;
+}
+
+.custom-range-facility::-moz-range-thumb {
+  background: #4960c5;
+}
+
+.custom-range-facility::-ms-thumb {
+  background: #4960c5;
+}
+th{
+	max-width: 20px !important;
+	width: 20px !important;
+
+}
+.voto{
+	display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;     /* center items horizontally, in this case */
+}
+#stars span{
+	color:#deddda ;
+}
+.chosen{
+	color:#f6d32d !important;
+}
+#stars span.chosen{
+	color:#f6d32d !important;
+}
+.progress{
+	
+	margin-top:10px;
+}
+.progress-bar{
+	background-color:#f5c211!important;
+}
+#review_text{
+	overflow-y:auto;
+	overflow-x:hidden;
+	 resize: none;
+	 height:100px;
+	 min-height: 100px;
+}
+.review_star{
+	margin-right:5px;
+}
+.review_star:hover{
+	color:#f6d32d !important;
+}
+.star-color{
+	color:#deddda ;
+}
+
+

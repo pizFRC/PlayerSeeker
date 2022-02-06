@@ -1,0 +1,18 @@
+{
+"eventi":[{
+
+"nome":"partitella",
+"maxGiocatori": "2",
+"indirizzo":"via progresso"
+},
+{
+"nome":"calcetto",
+"maxGiocatori": "4",
+"indirizzo":"via laco"
+}
+
+
+
+]
+
+}

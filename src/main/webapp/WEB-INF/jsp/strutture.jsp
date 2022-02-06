@@ -1,0 +1,120 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="head.jsp" />
+<link rel="stylesheet"
+	href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css"
+	type="text/css">
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css'
+	rel='stylesheet' />
+<title>Player Seeker - Strutture</title>
+</head>
+
+<body>
+
+	<!-- HEADER --->
+	<jsp:include page="header.jsp" />
+	<div class="m-5">
+		<p class="fs-1">Visualizza le strutture</p>
+		<p class="fs-6 mb-4">Qui puoi scoprire le strutture vicine alla tua posizione o alla tua città preferita</p>
+		<div style="border-bottom-color: #4960c5" class="info-element p-4">
+			<form id ="search_form">
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="browser" class="form-label">Inserisci una città</label>
+						<div id="addressDiv"></div>
+					</div>
+					<div class="col-md-4  mb-3">
+						<label for="browser" class="form-label">Scegli uno sport</label> 
+						<select id ="sport_select" class="form-select">
+							<option id = "all" selected>Tutti gli sport</option>
+						</select>
+					</div>
+					<div class="col-md-2 mb-3 d-flex align-items-end">
+						<button id="search" class="w-100 bottom-0 btn btn-outline-primary" type="submit">
+							<i class="fa fa-search" aria-hidden="true"></i> Cerca
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="m-5">
+		<div class="row">
+			<div class="col-lg-12  col-xxl-12 col-xl-12 col-sm-12">
+			<div class="d-flex justify-content-between align-items-center mb-3">
+				<div class="tasti_da_nascondere">
+					<button id="btn_list" class="near-position-button btn btn-primary me-2" type="submit" value="Search">
+						<i class="bi bi-list"></i> Lista
+					</button>
+
+					<button id="btn_grid" class="near-position-button btn btn-primary" type="submit" value="Search"> 
+						<i class="bi bi-grid-fill"></i> Griglia
+					</button>
+				</div>
+				<div id="rangeDiv" class="w-50">
+					<div class ="d-flex">
+						<label for="range" class="form-label">Distanza dalla tua posizione: &nbsp</label> 
+						<p id = "distance"> 15 km</p>
+					</div>
+						<input type="range" class="custom-range-facility form-range" min="5" max="25" step="5" id="range">
+				</div>
+			</div>
+			
+				<div class="row" id="sport_facility_container">
+					<c:if test="${user == null}">
+						<div class="alert alert-primary d-flex align-items-center" role="alert">
+							<i class="bi bi-info-circle-fill me-2"></i>
+							<div>Effettua l'accesso o cerca una città per visualizzare le strutture!</div>
+						</div>
+					</c:if>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
+	<c:if test="${user == null}">
+		<span id="popover" class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Effettua l'accesso per visualizzare le strutture vicine a te">
+  			<button type="button" disabled id="my_position" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+				<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill me-3"></i>Vicine a te
+			</button>
+		</span>
+	</c:if>
+	<c:if test="${user != null}">
+		<button id="my_position" onclick="changeCurrentPosition(${profile.address.longitude}, ${profile.address.latitude}); showNearbySportFacility()" 
+				class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+			<i style="font-size: 1.5rem"class="bi bi-geo-alt-fill me-3"></i>Vicine a te
+		</button>
+	</c:if>
+	
+	</div>
+
+	<!-- FOOTER -->
+	<jsp:include page="footer.jsp" />
+
+	<!-- CDN -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+	<script type="text/javascript" src="../js/strutture.js" crossorigin="anonymous"></script>
+	<c:if test="${user != null}">
+	<script type="text/javascript">
+		changeCurrentPosition(${profile.address.longitude}, ${profile.address.latitude});
+		showNearbySportFacility();
+	</script>
+	</c:if>
+
+</body>
+</html>
