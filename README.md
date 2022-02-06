@@ -4,14 +4,14 @@ Player Seeker agisce quindi da intermediario tra la struttura e i giocatori, eli
 
 ## Istruzioni e consigli per test
 >-Eseguire il restore del del db:
- >-Creare un database con nome player_seeker.
- >-Eseguire il restore del dump file: dumpPlayerSeeker
- >-Cambiare password nella classe PlayerSeeker/persistance/jdbc/DatabaseJDBC.java
+ >- Creare un database con nome player_seeker.
+ >- Eseguire il restore del dump file: dumpPlayerSeeker
+ >- Cambiare password nella classe PlayerSeeker/persistance/jdbc/DatabaseJDBC.java
 
 
 
 >-Account già creati per i test
- >-Account tipo player.
+ >- Account tipo player.
  >- username: frcdef , password: 12345.
  >- username :gvnBeraldi , password: 12345
 
