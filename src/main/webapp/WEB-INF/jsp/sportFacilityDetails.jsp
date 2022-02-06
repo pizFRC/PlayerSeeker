@@ -144,7 +144,7 @@
 					<h5 class="modal-title">Recensioni</h5>
 					<button type="button" onclick="" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body" style="overflow-y:auto !important;overflow-x:hidden !important;">
+				<div class="modal-body">
 					<div class=" " role="">
 						 <c:if test = "${ reviews != null }">
 						<c:forEach var="review" items="${ reviews }">
