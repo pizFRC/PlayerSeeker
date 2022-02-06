@@ -13,26 +13,30 @@
 
 function next() {
 
-	if(validateForm()){
-		
-	}else{  return; }
-
-	if ($(".point:last").hasClass("active_point_point"))
+	if(!validateForm())
+	return; 
+    if($(".d-y:first").attr("id") == "third_step"){
+	if(localStorage.getItem("strutture")==null){
+		 $('#error_modal').find("#error_message").text("Nessuna struttura selezionata");
+	     $('#error_modal').modal('show');
+	return;
+	}
+  }
+	if ($(".point:last").hasClass("active_point") || $("#last_step").hasClass("d-y"))
 		return;
 
 	if ($(".d-y:first").attr("id") == "second_step"){
 		
 	
-if(!check_impegni_player()){
+     if(!check_impegni_player()){
      $('#error_modal').find("#error_message").text("Sembra che tu abbia già un impegno nella data e fascia oraria scelte");
-			
-			$('#error_modal').modal('show');
-			return;
-		}
+	 $('#error_modal').modal('show');
+	 return;
+	}
 
 	set_datetime_resoconto();
-addAddressInput();
-}
+    addAddressInput();
+     }
 	updateProgress(true);
 	
 	//qui gestisco le icone sulla progress bar
@@ -40,7 +44,7 @@ addAddressInput();
     $(".d-y:first").next().removeClass('d-n');
 	$(".d-y:first").addClass('d-n').removeClass('d-y');
 	$("#contenitore").find(" span:not(.border-primary) > i").first().addClass("text-primary ");
-	$(".active_point_point:first").removeClass("active_point");
+	$(".active_point:first").removeClass("active_point");
 	$("#contenitore").find(" span:not(.border-primary)").first().addClass("border-primary active_point");
 
 
@@ -166,17 +170,6 @@ $(document).ready(function() {
 	//qui gestisco il tasto confirm
 	
 	
-	$('#privacy').prop('checked', false);
-	$('#privacy').click(function() {
-		if ($('#privacy').is(':checked')) {
-			$("#confirm_btn").prop("disabled", false);
-
-		} else {
-			$("#confirm_btn").prop("disabled", true);
-
-
-		}
-	})
 
 });
 
@@ -339,9 +332,8 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 
 
 			el.children.item(0).checked = true;
-             $('#campo_selezionato').empty();
+             $('#campo_radio_list').empty();
      
-			document.getElementById("struttura_selezionata").innerHTML = el.id;
 			document.getElementById("struttura_resoconto").innerHTML = el.id;
 			var stru=JSON.parse(localStorage.getItem("strutture"));
 			
@@ -352,17 +344,19 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 				   for(var j=0;j<stru[i].campiSportivi.length;j++){
 				 
      			    var sport_selez= document.querySelector('#sport_select').value
-					if(stru[i].campiSportivi[j].sport.type==sport_selez ){
-					var option=document.createElement("option");
-					option.value=stru[i].campiSportivi[j].id;
-					option.innerHTML="Campo di "+stru[i].campiSportivi[j].sport.type;
-					document.getElementById("campo_selezionato").append(option);
-				
+        
+					if(stru[i].campiSportivi[j].sport.type== sport_selez ){
+					  
+				     document.getElementById("struttura").innerHTML=stru[i].name;
+                      document.getElementById("campo_radio_list").append(creaLabel(stru[i].campiSportivi[j].sport.type,stru[i].campiSportivi[j].id,stru[i].campiSportivi[j].description));
+
+
 					}
 				  }
 				}
 			}
 			
+			$('#playground_modal').modal('show');
 			
 		});
 		
@@ -377,9 +371,103 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 
 	}
 }
+function creaLabel(type,id,description){
+	var div=document.createElement("div");
+	div.className="d-flex justify-content-start";
+	
+	var label =document.createElement("label");
+	label.className="list-group-item border-0 ";
+	//<a onclick="alert('ok')">dettagli <a>
+	var a=document.createElement("a");
+	a.id='a_'+id;
+	a.innerHTML=" Dettagli campo";
+	a.className="link-primary my-auto";
+	//data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal"
+	
+
+	a.setAttribute('data-bs-target', "#playground_modal_img");
+	a.setAttribute('data-bs-toggle', 'modal');
+	a.setAttribute('data-bs-dismiss', 'modal');
+
+	a.addEventListener('click', () => {
+		//alert("prova");
+		console.log(id);
+		showPlaygroundDetails(id,description);
+	});
+	//a.onclick=show(id);
+	var input =document.createElement("input");
+	input.type="radio";
+	input.value=id;
+	input.name="campo_selezionato";
+	input.form="form_evento"
+	input.className="form-check-input me-1";
+	label.innerText="Campo di "+ type;
+	
+
+	label.prepend(input);
+		div.append(label,a);
+	return div;
+}
+
+
+function showPlaygroundDetails(id, description){
+	if(description == "")
+		$("#playground_modal_img").find("#description").hide();
+	else
+		$("#playground_modal_img").find("#description").text(description);
+	var folder = "playground_" + id;
+	
+	$("#playground_modal_img").find(".carousel-inner").children().remove();
+	$.ajax({
+		type: "POST",
+		url: "/getPlaygroundImage",
+		contentType: "application/json",
+		data: JSON.stringify(folder),
+		async: false,
+		success: function(result) {
+			
+			if(result.resources.length == 0){
+				$("#playground_modal_img").find("#image_carousel").hide();
+				$("#playground_modal_img").find("#description").show();
+				$("#playground_modal_img").find("#description").text("Nessun immagine trovata");
+			}else {
+				var count = 1;
+				$.each(result.resources, function(index, img) {
+					console.log(img.url);
+					if(count==1){
+						var item = document.createElement("div");
+						item.className = "carousel-item active";
+						var image = document.createElement("img");
+						image.className = "d-block w-100 rounded";
+						image.setAttribute('src',img.url);
+						item.append(image);
+						$("#playground_modal_img").find(".carousel-inner").append(item);
+					}
+					else{
+						var item = document.createElement("div");
+						item.className = "carousel-item";
+						var image = document.createElement("img");
+						image.className = "d-block w-100 rounded";
+						image.setAttribute('src',img.url);
+						item.append(image);
+						$("#playground_modal_img").find(".carousel-inner").append(item);
+					}
+					count++;
+				});
+			}
+		}
+	});
+	
+//	$('#playground_modal_img').modal('show');
+}
+
 //FINE FUNZIONI MAPPA
 
-
+function resetStruttura(){
+	console.log("prova");
+     document.querySelector('input[name="struttura_selezionata"]:checked').checked = false;
+	
+}
 
 //aggiunge le informazioni relative a data e ora nel form creazione evento
 function set_datetime_resoconto() {
@@ -480,7 +568,7 @@ function loadSportType() {
 		if (this.readyState == 4 && this.status == 200) {
 			var jsonObj = JSON.parse(xhttp.response);
            var select=document.getElementById("sport_select");
-			console.log(jsonObj);
+			
 			Object.entries(jsonObj).forEach((entry) => {
 				const [key, value] = entry;
 				var option=document.createElement("option");
@@ -492,12 +580,12 @@ function loadSportType() {
 				e = e || window.event;
 				var target = e.target || e.srcElement,
 					text = target.textContent || target.innerText;
-				console.log(target.value);
+				
 
 				if (target.value != "") {
 					var type = target.value;
 					Object.entries(jsonObj).forEach((entry) => {
-						console.log(entry[1].type);
+						
 						if (entry[1].type == target.value) {
 							document.getElementById("num_giocatori").value = entry[1].requiredPlayers - 1;
 							$("#set_giocatori").empty();
@@ -552,9 +640,7 @@ function validateForm() {
 				required: true,
 			},campo_selezionato:{
 				required: true,
-			},privacy_cornfirm:{
-				required:true,
-			}
+			},
 		},
 		messages: {
 			data_input: {
@@ -578,14 +664,21 @@ function validateForm() {
 				required: "Compilare correttamente i campi nome ,cognome",
 			},campo_selezionato:{
 				required: "Scegli un campo per poter proseguire",
-			},privacy_cornfirm:{
-				required:"confermare per proseguire",
 			}
 		}, errorPlacement: function(error, element) {
 			//Custom position: first name
 		
 			if (element.attr("name") == "struttura_selezionata") {
 				$("#struttura_selezionata").html(error);
+				console.log(error);
+				 $('#error_modal').find("#error_message").html(error);
+			   	$('#error_modal').modal('show');
+				
+			}else if (element.attr("name") == "campo_selezionato") {
+				console.log(error);
+				 $('#error_modal').find("#error_message").html(error);
+			   	$('#error_modal').modal('show');
+				
 			} else {
 				error.insertAfter(element);
 
@@ -603,10 +696,9 @@ function validateForm() {
 			sport:document.querySelector('#sport_select').value,
 		struttura:document.querySelector('input[name="struttura_selezionata"]:checked').value,
 		data:document.getElementById("data_input").value,
-		campo:document.getElementById("campo_selezionato").value,
+		campo:document.querySelector('input[name="campo_selezionato"]:checked').value,
 		ora_inizio: document.getElementById("ora_inizio").value,
 		ora_fine: document.getElementById("ora_fine").value,
-		privacy:document.querySelector('input[name="privacy_cornfirm"]:checked').value,
 		giocatori_mancanti:document.getElementById("num_giocatori").value ,
 		players:[]
 		

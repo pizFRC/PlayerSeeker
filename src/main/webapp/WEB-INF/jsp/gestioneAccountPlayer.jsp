@@ -173,7 +173,7 @@
 					<c:if test="${user.googleId == null }">
   						<button id="password_button" onclick="showPasswordSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-key menu-icon me-3"></i> Password</button>
   					</c:if>
-  					<button id="event_button" onclick="showOrganized(${ user.id }); showEventsSettings()" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-calendar2-event menu-icon me-3"></i> Eventi</button>
+  					<button id="event_button" onclick="showOrganized(${ user.id }); showEventsSettings(${ user.id })" class="button raleway_font text-start menu-item text-start"> <i class="bi bi-calendar2-event menu-icon me-3"></i> Eventi</button>
 				</div>
 				<button id="logout_button" onclick="$('#modal').modal('show');" class="button raleway_font text-start menu-item text-start" style="color:red"> <i class="bi bi-box-arrow-right menu-icon me-3"></i> Logout</button>
 			</div>

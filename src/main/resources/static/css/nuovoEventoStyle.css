@@ -6,7 +6,7 @@
 
 body {
 	padding-top: 90px;
-	background-color: #eaf4f4;
+	background-color: white;
 
 }
 
@@ -39,6 +39,7 @@ h4, h5, h6 {
 .modal h5,h4{
 		color: black !important;
 }
+
 .text-purple{
 	color: #4960c5 !important;
 }
@@ -55,6 +56,7 @@ h4, h5, h6 {
      overflow-y: auto;
      border-radius:0% !important;
 }
+
 #alert_strutture:hover #icon_alert{
 	display:none !important;
 }
@@ -68,25 +70,32 @@ h4, h5, h6 {
 	top:0;
 	right:0;
 }
-
+#icon_alert:hover{
+	display:block !important;
+	background-color: red;
+}
 
 #info_struttura_selezionata{
-	   width:35%;
-	   height:95%;
-	 overflow-x: hidden;
-     overflow-y: auto;
+	   width:10%;
+	   height:10%;
+	
     position:absolute;
     z-index: 999;
     margin-left:10px;
     margin-top:10px;
+    
 }
-.glass{
-background: rgba( 255, 255, 255, 0.9 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 1.5px );
--webkit-backdrop-filter: blur( 1.5px );
-border-radius: 3px;
+#info_struttura_selezionata.info_orario{
+display:none;	
 }
+#info_struttura_selezionata.info_orario:hover{
+display:block;	
+width:25%;
+height:25%;
+ overflow-x: hidden;
+     overflow-y: auto;
+}
+
 .geocoder {
 	border: 1px solid #ced4da;
 	z-index: 1;
@@ -175,7 +184,7 @@ span.point{
 	position:absolute;
 	
 	bottom:-8px;
-	padding:  right;
+   
 	
 	/*vertical-align:"bottom"*/
 }
@@ -198,6 +207,14 @@ span.point{
 
 	
 }
+#map{
+	 max-width: 100%;
+        min-width: 100%;  
+     
+       height:500px;
+     
+	
+}
 @media screen and (max-width:410px){
 	
 	.point{display: none;}
@@ -206,7 +223,8 @@ span.point{
 
 #map{
 	 max-width: 100%;
-        min-width: 100%  
+        min-width: 100%;  
+        min-height:100%;
      
 	
 }
@@ -259,10 +277,43 @@ label.error {
 
 }
 
-@media screen and (max-width:600px){
+@media screen and (max-height:500px){
+#map{
+	 max-width: 100%;
+        min-width: 100%;  
+     
+       height:300px;
+     
+	
+}
+	}
+
+@media screen and (max-width:500px){
+	
+	
+.lbl_progress{
+	display:none;
+	
+	/*vertical-align:"bottom"*/
+}
 #form_creazione_evento{
-	margin-top:30%;
-margin-bottom:20%;
+
+overflow-y:auto;
+	overflow-x:hidden;
+
+}
+	
+}
+@media screen and (max-width:1000px){
+#form_creazione_evento{
+
+
+width: 100% !important;
+
+}
+#resoconto{
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 
 
@@ -273,22 +324,5 @@ margin-bottom:20%;
 }
 }
 
-  
-@media screen and (max-width:768px){
-#form_creazione_evento{
-	margin-top:20%;
-margin-bottom:20%;
-height:100% !important;
-
-}
 
 
-
-.lbl_progress{
-	font-size: 14px;
-	bottom:0px;
-	
-	/*vertical-align:"bottom"*/
-}
-
-}

@@ -452,7 +452,7 @@ function showOrganized(userId){
 	});
 }
 function showEventSportsFacility(id){
-	console.log("id"+id);
+	console.log(id);
 	$.ajax({
 		type: "POST",
 		url: "/getEventBySportsFacilityKey",

@@ -186,3 +186,45 @@ p {
 .custom-range-facility::-ms-thumb {
   background: #4960c5;
 }
+th{
+	max-width: 20px !important;
+	width: 20px !important;
+
+}
+.voto{
+	display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;     /* center items horizontally, in this case */
+}
+#stars span{
+	color:#deddda ;
+}
+.chosen{
+	color:#f6d32d !important;
+}
+#stars span.chosen{
+	color:#f6d32d !important;
+}
+.progress{
+	
+	margin-top:10px;
+}
+.progress-bar{
+	background-color:#f5c211!important;
+}
+#review_text{
+	overflow-y:auto;
+	overflow-x:hidden;
+	 resize: none;
+	 height:100px;
+	 min-height: 100px;
+}
+.review_star{
+	margin-right:5px;
+}
+.review_star:hover{
+	color:#f6d32d !important;
+}
+
+

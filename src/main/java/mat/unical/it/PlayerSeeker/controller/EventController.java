@@ -179,8 +179,8 @@ public class EventController {
 	@PostMapping("/getEventBySportsFacilityKey")
 	public List<SportEvent> getEventBySportsFacilityKey(HttpServletRequest req, HttpServletResponse res, @RequestBody Long id) {
 		List<SportEvent> result = DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(id);
-		System.out.println("rice"+id);
-		res.setStatus(HttpServletResponse.SC_OK);
+		
+		res.setStatus(200);
 		return result;
 	}
 }

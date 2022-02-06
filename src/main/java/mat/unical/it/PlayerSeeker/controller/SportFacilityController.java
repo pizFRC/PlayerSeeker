@@ -1,6 +1,7 @@
 package mat.unical.it.PlayerSeeker.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,10 @@ import mat.unical.it.PlayerSeeker.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+import mat.unical.it.PlayerSeeker.model.Player;
+import mat.unical.it.PlayerSeeker.model.Review;
 
 import mat.unical.it.PlayerSeeker.model.Sport;
 
@@ -146,5 +151,45 @@ public class SportFacilityController {
 			System.out.println("200");
 		}
 
+	}
+	@PostMapping("/getReviewsSportsFacility")
+	public void getReviewsBySportFacilityKey(HttpServletRequest req, HttpServletResponse res, @RequestBody String id) {
+		
+		
+	
+		Review r=new Review();
+		
+		ArrayList<Review> lista = new ArrayList<Review>();
+		lista.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
+		if(lista.size()>0)
+		req.setAttribute("reviews", lista);
+		else
+			req.removeAttribute("reviews");
+		res.setStatus(200);
+	}
+	
+	
+	
+	@PostMapping("/addReview")
+	public void addReview(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
+		JacksonJsonParser ja = new JacksonJsonParser();
+		Map<String, Object> mappa = ja.parseMap(mes);
+		Integer userId=	(Integer)mappa.get("userId");
+		String sportsFacilityId=	(String)mappa.get("id_struttura");
+	String testo=(String)mappa.get("testo");
+	String voto=(String)mappa.get("voto");
+	Review r=new Review();
+	r.setAuthor(DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(Long.valueOf(userId)));
+	r.setSportsFacility(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.valueOf(sportsFacilityId)));
+	r.setId(DatabaseJDBC.getInstance().getReviewIdBroker().getId());
+	r.setStars(Integer.parseInt(voto));
+	r.setData(LocalDate.now());
+	r.setText(testo);
+	if(DatabaseJDBC.getInstance().getReviewDaoJDBC().saveOrUpdate(r))
+		res.setStatus(200);
+	else
+		res.setStatus(400);
+		System.out.println(mes);
+		
 	}
 }

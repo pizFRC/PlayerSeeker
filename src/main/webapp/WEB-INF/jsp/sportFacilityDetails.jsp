@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <html lang="it">
 <head>
@@ -96,6 +98,105 @@
     </div>
   </div>
 </nav>
+	
+		<div id = "review_modal" class="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Lascia la tua recensione</h5>
+					<button type="button" class="btn-close" onclick="closeReviewModal()"data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="d-flex mb-3">
+							<span class="fa fa-user-circle  mx-2 my-1" class="fa fa-user"></span> 
+							<p> ${ profile.name } ${ profile.surname } </p>
+						</div>
+						
+						<div class="d-flex justify-content-start my-2 mx-2" id="review_stars">
+						
+						<span class="fa fa-star review_star chosen" id="1" ></span>
+						<span class="fa fa-star review_star" id="2"></span>
+						<span class="fa fa-star review_star" id="3" ></span>
+						<span class="fa fa-star review_star" id="4"></span>
+						<span class="fa fa-star review_star" id="5"></span>
+						</div>
+					<form  class="input-group">
+						<div class="input-group">
+						
+							<textarea class="form-control" aria-label="With textarea" id="review_text" style="border-bottom-color: #4960c5"></textarea>
+						</div>
+					</form>
+			
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Annulla</button>
+					<button id="confirm_review" onclick="sendReview(${ profile.id })" type="button" class="btn btn-primary">Conferma</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id = "review_list_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Recensioni</h5>
+					<button type="button" onclick="" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="overflow-y:auto !important;overflow-x:hidden !important;">
+					<div class=" " role="">
+						 <c:if test = "${ reviews != null }">
+						<c:forEach var="review" items="${ reviews }">
+							<div class="border ">
+								<div class="d-flex mb-3">
+									<span class="fa fa-user-circle  mx-2 my-1" class="fa fa-user"></span>
+									<p>${ review.author.name  } ${ review.author.surname }</p>
+								</div>
+
+								<div class="d-flex justify-content-start my-2 mx-2"
+									id="review_stars">
+                           
+                                     
+                                    <c:forEach var="i" begin="0" end="5" step="1" varStatus ="status">
+    
+
+                                           <c:if test = "${ review.stars > i }">
+                                       <span class="fa fa-star chosen" id=""></span> 
+                                     </c:if>
+                                      <c:if test = "${review.stars < i}">
+                                       <span class="fa fa-star" id=""></span> 
+                                     </c:if>
+                                          </c:forEach>
+                                     
+								
+								
+								</div>
+								<div class="d-flex justify-content-start my-2 mx-2">
+								
+								<section> 
+								<p>${ review.text  }  </p>
+									
+									<p>${ review.data  }  </p>
+								</section>
+								
+								</div>
+							</div>
+						</c:forEach>
+						</c:if>
+						<c:if test = "${ reviews == null }">
+						<p>Ops,sembra le recensioni non siano disponibili al momento riprova più tardi </p>
+						</c:if>
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<a type="button"  data-bs-dismiss="modal" class="btn btn-primary">Indietro</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	
 	<div id = "hour_modal" class="modal" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
@@ -265,12 +366,110 @@
 						<c:set var="count" value="${count+1 }"/>
 					</c:forEach>
 				</div>
+
+				
+				<!-- review -->
+				<div class="p-3 mb-5 info-element" style="border-bottom-color: #4960c5">
+					<p id="name" class="fs-5 mb-1"><strong>Recensioni</strong></p>
+                  <div class="d-flex justify-content-between">
+					<table class="table table-borderless ">
+					
+						<tbody >
+							<tr>
+								<th scope="row" >5</th>
+								<td>
+									<div id="5_stars"  class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+									style="width:${(review.votes[4] * 100)/review.totalVotes}%;" aria-valuenow="${review.votes[4]}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+							
+							</tr>
+							<tr>
+								 <th scope="row"  class="w-10">4</th>
+									<td>
+									<div id="4_stars"  class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+									style="width:${(review.votes[3] * 100)/review.totalVotes}%;" aria-valuenow="${review.votes[3]}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+								
+							</tr>
+							<tr>
+								<th scope="row"  class="w-10">3</th>
+									<td>
+									<div id="3_stars"  class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+											style="width:${(review.votes[2] * 100)/review.totalVotes}%;" aria-valuenow="${review.votes[2]}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"  class="w-10" >2</th>
+									<td>
+									<div id="2_stars"  class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+											style="width:${(review.votes[1] * 100)/review.totalVotes}%;" aria-valuenow="${review.votes[1]}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row" class="w-10" >1</th>
+									<td>
+									<div id="1_stars" class="progress" style="height: 2px;">
+										<div class="progress-bar" role="progressbar"
+											style="width:${(review.votes[0] * 100)/review.totalVotes}%;" aria-valuenow="${(review.votes[0] * 100)/review.totalVotes}" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+						<div id="voto "	class="position-relative voto my-auto">
+							<div class="position-aboslute text-center w-100  mw-100">
+							
+								<h2 id="voto_value"><fmt:formatNumber type="number" maxFractionDigits="1" value=" ${review.starsAverage} "/></h2>
+									
+								<div class="d-flex justify-content-center" id="stars">
+							
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star "></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								
+								</div>
+								
+								<input type="button" class="btn  btn-sm mx-auto" onclick="showReview(${sportFacility.id })" value="${review.totalVotes} Recensioni"> 
+							</div>
+               
+						</div>
+						
+						
+					</div>
+					<div class="d-flex justify-content-center">
+					<c:if test="${user != null}">					
+		           <input type="button" onclick="showAddReview()"class="btn btn-outline-primary btn-sm mx-auto" value="Scrivi una recensione"> 
+		         </c:if>
+		         <c:if test="${user == null}">					
+		           <a href="/login" class="btn btn-outline-primary btn-sm mx-auto">Accedi per lasciare una recensione  </a>
+		         </c:if>
+		           </div>
+				</div>
+					<!--  -->
+				
+
 				<div style = "min-height: 350px" class="w-100" id="internal_map"></div>
 				<div id="internal_email_button" class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
 					<button onclick="$('#email_modal').modal('show')" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
 						<i style="font-size: 1.5rem"class="bi bi-send-plus me-3"></i>Contatta
 					</button>		
 				</div>
+
 			</div>
 		</div>
 	</div>
