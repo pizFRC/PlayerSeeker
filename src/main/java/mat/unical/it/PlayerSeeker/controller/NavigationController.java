@@ -4,21 +4,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 import mat.unical.it.PlayerSeeker.model.Review;
 import mat.unical.it.PlayerSeeker.model.ReviewSummary;
 import mat.unical.it.PlayerSeeker.model.SportEvent;
+
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
 
 @Controller
 public class NavigationController {
-
+	
 	@GetMapping("/")
 	public String homePage(HttpServletRequest req, HttpServletResponse resp) {
 		return "index";

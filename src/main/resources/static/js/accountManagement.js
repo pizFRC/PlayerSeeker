@@ -3,8 +3,10 @@ $(window).scroll(function(event){
    var st = $(this).scrollTop();
    if (st > lastScrollTop){
        $("#new_event").html('<i style="font-size: 1.5rem"class="bi bi-plus-lg"></i>');
+ 	   $("#calendar_button").html('<i style="font-size: 1.5rem"class="bi bi-calendar-range"></i>');
    } else {
        $("#new_event").html('<i style="font-size: 1.5rem"class="bi bi-plus-lg me-3"></i>Crea nuovo evento');
+	   $("#calendar_button").html('<i style="font-size: 1.5rem"class="bi bi-calendar-range me-3"></i> Visualizza calendario');
    }
    lastScrollTop = st;
 });
@@ -85,7 +87,7 @@ function showPlaygroudsSettings(){
 	$("#playgroundDiv").addClass("active");
 }
 
-function showEventsSettings(id){
+function showEventsSettings(){
 	$(".button").removeClass("selected");
 	$("#event_button").addClass("selected");
 	$("#account_button").find("i").removeClass("bi-person-fill");
@@ -100,7 +102,6 @@ function showEventsSettings(id){
 	$(".section").removeClass("active");
 	$("#eventsDiv").addClass("active");
 	$("#organized").addClass("active");
-	showEventSportsFacility(id);
 }
 
 function createCard(event, userId, isOrganizer) {
@@ -172,20 +173,19 @@ function createCard(event, userId, isOrganizer) {
 	contentCard.append(address, dateDiv, beginDiv, endDiv);
 
 	var buttonDiv = document.createElement("div");
-	buttonDiv.className = "d-flex justify-content-end";
+	buttonDiv.className = "row me-4 ms-4 me-lg-0 ms-lg-0 justify-content-lg-end justify-content-center";
 	
 	var details = document.createElement("a");
-	details.className = "btn btn-outline-primary";
+	details.className = "btn btn-outline-primary mb-2 col-12 col-lg-3";
 	details.innerHTML = "Visualizza dettagli";
 	$(details).attr("href", "eventDetails/" + event.id);
 	$(details).attr("target", "_blank");
 	
 	var unsubscribe = document.createElement("button");
-	unsubscribe.className = "btn btn-outline-secondary ms-3";
+	unsubscribe.className = "btn btn-outline-secondary mb-2 ms-lg-3 col-12 col-lg-3";
 	unsubscribe.innerHTML = "Disiscriviti";
 if(event.sportFacility.id!=userId)	{
 	if (isOrganizer) {
-
 		$(unsubscribe).click(function() {
 			$('#div_select').empty();
 			console.log(event);
@@ -215,7 +215,7 @@ if(event.sportFacility.id!=userId)	{
 				$('#div_select').append(select);
 
 			}
-			$('#event_modal').find("#event_button").click(function() {
+			$('#event_modal').find("#confirm_button").click(function() {
 
 				if (event.playersNumber == 1) {
 					deleteEvent(event.id);
@@ -251,7 +251,7 @@ if(event.sportFacility.id!=userId)	{
 	else{
 		$(unsubscribe).click(function() {
 			$('#event_modal').find("#event_message").text("Vuoi davvero disinscriverti dall'evento?");
-			$('#event_modal').find("#event_button").click(function() {
+			$('#event_modal').find("#confirm_button").click(function() {
 				unsubscribeParticipantEvent(event.id, userId);
 			})
 			$('#event_modal').modal('show');
@@ -261,13 +261,13 @@ if(event.sportFacility.id!=userId)	{
 	
 	if (isOrganizer) {
 		var remove = document.createElement("button");
-		remove.className = "btn btn-outline-danger ms-3";
+		remove.className = "btn btn-outline-danger mb-2 ms-lg-3 col-12 col-lg-3";
 		remove.innerHTML = "Elimina";
 		$(remove).click(function(){
 		
 			$('#div_select').empty();
 			$('#event_modal').find("#event_message").text("Vuoi davvero eliminare l'evento?");
-			$('#event_modal').find("#event_button").click(function(){
+			$('#event_modal').find("#confirm_button").click(function(){
 				deleteEvent(event.id);
 			})
 			$('#event_modal').modal('show');
@@ -279,11 +279,11 @@ if(event.sportFacility.id!=userId)	{
 	}
 	}else{
 		var remove = document.createElement("button");
-		remove.className = "btn btn-outline-danger ms-3";
+		remove.className = "btn btn-outline-danger mb-2 ms-lg-3 col-12 col-lg-3";
 		remove.innerHTML = "Elimina";
 		$(remove).click(function(){
 			$('#event_modal').find("#event_message").text("Vuoi davvero eliminare l'evento?");
-			$('#event_modal').find("#event_button").click(function(){
+			$('#event_modal').find("#confirm_button").click(function(){
 				deleteEvent(event.id);
 			})
 			$('#event_modal').modal('show');
@@ -348,6 +348,90 @@ function deleteEvent(id){
 	});
 }
 
+var colorArray = ['#e59558', '#e5c45d', '#bbe39d', '#8aceec'];
+
+function initializeCalendar(userId){
+	$("#calendar").evoCalendar({
+		theme: 'Royal Navy',
+		todayHighlight: true,
+		firstDayOfWeek: 1
+	});
+	$.ajax({
+		type: "POST",
+		url: "/getEventByOrganizer",
+		contentType: "application/json",
+		data: JSON.stringify(userId),
+		success: function(list) {
+			$.each(list, function(index, event) {
+				$("#calendar").evoCalendar('addCalendarEvent', [
+					{
+						id: event.id, // Event's id (required, for removing event)
+						name: "Evento di " + event.playground.sport.type, // Name of event
+						description: event.playground.description, // Description of event (optional)
+						date: event.start, // Date of event
+						badge: event.beginHour.substring(0, 5) + " - " + event.endHour.substring(0, 5),
+						type: "event", // Type of event (event|holiday|birthday)
+						color: colorArray[Math.floor(Math.random()*colorArray.length)]
+					}
+				]);
+			});
+		}
+	});
+	$.ajax({
+		type: "POST",
+		url: "/getEventByParticipant",
+		contentType: "application/json",
+		data: JSON.stringify(userId),
+		success: function(list) {
+			$.each(list, function(index, event) {
+				$("#calendar").evoCalendar('addCalendarEvent', [
+					{
+						id: event.id, // Event's id (required, for removing event)
+						name: "Evento di " + event.playground.sport.type, // Name of event
+						description: event.playground.description, // Description of event (optional)
+						date: event.start, // Date of event
+						badge: event.beginHour.substring(0, 5) + " - " + event.endHour.substring(0, 5),
+						type: "event", // Type of event (event|holiday|birthday)
+						color: colorArray[Math.floor(Math.random()*colorArray.length)]
+					}
+				]);
+			});
+		}
+	});
+	
+	$("#calendar").evoCalendar('setTheme', 'Royal Navy');
+	$("#calendar_modal").modal('show');
+}
+
+function initializeFacilityCalendar(sportFacilityId){
+	$("#calendar").evoCalendar({
+		theme: 'Royal Navy',
+		todayHighlight: true
+	});
+	$.ajax({
+		type: "POST",
+		url: "/getEventBySportsFacilityKey",
+		contentType: "application/json",
+		data: JSON.stringify(sportFacilityId),
+		success: function(list) {
+			$.each(list, function(index, event) {
+				$("#calendar").evoCalendar('addCalendarEvent', [
+					{
+						id: event.id, // Event's id (required, for removing event)
+						name: "Evento di " + event.playground.sport.type, // Name of event
+						description: event.playground.description, // Description of event (optional)
+						date: event.start, // Date of event
+						badge: event.beginHour.substring(0, 5) + " - " + event.endHour.substring(0, 5),
+						type: "event", // Type of event (event|holiday|birthday)
+						color: colorArray[Math.floor(Math.random()*colorArray.length)]
+					}
+				]);
+			});
+		}
+	});	
+	$("#calendar_modal").modal('show');
+}
+
 function showOrganized(userId){
 	$("#organized_button").addClass("selected");
 	$("#participate_button").removeClass("selected");
@@ -379,7 +463,6 @@ function showEventSportsFacility(id){
 				var div =document.createElement("div");
 				div.innerHTML="<h1> ciao<h1>"
 				$("#organized").append(createCard(event,id,true));
-				
 			});
 		}
 	});
@@ -452,7 +535,6 @@ function changeHours(event){
 	}
 	$('#hour_modal').modal('hide');
 }
-
 
 
 currentPlayground = null;

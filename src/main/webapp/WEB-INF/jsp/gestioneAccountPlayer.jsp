@@ -8,6 +8,8 @@
 	<!-- Mapbox CSS-->
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+	<!-- Add the evo-calendar.css for styling -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.3/evo-calendar/css/evo-calendar.min.css"/>
 	<title>Player Seeker - Gestione Account</title>
 	<style>
 	
@@ -79,7 +81,21 @@
 			</div>
 		</div>
 	</div>
-	
+
+	<div id="calendar_modal" class="modal w-100 h-100" tabindex="-1">
+		<div class="modal-dialog modal-xl modal-dialog-centered" >
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Calendario dei tuoi eventi</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="calendar"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div id = "event_modal" class="modal" tabindex="-1">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -92,14 +108,12 @@
 						<p id ="event_message"> <i class="bi bi-exclamation-triangle-fill me-2"></i></p>
 					</div>
 					<form id="div_select" class="input-group">
-					
-					 
 					</form>
 					 <label id="error_label_oranizer"> </label>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Annulla</button>
-					<button id="event_button" type="button" class="btn btn-primary">Conferma</button>
+					<button id="confirm_button" type="button" class="btn btn-primary">Conferma</button>
 				</div>
 			</div>
 		</div>
@@ -269,10 +283,14 @@
 				<div id="partecipate" class = "section overflow-auto pe-4 ps-4" style ="max-height: 600px"></div>
 				
 				<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
+					<button id="calendar_button" onclick="initializeCalendar(${ user.id })" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+						<i style="font-size: 1.5rem"class="bi bi-calendar-range me-3"></i>Visualizza calendario
+					</button>
 					<a id="new_event" href="/nuovoEvento" class="new-event-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 rounded d-flex align-items-center">
 						<i style="font-size: 1.5rem"class="bi bi-plus-lg me-3"></i>Crea nuovo evento
 					</a>
 				</div>
+				
 			</div>
     		
 		</div>
@@ -300,6 +318,12 @@
 	
 	<!-- Custom -->
 	<script type="text/javascript"  src="../js/accountManagement.js"> </script>
+	
+	<!-- Cloudinary -->
+	<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+	
+	<!-- Add the evo-calendar.js for.. obviously, functionality! -->
+	<script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.3/evo-calendar/js/evo-calendar.min.js"></script>
 	
 	<script type="text/javascript">
 		initializeAddress(${profile.address.longitude}, ${profile.address.latitude});

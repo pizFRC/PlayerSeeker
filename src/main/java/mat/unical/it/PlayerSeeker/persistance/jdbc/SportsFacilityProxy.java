@@ -9,7 +9,6 @@ import java.util.List;
 
 import mat.unical.it.PlayerSeeker.model.OpeningHours;
 import mat.unical.it.PlayerSeeker.model.Playground;
-import mat.unical.it.PlayerSeeker.model.SportEvent;
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 
 public class SportsFacilityProxy extends SportsFacility {

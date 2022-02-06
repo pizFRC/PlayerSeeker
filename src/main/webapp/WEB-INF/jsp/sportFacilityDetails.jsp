@@ -254,9 +254,10 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-4">
+					<p id="description_label" class="fs-6 mb-1"><strong>Descrizione:</strong></p>
 					<p id="description" class="fs-6 mb-3"></p>
 					<div id="image_carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-					<p class="fs-6 mb-2">Ecco qualche immagine:</p>
+					<p class="fs-6 mb-2"><strong>Immagini:</strong></p>
   					<div class="carousel-inner"></div>
   					<button class="carousel-control-prev" type="button" data-bs-target="#image_carousel" data-bs-slide="prev">
     					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -272,11 +273,40 @@
 		</div>
 	</div>
 	
+	<div class="modal fade" id="email_modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<h5 class="modal-title" id="title">Nuovo messaggio per ${sportFacility.name }</h5>
+        			<button onclick="closeEmailModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      			</div>
+     		 	<div class="modal-body">
+        			<form>
+          				<div class="mb-3">
+            				<label for="message-text" class="col-form-label">Messaggio:</label>
+            				<textarea class="form-control" id="message"></textarea>
+          				</div>
+        			</form>
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+        			<button id="send_message_button" disabled onclick="sendMessage(${sportFacility.id}, '${sportFacility.name}')" type="button" class="btn btn-primary">Invia messaggio</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	
 	<div class="h-100 w-100 d-flex align-items-center position-relative">
 		<div class="h-100 w-100" id="map"></div>
 		
+		<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
+			<button id="calendar_button" onclick="$('#email_modal').modal('show')" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+				<i style="font-size: 1.5rem"class="bi bi-send-plus me-3"></i>Contatta
+			</button>		
+		</div>
+		
 		<div class="col-12 col-md-7 col-xl-5 position-absolute top-50 start-0 translate-middle-y h-100 p-0 p-md-5" style="z-index: 2;">
-			<div style="overflow-y: auto; max-height:100%"class="h-100 shadow-lg p-5 mb-5 bg-body rounded">
+			<div style="overflow-y: auto; max-height:100%" class="h-100 shadow-lg p-4 p-md-5 pt-5 mb-5 bg-body rounded">
 				<p id="name" class="fs-2 mb-3">${sportFacility.name }</p>
 				<c:if test="${user != null }">
 					<hr class="mb-2" style="height:0.5px">
@@ -336,6 +366,7 @@
 						<c:set var="count" value="${count+1 }"/>
 					</c:forEach>
 				</div>
+
 				
 				<!-- review -->
 				<div class="p-3 mb-5 info-element" style="border-bottom-color: #4960c5">
@@ -431,6 +462,14 @@
 				</div>
 					<!--  -->
 				
+
+				<div style = "min-height: 350px" class="w-100" id="internal_map"></div>
+				<div id="internal_email_button" class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
+					<button onclick="$('#email_modal').modal('show')" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
+						<i style="font-size: 1.5rem"class="bi bi-send-plus me-3"></i>Contatta
+					</button>		
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -458,6 +497,9 @@
 	
 	<!-- Custom -->
 	<script type="text/javascript" src="../js/sportFacilityDetails.js"> </script>
+	
+	<!-- EmailJS -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 		
 	<script type="text/javascript">
 		initializePosition(${sportFacility.address.longitude}, ${sportFacility.address.latitude});
@@ -469,5 +511,4 @@
 	</script>
 	</c:if>
 	
-
 </body>

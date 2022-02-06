@@ -176,13 +176,11 @@ public class PlayerDaoJDBC implements PlayerDao{
 
 	private boolean deleteInterested(Player player) {
 		try {
-			for(Sport sport : player.getSports()) {
 				String query = "DELETE interested WHERE player_id=?";
 				PreparedStatement statement = connection.prepareStatement(query);
 				statement.setLong(1,player.getId());
 				statement.execute();
 				statement.close();
-			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 			return false;

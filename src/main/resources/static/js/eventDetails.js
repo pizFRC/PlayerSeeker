@@ -69,8 +69,10 @@ function attendTheEvent(event, userId, email, name, eventId){
 }
 
 function showPlaygroundDetails(id, description){
-	if(description == "")
+	if(description == ""){
+		$("#playground_modal").find("#description_label").hide();
 		$("#playground_modal").find("#description").hide();
+	}
 	else
 		$("#playground_modal").find("#description").text(description);
 		

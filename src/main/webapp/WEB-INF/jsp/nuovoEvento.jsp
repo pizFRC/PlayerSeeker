@@ -366,6 +366,7 @@
 
 
 					<!-- MAP -->
+
 					<div class="col-12 d-n  position-static " style="height: 90%;z-index: 80"id="third_step">
 
 						<h3 class="fs-4 " >Seleziona una struttura nella
@@ -385,17 +386,20 @@
 							<div class="alert alert-warning alert-dismissible  rounded rounded-pill align-items-center "role="alert" id="alert_strutture" style="z-index: 99">
 								
 								
+
 								<i class="bi bi-info-circle-fill"width="24" height="24" id="icon_alert"></i> 
 								<p class="text_alert align-middle">Potrebbero non esserci strutture disponibili nella zona in cui stai cercando </br>  prova a cambiare fascia oraria o a spostarti sulla mappa</p> 
 								<button type="button" class="btn-close " id="btn_close_alert" action="hideAlert()" aria-label="Close"></button>
-								
-								 
 							</div>
+
 							</div>
 							
 							
 							
+
 					</div>
+					
+					
 
 					<!-- SET NUMERO GIOCATORI -->
 					<div class="col-12 mb-3 d-n " id="four_step">
