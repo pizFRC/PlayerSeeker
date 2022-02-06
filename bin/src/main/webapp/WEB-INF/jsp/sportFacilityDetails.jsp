@@ -104,7 +104,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Lascia la tua recensione</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn-close" onclick="closeReviewModal()"data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="d-flex mb-3">
@@ -135,48 +135,63 @@
 			</div>
 		</div>
 	</div>
-
-
-	<div id="review_list_modal" class="modal fade" tabindex="-1">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+	
+	
+	<div id = "review_list_modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Recensioni</h5>
 					<button type="button" onclick="" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<c:if test="${ reviews != null }">
-						<c:forEach var="review" items="${reviews}">
-								<div class="p-2 pb-1">
+					<div class=" " role="">
+						 <c:if test = "${ reviews != null }">
+						<c:forEach var="review" items="${ reviews }">
+							<div class="border mb-3 p-2">
 								<div class="d-flex mb-3">
 									<span class="fa fa-user-circle  mx-2 my-1" class="fa fa-user"></span>
 									<p>${ review.author.name  } ${ review.author.surname }</p>
 								</div>
+
 								<div class="d-flex justify-content-start my-2 mx-2"
-									id="review_stars">          
+									id="review_stars">
+                           
+                                     
                                     <c:forEach var="i" begin="0" end="5" step="1" varStatus ="status">
+    
+
                                            <c:if test = "${ review.stars > i }">
                                        <span class="fa fa-star chosen" id=""></span> 
                                      </c:if>
                                       <c:if test = "${review.stars < i}">
                                        <span class="fa fa-star star-color" id=""></span> 
                                      </c:if>
-                                     </c:forEach>
+                                          </c:forEach>
+                                     
+								
+								
 								</div>
 								<div class="d-flex justify-content-start my-2 mx-2">
 								
 								<section> 
-									<p class="mb-3" >${ review.text  }  </p>
-									<p style="font-size: 80%">${ review.data  } </p>
+								<p>${ review.text  }  </p>
+									
+									<p>${ review.data  }  </p>
 								</section>
+								
 								</div>
 							</div>
-							<hr style="height:0.5px">
 						</c:forEach>
-					</c:if>
-					<c:if test = "${ reviews == null }">
+						</c:if>
+						<c:if test = "${ reviews == null }">
 						<p>Ops,sembra le recensioni non siano disponibili al momento riprova più tardi </p>
-					</c:if>
+						</c:if>
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<a type="button"  data-bs-dismiss="modal" class="btn btn-primary">Indietro</a>
 				</div>
 			</div>
 		</div>
@@ -416,21 +431,29 @@
 					</table>
 						<div id="voto "	class="position-relative voto my-auto">
 							<div class="position-aboslute text-center w-100  mw-100">
+							
 								<h2 id="voto_value"><fmt:formatNumber type="number" maxFractionDigits="1" value=" ${review.starsAverage} "/></h2>
+									
 								<div class="d-flex justify-content-center" id="stars">
-									<span class="fa fa-star"></span>
-									<span class="fa fa-star"></span>
-									<span class="fa fa-star "></span>
-									<span class="fa fa-star"></span>
-									<span class="fa fa-star"></span>
+							
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star "></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								
 								</div>
+								
 								<input type="button" class="btn link-primary btn-sm mx-auto" onclick="showReview(${sportFacility.id })" value="${review.totalVotes} Recensioni"> 
 							</div>
-						</div>	
+               
+						</div>
+						
+						
 					</div>
 					<div class="d-flex justify-content-center">
 					<c:if test="${user != null}">					
-		           <button onclick="showAddReview()"class="btn btn-outline-primary mx-auto rounded-pill d-flex align-items-center"> <i class="bi bi-chat-quote me-2"></i> Scrivi una recensione </button>
+		           <input type="button" onclick="showAddReview()"class="btn btn-outline-primary btn-sm mx-auto" value="Scrivi una recensione"> 
 		         </c:if>
 		         <c:if test="${user == null}">					
 		           <a href="/login" class="btn btn-outline-primary btn-sm mx-auto">Accedi per lasciare una recensione  </a>

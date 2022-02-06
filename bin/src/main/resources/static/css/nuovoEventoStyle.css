@@ -1,0 +1,328 @@
+@charset "UTF-8";
+
+
+
+
+
+body {
+	padding-top: 90px;
+	background-color: white;
+
+}
+
+#form_creazione_evento {
+	width:90%;
+	min-width: 90%;
+    min-height: 90%;
+	
+}
+#alert_strutture{
+	width:5%;
+	height:10%;
+	  position:absolute;
+    z-index: 999;
+    bottom:10;
+    right:10; 
+     overflow:hidden;
+     	transition: all .2s ease-in-out;
+}
+.text_alert {
+	display:none !important;
+	
+       
+          
+}
+h1, h2, h3,
+h4, h5, h6 {
+	color: #e08138 !important;
+}
+.modal h5,h4{
+		color: black !important;
+}
+
+.text-purple{
+	color: #4960c5 !important;
+}
+#btn_close_alert {
+	display:none !important;
+}
+
+
+#alert_strutture:hover{
+	width:30%;
+	height:20%;
+	
+	overflow-x: auto;
+     overflow-y: auto;
+     border-radius:0% !important;
+}
+
+#alert_strutture:hover #icon_alert{
+	display:none !important;
+}
+#alert_strutture:hover .text_alert {
+	display:inline-block !important;
+	 padding-top:10px;
+
+}
+#alert_strutture:hover  #btn_close_alert {
+	display:block !important;
+	top:0;
+	right:0;
+}
+#icon_alert:hover{
+	display:block !important;
+	background-color: red;
+}
+
+#info_struttura_selezionata{
+	   width:10%;
+	   height:10%;
+	
+    position:absolute;
+    z-index: 999;
+    margin-left:10px;
+    margin-top:10px;
+    
+}
+#info_struttura_selezionata.info_orario{
+display:none;	
+}
+#info_struttura_selezionata.info_orario:hover{
+display:block;	
+width:25%;
+height:25%;
+ overflow-x: hidden;
+     overflow-y: auto;
+}
+
+.geocoder {
+	border: 1px solid #ced4da;
+	z-index: 1;
+	margin: 20px;
+}
+
+
+
+
+.mapboxgl-ctrl-geocoder {
+
+	box-shadow: none;
+	border: none;
+	   margin:auto;
+    max-width: 360px;
+
+	}
+	.mapboxgl-ctrl-geocoder--input {
+	border: 1px solid #ced4da;
+	border-radius: 5px;
+	
+	
+}
+
+	  .progress{
+	  height:5px !important;
+	  }
+
+
+
+.slick-prev:before {
+	color: black;
+}
+.slick-next:before {
+	color: black;
+}
+
+
+.slick-slide {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+
+.d-n{
+	display: none;
+}
+.d-y{
+	 display:inline-block;
+}
+#step,#progress{
+	width:100%;
+	height:100%;
+	position:absolute;
+	z-index:2;
+	 top: 0;
+     left: 0;
+          
+         
+  
+}
+
+
+.point{
+	 
+	 font-size: 18px;
+	  display: inline-flex;
+     justify-content:center;
+     align-items: center;
+	 border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	padding:16px;
+	margin-right:-2px;
+	margin-top: -5px;
+	padding-left: 19px;
+	padding-right: 19px;
+	
+	}
+span.point{
+     position:absolute;
+     
+
+}
+.lbl_progress{
+	position:absolute;
+	
+	bottom:-8px;
+   
+	
+	/*vertical-align:"bottom"*/
+}
+
+
+.point i{
+	
+    padding:0px 15px;
+     margin:10px 10px;
+   display: flex;
+      
+   
+
+	
+}
+#progress{
+	margin-top: 10px;
+	
+	margin-bottom: 10px;
+
+	
+}
+#map{
+	 max-width: 100%;
+        min-width: 100%;  
+     
+       height:500px;
+     
+	
+}
+@media screen and (max-width:410px){
+	
+	.point{display: none;}
+	
+}
+
+#map{
+	 max-width: 100%;
+        min-width: 100%;  
+        min-height:100%;
+     
+	
+}
+#set_giocatori{
+	
+    min-height:50%;
+    height:200px;
+    max-height:75%;
+
+	 overflow-x: hidden;
+     overflow-y: auto;
+     text-align:justify;
+}
+#resoconto{
+ overflow-x: hidden;
+     overflow-y: auto;
+     }
+.point { 
+	transition: all .2s ease-in-out;
+ }
+ 
+
+.active_point{
+	transform: scale(1.3);
+}
+.sport_item {
+transition: all .2s ease-in-out;
+align-content: center;
+vertical-align: center;
+}
+
+input.error{
+	border-bottom: 4px solid #E52948;
+	color:red;
+	
+}
+#sport-error{
+	text-align: center;
+	justify-content: center;
+	border:1px solid red;
+	
+}
+
+label.error {
+	color: red;
+	font-weight: normal;
+}
+.sport_item:hover {
+	transform: scale(1.3);
+
+}
+
+@media screen and (max-height:500px){
+#map{
+	 max-width: 100%;
+        min-width: 100%;  
+     
+       height:300px;
+     
+	
+}
+	}
+
+@media screen and (max-width:500px){
+	
+	
+.lbl_progress{
+	display:none;
+	
+	/*vertical-align:"bottom"*/
+}
+#form_creazione_evento{
+
+overflow-y:auto;
+	overflow-x:hidden;
+
+}
+	
+}
+@media screen and (max-width:1000px){
+#form_creazione_evento{
+
+
+width: 100% !important;
+
+}
+#resoconto{
+	overflow-y:auto;
+	overflow-x:hidden;
+}
+
+
+.lbl_progress{
+	display:none;
+	
+	/*vertical-align:"bottom"*/
+}
+}
+
+
+

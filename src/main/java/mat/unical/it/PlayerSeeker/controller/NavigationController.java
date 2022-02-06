@@ -1,7 +1,6 @@
 package mat.unical.it.PlayerSeeker.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import mat.unical.it.PlayerSeeker.model.Review;
 import mat.unical.it.PlayerSeeker.model.ReviewSummary;
-import mat.unical.it.PlayerSeeker.model.SportEvent;
 
 import mat.unical.it.PlayerSeeker.model.SportsFacility;
 import mat.unical.it.PlayerSeeker.persistance.jdbc.DatabaseJDBC;
@@ -62,8 +60,6 @@ public class NavigationController {
 		System.out.println(reviews);
 		req.setAttribute("sportFacility", sportsFacility);
 		req.setAttribute("review", rs);
-          Review r=new Review();
-		
 		ArrayList<Review> lista = new ArrayList<Review>();
 		lista.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
 		if(lista.size()>0)

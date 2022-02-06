@@ -1,7 +1,7 @@
 package mat.unical.it.PlayerSeeker.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-import mat.unical.it.PlayerSeeker.model.Player;
 import mat.unical.it.PlayerSeeker.model.Review;
 
 import mat.unical.it.PlayerSeeker.model.Sport;
@@ -154,10 +152,6 @@ public class SportFacilityController {
 	}
 	@PostMapping("/getReviewsSportsFacility")
 	public void getReviewsBySportFacilityKey(HttpServletRequest req, HttpServletResponse res, @RequestBody String id) {
-		
-		
-	
-		Review r=new Review();
 		
 		ArrayList<Review> lista = new ArrayList<Review>();
 		lista.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));

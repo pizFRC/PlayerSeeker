@@ -265,7 +265,6 @@ function sendReview(id){
 			$('#review_modal').find('.modal-body').find('#review_stars').removeClass("d-flex").addClass("d-none");
 			$('#review_modal').find('.modal-body').children().hide();
 		    $('#review_modal').find('.modal-footer').hide();
-			$('#review_modal').find('.btn-close').on('click',function(){closeReviewModal()});
 			$('#review_modal').find('.modal-body').append(messageContainer);
 		},
 		error: function(response) {
@@ -288,6 +287,6 @@ function sendReview(id){
 
 function closeReviewModal(){
 	$('#review_text').val("");
-	$('#review_modal').find('.btn-close').unbind('click');
+
 	window.location.reload();
 }
