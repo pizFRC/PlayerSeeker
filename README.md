@@ -14,7 +14,7 @@ Account già creati per i test
 
 
 
->- Account tipo player.
+>-Account tipo player.
  >- username: frcdef , password: 12345.
  >- username :gvnBeraldi , password: 12345
 
