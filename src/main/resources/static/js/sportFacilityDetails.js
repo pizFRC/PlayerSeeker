@@ -36,8 +36,50 @@ function getDistance(facilityLongitude, facilityLatitude, userLongitude, userLat
 	}
 }
 
-function showPlaygroundDescription(description){
-	$("#playground_modal").find("#description").text(description);
+function showPlaygroundDetails(id, description){
+	if(description == "")
+		$("#playground_modal").find("#description").hide();
+	else
+		$("#playground_modal").find("#description").text(description);
+	var folder = "playground_" + id;
+	
+	$("#playground_modal").find(".carousel-inner").children().remove();
+	$.ajax({
+		type: "POST",
+		url: "/getPlaygroundImage",
+		contentType: "application/json",
+		data: JSON.stringify(folder),
+		async: false,
+		success: function(result) {
+			if(result.resources.length == 0)
+				$("#playground_modal").find("#image_carousel").hide();
+			else {
+				var count = 1;
+				$.each(result.resources, function(index, img) {
+					if(count==1){
+						var item = document.createElement("div");
+						item.className = "carousel-item active";
+						var image = document.createElement("img");
+						image.className = "d-block w-100 rounded";
+						$(image).attr("src", img.url);
+						item.append(image);
+						$("#playground_modal").find(".carousel-inner").append(item);
+					}
+					else{
+						var item = document.createElement("div");
+						item.className = "carousel-item";
+						var image = document.createElement("img");
+						image.className = "d-block w-100 rounded";
+						$(image).attr("src", img.url);
+						item.append(image);
+						$("#playground_modal").find(".carousel-inner").append(item);
+					}
+					count++;
+				});
+			}
+		}
+	});
+	
 	$('#playground_modal').modal('show');
 }
 

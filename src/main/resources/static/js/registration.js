@@ -1,3 +1,7 @@
+$(document).ready(function() {
+	cloudinary.setCloudName("player-seeker");
+});
+
 function switchToRegistration(){
 	console.log("registrazione");
 	$("#login_form").children().slice(1).remove();
@@ -624,10 +628,31 @@ function getOpeningHours() {
 	showPlaygroundForm();
 }
 
+function createUploadWidget(playground_id){
+	var uploadPhotoWidget = cloudinary.createUploadWidget({ 
+  		uploadPreset: 'uurvojju', folder: 'playground_' + playground_id, multiple: true, maxFiles: 5, clientAllowedFormats: ['png', 'jpg'], 
+		thumbnails: '#uploadedImage_' + playground_id, thumbnailTransformation: [{ width: 150, height: 150, crop: 'fit' }], 
+		showUploadMoreButton: true, 
+	}, (error, result) => { }
+	);
+	return uploadPhotoWidget;
+}
+
 var playgroundCount = 1;
 function addPlaygrund(index) {
+	var playground_id;
+	$.ajax({
+		type: "POST",
+		url: "/getPlaygroundId",
+		contentType: "application/json",
+		dataType: 'json',
+		async: false,
+		success: function(id) {
+			playground_id = id;
+		}
+	});
 	var container = document.createElement("div");
-	container.id = "parent_" + index;
+	container.id = playground_id;
 	container.className = "playground";
 	
 	var titleDiv = document.createElement("div");
@@ -642,9 +667,18 @@ function addPlaygrund(index) {
 		deletePlaygroundButton.innerHTML = '<i class = "bi bi-dash" style = "color: #dc3545" ></i> Elimina campo';
 		$(deletePlaygroundButton).on("click", function(event) {
 			event.preventDefault();
-						console.log($("#parent_" + this.id));
-			$("#parent_" + this.id).remove();
-
+			$('#' + playground_id).remove();
+			//ELIMINARE CARTELLA FOTO CAMPO SE ESISTE
+			var folder = "playground_" + playground_id;
+			$.ajax({
+				type: "POST",
+				url: "/deleteImageFolder",
+				contentType: "application/json",
+				data: JSON.stringify(folder),
+				success: function() {
+					console.log("folder deleted");
+				}
+			});
 			playgroundCount--;
 		});
 		titleDiv.append(title, deletePlaygroundButton);
@@ -699,17 +733,15 @@ function addPlaygrund(index) {
 	photoTitle.className = "fs-6 mt-3";
 	photoTitle.innerText = "Aggiungi le foto del campo";
 	
-	/*var photoDiv = document.createElement("div");
-	photoDiv.className = "d-flex mt-2 mb-2";
+	var photoDiv = document.createElement("div");
+	photoDiv.className = "row mt-2 mb-2";
+	
 	var addPhoto = document.createElement("button");
-	addPhoto.className = "btn btn-outline-primary text-center me-3";
+	addPhoto.className = "col-12 col-md-4 btn btn-outline-primary text-center me-3";
 	addPhoto.id = "add_photo";
 	addPhoto.name = index;
-	$(addPhoto).css("min-height", "100px");
-	$(addPhoto).on("click", function(event) {
-		event.preventDefault();
-		$(this).siblings("#photos").trigger('click');
-	});
+	$(addPhoto).css("min-height", "220px");
+	$(addPhoto).css("min-width", "220px");
 	var div = document.createElement("div");
 	div.className = "row row-cols-1";
 	var img = document.createElement("i");
@@ -719,15 +751,26 @@ function addPlaygrund(index) {
 	p.innerText = "Aggiungi foto";
 	div.append(img, p);
 	addPhoto.append(div);
-	var inputFile = document.createElement("input");
-	inputFile.id = "photos";
-	inputFile.type = "file";
-	$(inputFile).attr('multiple', true);
-	$(inputFile).hide();
 	
-	photoDiv.append(addPhoto, inputFile);*/
-
-	container.append(titleDiv, label, select, descriptionTitle, description);
+	var thumbnails = document.createElement("div");
+	thumbnails.id="uploadedImage_" + playground_id;
+	thumbnails.className ="col-12 col-md-7"
+	$(thumbnails).css("max-height", "220px");
+	$(thumbnails).css("overflow-x", "auto");
+	$(thumbnails).on('DOMSubtreeModified', function() {
+		$(this).find('ul').addClass("d-flex");
+		$(this).find('img').addClass("rounded");
+	});
+	
+	photoDiv.append(addPhoto, thumbnails);
+	
+	var uploadWidget = createUploadWidget(playground_id);
+	$(addPhoto).on("click", function(event) {
+		event.preventDefault();
+		uploadWidget.open();
+	});
+	
+	container.append(titleDiv, label, select, descriptionTitle, description, photoTitle, photoDiv);
 	return container;
 }
 
@@ -767,31 +810,20 @@ function showPlaygroundForm() {
 
 var playgrounds = new Array();
 function getPlaygrounds(){
-	console.log("playground 1");
 	$('#playgrounds').children('.playground').each(function () {
 		var element = this;
+		console.log(element.id)
 		var selectedSport = $(element).find('#sport').val();
-    	$.ajax({
-		type: "POST",
-		url: "/getPlaygroundId",
-		contentType: "application/json",
-		dataType: 'json',
-		async: false,
-		success: function (id) { 
-			//Creazione playground
-			var playground = {
-				id: id,
-				description: $(element).find('textarea').val(),
-				sport: allSports.find(function(element) { return element.type == selectedSport; }),
-			}
-			playgrounds.push(playground);
-    	},
-	 	error: {
-    		
+		//Creazione playground
+		var playground = {
+			id: element.id,
+			description: $(element).find('textarea').val(),
+			sport: allSports.find(function(element) { return element.type == selectedSport; }),
 		}
+		playgrounds.push(playground);
+		
 		});
-	});
-	
+
 	registerSportFacility();
 }
 

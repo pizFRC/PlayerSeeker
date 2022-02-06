@@ -79,6 +79,9 @@
 		
 	<!-- Slick -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+	
+	<!-- Cloudinary -->
+	<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 
 	<!-- Custom -->
 	<script type="text/javascript"  src="../js/login.js"> </script>

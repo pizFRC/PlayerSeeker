@@ -158,6 +158,32 @@ body {
 			</div>
 		</div>
 	</div>
+	
+	<div id = "playground_modal" class="modal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Campo da gioco</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-4">
+					<p id="description" class="fs-6 mb-3"></p>
+					<div id="image_carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<p class="fs-6 mb-2">Ecco qualche immagine:</p>
+  					<div class="carousel-inner"></div>
+  					<button class="carousel-control-prev" type="button" data-bs-target="#image_carousel" data-bs-slide="prev">
+    					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    					<span class="visually-hidden">Previous</span>
+  					</button>
+  					<button class="carousel-control-next" type="button" data-bs-target="#image_carousel" data-bs-slide="next">
+    					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    					<span class="visually-hidden">Next</span>
+  					</button>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="m-0 m-sm-5 p-0 p-sm-5">
 		<div class="row">
@@ -204,6 +230,11 @@ body {
 							</div>
 						</div>
 					</div>
+					
+					<div class="mb-4 d-flex justify-content-center">
+						<a type="button" onclick="showPlaygroundDetails(${event.playground.id}, '${event.playground.description}')" class="link-primary">Visualizza i dettagli del campo da gioco</a>
+					</div>
+					
 					<p id="participants" class="fs-6 mb-3">Partecipanti: ${event.playersNumber} su ${event.sport.requiredPlayers}</p>
 					<div class="progress mb-5" style="height: 10px;">
 						<div id="progress_bar" class="progress-bar bg-success" role="progressbar"
