@@ -6,6 +6,15 @@ $(document).ready(function(){
 		}
 	});
 	
+	if ($(window).width() < 768){
+			$('#internal_email_button').show();
+			$('#internal_map').show();
+		}
+		else{
+			$('#internal_email_button').hide();
+			$('#internal_map').hide();
+		}
+	
 	$(window).on('resize', function() {
 		var win = $(this);
 		if (win.width() < 768){
