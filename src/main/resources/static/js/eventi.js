@@ -15,7 +15,7 @@ var placeName = null;
 
 $(document).ready(function() {
 	$("nav").find("a").removeClass("active");
-	$("nav").find("#event").addClass("active");
+	$("nav").find("#events").addClass("active");
 	$('#popover-event').popover();
 	$('#popover-new-event').popover();
 	

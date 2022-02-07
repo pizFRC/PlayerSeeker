@@ -148,8 +148,8 @@
 					<c:if test="${ reviews != null }">
 						<c:forEach var="review" items="${reviews}">
 								<div class="p-2 pb-1">
-								<div class="d-flex mb-3">
-									<span class="fa fa-user-circle  mx-2 my-1" class="fa fa-user"></span>
+								<div class="d-flex mb-3 align-items-center my-2 mx-2">
+									<i class="bi bi-person-circle me-2" style="font-size: 1.3rem"></i>
 									<p>${ review.author.name  } ${ review.author.surname }</p>
 								</div>
 								<div class="d-flex justify-content-start my-2 mx-2"

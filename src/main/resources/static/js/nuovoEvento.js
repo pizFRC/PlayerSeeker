@@ -69,18 +69,13 @@ function prev() {
 	
 }
 
-
-
-
-
-
 ///////////////TIME PICKER CONFIG////////////
 
 
 $(document).ready(function() {
-
-
-
+	
+	$("nav").find("a").removeClass("active");
+	$("nav").find("#events").addClass("active");
 
 	$('#ora_inizio').timepicker({
 		timeFormat: 'HH:mm',
@@ -368,7 +363,6 @@ function creaMarkerIniziali(mapboxgl, map, strutture) {
 		new mapboxgl.Marker(el)
 			.setLngLat(strutture[i].coordinates).setPopup(popup).addTo(map);
 
-
 	}
 }
 function creaLabel(type,id,description){
@@ -550,7 +544,7 @@ function addInputNameGiocatore() {
 	div_btn.className = "col-2";
 	div_btn.append(btnMeno);
 
-	divContenitore.append(creaInput("Nome" + num_input),creaInput("Cognome" + num_input), div_btn);
+	divContenitore.append(creaInput("Nome"),creaInput("Cognome"), div_btn);
 
 	document.getElementById("set_giocatori").append(divContenitore);
 
@@ -651,15 +645,15 @@ function validateForm() {
 				required: "Seleziona uno sport per poter proseguire",
 
 			}, ora_inizio: {
-				required: "inserire ora inizio",
+				required: "Inserire ora inizio",
 				ora_inizio_consentita: "L'ora di inizio deve essere precedente a quella di fine",
 			},
 			ora_fine: {
 				required: "camprichiesto",
-				ora_fine_consentita: "la partita deve durare almeno un'ora'"
+				ora_fine_consentita: "La partita deve durare almeno un'ora'"
 
 			}, struttura_selezionata: {
-				required: "seleziona una struttura per continuare,se non vedi nessuna struttura prova a cambiare fascia oraria",
+				required: "Seleziona una struttura per continuare. Se non vedi nessuna struttura prova a cambiare data o fascia oraria",
 			}, Nome: {
 				required: "Compilare correttamente i campi nome ,cognome",
 			},campo_selezionato:{
