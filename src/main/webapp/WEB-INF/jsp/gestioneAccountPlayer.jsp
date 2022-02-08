@@ -31,7 +31,7 @@
 
 	.menu-item.selected {
 		font-weight: bold;
-		color: #e59558;
+		color: #4960c5
 	}
 	
 	.menu-icon {
@@ -180,7 +180,7 @@
 		</div>
     	
     	<div class="col-md-9 p-3">
-    		<!-- ACCOUNT SETTINGS -->
+			<!-- ACCOUNT SETTINGS -->
     		<div id = "accountDiv" class="p-5 shadow-sm p-3 mb-5 bg-body rounded section active">
     			<p class="fs-2 d-block">Impostazioni account</p>
     			<p class="fs-6 d-block">Aggiorna i dati del tuo account</p>

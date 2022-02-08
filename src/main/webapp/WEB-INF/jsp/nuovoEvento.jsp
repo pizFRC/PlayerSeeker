@@ -148,19 +148,17 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Successo</h5>
-					<button type="button" onclick="" class="btn-close"
-						data-bs-dismiss="modal" aria-label="Close"></button>
+					<h5 class="modal-title">Opreazione effettuata</h5>
 				</div>
 				<div class="modal-body">
 					<div class="alert alert-success" role="alert">
 						<h4 class="alert-heading">Ben fatto!</h4>
-						<p>L'evento è stato creato con successo!.</p>
+						<p>L'evento è stato creato con successo!</p>
 					</div>
 
 				</div>
 				<div class="modal-footer">
-					<a type="button" href="/" class="btn btn-primary">Capito</a>
+					<a type="button" href="/" class="btn btn-primary">Torna alla home</a>
 				</div>
 			</div>
 		</div>
@@ -234,13 +232,12 @@
 
 	<c:if test="${user != null && user.userType == 'player'}">
 		<!-- FORM -->
-		<div class="position-relative mt-0 mt-sm-5 mb-0 mb-sm-5 container shadow p-5 bg-body rounded" id="form_creazione_evento">
+		<div style="max-width: 800px" class="event-card position-relative mt-0 mt-md-5 mb-0 mb-md-5 container shadow p-4 p-sm-5 pt-5 bg-body rounded" id="form_creazione_evento">
 			<div class="col-12" id="title">
 				<p class="fs-2 mb-1">Crea il tuo evento</p>
 				<p class="fs-6">Segui questi brevi passi per creare un nuovo evento nella tua struttura preferita!</p>
 			</div>
-			<div id="contenitore" class="col-10 my-5 mx-auto"
-				style="position: relative; height: 50px;">
+			<div id="contenitore" class="col-10 m-5" style="position: relative; margin-left: 2rem!important; height: 50px;">
 				<div id="step" class="d-flex justify-content-between w-100 "
 					style="z-index: 9;">
 					<div>
@@ -317,9 +314,8 @@
 
 					<!-- MAP -->
 					<div class="col-12 d-n mb-5 position-static" style="height: 90%; z-index: 80" id="third_step">
-						<p class="fs-5 fw-bold mb-3">Seleziona una strttura sportiva scegliendola dalla mappa:</p>
-						<div id="map" name="map" class="border border-2 "
-							style="z-index: 90;">
+						<p class="fs-5 fw-bold mb-3">Seleziona una struttura sportiva scegliendola dalla mappa:</p>
+						<div id="map" name="map" style="z-index: 90;">
 							<div
 								class="alert alert-warning alert-dismissible  rounded rounded-pill align-items-center "
 								role="alert" id="alert_strutture" style="z-index: 99">

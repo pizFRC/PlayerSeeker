@@ -8,19 +8,6 @@
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
 	<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
 	<title>Player Seeker</title>
-	
-	<style>
-	.event-card{
-		border-bottom-style: solid;
-		border-bottom-width: 3px;
-		border-bottom-color: #e59558;
-	}
-	.sportFacility-card {
-		border-bottom-style: solid;
-		border-bottom-width: 3px;
-		border-bottom-color: #4960c5;
-	}
-	</style>
 </head>
 
 <body>
