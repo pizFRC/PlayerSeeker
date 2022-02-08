@@ -352,7 +352,7 @@
 
 					<!-- CONFERMA CREAZIONE-->
 					<div class="form-check col-12 d-n mb-5" id="last_step">
-						<p class="fs-2 text-center mb-4">Resoconto creazione evento</p>
+						<p class="fs-4 text-center mb-4">Resoconto creazione evento</p>
 						<div class="row " id="resoconto">
 							<div class="col-12  ">
 								<p class="fs-5 fw-bold mb-0">Organizzatore:</p>

@@ -37,15 +37,12 @@ public class SportFacilityController {
 
 	@PostMapping("/listaStruttureBB")
 	public SportFacilityList getStruttureBB(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
-
 		JacksonJsonParser ja = new JacksonJsonParser();
-
 		Map<String, Object> mappa = ja.parseMap(mes);
-        System.out.println("richiesta strutture:"+mappa);
+		System.out.println("richiesta strutture:"+mappa);
 		ObjectMapper mapper = new ObjectMapper();
 		SportFacilityList sfl = new SportFacilityList();
 		try {
-
 			String sw = mapper.writeValueAsString(mappa.get("sw"));
 			String ne = mapper.writeValueAsString(mappa.get("ne"));
 			Double ne_lng = (Double) ja.parseMap(ne).get("lng");
@@ -60,7 +57,7 @@ public class SportFacilityController {
 			Address tmpSW = new Address();
 			tmpSW.setLatitude(sw_lat.floatValue());
 			tmpSW.setLongitude(sw_lng.floatValue());
-            
+
 			ArrayList<SportsFacility> struttureBBOX = new ArrayList<SportsFacility>(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(tmpSW, tmpNE));
 			Sport s=DatabaseJDBC.getInstance().getSportDao().doRetrieveByKey((String)mappa.get("sport"));
 			for(SportsFacility str:struttureBBOX)
@@ -72,18 +69,15 @@ public class SportFacilityController {
 			oraInizioStr+=":00";
 			oraFineStr+=":00";
 			sfl.setBySport(struttureBBOX,s,dataStr,oraInizioStr,oraFineStr);
-           
 			res.setStatus(200);
 		} catch (JsonProcessingException e) {
 			res.setStatus(400);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return sfl;
-
 	}
-	
+
 	@PostMapping("/getSportFacilityEmail")
 	public String getEmail(HttpServletRequest req, HttpServletResponse res, @RequestBody String id) {
 		Gson gson = new Gson();
@@ -98,7 +92,7 @@ public class SportFacilityController {
 			return null;
 		}
 	}
-	
+
 	@PostMapping("/getBestSportFacility")
 	public List<SportsFacility> getBestSportFacility(HttpServletRequest req, HttpServletResponse res, @RequestBody List<Address> bbox) {
 		Address southWest = bbox.get(0);
@@ -116,74 +110,67 @@ public class SportFacilityController {
 		res.setStatus(HttpServletResponse.SC_OK);
 		return result;
 	}
-	
+
 	@PostMapping("/getSportFacilityByBBox")
 	public List<SportsFacility> getSportFacilityByBBox(HttpServletResponse res, @RequestBody List<Address> bbox) {
 		Address southWest = bbox.get(0);
 		Address northEast = bbox.get(1);
 		List<SportsFacility> result = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByBBox(southWest, northEast);
-		
+
 		res.setStatus(HttpServletResponse.SC_OK);
 		return result;
 	}
-	
+
 	@PostMapping("/checkImpegniPlayer")
 	public void getImpegniPlayer(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
 		User u=(User)req.getSession().getAttribute("user");
 		JacksonJsonParser ja = new JacksonJsonParser();
 		Map<String, Object> mappa = ja.parseMap(mes);
-	
 		String dataStr =(String)mappa.get("data");
 		String oraInizioStr = (String)mappa.get("ora_inizio") ;
 		oraInizioStr+=":00" ;
-		
+
 		String oraFineStr = (String)mappa.get("ora_fine");
 		oraFineStr+=":00" ;
 		if(DatabaseJDBC.getInstance().getPlayerDao().checkImpegni(u,LocalDate.parse(dataStr),LocalTime.parse(oraInizioStr),LocalTime.parse(oraFineStr)))
 		{
 			System.out.println("sono qui 400");
 			res.setStatus(400);
-			
 		}else {
 			res.setStatus(200);
 			System.out.println("200");
 		}
-
 	}
+
 	@PostMapping("/getReviewsSportsFacility")
 	public void getReviewsBySportFacilityKey(HttpServletRequest req, HttpServletResponse res, @RequestBody String id) {
-		
 		ArrayList<Review> lista = new ArrayList<Review>();
 		lista.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
 		if(lista.size()>0)
-		req.setAttribute("reviews", lista);
+			req.setAttribute("reviews", lista);
 		else
 			req.removeAttribute("reviews");
 		res.setStatus(200);
 	}
-	
-	
-	
+
 	@PostMapping("/addReview")
 	public void addReview(HttpServletRequest req, HttpServletResponse res, @RequestBody String mes) {
 		JacksonJsonParser ja = new JacksonJsonParser();
 		Map<String, Object> mappa = ja.parseMap(mes);
 		Integer userId=	(Integer)mappa.get("userId");
 		String sportsFacilityId=	(String)mappa.get("id_struttura");
-	String testo=(String)mappa.get("testo");
-	String voto=(String)mappa.get("voto");
-	Review r=new Review();
-	r.setAuthor(DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(Long.valueOf(userId)));
-	r.setSportsFacility(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.valueOf(sportsFacilityId)));
-	r.setId(DatabaseJDBC.getInstance().getReviewIdBroker().getId());
-	r.setStars(Integer.parseInt(voto));
-	r.setData(LocalDate.now());
-	r.setText(testo);
-	if(DatabaseJDBC.getInstance().getReviewDaoJDBC().saveOrUpdate(r))
-		res.setStatus(200);
-	else
-		res.setStatus(400);
-		System.out.println(mes);
-		
+		String testo=(String)mappa.get("testo");
+		String voto=(String)mappa.get("voto");
+		Review r=new Review();
+		r.setAuthor(DatabaseJDBC.getInstance().getPlayerDao().doRetrieveByKey(Long.valueOf(userId)));
+		r.setSportsFacility(DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.valueOf(sportsFacilityId)));
+		r.setId(DatabaseJDBC.getInstance().getReviewIdBroker().getId());
+		r.setStars(Integer.parseInt(voto));
+		r.setData(LocalDate.now());
+		r.setText(testo);
+		if(DatabaseJDBC.getInstance().getReviewDaoJDBC().saveOrUpdate(r))
+			res.setStatus(200);
+		else
+			res.setStatus(400);	
 	}
 }

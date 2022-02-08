@@ -53,21 +53,19 @@ public class NavigationController {
 	public String sportFacilityDetails(HttpServletRequest req, HttpServletResponse res, @PathVariable(value="id") String id) {
 		SportsFacility sportsFacility = DatabaseJDBC.getInstance().getSportsFacilityDao().doRetrieveByKey(Long.parseLong(id));
 		sportsFacility.setEvents(DatabaseJDBC.getInstance().getSportsEventDao().doRetrieveAllBySportFacilityKey(sportsFacility.getId()));
-		ReviewSummary rs=new ReviewSummary();
-		ArrayList<Review>reviews=new ArrayList<Review>();
+		ReviewSummary rs = new ReviewSummary();
+		ArrayList<Review>reviews = new ArrayList<Review>();
 		reviews.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
 		rs.setVotes(reviews);
-		System.out.println(reviews);
 		req.setAttribute("sportFacility", sportsFacility);
 		req.setAttribute("review", rs);
 		ArrayList<Review> lista = new ArrayList<Review>();
 		lista.addAll(DatabaseJDBC.getInstance().getReviewDaoJDBC().doRetrieveByIdSportsFacility(Long.valueOf(id)));
-		if(lista.size()>0)
-		req.setAttribute("reviews", lista);
+		if(lista.size() > 0)
+			req.setAttribute("reviews", lista);
 		else
 			req.removeAttribute("reviews");
 		res.setStatus(200);
-	
 		return "sportFacilityDetails";
 	}
 	
