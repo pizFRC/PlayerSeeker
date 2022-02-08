@@ -83,7 +83,7 @@ public class EventController {
 			}
 		}
 		res.setStatus(HttpServletResponse.SC_OK);
-		System.out.println(result.size());
+		result = result.subList(0, 6);
 		return result;
 	}
 	

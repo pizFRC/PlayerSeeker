@@ -283,13 +283,13 @@
 	
 	<div class="h-100 w-100 d-flex align-items-center position-relative">
 		<div class="h-100 w-100" id="map"></div>
-		
+		<c:if test="${user != null}">
 		<div class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
 			<button id="calendar_button" onclick="$('#email_modal').modal('show')" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
 				<i style="font-size: 1.5rem"class="bi bi-send-plus me-3"></i>Contatta
 			</button>		
 		</div>
-		
+		</c:if>
 		<div class="col-12 col-md-7 col-xl-5 position-absolute top-50 start-0 translate-middle-y h-100 p-0 p-md-5" style="z-index: 2;">
 			<div style="overflow-y: auto; max-height:100%" class="h-100 shadow-lg p-4 p-md-5 pt-5 mb-5 bg-body rounded">
 				<p id="name" class="fs-2 mb-3">${sportFacility.name }</p>
@@ -435,18 +435,19 @@
 		           <button onclick="showAddReview()"class="btn btn-outline-primary mx-auto rounded-pill d-flex align-items-center"> <i class="bi bi-chat-quote me-2"></i> Scrivi una recensione </button>
 		         </c:if>
 		         <c:if test="${user == null}">					
-		           <a href="/login" class="btn btn-outline-primary btn-sm mx-auto">Accedi per lasciare una recensione  </a>
+		           <a href="/login" class="btn btn-outline-primary rounded-pill">Accedi per lasciare una recensione  </a>
 		         </c:if>
 		           </div>
 				</div>
 
 				<div style = "min-height: 350px" class="w-100" id="internal_map"></div>
-				
+				<c:if test="${user != null}">
 				<div id="internal_email_button" class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
 					<button onclick="$('#email_modal').modal('show')" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
 						<i style="font-size: 1.5rem"class="bi bi-send-plus me-3"></i>Contatta
 					</button>		
 				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
