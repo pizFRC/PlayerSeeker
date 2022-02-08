@@ -16,6 +16,13 @@ function next() {
 	if(!validateForm())
 	return; 
     if($(".d-y:first").attr("id") == "third_step"){
+	var value=document.querySelector('input[name="campo_selezionato"]:checked');
+	if(value==null){
+		 $('#error_modal').find("#error_message").text("Nessun campo selezionato");
+	     $('#error_modal').modal('show');
+         return;
+	}
+
 	if(localStorage.getItem("strutture")==null){
 		 $('#error_modal').find("#error_message").text("Nessuna struttura selezionata");
 	     $('#error_modal').modal('show');
