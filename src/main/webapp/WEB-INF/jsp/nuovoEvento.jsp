@@ -148,19 +148,17 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Successo</h5>
-					<button type="button" onclick="" class="btn-close"
-						data-bs-dismiss="modal" aria-label="Close"></button>
+					<h5 class="modal-title">Opreazione effettuata</h5>
 				</div>
 				<div class="modal-body">
 					<div class="alert alert-success" role="alert">
 						<h4 class="alert-heading">Ben fatto!</h4>
-						<p>L'evento è stato creato con successo!.</p>
+						<p>L'evento è stato creato con successo!</p>
 					</div>
 
 				</div>
 				<div class="modal-footer">
-					<a type="button" href="/" class="btn btn-primary">Capito</a>
+					<a type="button" href="/" class="btn btn-primary">Torna alla home</a>
 				</div>
 			</div>
 		</div>
