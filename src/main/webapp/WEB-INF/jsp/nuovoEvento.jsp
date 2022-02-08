@@ -237,8 +237,7 @@
 				<p class="fs-2 mb-1">Crea il tuo evento</p>
 				<p class="fs-6">Segui questi brevi passi per creare un nuovo evento nella tua struttura preferita!</p>
 			</div>
-			<div id="contenitore" class="col-10 my-5 mx-auto"
-				style="position: relative; height: 50px;">
+			<div id="contenitore" class="col-10 m-5" style="position: relative; margin-left: 2rem!important; height: 50px;">
 				<div id="step" class="d-flex justify-content-between w-100 "
 					style="z-index: 9;">
 					<div>
