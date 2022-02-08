@@ -45,12 +45,18 @@ body {
   }
 }
 
-#form_creazione_evento {
-	width:90%;
-	min-width: 90%;
-    min-height: 60%;
+.event-card{
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	border-bottom-color: #e59558;
 }
 
+.sportFacility-card {
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	border-bottom-color: #4960c5;
+}
+	
 .info-element {
 	box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
 	-webkit-box-shadow: 0px 0px 37px -10px rgba(0, 0, 0, 0.15);
@@ -196,22 +202,27 @@ th{
     justify-content: center; /* center items vertically, in this case */
     align-items: center;     /* center items horizontally, in this case */
 }
+
 #stars span{
 	color:#deddda ;
 }
+
 .chosen{
 	color:#f6d32d !important;
 }
+
 #stars span.chosen{
 	color:#f6d32d !important;
 }
+
 .progress{
-	
 	margin-top:10px;
 }
+
 .progress-bar{
 	background-color:#f5c211!important;
 }
+
 #review_text{
 	overflow-y:auto;
 	overflow-x:hidden;
@@ -219,14 +230,15 @@ th{
 	 height:100px;
 	 min-height: 100px;
 }
+
 .review_star{
 	margin-right:5px;
 }
+
 .review_star:hover{
 	color:#f6d32d !important;
 }
+
 .star-color{
 	color:#deddda ;
 }
-
-

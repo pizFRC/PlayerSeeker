@@ -234,7 +234,7 @@
 
 	<c:if test="${user != null && user.userType == 'player'}">
 		<!-- FORM -->
-		<div class="position-relative mt-0 mt-sm-5 mb-0 mb-sm-5 container shadow p-5 bg-body rounded" id="form_creazione_evento">
+		<div style="max-width: 800px" class="event-card position-relative mt-0 mt-md-5 mb-0 mb-md-5 container shadow p-4 p-sm-5 pt-5 bg-body rounded" id="form_creazione_evento">
 			<div class="col-12" id="title">
 				<p class="fs-2 mb-1">Crea il tuo evento</p>
 				<p class="fs-6">Segui questi brevi passi per creare un nuovo evento nella tua struttura preferita!</p>
@@ -317,9 +317,8 @@
 
 					<!-- MAP -->
 					<div class="col-12 d-n mb-5 position-static" style="height: 90%; z-index: 80" id="third_step">
-						<p class="fs-5 fw-bold mb-3">Seleziona una strttura sportiva scegliendola dalla mappa:</p>
-						<div id="map" name="map" class="border border-2 "
-							style="z-index: 90;">
+						<p class="fs-5 fw-bold mb-3">Seleziona una struttura sportiva scegliendola dalla mappa:</p>
+						<div id="map" name="map" style="z-index: 90;">
 							<div
 								class="alert alert-warning alert-dismissible  rounded rounded-pill align-items-center "
 								role="alert" id="alert_strutture" style="z-index: 99">

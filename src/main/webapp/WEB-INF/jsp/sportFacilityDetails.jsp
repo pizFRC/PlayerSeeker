@@ -333,9 +333,12 @@
 					<p id="name" class="fs-6 mb-3">La struttura ha a disposizione ${ sportFacility.playgrounds.size() } campo/i da gioco</p>
 					<c:set var="count" value="1"/>
 					<c:forEach var="playground" items="${ sportFacility.playgrounds }">
-						<p class="fs-6 mb-2"><strong>Campo da gioco n. ${count}: </strong> ${playground.sport.type}
-							<a type="button" onclick="showPlaygroundDetails(${playground.id}, '${playground.description}')" href="#" class="link-primary">Mostra dettagli</a>
-						</p>
+						<div class="d-flex align-items-center justify-content-between mb-3">
+							<p class="fs-6 me-2"><strong>Campo da gioco ${count}: </strong> ${playground.sport.type}</p>
+							<button onclick="showPlaygroundDetails(${playground.id}, '${playground.description}')" class="pe-3 ps-3 btn btn-sm btn-outline-light border border-2 rounded-pill d-flex justify-content-center align-items-center"> 
+								<i class="bi bi-eye me-2"></i> Dettagli
+							</button>
+						</div>
 						<c:set var="count" value="${count+1 }"/>
 					</c:forEach>
 				</div>
@@ -345,20 +348,21 @@
 					<p id="name" class="fs-6 mb-3">La struttura ospiterà ${ sportFacility.events.size()} evento/i</p>
 					<c:set var="count" value="1"/>
 					<c:forEach var="event" items="${ sportFacility.events }">
-						<p class="fs-6 mb-2"><strong>Evento n. ${count}: </strong> ${event.sport.type}
-							<a type="button" href="//localhost:8080/eventDetails/${event.id}" class="link-primary">Mostra dettagli</a>
-						</p>
+						<div class="d-flex align-items-center justify-content-between mb-3">
+							<p class="fs-6 me-2"><strong>Evento ${count}: </strong> ${event.sport.type}</p>
+							<button onclick="window.location = '//localhost:8080/eventDetails/${event.id}'" class="pe-3 ps-3 btn btn-sm btn-outline-light border border-2 rounded-pill d-flex justify-content-center align-items-center"> 
+								<i class="bi bi-eye me-2"></i> Dettagli
+							</button>
+						</div>
 						<c:set var="count" value="${count+1 }"/>
 					</c:forEach>
 				</div>
-
 				
-				<!-- review -->
+				<!-- Review -->
 				<div class="p-3 mb-5 info-element" style="border-bottom-color: #bbe39d">
 					<p id="name" class="fs-5 mb-1"><strong>Recensioni</strong></p>
                   <div class="d-flex justify-content-between">
 					<table class="table table-borderless ">
-					
 						<tbody >
 							<tr>
 								<th scope="row" >5</th>
@@ -369,7 +373,6 @@
 											aria-valuemax="100"></div>
 									</div>
 								</td>
-							
 							</tr>
 							<tr>
 								 <th scope="row"  class="w-10">4</th>
@@ -380,7 +383,6 @@
 											aria-valuemax="100"></div>
 									</div>
 								</td>
-								
 							</tr>
 							<tr>
 								<th scope="row"  class="w-10">3</th>
@@ -437,16 +439,14 @@
 		         </c:if>
 		           </div>
 				</div>
-					<!--  -->
-				
 
 				<div style = "min-height: 350px" class="w-100" id="internal_map"></div>
+				
 				<div id="internal_email_button" class="position-fixed bottom-0 end-0 m-4" style="z-index: 2;">
 					<button onclick="$('#email_modal').modal('show')" class="w-100 near-position-button rounded-pill btn btn-primary shadow-lg p-3 ps-4 pe-4 mb-3 rounded d-flex align-items-center">
 						<i style="font-size: 1.5rem"class="bi bi-send-plus me-3"></i>Contatta
 					</button>		
 				</div>
-
 			</div>
 		</div>
 	</div>

@@ -232,9 +232,9 @@ body {
 						</div>
 					</div>
 					
-					<div class="mb-4 d-flex justify-content-center">
-						<a type="button" onclick="showPlaygroundDetails(${event.playground.id}, '${event.playground.description}')" class="link-primary">Visualizza i dettagli del campo da gioco</a>
-					</div>
+					<button onclick="showPlaygroundDetails(${event.playground.id}, '${event.playground.description}')" class="w-100 mb-4 btn btn-outline-light border border-2 rounded-pill d-flex justify-content-center align-items-center"> 
+						<i class="bi bi-eye-fill me-2"></i> Visualizza campo da gioco
+					</button>
 					
 					<p id="participants" class="fs-6 mb-3">Partecipanti: ${event.playersNumber} su ${event.sport.requiredPlayers}</p>
 					<div class="progress mb-5" style="height: 10px;">
